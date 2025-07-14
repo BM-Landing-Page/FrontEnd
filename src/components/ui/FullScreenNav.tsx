@@ -13,41 +13,110 @@ import { useRef, useState, useLayoutEffect } from "react";
 
 const NAV_ITEMS = [
   {
-    label: "About",
+    label: "About Us",
     subItems: [
-      "Mission for Vision",
-      "Our Story",
+      "Vision, Mission & Philosophy",
       "Principal’s Message",
-      "Our Team",
-      "Milestones",
-      "Courses Offered",
-      "Workshops",
-      "Resources"
+      "BMIS Journey",
+      "Leadership Team",
     ],
   },
   {
     label: "Academics",
-    subItems: ["Curriculum", "Faculty", "Methodology", "Assessments", "Clubs", "Sports", "Arts", "STEM"],
-  },
-  {
-    label: "Campus Life",
-    subItems: ["Student Life", "Facilities", "Events", "Student Council", "Student Profiles", "Past Councils", "Click to Read More", "Photos", "Videos", "School Events"],
+    subItems: [
+      "Curriculum Overview",
+      "Early Years",
+      "Primary & Middle Years",
+      "IGCSE & Senior Programmes",
+      "Pedagogy & Tools",
+    ],
   },
   {
     label: "Admissions",
-    subItems: ["Admission Process", "Eligibility", "Enquiry Form", "Fee Structure"],
+    subItems: [
+      "Admission Process",
+      "Age Eligibility & FAQs",
+      "Fee Structure",
+    ],
   },
   {
-    label: "Parent Zone",
-    subItems: ["Circulars", "Timetables", "Parent Resources", "Feedback"],
+    label: "Programs",
+    subItems: [
+      "Enrichment Activities",
+      "Clubs & Workshops",
+      "Certificate Courses",
+    ],
   },
   {
-    label: "Blog & Updates",
-    subItems: ["Announcements", "Achievements", "Media Coverage"],
+    label: "Campus Life",
+    subItems: [
+      "A Day at BMIS",
+      "Events & Celebrations",
+      "Student Voice",
+    ],
   },
   {
-    label: "Contact",
-    subItems: ["Visit Us", "Enquiry Form", "Phone & Email"],
+    label: "Student Leadership",
+    subItems: [
+      "SLC Overview",
+      "Student Profiles",
+      "Leadership Projects",
+    ],
+  },
+  {
+    label: "IGNITE",
+    subItems: [],
+  },
+  {
+    label: "BM PD Academy",
+    subItems: [
+      "About the Academy",
+      "Vision & Outcomes",
+      "Pedagogy & Modules",
+      "Candidate Voice",
+      "Gallery / Media",
+      "FAQs or Myths Busted",
+    ],
+  },
+  {
+    label: "Parent Hub",
+    subItems: [
+      "Communication Tools",
+      "Calendar & Downloads",
+      "Parent Testimonials",
+    ],
+  },
+  {
+    label: "Gallery",
+    subItems: [
+      "Curated Albums",
+      "Media Highlights",
+    ],
+  },
+  {
+    label: "Newsroom",
+    subItems: [
+      "School Updates",
+      "Student Achievements",
+      "Thought Pieces",
+      "BM Gazette",
+    ],
+  },
+  {
+    label: "Contact Us",
+    subItems: [
+      "Location & Details",
+      "Socials",
+    ],
+  },
+  {
+    label: "Extras",
+    subItems: [
+      "Alumni Stories",
+      "Faculty Spotlights",
+      "Student Projects",
+      "School Policies",
+    ],
   },
 ];
 
@@ -120,13 +189,9 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             {NAV_ITEMS.find((n) => n.label === active)?.subItems.map((sub) => (
               <Link
                 key={sub}
-                href={
-                  active === "About" && sub === "Mission for Vision"
-                    ? "/missionforvision"
-                    : `/${active.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-")}/${sub
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`
-                }
+                href={`/${active.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-")}/${sub
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
                 className="hover:text-[#850000] transition-colors"
                 onClick={handleSubItemClick}
               >
