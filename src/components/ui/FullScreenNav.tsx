@@ -12,55 +12,41 @@ import Link from "next/link";
 import { useRef, useState, useLayoutEffect } from "react";
 
 const NAV_ITEMS = [
-  { label: "Home", subItems: [] },
   {
-    label: "About Us",
+    label: "About",
     subItems: [
       "Mission for Vision",
       "Our Story",
       "Principal’s Message",
       "Our Team",
       "Milestones",
+      "Courses Offered",
+      "Workshops",
+      "Resources"
     ],
   },
   {
     label: "Academics",
-    subItems: ["Curriculum", "Faculty", "Methodology", "Assessments"],
+    subItems: ["Curriculum", "Faculty", "Methodology", "Assessments", "Clubs", "Sports", "Arts", "STEM"],
+  },
+  {
+    label: "Campus Life",
+    subItems: ["Student Life", "Facilities", "Events", "Student Council", "Student Profiles", "Past Councils", "Click to Read More", "Photos", "Videos", "School Events"],
   },
   {
     label: "Admissions",
     subItems: ["Admission Process", "Eligibility", "Enquiry Form", "Fee Structure"],
   },
   {
-    label: "Programs & Co-curricular",
-    subItems: ["Clubs", "Sports", "Arts", "STEM"],
-  },
-  {
-    label: "Campus Life",
-    subItems: ["Student Life", "Facilities", "Events", "Student Council"],
-  },
-  {
-    label: "BM PD Academy",
-    subItems: ["Courses Offered", "Workshops", "Resources"],
-  },
-  {
-    label: "Student Leadership",
-    subItems: ["Student Council", "Student Profiles", "Past Councils", "Click to Read More"],
-  },
-  {
-    label: "Parent Corner",
+    label: "Parent Zone",
     subItems: ["Circulars", "Timetables", "Parent Resources", "Feedback"],
   },
   {
-    label: "Gallery",
-    subItems: ["Photos", "Videos", "School Events"],
-  },
-  {
-    label: "Blog / News / Updates",
+    label: "Blog & Updates",
     subItems: ["Announcements", "Achievements", "Media Coverage"],
   },
   {
-    label: "Contact Us",
+    label: "Contact",
     subItems: ["Visit Us", "Enquiry Form", "Phone & Email"],
   },
 ];
@@ -135,7 +121,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
               <Link
                 key={sub}
                 href={
-                  active === "About Us" && sub === "Mission for Vision"
+                  active === "About" && sub === "Mission for Vision"
                     ? "/missionforvision"
                     : `/${active.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-")}/${sub
                         .toLowerCase()
