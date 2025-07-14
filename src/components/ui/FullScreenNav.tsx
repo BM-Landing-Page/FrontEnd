@@ -1,22 +1,68 @@
 "use client";
 
-import { X, Instagram, Facebook, Twitter, Linkedin, Youtube } from "lucide-react";
+import {
+  X,
+  Instagram,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Youtube,
+} from "lucide-react";
 import Link from "next/link";
 import { useRef, useState, useLayoutEffect } from "react";
 
 const NAV_ITEMS = [
   { label: "Home", subItems: [] },
-  { label: "About Us", subItems: ["Mission for Vision", "Our Story", "Principal’s Message", "Our Team", "Milestones"] },
-  { label: "Academics", subItems: ["Curriculum", "Faculty", "Methodology", "Assessments"] },
-  { label: "Admissions", subItems: ["Admission Process", "Eligibility", "Enquiry Form", "Fee Structure"] },
-  { label: "Programs & Co-curricular", subItems: ["Clubs", "Sports", "Arts", "STEM"] },
-  { label: "Campus Life", subItems: ["Student Life", "Facilities", "Events", "Student Council"] },
-  { label: "BM PD Academy", subItems: ["Courses Offered", "Workshops", "Resources"] },
-  { label: "Student Leadership", subItems: ["Student Council", "Student Profiles", "Past Councils", "Click to Read More"] },
-  { label: "Parent Corner", subItems: ["Circulars", "Timetables", "Parent Resources", "Feedback"] },
-  { label: "Gallery", subItems: ["Photos", "Videos", "School Events"] },
-  { label: "Blog / News / Updates", subItems: ["Announcements", "Achievements", "Media Coverage"] },
-  { label: "Contact Us", subItems: ["Visit Us", "Enquiry Form", "Phone & Email"] },
+  {
+    label: "About Us",
+    subItems: [
+      "Mission for Vision",
+      "Our Story",
+      "Principal’s Message",
+      "Our Team",
+      "Milestones",
+    ],
+  },
+  {
+    label: "Academics",
+    subItems: ["Curriculum", "Faculty", "Methodology", "Assessments"],
+  },
+  {
+    label: "Admissions",
+    subItems: ["Admission Process", "Eligibility", "Enquiry Form", "Fee Structure"],
+  },
+  {
+    label: "Programs & Co-curricular",
+    subItems: ["Clubs", "Sports", "Arts", "STEM"],
+  },
+  {
+    label: "Campus Life",
+    subItems: ["Student Life", "Facilities", "Events", "Student Council"],
+  },
+  {
+    label: "BM PD Academy",
+    subItems: ["Courses Offered", "Workshops", "Resources"],
+  },
+  {
+    label: "Student Leadership",
+    subItems: ["Student Council", "Student Profiles", "Past Councils", "Click to Read More"],
+  },
+  {
+    label: "Parent Corner",
+    subItems: ["Circulars", "Timetables", "Parent Resources", "Feedback"],
+  },
+  {
+    label: "Gallery",
+    subItems: ["Photos", "Videos", "School Events"],
+  },
+  {
+    label: "Blog / News / Updates",
+    subItems: ["Announcements", "Achievements", "Media Coverage"],
+  },
+  {
+    label: "Contact Us",
+    subItems: ["Visit Us", "Enquiry Form", "Phone & Email"],
+  },
 ];
 
 const SOCIAL_LINKS = [
@@ -38,7 +84,8 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
 
   useLayoutEffect(() => {
     if (active && refMap.current[active]) {
-      setSubTop(refMap.current[active]!.getBoundingClientRect().top);
+      const rect = refMap.current[active]!.getBoundingClientRect();
+      setSubTop(rect.top);
     }
   }, [active]);
 
@@ -48,9 +95,9 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex font-light select-none">
+    <div className="fixed inset-0 z-[100] flex flex-col md:flex-row font-light select-none">
       {/* LEFT PANEL */}
-      <div className="relative w-1/2 h-full flex flex-col justify-center items-end pr-16 gap-6 bg-[#F7ECDE]">
+      <div className="relative md:w-1/2 w-full h-full flex flex-col justify-center items-end md:pr-16 px-6 gap-5 bg-[#F7ECDE]">
         <button
           onClick={onClose}
           aria-label="Close Menu"
@@ -66,7 +113,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
               refMap.current[item.label] = el;
             }}
             onMouseEnter={() => setActive(item.label)}
-            className={`cursor-pointer text-2xl md:text-3xl font-semibold transition-all hover:underline hover:text-[#850000] ${
+            className={`cursor-pointer text-xl md:text-3xl font-semibold transition-all hover:underline hover:text-[#850000] ${
               active === item.label ? "text-[#850000]" : "text-[#1E293B]"
             }`}
           >
@@ -75,11 +122,11 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         ))}
       </div>
 
-      {/* RIGHT PANEL */}
-      <div className="relative w-1/2 h-full backdrop-blur-md bg-white/20 text-[#1E293B]">
+      {/* RIGHT PANEL — SubItems */}
+      <div className="relative md:w-1/2 w-full h-full backdrop-blur-md bg-white/20 text-[#1E293B]">
         {active && (
           <div
-            className="absolute left-10 flex flex-col gap-4 text-xl md:text-2xl font-bold animate-fade-in"
+            className="absolute left-6 md:left-10 flex flex-col gap-3 text-lg md:text-2xl font-bold animate-fade-in"
             style={{ top: subTop }}
             onMouseEnter={() => setActive(active)}
             onMouseLeave={() => setActive(null)}
@@ -104,7 +151,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         )}
 
         {/* SOCIAL LINKS */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-6 text-sm items-center">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4 text-sm items-center">
           {SOCIAL_LINKS.map(({ name, icon: Icon, href }) => (
             <a
               key={name}
