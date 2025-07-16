@@ -89,8 +89,8 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         ))}
       </div>
 
-      {/* RIGHT PANEL */}
-      <div className="relative lg:w-1/2 w-full h-full bg-white text-[#1E293B] p-6 lg:p-0 lg:backdrop-blur-md lg:bg-white/20 min-h-screen">
+      {/* RIGHT PANEL with Glass Effect */}
+      <div className="relative lg:w-1/2 w-full h-full text-[#1E293B] p-6 lg:p-0 backdrop-blur-md bg-white/60 lg:bg-white/30 min-h-screen">
         {active && (
           <div
             className="lg:absolute flex flex-col gap-2 text-sm lg:text-lg font-semibold animate-fade-in max-h-[75vh] overflow-y-auto pr-4"
