@@ -61,9 +61,9 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col lg:flex-row font-light select-none overflow-y-auto lg:overflow-hidden">
+    <div className="fixed inset-0 z-[100] flex flex-row font-light select-none overflow-hidden w-full h-screen">
       {/* LEFT PANEL */}
-      <div className="relative lg:w-1/2 w-full h-auto lg:h-full flex flex-col justify-start items-start lg:items-end lg:pr-12 px-6 pt-10 gap-4 bg-[#F7ECDE] min-h-screen">
+      <div className="w-1/2 h-full bg-[#F7ECDE] flex flex-col justify-center gap-4 px-8 pt-10 relative overflow-y-auto items-end">
         <button
           onClick={onClose}
           aria-label="Close Menu"
@@ -72,33 +72,31 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
           <X size={30} />
         </button>
 
-        {NAV_ITEMS.map((item) => (
-          <div
-            key={item.label}
-            ref={(el) => {
-              refMap.current[item.label] = el;
-            }}
-            onClick={() => setActive(item.label)}
-            onMouseEnter={() => setActive(item.label)}
-            className={`cursor-pointer text-base lg:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
-              active === item.label ? "text-[#850000]" : "text-[#1E293B]"
-            }`}
-          >
-            {item.label}
-          </div>
-        ))}
+        <div className="h-[75%] flex flex-col justify-between text-right">
+          {NAV_ITEMS.map((item) => (
+            <div
+              key={item.label}
+              ref={(el) => {
+                refMap.current[item.label] = el;
+              }}
+              onClick={() => setActive(item.label)}
+              onMouseEnter={() => setActive(item.label)}
+              className={`cursor-pointer text-base xl:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
+                active === item.label ? "text-[#850000]" : "text-[#1E293B]"
+              }`}
+            >
+              {item.label}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* RIGHT PANEL with Glass Effect */}
-      <div className="relative lg:w-1/2 w-full h-full text-[#1E293B] p-6 lg:p-0 backdrop-blur-md bg-white/60 lg:bg-white/30 min-h-screen">
+      {/* RIGHT PANEL */}
+      <div className="w-1/2 h-full bg-white/30 backdrop-blur-md p-4 text-[#1E293B] relative overflow-y-auto">
         {active && (
           <div
-            className="lg:absolute flex flex-col gap-2 text-sm lg:text-lg font-semibold animate-fade-in max-h-[75vh] overflow-y-auto pr-4"
-            style={
-              typeof window !== "undefined" && window.innerWidth >= 1024
-                ? { top: subTop, left: "2.5rem" }
-                : {}
-            }
+            className="absolute flex flex-col gap-2 text-sm xl:text-base font-semibold animate-fade-in"
+            style={{ top: subTop, left: "2rem" }}
             onMouseEnter={() => setActive(active)}
             onMouseLeave={() => setActive(null)}
           >
@@ -124,8 +122,8 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
           </div>
         )}
 
-        {/* SOCIAL LINKS */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-4 text-xs lg:text-sm items-center text-[#1E293B]">
+        {/* Social Links */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-4 text-xs xl:text-sm items-center text-[#1E293B]">
           {SOCIAL_LINKS.map(({ name, icon: Icon, href }) => (
             <a
               key={name}
