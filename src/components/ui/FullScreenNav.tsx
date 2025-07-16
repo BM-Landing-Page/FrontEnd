@@ -32,11 +32,10 @@ const ROUTE_OVERRIDES: Record<string, string> = {
 };
 
 const SOCIAL_LINKS = [
-  { name: "Instagram", icon: Instagram, href: "https://instagram.com/buddingminds" },
-  { name: "Facebook", icon: Facebook, href: "https://facebook.com/buddingminds" },
-  { name: "Twitter", icon: Twitter, href: "https://twitter.com/buddingminds" },
-  { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com/school/buddingminds" },
-  { name: "YouTube", icon: Youtube, href: "https://youtube.com/@buddingminds" },
+  { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/bmischool/#" },
+  { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/buddingmindsinternationalschool/" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/budding-minds-international-school-15585419b/?originalSubdomain=in" },
+  { name: "YouTube", icon: Youtube, href: "https://www.youtube.com/@BMIS" },
 ];
 
 interface FullScreenNavProps {

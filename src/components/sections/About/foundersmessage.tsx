@@ -12,17 +12,19 @@ const FoundersMessage = () => {
           <img 
             src={heroImage} 
             alt="Budding Minds School Campus" 
-            className="w-full h-full object-cover object-bottom"
+            className="w-full h-full object-cover object-bottom contrast-110 saturate-110"
           />
-          <div className="absolute inset-0 bg-white opacity-80" />
+          <div className="absolute inset-0 bg-white/20" /> {/* Subtle faded overlay */}
         </div>
-        <div className="relative container mx-auto px-4 text-center h-full flex flex-col justify-center">
-          <h2 className="font-heading text-4xl md:text-6xl font-bold mb-4 text-[#1e1e1e]">
-            From the Founder's Desk
-          </h2>
-          <p className="text-xl md:text-2xl text-[#444] max-w-2xl mx-auto leading-relaxed">
-            A personal message about what makes Budding Minds so special
-          </p>
+        <div className="relative container mx-auto px-4 text-center h-full flex flex-col items-end justify-end pb-10">
+          <div className="w-full">
+            <h2 className="font-heading text-4xl md:text-6xl font-bold mb-2 text-black drop-shadow-lg">
+              From the Founder's Desk
+            </h2>
+            <p className="text-lg md:text-2xl text-black/90 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+              A personal message about what makes Budding Minds so special
+            </p>
+          </div>
         </div>
       </section>
 
@@ -32,8 +34,7 @@ const FoundersMessage = () => {
           <div className="max-w-4xl mx-auto">
             <Card className="p-8 md:p-12 border border-[#f5e8d9] bg-white shadow-md rounded-xl">
               <div className="space-y-6 text-lg leading-relaxed font-body text-[#333]">
-                
-                {/* Warm Highlight Box */}
+
                 <div className="bg-gradient-to-br from-[#fff0d9] to-[#fef7ed] p-6 rounded-lg border border-[#f5e8d9] italic font-medium text-[#1e1e1e]">
                   "When people ask what makes Budding Minds so special, I often pause—because it's not just one thing. It's a feeling. A rhythm. A spirit that runs through our corridors."
                 </div>
@@ -46,7 +47,6 @@ const FoundersMessage = () => {
                   It could be the extraordinary experiences we quietly weave into everyday learning—those unplanned sparks of joy, discovery, and challenge that leave lasting imprints on young hearts. Or maybe it's the way our school environment adapts and grows—just like our learners do—to stay in step with a rapidly changing world.
                 </p>
 
-                {/* Teal Quote Box */}
                 <div className="bg-gradient-to-br from-[#b9f6ef] to-[#d3f2ed] border-l-4 border-[#0d9488] p-6 rounded-lg">
                   <p className="font-semibold text-lg text-[#0f766e]">
                     We are not a large school, but we are deeply rooted. And we dream big.
@@ -69,7 +69,6 @@ const FoundersMessage = () => {
                   At Budding Minds, we don't promise perfection. But we do promise a space where children can grow with courage, learn with joy, and step into the world equipped not just with knowledge, but with wisdom.
                 </p>
 
-                {/* Call-to-Action Highlight */}
                 <div className="bg-gradient-to-br from-[#54BAB9] to-[#9ED2C6] p-8 rounded-xl text-center text-white shadow-md space-y-2">
                   <p className="font-semibold text-lg">
                     Come be a part of our story.
@@ -82,7 +81,6 @@ const FoundersMessage = () => {
                   </p>
                 </div>
 
-                {/* Signature */}
                 <div className="text-right mt-12 pt-8 border-t border-[#f5e8d9]">
                   <p className="font-heading text-2xl font-bold text-[#0f766e] mb-2">
                     A V Ashok Kumar
