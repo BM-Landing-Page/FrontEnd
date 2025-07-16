@@ -12,112 +12,19 @@ import Link from "next/link";
 import { useRef, useState, useLayoutEffect } from "react";
 
 const NAV_ITEMS = [
-  {
-    label: "About Us",
-    subItems: [
-      "Vision, Mission & Philosophy",
-      "Principal’s Message",
-      "BMIS Journey",
-      "Leadership Team",
-    ],
-  },
-  {
-    label: "Academics",
-    subItems: [
-      "Curriculum Overview",
-      "Early Years",
-      "Primary & Middle Years",
-      "IGCSE & Senior Programmes",
-      "Pedagogy & Tools",
-    ],
-  },
-  {
-    label: "Admissions",
-    subItems: [
-      "Admission Process",
-      "Age Eligibility & FAQs",
-      "Fee Structure",
-    ],
-  },
-  {
-    label: "Programs",
-    subItems: [
-      "Enrichment Activities",
-      "Clubs & Workshops",
-      "Certificate Courses",
-    ],
-  },
-  {
-    label: "Campus Life",
-    subItems: [
-      "A Day at BMIS",
-      "Events & Celebrations",
-      "Student Voice",
-    ],
-  },
-  {
-    label: "Student Leadership",
-    subItems: [
-      "SLC Overview",
-      "Student Profiles",
-      "Leadership Projects",
-    ],
-  },
-  {
-    label: "IGNITE",
-    subItems: [],
-  },
-  {
-    label: "BM PD Academy",
-    subItems: [
-      "About the Academy",
-      "Vision & Outcomes",
-      "Pedagogy & Modules",
-      "Candidate Voice",
-      "Gallery / Media",
-      "FAQs or Myths Busted",
-    ],
-  },
-  {
-    label: "Parent Hub",
-    subItems: [
-      "Communication Tools",
-      "Calendar & Downloads",
-      "Parent Testimonials",
-    ],
-  },
-  {
-    label: "Gallery",
-    subItems: [
-      "Curated Albums",
-      "Media Highlights",
-    ],
-  },
-  {
-    label: "Newsroom",
-    subItems: [
-      "School Updates",
-      "Student Achievements",
-      "Thought Pieces",
-      "BM Gazette",
-    ],
-  },
-  {
-    label: "Contact Us",
-    subItems: [
-      "Location & Details",
-      "Socials",
-    ],
-  },
-  {
-    label: "Extras",
-    subItems: [
-      "Alumni Stories",
-      "Faculty Spotlights",
-      "Student Projects",
-      "School Policies",
-    ],
-  },
+  { label: "About Us", subItems: ["Vision, Mission & Philosophy", "Principal’s Message", "BMIS Journey", "Leadership Team"] },
+  { label: "Academics", subItems: ["Curriculum Overview", "Early Years", "Primary & Middle Years", "IGCSE & Senior Programmes", "Pedagogy & Tools"] },
+  { label: "Admissions", subItems: ["Admission Process", "Age Eligibility & FAQs", "Fee Structure"] },
+  { label: "Programs", subItems: ["Enrichment Activities", "Clubs & Workshops", "Certificate Courses"] },
+  { label: "Campus Life", subItems: ["A Day at BMIS", "Events & Celebrations", "Student Voice"] },
+  { label: "Student Leadership", subItems: ["SLC Overview", "Student Profiles", "Leadership Projects"] },
+  { label: "IGNITE", subItems: [] },
+  { label: "BM PD Academy", subItems: ["About the Academy", "Vision & Outcomes", "Pedagogy & Modules", "Candidate Voice", "Gallery / Media", "FAQs or Myths Busted"] },
+  { label: "Parent Hub", subItems: ["Communication Tools", "Calendar & Downloads", "Parent Testimonials"] },
+  { label: "Gallery", subItems: ["Curated Albums", "Media Highlights"] },
+  { label: "Newsroom", subItems: ["School Updates", "Student Achievements", "Thought Pieces", "BM Gazette"] },
+  { label: "Contact Us", subItems: ["Location & Details", "Socials"] },
+
 ];
 
 const SOCIAL_LINKS = [
@@ -150,9 +57,9 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col md:flex-row font-light select-none">
+    <div className="fixed inset-0 z-[100] flex flex-col md:flex-row font-light select-none overflow-y-auto md:overflow-hidden">
       {/* LEFT PANEL */}
-      <div className="relative md:w-1/2 w-full h-full flex flex-col justify-center items-end md:pr-16 px-6 gap-5 bg-[#F7ECDE]">
+      <div className="relative md:w-1/2 w-full h-auto md:h-full flex flex-col justify-center items-start md:items-end md:pr-16 px-6 pt-10 gap-4 bg-[#F7ECDE]">
         <button
           onClick={onClose}
           aria-label="Close Menu"
@@ -167,8 +74,9 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             ref={(el) => {
               refMap.current[item.label] = el;
             }}
+            onClick={() => setActive(item.label)}
             onMouseEnter={() => setActive(item.label)}
-            className={`cursor-pointer text-xl md:text-3xl font-semibold transition-all hover:underline hover:text-[#850000] ${
+            className={`cursor-pointer text-base md:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
               active === item.label ? "text-[#850000]" : "text-[#1E293B]"
             }`}
           >
@@ -177,19 +85,26 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         ))}
       </div>
 
-      {/* RIGHT PANEL — SubItems */}
-      <div className="relative md:w-1/2 w-full h-full backdrop-blur-md bg-white/20 text-[#1E293B]">
+      {/* RIGHT PANEL */}
+      <div className="relative md:w-1/2 w-full h-full bg-white text-[#1E293B] p-6 md:p-0 md:backdrop-blur-md md:bg-white/20">
         {active && (
           <div
-            className="absolute left-6 md:left-10 flex flex-col gap-3 text-lg md:text-2xl font-bold animate-fade-in"
-            style={{ top: subTop }}
+            className="md:absolute flex flex-col gap-3 text-base md:text-lg font-semibold animate-fade-in max-h-[75vh] overflow-y-auto pr-4"
+            style={
+              typeof window !== "undefined" && window.innerWidth >= 768
+                ? { top: subTop, left: "2.5rem" }
+                : {}
+            }
             onMouseEnter={() => setActive(active)}
             onMouseLeave={() => setActive(null)}
           >
             {NAV_ITEMS.find((n) => n.label === active)?.subItems.map((sub) => (
               <Link
                 key={sub}
-                href={`/${active.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-")}/${sub
+                href={`/${active
+                  .toLowerCase()
+                  .replace(/ & /g, "-")
+                  .replace(/\s+/g, "-")}/${sub
                   .toLowerCase()
                   .replace(/\s+/g, "-")}`}
                 className="hover:text-[#850000] transition-colors"
@@ -202,16 +117,16 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         )}
 
         {/* SOCIAL LINKS */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4 text-sm items-center">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-5 text-sm items-center text-[#1E293B]">
           {SOCIAL_LINKS.map(({ name, icon: Icon, href }) => (
             <a
               key={name}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-white opacity-80 hover:opacity-100 transition"
+              className="flex items-center gap-1 opacity-80 hover:opacity-100 transition"
             >
-              <Icon size={16} className="stroke-1" />
+              <Icon size={16} />
               <span className="hidden sm:inline-block">{name}</span>
             </a>
           ))}
