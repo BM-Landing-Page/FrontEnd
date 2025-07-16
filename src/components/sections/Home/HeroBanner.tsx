@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Circle, Search } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+
 const images = [
   { url: "/images/Herobannerbg.jpg", alt: "Hero Background 1" },
   { url: "/images/Herobannerbg1.jpg", alt: "Hero Background 2" },
@@ -20,7 +21,7 @@ export default function HeroBanner() {
   }, []);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[#F7ECDE] text-white font-sans">
+    <div className="relative w-full h-[80vh] md:h-screen overflow-hidden bg-[#F7ECDE] text-white font-sans">
       {/* Background Carousel */}
       <div className="absolute inset-0 z-0">
         {images.map((img, idx) => (
@@ -33,7 +34,7 @@ export default function HeroBanner() {
             <img
               src={img.url}
               alt={img.alt}
-              className="w-full h-full object-cover"
+              className="w-full h-[80vh] md:h-screen object-cover object-center"
             />
             <div className="absolute inset-0 bg-black/40" />
           </div>
@@ -41,22 +42,26 @@ export default function HeroBanner() {
       </div>
 
       {/* Slogan */}
-      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-20 text-center px-6">
-        <p className="text-xl font-light tracking-wider">BE THE START OF</p>
-        <h2 className="text-5xl md:text-6xl font-extrabold mt-1">SOMETHING</h2>
+      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-20 text-center px-4 md:px-6">
+        <p className="text-base md:text-xl font-light tracking-wider">
+          BE THE START OF
+        </p>
+        <h2 className="text-4xl md:text-6xl font-extrabold mt-1">SOMETHING</h2>
       </div>
 
       {/* Bottom Left Caption */}
-      <div className="absolute bottom-4 left-6 z-20 text-sm md:text-base text-white space-y-1">
-        <div className="flex items-center gap-3">
-          <Search size={14} />
-          <span className="font-semibold">PARENTS | STUDENTS | STAFF</span>
+      <div className="absolute bottom-4 left-4 md:left-6 z-20 text-xs md:text-base text-white space-y-1">
+        <div className="flex items-center gap-2 md:gap-3">
+          <Search size={12} className="md:size-4" />
+          <span className="font-semibold text-[10px] md:text-sm">
+            PARENTS | STUDENTS | STAFF
+          </span>
         </div>
-        <p className="text-xs md:text-sm">#BeTheStartOfSomething</p>
+        <p className="text-[10px] md:text-sm">#BeTheStartOfSomething</p>
       </div>
 
       {/* Bottom Right Dots */}
-      <div className="absolute bottom-4 right-6 z-20 flex items-center space-x-2">
+      <div className="absolute bottom-4 right-4 md:right-6 z-20 flex items-center space-x-2">
         {images.map((_, i) => (
           <Circle
             key={i}
@@ -74,9 +79,9 @@ export default function HeroBanner() {
         href="https://wa.me/919876543210"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-40 bg-[#54BAB9] hover:bg-[#459a99] p-3 rounded-full shadow-lg"
+        className="fixed bottom-5 right-5 md:bottom-6 md:right-6 z-40 bg-[#54BAB9] hover:bg-[#459a99] p-3 rounded-full shadow-lg"
       >
-        <FaWhatsapp size={24} className="text-white" />
+        <FaWhatsapp size={20} className="text-white" />
       </a>
     </div>
   );

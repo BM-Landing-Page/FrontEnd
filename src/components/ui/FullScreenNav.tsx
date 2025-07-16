@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useRef, useState, useLayoutEffect } from "react";
 
 const NAV_ITEMS = [
-  { label: "About Us", subItems: ["Vision, Mission & Philosophy", "Principal’s Message", "BMIS Journey", "Leadership Team"] },
+  { label: "About Us", subItems: ["Vision, Mission & Philosophy", "Founder's Message", "BMIS Journey", "Leadership Team"] },
   { label: "Academics", subItems: ["Curriculum Overview", "Early Years", "Primary & Middle Years", "IGCSE & Senior Programmes", "Pedagogy & Tools"] },
   { label: "Admissions", subItems: ["Admission Process", "Age Eligibility & FAQs", "Fee Structure"] },
   { label: "Programs", subItems: ["Enrichment Activities", "Clubs & Workshops", "Certificate Courses"] },
@@ -24,8 +24,12 @@ const NAV_ITEMS = [
   { label: "Gallery", subItems: ["Curated Albums", "Media Highlights"] },
   { label: "Newsroom", subItems: ["School Updates", "Student Achievements", "Thought Pieces", "BM Gazette"] },
   { label: "Contact Us", subItems: ["Location & Details", "Socials"] },
-
 ];
+
+const ROUTE_OVERRIDES: Record<string, string> = {
+  "Vision, Mission & Philosophy": "/missionforvision",
+  "Founder's Message": "/foundersmessage",
+};
 
 const SOCIAL_LINKS = [
   { name: "Instagram", icon: Instagram, href: "https://instagram.com/buddingminds" },
@@ -59,7 +63,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   return (
     <div className="fixed inset-0 z-[100] flex flex-col md:flex-row font-light select-none overflow-y-auto md:overflow-hidden">
       {/* LEFT PANEL */}
-      <div className="relative md:w-1/2 w-full h-auto md:h-full flex flex-col justify-center items-start md:items-end md:pr-16 px-6 pt-10 gap-4 bg-[#F7ECDE]">
+      <div className="relative md:w-1/2 w-full h-auto md:h-full flex flex-col justify-start items-start md:items-end md:pr-16 px-6 pt-10 gap-4 bg-[#F7ECDE]">
         <button
           onClick={onClose}
           aria-label="Close Menu"
@@ -76,7 +80,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             }}
             onClick={() => setActive(item.label)}
             onMouseEnter={() => setActive(item.label)}
-            className={`cursor-pointer text-base md:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
+            className={`cursor-pointer text-sm md:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
               active === item.label ? "text-[#850000]" : "text-[#1E293B]"
             }`}
           >
@@ -89,7 +93,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
       <div className="relative md:w-1/2 w-full h-full bg-white text-[#1E293B] p-6 md:p-0 md:backdrop-blur-md md:bg-white/20">
         {active && (
           <div
-            className="md:absolute flex flex-col gap-3 text-base md:text-lg font-semibold animate-fade-in max-h-[75vh] overflow-y-auto pr-4"
+            className="md:absolute flex flex-col gap-2 text-sm md:text-lg font-semibold animate-fade-in max-h-[75vh] overflow-y-auto pr-4"
             style={
               typeof window !== "undefined" && window.innerWidth >= 768
                 ? { top: subTop, left: "2.5rem" }
@@ -98,26 +102,30 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             onMouseEnter={() => setActive(active)}
             onMouseLeave={() => setActive(null)}
           >
-            {NAV_ITEMS.find((n) => n.label === active)?.subItems.map((sub) => (
-              <Link
-                key={sub}
-                href={`/${active
-                  .toLowerCase()
-                  .replace(/ & /g, "-")
-                  .replace(/\s+/g, "-")}/${sub
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-                className="hover:text-[#850000] transition-colors"
-                onClick={handleSubItemClick}
-              >
-                {sub}
-              </Link>
-            ))}
+            {NAV_ITEMS.find((n) => n.label === active)?.subItems.map((sub) => {
+              const overrideHref = ROUTE_OVERRIDES[sub];
+              const defaultHref = `/${active
+                .toLowerCase()
+                .replace(/ & /g, "-")
+                .replace(/\s+/g, "-")}/${sub
+                .toLowerCase()
+                .replace(/\s+/g, "-")}`;
+              return (
+                <Link
+                  key={sub}
+                  href={overrideHref || defaultHref}
+                  className="hover:text-[#850000] transition-colors"
+                  onClick={handleSubItemClick}
+                >
+                  {sub}
+                </Link>
+              );
+            })}
           </div>
         )}
 
         {/* SOCIAL LINKS */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-5 text-sm items-center text-[#1E293B]">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-4 text-xs md:text-sm items-center text-[#1E293B]">
           {SOCIAL_LINKS.map(({ name, icon: Icon, href }) => (
             <a
               key={name}
