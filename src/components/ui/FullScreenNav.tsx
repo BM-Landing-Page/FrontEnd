@@ -61,9 +61,9 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col md:flex-row font-light select-none overflow-y-auto md:overflow-hidden">
+    <div className="fixed inset-0 z-[100] flex flex-col lg:flex-row font-light select-none overflow-y-auto lg:overflow-hidden">
       {/* LEFT PANEL */}
-      <div className="relative md:w-1/2 w-full h-auto md:h-full flex flex-col justify-start items-start md:items-end md:pr-16 px-6 pt-10 gap-4 bg-[#F7ECDE]">
+      <div className="relative lg:w-1/2 w-full h-auto lg:h-full flex flex-col justify-start items-start lg:items-end lg:pr-12 px-6 pt-10 gap-4 bg-[#F7ECDE] min-h-screen">
         <button
           onClick={onClose}
           aria-label="Close Menu"
@@ -80,7 +80,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             }}
             onClick={() => setActive(item.label)}
             onMouseEnter={() => setActive(item.label)}
-            className={`cursor-pointer text-sm md:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
+            className={`cursor-pointer text-base lg:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
               active === item.label ? "text-[#850000]" : "text-[#1E293B]"
             }`}
           >
@@ -90,12 +90,12 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
       </div>
 
       {/* RIGHT PANEL */}
-      <div className="relative md:w-1/2 w-full h-full bg-white text-[#1E293B] p-6 md:p-0 md:backdrop-blur-md md:bg-white/20">
+      <div className="relative lg:w-1/2 w-full h-full bg-white text-[#1E293B] p-6 lg:p-0 lg:backdrop-blur-md lg:bg-white/20 min-h-screen">
         {active && (
           <div
-            className="md:absolute flex flex-col gap-2 text-sm md:text-lg font-semibold animate-fade-in max-h-[75vh] overflow-y-auto pr-4"
+            className="lg:absolute flex flex-col gap-2 text-sm lg:text-lg font-semibold animate-fade-in max-h-[75vh] overflow-y-auto pr-4"
             style={
-              typeof window !== "undefined" && window.innerWidth >= 768
+              typeof window !== "undefined" && window.innerWidth >= 1024
                 ? { top: subTop, left: "2.5rem" }
                 : {}
             }
@@ -125,7 +125,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         )}
 
         {/* SOCIAL LINKS */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-4 text-xs md:text-sm items-center text-[#1E293B]">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-4 text-xs lg:text-sm items-center text-[#1E293B]">
           {SOCIAL_LINKS.map(({ name, icon: Icon, href }) => (
             <a
               key={name}
