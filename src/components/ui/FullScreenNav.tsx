@@ -67,18 +67,18 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col md:flex-row font-light select-none w-full h-screen">
-      {/* MOBILE VIEW */}
-      <div className="md:hidden bg-[#F7ECDE] w-full h-full p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-[100] flex flex-col lg:flex-row font-light select-none w-full h-screen">
+      {/* MOBILE AND TABLET VIEW */}
+      <div className="lg:hidden bg-[#F7ECDE] w-full h-full p-4 sm:p-6 overflow-y-auto">
         <button
           onClick={onClose}
           aria-label="Close Menu"
           className="text-[#1E293B] hover:scale-105 transition-transform self-start mb-6"
         >
-          <X size={30} />
+          <X size={24} className="sm:w-7 sm:h-7" />
         </button>
 
-        <div className="flex flex-col gap-4 text-left">
+        <div className="flex flex-col gap-3 sm:gap-4 text-left">
           {NAV_ITEMS.map((item) => (
             <div key={item.label} className="w-full">
               <div
@@ -93,7 +93,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                     setActive(active === item.label ? null : item.label);
                   }
                 }}
-                className={`cursor-pointer text-lg font-medium transition-all hover:underline hover:text-[#850000] ${
+                className={`cursor-pointer text-base sm:text-lg font-medium transition-all hover:underline hover:text-[#850000] ${
                   active === item.label ? "text-[#850000]" : "text-[#1E293B]"
                 }`}
               >
@@ -101,7 +101,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
               </div>
 
               {active === item.label && item.subItems.length > 0 && (
-                <div className="mt-2 ml-4 flex flex-col gap-2 text-sm font-semibold">
+                <div className="mt-2 ml-3 sm:ml-4 flex flex-col gap-1.5 sm:gap-2 text-sm font-semibold">
                   {item.subItems.map((sub) => {
                     const overrideHref = ROUTE_OVERRIDES[sub];
                     const defaultHref = `/${item.label
@@ -128,7 +128,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         </div>
 
         {/* Social Links */}
-        <div className="mt-10 flex flex-wrap justify-center gap-4 text-xs items-center text-[#1E293B]">
+        <div className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-3 sm:gap-4 text-xs items-center text-[#1E293B]">
           {SOCIAL_LINKS.map(({ name, icon: Icon, href }) => (
             <a
               key={name}
@@ -145,11 +145,11 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
       </div>
 
       {/* DESKTOP VIEW */}
-      <div className="hidden md:flex w-full h-full relative">
+      <div className="hidden lg:flex w-full h-full relative">
         {/* LEFT PANEL */}
         <div
           ref={containerRef}
-          className="w-1/2 bg-[#F7ECDE] px-8 pt-10 pb-6 flex items-center justify-end relative"
+          className="w-1/2 bg-[#F7ECDE] px-6 xl:px-8 pt-10 pb-6 flex items-center justify-end relative"
         >
           <button
             onClick={onClose}
@@ -159,14 +159,18 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             <X size={30} />
           </button>
 
-          <div className="flex flex-col gap-4 text-right w-full items-end justify-center">
+          {/* Navigation Items Container - 75% height, centered */}
+          <div 
+            className="flex flex-col justify-center gap-3 xl:gap-4 text-right w-full items-end"
+            style={{ height: '75vh' }}
+          >
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
               const route =
                 ROUTE_OVERRIDES[item.label] ||
                 `/${item.label.toLowerCase().replace(/\s+/g, "-")}`;
 
-              const sharedClass = `cursor-pointer text-lg font-medium transition-all hover:underline hover:text-[#850000] ${
+              const sharedClass = `cursor-pointer text-base xl:text-lg 2xl:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
                 active === item.label ? "text-[#850000]" : "text-[#1E293B]"
               }`;
 
@@ -196,10 +200,10 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         </div>
 
         {/* RIGHT PANEL */}
-        <div className="w-1/2 bg-white/30 backdrop-blur-md p-6 text-[#1E293B] relative">
+        <div className="w-1/2 bg-white/30 backdrop-blur-md p-6 xl:p-8 text-[#1E293B] relative">
           {active && hoverTop !== null && (
             <div
-              className="absolute left-6 flex flex-col gap-2 text-sm font-semibold bg-white/50 p-4 rounded-xl"
+              className="absolute left-6 xl:left-8 flex flex-col gap-2 text-sm xl:text-base font-semibold bg-white/50 p-4 xl:p-5 rounded-xl shadow-lg backdrop-blur-sm min-w-[200px] xl:min-w-[250px]"
               style={{ top: `${hoverTop}px` }}
               onMouseLeave={() => setActive(null)}
               onMouseEnter={() => null}
@@ -216,7 +220,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                   <Link
                     key={sub}
                     href={overrideHref || defaultHref}
-                    className="hover:text-[#850000] transition-colors"
+                    className="hover:text-[#850000] transition-colors py-1"
                     onClick={handleSubItemClick}
                   >
                     {sub}
