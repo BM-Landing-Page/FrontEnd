@@ -149,7 +149,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         {/* LEFT PANEL */}
         <div
           ref={containerRef}
-          className="w-1/2 bg-[#F7ECDE] px-6 xl:px-8 pt-10 pb-6 flex items-center justify-end relative"
+          className="w-1/2 bg-[#F7ECDE] px-6 xl:px-8 pt-10 pb-6 flex flex-col relative"
         >
           <button
             onClick={onClose}
@@ -159,11 +159,8 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             <X size={30} />
           </button>
 
-          {/* Navigation Items Container - 75% height, centered */}
-          <div 
-            className="flex flex-col justify-center gap-3 xl:gap-4 text-right w-full items-end"
-            style={{ height: '75vh' }}
-          >
+          {/* Navigation Items Container - vertically centered, 3/4 height */}
+          <div className="flex-grow flex flex-col justify-center gap-3 xl:gap-4 text-right w-full items-end">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
               const route =
