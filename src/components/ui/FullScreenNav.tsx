@@ -84,12 +84,12 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                       ROUTE_OVERRIDES[item.label] ||
                       `/${item.label.toLowerCase().replace(/\s+/g, "-")}`;
                     onClose();
-                    window.location.href = route; // fallback in mobile
+                    window.location.href = route;
                   } else {
                     setActive(active === item.label ? null : item.label);
                   }
                 }}
-                className={`cursor-pointer text-base xl:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
+                className={`cursor-pointer text-lg font-medium transition-all hover:underline hover:text-[#850000] ${
                   active === item.label ? "text-[#850000]" : "text-[#1E293B]"
                 }`}
               >
@@ -97,7 +97,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
               </div>
 
               {active === item.label && item.subItems.length > 0 && (
-                <div className="mt-2 ml-4 flex flex-col gap-2 text-sm xl:text-base font-semibold">
+                <div className="mt-2 ml-4 flex flex-col gap-2 text-sm font-semibold">
                   {item.subItems.map((sub) => {
                     const overrideHref = ROUTE_OVERRIDES[sub];
                     const defaultHref = `/${item.label
@@ -124,7 +124,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         </div>
 
         {/* Social Links */}
-        <div className="mt-10 flex flex-wrap justify-center gap-4 text-xs xl:text-sm items-center text-[#1E293B]">
+        <div className="mt-10 flex flex-wrap justify-center gap-4 text-xs items-center text-[#1E293B]">
           {SOCIAL_LINKS.map(({ name, icon: Icon, href }) => (
             <a
               key={name}
@@ -143,7 +143,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
       {/* DESKTOP VIEW */}
       <div className="hidden md:flex w-full h-full relative">
         {/* LEFT PANEL */}
-        <div className="w-1/2 bg-[#F7ECDE] flex flex-col justify-center gap-4 px-8 pt-10 overflow-y-auto items-end relative">
+        <div className="w-1/2 bg-[#F7ECDE] px-8 pt-10 pb-6 flex items-center justify-end relative">
           <button
             onClick={onClose}
             aria-label="Close Menu"
@@ -152,14 +152,14 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             <X size={30} />
           </button>
 
-          <div className="flex flex-col gap-4 text-right md:h-[75%] w-full md:w-auto">
+          <div className="flex flex-col gap-4 text-right max-h-[75vh] overflow-y-auto w-full md:w-auto">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
               const route =
                 ROUTE_OVERRIDES[item.label] ||
                 `/${item.label.toLowerCase().replace(/\s+/g, "-")}`;
 
-              const sharedClass = `cursor-pointer text-base xl:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
+              const sharedClass = `cursor-pointer text-lg font-medium transition-all hover:underline hover:text-[#850000] ${
                 active === item.label ? "text-[#850000]" : "text-[#1E293B]"
               }`;
 
@@ -192,7 +192,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         <div className="w-1/2 bg-white/30 backdrop-blur-md p-6 text-[#1E293B] overflow-hidden relative">
           {active && (
             <div
-              className="absolute left-6 flex flex-col gap-2 text-sm xl:text-base font-semibold bg-white/50 p-4 rounded-xl"
+              className="absolute left-6 flex flex-col gap-2 text-sm font-semibold bg-white/50 p-4 rounded-xl"
               style={{ top: hoverTop ?? 0 }}
               onMouseLeave={() => setActive(null)}
               onMouseEnter={() => null}
