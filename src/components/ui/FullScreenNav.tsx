@@ -159,8 +159,8 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             <X size={30} />
           </button>
 
-          {/* Nav Items - Shorter (75% height), Centered */}
-          <div className="h-[75%] flex flex-col justify-center items-end text-right w-full space-y-[clamp(0.5rem,1.2vh,1rem)]">
+          {/* Nav Items - Top-aligned with padding */}
+          <div className="flex-1 flex flex-col justify-start pt-16 items-end text-right w-full space-y-[clamp(0.5rem,1.2vh,1rem)]">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
               const route =
