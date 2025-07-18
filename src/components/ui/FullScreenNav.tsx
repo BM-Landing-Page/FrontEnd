@@ -27,9 +27,10 @@ const NAV_ITEMS = [
 ];
 
 const ROUTE_OVERRIDES: Record<string, string> = {
+  "Home": "/",
   "Vision, Mission & Philosophy": "/missionforvision",
   "Founder's Message": "/foundersmessage",
-  "Admission Process": "admissionsprocess"
+  "Admission Process": "admissionsprocess",
 };
 
 const SOCIAL_LINKS = [
@@ -77,7 +78,17 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
           {NAV_ITEMS.map((item) => (
             <div key={item.label} className="w-full">
               <div
-                onClick={() => setActive(active === item.label ? null : item.label)}
+                onClick={() => {
+                  if (item.subItems.length === 0) {
+                    const route =
+                      ROUTE_OVERRIDES[item.label] ||
+                      `/${item.label.toLowerCase().replace(/\s+/g, "-")}`;
+                    onClose();
+                    window.location.href = route; // fallback in mobile
+                  } else {
+                    setActive(active === item.label ? null : item.label);
+                  }
+                }}
                 className={`cursor-pointer text-base xl:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
                   active === item.label ? "text-[#850000]" : "text-[#1E293B]"
                 }`}
@@ -142,20 +153,38 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
           </button>
 
           <div className="flex flex-col gap-4 text-right md:h-[75%] w-full md:w-auto">
-            {NAV_ITEMS.map((item, index) => (
-              <div
-                key={item.label}
-                ref={(el) => {
-                  itemRefs.current[index] = el;
-                }}
-                onMouseEnter={() => handleMouseEnter(item.label, index)}
-                className={`cursor-pointer text-base xl:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
-                  active === item.label ? "text-[#850000]" : "text-[#1E293B]"
-                }`}
-              >
-                {item.label}
-              </div>
-            ))}
+            {NAV_ITEMS.map((item, index) => {
+              const isLink = item.subItems.length === 0;
+              const route =
+                ROUTE_OVERRIDES[item.label] ||
+                `/${item.label.toLowerCase().replace(/\s+/g, "-")}`;
+
+              const sharedClass = `cursor-pointer text-base xl:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
+                active === item.label ? "text-[#850000]" : "text-[#1E293B]"
+              }`;
+
+              return (
+                <div
+                  key={item.label}
+                  ref={(el) => {
+                    itemRefs.current[index] = el;
+                  }}
+                  onMouseEnter={() => handleMouseEnter(item.label, index)}
+                >
+                  {isLink ? (
+                    <Link
+                      href={route}
+                      onClick={onClose}
+                      className={sharedClass}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <div className={sharedClass}>{item.label}</div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
