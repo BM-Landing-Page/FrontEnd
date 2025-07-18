@@ -159,7 +159,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             <X size={30} />
           </button>
 
-          {/* Nav Items - Top-aligned with padding */}
+          {/* Nav Items - Top-aligned */}
           <div className="flex-1 flex flex-col justify-start pt-16 items-end text-right w-full space-y-[clamp(0.5rem,1.2vh,1rem)]">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
