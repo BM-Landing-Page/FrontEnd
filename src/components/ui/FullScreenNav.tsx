@@ -159,7 +159,6 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             <X size={30} />
           </button>
 
-          {/* Nav Items - Top-aligned */}
           <div className="flex-1 flex flex-col justify-start pt-16 items-end text-right w-full space-y-[clamp(0.5rem,1.2vh,1rem)]">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
@@ -197,7 +196,16 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
           {active && hoverTop !== null && (
             <div
               className="absolute left-6 xl:left-8 flex flex-col gap-2 text-sm xl:text-base font-semibold bg-white/50 p-4 xl:p-5 rounded-xl shadow-lg backdrop-blur-sm min-w-[200px] xl:min-w-[250px]"
-              style={{ top: `${hoverTop}px` }}
+              style={{
+                top:
+                  hoverTop !== null && containerRef.current
+                    ? Math.min(
+                        hoverTop,
+                        containerRef.current.offsetHeight -
+                          (NAV_ITEMS.find((n) => n.label === active)?.subItems.length ?? 0) * 36 - 32
+                      )
+                    : 0,
+              }}
               onMouseLeave={() => setActive(null)}
             >
               {NAV_ITEMS.find((n) => n.label === active)?.subItems.map((sub) => {
