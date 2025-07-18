@@ -159,15 +159,15 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             <X size={30} />
           </button>
 
-          {/* Navigation Items - vertically centered, scroll-safe */}
-          <div className="flex-1 flex flex-col justify-center gap-3 xl:gap-4 text-right w-full items-end overflow-y-auto pr-2">
+          {/* Nav Items - fit screen without scroll */}
+          <div className="flex-1 flex flex-col justify-center items-end text-right w-full space-y-[clamp(0.5rem,1.2vh,1rem)]">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
               const route =
                 ROUTE_OVERRIDES[item.label] ||
                 `/${item.label.toLowerCase().replace(/\s+/g, "-")}`;
 
-              const sharedClass = `cursor-pointer text-base xl:text-lg 2xl:text-xl font-medium transition-all hover:underline hover:text-[#850000] ${
+              const sharedClass = `cursor-pointer text-[clamp(0.9rem,1.5vw,1.2rem)] font-medium transition-all hover:underline hover:text-[#850000] ${
                 active === item.label ? "text-[#850000]" : "text-[#1E293B]"
               }`;
 
@@ -180,11 +180,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                   onMouseEnter={() => handleMouseEnter(item.label, index)}
                 >
                   {isLink ? (
-                    <Link
-                      href={route}
-                      onClick={onClose}
-                      className={sharedClass}
-                    >
+                    <Link href={route} onClick={onClose} className={sharedClass}>
                       {item.label}
                     </Link>
                   ) : (
