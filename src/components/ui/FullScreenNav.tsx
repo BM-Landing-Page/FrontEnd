@@ -127,7 +127,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
           ))}
         </div>
 
-        {/* Social Links */}
+        {/* Social Links (Mobile) */}
         <div className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-3 sm:gap-4 text-xs items-center text-[#1E293B]">
           {SOCIAL_LINKS.map(({ name, icon: Icon, href }) => (
             <a
@@ -159,7 +159,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             <X size={30} />
           </button>
 
-          <div className="flex-1 flex flex-col justify-start pt-16 items-end text-right w-full space-y-[clamp(0.5rem,1.2vh,1rem)]">
+          <div className="h-[75%] flex flex-col justify-center items-end text-right gap-3 xl:gap-4">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
               const route =
@@ -229,6 +229,24 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
               })}
             </div>
           )}
+
+          {/* Social Icons - Center aligned with labels */}
+          <div className="absolute bottom-6 w-full flex justify-center z-50">
+            <div className="flex gap-6 items-center text-[#1E293B] opacity-80 hover:opacity-100 transition">
+              {SOCIAL_LINKS.map(({ name, icon: Icon, href }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-[#850000]"
+                >
+                  <Icon size={18} />
+                  <span className="text-sm font-medium">{name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
