@@ -30,13 +30,13 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Home": "/",
   "Vision, Mission & Philosophy": "/missionforvision",
   "Founder's Message": "/foundersmessage",
-  "Admission Process": "admissionsprocess",
+  "Admission Process": "/admissionsprocess",
 };
 
 const SOCIAL_LINKS = [
   { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/bmischool/#" },
   { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/buddingmindsinternationalschool/" },
-  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/budding-minds-international-school-15585419b/?originalSubdomain=in" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/budding-minds-international-school-15585419b" },
   { name: "YouTube", icon: Youtube, href: "https://www.youtube.com/@BMIS" },
 ];
 
@@ -48,6 +48,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   const [active, setActive] = useState<string | null>(null);
   const [hoverTop, setHoverTop] = useState<number | null>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleSubItemClick = () => {
     setActive(null);
@@ -57,13 +58,16 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   const handleMouseEnter = (label: string, index: number) => {
     setActive(label);
     const el = itemRefs.current[index];
-    if (el) {
-      setHoverTop(el.offsetTop);
+    const container = containerRef.current;
+    if (el && container) {
+      const elRect = el.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      setHoverTop(elRect.top - containerRect.top);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col md:flex-row font-light select-none overflow-hidden w-full h-screen">
+    <div className="fixed inset-0 z-[100] flex flex-col md:flex-row font-light select-none w-full h-screen">
       {/* MOBILE VIEW */}
       <div className="md:hidden bg-[#F7ECDE] w-full h-full p-6 overflow-y-auto">
         <button
@@ -143,7 +147,10 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
       {/* DESKTOP VIEW */}
       <div className="hidden md:flex w-full h-full relative">
         {/* LEFT PANEL */}
-        <div className="w-1/2 bg-[#F7ECDE] px-8 pt-10 pb-6 flex items-center justify-end relative">
+        <div
+          ref={containerRef}
+          className="w-1/2 bg-[#F7ECDE] px-8 pt-10 pb-6 flex items-center justify-end relative"
+        >
           <button
             onClick={onClose}
             aria-label="Close Menu"
@@ -152,7 +159,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             <X size={30} />
           </button>
 
-          <div className="flex flex-col gap-4 text-right max-h-[75vh] overflow-y-auto w-full md:w-auto">
+          <div className="flex flex-col gap-4 text-right w-full items-end justify-center">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
               const route =
@@ -189,11 +196,11 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         </div>
 
         {/* RIGHT PANEL */}
-        <div className="w-1/2 bg-white/30 backdrop-blur-md p-6 text-[#1E293B] overflow-hidden relative">
-          {active && (
+        <div className="w-1/2 bg-white/30 backdrop-blur-md p-6 text-[#1E293B] relative">
+          {active && hoverTop !== null && (
             <div
               className="absolute left-6 flex flex-col gap-2 text-sm font-semibold bg-white/50 p-4 rounded-xl"
-              style={{ top: hoverTop ?? 0 }}
+              style={{ top: `${hoverTop}px` }}
               onMouseLeave={() => setActive(null)}
               onMouseEnter={() => null}
             >
