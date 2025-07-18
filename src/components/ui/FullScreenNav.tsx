@@ -149,7 +149,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         {/* LEFT PANEL */}
         <div
           ref={containerRef}
-          className="w-1/2 bg-[#F7ECDE] px-6 xl:px-8 pt-10 pb-6 flex flex-col relative"
+          className="w-1/2 bg-[#F7ECDE] px-6 xl:px-8 flex flex-col h-full relative"
         >
           <button
             onClick={onClose}
@@ -159,8 +159,8 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             <X size={30} />
           </button>
 
-          {/* Navigation Items Container - vertically centered, 3/4 height */}
-          <div className="flex-grow flex flex-col justify-center gap-3 xl:gap-4 text-right w-full items-end">
+          {/* Navigation Items - vertically centered, scroll-safe */}
+          <div className="flex-1 flex flex-col justify-center gap-3 xl:gap-4 text-right w-full items-end overflow-y-auto pr-2">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
               const route =
@@ -203,7 +203,6 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
               className="absolute left-6 xl:left-8 flex flex-col gap-2 text-sm xl:text-base font-semibold bg-white/50 p-4 xl:p-5 rounded-xl shadow-lg backdrop-blur-sm min-w-[200px] xl:min-w-[250px]"
               style={{ top: `${hoverTop}px` }}
               onMouseLeave={() => setActive(null)}
-              onMouseEnter={() => null}
             >
               {NAV_ITEMS.find((n) => n.label === active)?.subItems.map((sub) => {
                 const overrideHref = ROUTE_OVERRIDES[sub];
