@@ -1,7 +1,12 @@
-// components/ui/Header.tsx
 "use client";
 
 import Image from "next/image";
+import { Playfair_Display } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["700"],
+});
 
 interface HeaderProps {
   openNav: () => void;
@@ -9,18 +14,29 @@ interface HeaderProps {
 
 export default function Header({ openNav }: HeaderProps) {
   return (
-    <header className="fixed top-0 left-0 w-full z-40 backdrop-blur-md bg-white/30 text-[#1E293B] shadow-sm transition-colors">
-      <div className="flex items-center justify-between px-6 py-3">
+    <header
+      className="fixed top-0 left-0 w-full z-40 transition-colors shadow-sm"
+      style={{
+        background: "rgba(255, 255, 255, 0.8)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+      }}
+    >
+      <div className="flex items-center justify-between px-6 py-4">
         {/* Logo and School Name */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <Image
             src="/images/logo.png"
             alt="Budding Minds Logo"
-            width={50}
-            height={50}
+            width={70}
+            height={70}
             className="rounded-full"
           />
-          <span className="text-lg font-bold tracking-wide">Budding Minds International School</span>
+          <span
+            className={`text-2xl font-bold tracking-wide text-[#1E293B] ${playfair.className}`}
+          >
+            Budding Minds International School
+          </span>
         </div>
 
         {/* Hamburger Button */}
@@ -34,7 +50,7 @@ export default function Header({ openNav }: HeaderProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-7 h-7 text-[#1E293B]"
           >
             <path
               strokeLinecap="round"
