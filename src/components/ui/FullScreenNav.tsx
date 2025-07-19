@@ -29,6 +29,7 @@ const NAV_ITEMS = [
 const ROUTE_OVERRIDES: Record<string, string> = {
   "Home": "/",
   "Curriculum Overview": "curriculum",
+  "Early Years": "/earlyyears",
   "Vision, Mission & Philosophy": "/missionforvision",
   "Founder's Message": "/foundersmessage",
   "Admission Process": "/admissionsprocess",
