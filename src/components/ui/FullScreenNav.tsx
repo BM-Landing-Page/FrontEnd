@@ -6,7 +6,7 @@ import { useRef, useState } from "react"
 
 const NAV_ITEMS = [
   { label: "Home", subItems: [] },
-  { label: "ERP", subItems: [] },
+  { label: "My School One App", subItems: [] },
   {
     label: "About Us",
     subItems: ["Vision, Mission & Philosophy", "Founder's Message", "BMIS Journey", "Leadership Team"],
@@ -94,12 +94,12 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   const handleNavigation = (item: (typeof NAV_ITEMS)[0]) => {
     if (item.subItems.length === 0) {
       const route =
-        item.label === "ERP"
+        item.label === "My School One App"
           ? "https://myschoolone.com/App.php"
           : ROUTE_OVERRIDES[item.label] || `/${item.label.toLowerCase().replace(/\s+/g, "-")}`
       onClose()
 
-      if (item.label === "ERP") {
+      if (item.label === "My School One App") {
         window.open(route, "_blank", "noopener,noreferrer")
       } else {
         window.location.href = route
@@ -186,7 +186,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0
               const route =
-                item.label === "ERP"
+                item.label === "My School One App"
                   ? "https://myschoolone.com/App.php"
                   : ROUTE_OVERRIDES[item.label] || `/${item.label.toLowerCase().replace(/\s+/g, "-")}`
 
@@ -203,7 +203,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                   onMouseEnter={() => handleMouseEnter(item.label, index)}
                 >
                   {isLink ? (
-                    item.label === "ERP" ? (
+                    item.label === "My School One App" ? (
                       <a
                         href="https://myschoolone.com/App.php"
                         target="_blank"
