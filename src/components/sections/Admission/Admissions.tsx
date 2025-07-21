@@ -67,7 +67,7 @@ const Admissions = () => {
         {/* Background Image - Covers entire hero */}
         <div className="absolute inset-0">
           <Image
-            src="/images/admission-hero-banner.jpg"
+            src="/placeholder.svg?height=600&width=1200"
             alt="Children learning in classroom"
             fill
             className="object-cover"

@@ -6,10 +6,10 @@ import { useRef, useState } from "react"
 
 const NAV_ITEMS = [
   { label: "Home", subItems: [] },
-  { label: "My School One App", subItems: [] },
+  { label: "My School One", subItems: [] },
   {
-    label: "About Us",
-    subItems: ["Vision, Mission & Philosophy", "Founder's Message", "BMIS Journey", "Leadership Team"],
+    label: "About BMIS",
+    subItems: ["Vision, Mission & Philosophy", "Founder's Message", "BMIS Journey", "Leadership Team", "Alumni"],
   },
   {
     label: "Academics",
@@ -22,8 +22,10 @@ const NAV_ITEMS = [
     ],
   },
   { label: "Admissions", subItems: ["Admission Process", "Register Now"] },
-  { label: "Programs", subItems: ["Enrichment Activities", "Clubs & Workshops", "Certificate Courses"] },
-  { label: "Campus Life", subItems: ["A Day at BMIS", "Events & Celebrations", "Student Voice"] },
+  {
+    label: "Campus Life",
+    subItems: ["A Day at BMIS", "Events & Celebrations", "Student Voice", "Gallery", "Beyond Books"],
+  },
   { label: "Student Leadership", subItems: ["SLC Overview", "Student Profiles", "Leadership Projects"] },
   { label: "IGNITE", subItems: [] },
   {
@@ -38,7 +40,6 @@ const NAV_ITEMS = [
     ],
   },
   { label: "Parent Hub", subItems: ["Communication Tools", "Calendar & Downloads", "Parent Testimonials"] },
-  { label: "Gallery", subItems: ["Curated Albums", "Media Highlights"] },
   { label: "Newsroom", subItems: ["School Updates", "Student Achievements", "Thought Pieces", "BM Gazette"] },
   { label: "Contact Us", subItems: ["Location & Details", "Socials"] },
 ]
@@ -46,12 +47,17 @@ const NAV_ITEMS = [
 const ROUTE_OVERRIDES: Record<string, string> = {
   Home: "/",
   "Curriculum Overview": "curriculum",
+
   "Leadership Team": "ourteam",
   "Early Years": "/earlyyears",
+  "Primary & Middle Years": "/primaryandmiddleyears",
   "Vision, Mission & Philosophy": "/missionforvision",
   "Founder's Message": "/foundersmessage",
   "Admission Process": "/admissionsprocess",
   IGNITE: "/ignite",
+  Gallery: "/gallery",
+  "Beyond Books": "/beyond-books",
+  Alumni: "/alumni",
 }
 
 const SOCIAL_LINKS = [
@@ -81,25 +87,29 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   }
 
   const handleMouseEnter = (label: string, index: number) => {
-    setActive(label)
-    const el = itemRefs.current[index]
-    const container = containerRef.current
-    if (el && container) {
-      const elRect = el.getBoundingClientRect()
-      const containerRect = container.getBoundingClientRect()
-      setHoverTop(elRect.top - containerRect.top)
+    // Only set active if the item has sub-items
+    const item = NAV_ITEMS.find((nav) => nav.label === label)
+    if (item && item.subItems.length > 0) {
+      setActive(label)
+      const el = itemRefs.current[index]
+      const container = containerRef.current
+      if (el && container) {
+        const elRect = el.getBoundingClientRect()
+        const containerRect = container.getBoundingClientRect()
+        setHoverTop(elRect.top - containerRect.top)
+      }
     }
   }
 
   const handleNavigation = (item: (typeof NAV_ITEMS)[0]) => {
     if (item.subItems.length === 0) {
       const route =
-        item.label === "My School One App"
+        item.label === "My School One"
           ? "https://myschoolone.com/App.php"
           : ROUTE_OVERRIDES[item.label] || `/${item.label.toLowerCase().replace(/\s+/g, "-")}`
       onClose()
 
-      if (item.label === "My School One App") {
+      if (item.label === "My School One") {
         window.open(route, "_blank", "noopener,noreferrer")
       } else {
         window.location.href = route
@@ -186,7 +196,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0
               const route =
-                item.label === "My School One App"
+                item.label === "My School One"
                   ? "https://myschoolone.com/App.php"
                   : ROUTE_OVERRIDES[item.label] || `/${item.label.toLowerCase().replace(/\s+/g, "-")}`
 
@@ -203,7 +213,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                   onMouseEnter={() => handleMouseEnter(item.label, index)}
                 >
                   {isLink ? (
-                    item.label === "My School One App" ? (
+                    item.label === "My School One" ? (
                       <a
                         href="https://myschoolone.com/App.php"
                         target="_blank"
@@ -228,7 +238,12 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         </div>
 
         {/* RIGHT PANEL */}
-        <div className="w-1/2 bg-white/30 backdrop-blur-md p-6 xl:p-8 text-[#1E293B] relative">
+        <div
+          className="w-1/2 bg-white/30 backdrop-blur-md p-6 xl:p-8 text-[#1E293B] relative"
+          onMouseEnter={() => {
+            // Keep the active state when hovering over the right panel
+          }}
+        >
           {active && hoverTop !== null && (
             <div
               className="absolute left-6 xl:left-8 flex flex-col gap-2 text-sm xl:text-base font-semibold bg-white/50 p-4 xl:p-5 rounded-xl shadow-lg backdrop-blur-sm min-w-[200px] xl:min-w-[250px]"
@@ -243,7 +258,14 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                       )
                     : 0,
               }}
-              onMouseLeave={() => setActive(null)}
+              onMouseEnter={() => {
+                // Keep submenu open when hovering over it
+              }}
+              onMouseLeave={() => {
+                // Only close when leaving the submenu
+                setActive(null)
+                setHoverTop(null)
+              }}
             >
               {NAV_ITEMS.find((n) => n.label === active)?.subItems.map((sub) => {
                 const overrideHref = ROUTE_OVERRIDES[sub]
