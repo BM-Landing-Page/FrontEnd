@@ -12,6 +12,7 @@ import { useRef, useState } from "react";
 
 const NAV_ITEMS = [
   { label: "Home", subItems: [] },
+  { label: "ERP", subItems: []},
   { label: "About Us", subItems: ["Vision, Mission & Philosophy", "Founder's Message", "BMIS Journey", "Leadership Team"] },
   { label: "Academics", subItems: ["Curriculum Overview", "Early Years", "Primary & Middle Years", "IGCSE & Senior Programmes", "Pedagogy & Tools"] },
   { label: "Admissions", subItems: ["Admission Process"] },
@@ -29,6 +30,7 @@ const NAV_ITEMS = [
 const ROUTE_OVERRIDES: Record<string, string> = {
   "Home": "/",
   "Curriculum Overview": "curriculum",
+  "Leadership Team": "ourteam",
   "Early Years": "/earlyyears",
   "Vision, Mission & Philosophy": "/missionforvision",
   "Founder's Message": "/foundersmessage",
@@ -87,8 +89,10 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                 onClick={() => {
                   if (item.subItems.length === 0) {
                     const route =
-                      ROUTE_OVERRIDES[item.label] ||
-                      `/${item.label.toLowerCase().replace(/\s+/g, "-")}`;
+                      item.label === "ERP"
+                        ? "https://myschoolone.com/App.php"
+                        : ROUTE_OVERRIDES[item.label] ||
+                          `/${item.label.toLowerCase().replace(/\s+/g, "-")}`;
                     onClose();
                     window.location.href = route;
                   } else {
@@ -165,8 +169,10 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0;
               const route =
-                ROUTE_OVERRIDES[item.label] ||
-                `/${item.label.toLowerCase().replace(/\s+/g, "-")}`;
+                item.label === "ERP"
+                  ? "https://myschoolone.com/App.php"
+                  : ROUTE_OVERRIDES[item.label] ||
+                    `/${item.label.toLowerCase().replace(/\s+/g, "-")}`;
 
               const sharedClass = `cursor-pointer text-[clamp(0.9rem,1.5vw,1.2rem)] font-medium transition-all hover:underline hover:text-[#850000] ${
                 active === item.label ? "text-[#850000]" : "text-[#1E293B]"
@@ -181,9 +187,21 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                   onMouseEnter={() => handleMouseEnter(item.label, index)}
                 >
                   {isLink ? (
-                    <Link href={route} onClick={onClose} className={sharedClass}>
-                      {item.label}
-                    </Link>
+                    item.label === "ERP" ? (
+                      <a
+                        href="https://myschoolone.com/App.php"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={onClose}
+                        className={sharedClass}
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link href={route} onClick={onClose} className={sharedClass}>
+                        {item.label}
+                      </Link>
+                    )
                   ) : (
                     <div className={sharedClass}>{item.label}</div>
                   )}
