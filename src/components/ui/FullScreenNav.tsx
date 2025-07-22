@@ -54,6 +54,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Vision, Mission & Philosophy": "/missionforvision",
   "Founder's Message": "/foundersmessage",
   "Admission Process": "/admissionsprocess",
+  "Calendar & Downloads":"/calendar",
   IGNITE: "/ignite",
   Gallery: "/gallery",
   "Beyond Books": "/beyond-books",
