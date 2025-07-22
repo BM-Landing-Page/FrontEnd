@@ -51,6 +51,8 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Leadership Team": "ourteam",
   "Early Years": "/earlyyears",
   "Primary & Middle Years": "/primaryandmiddleyears",
+  "IGCSE & Senior Programmes": "/igcseandsenioryears",
+  "Pedagogy & Tools": "/pedagogytools",
   "Vision, Mission & Philosophy": "/missionforvision",
   "Founder's Message": "/foundersmessage",
   "Admission Process": "/admissionsprocess",
@@ -64,11 +66,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
 const SOCIAL_LINKS = [
   { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/bmischool/#" },
   { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/buddingmindsinternationalschool/" },
-  {
-    name: "LinkedIn",
-    icon: Linkedin,
-    href: "https://www.linkedin.com/in/budding-minds-international-school-15585419b",
-  },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/budding-minds-international-school-15585419b"},
   { name: "YouTube", icon: Youtube, href: "https://www.youtube.com/@BMIS" },
 ]
 
