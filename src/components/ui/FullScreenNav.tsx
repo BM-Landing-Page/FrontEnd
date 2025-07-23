@@ -1,6 +1,6 @@
 "use client"
-
 import { X, Instagram, Facebook, Linkedin, Youtube } from "lucide-react"
+import type React from "react"
 import Link from "next/link"
 import { useRef, useState } from "react"
 
@@ -47,7 +47,6 @@ const NAV_ITEMS = [
 const ROUTE_OVERRIDES: Record<string, string> = {
   Home: "/",
   "Curriculum Overview": "curriculum",
-
   "Leadership Team": "ourteam",
   "Early Years": "/earlyyears",
   "Primary & Middle Years": "/primaryandmiddleyears",
@@ -56,7 +55,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Vision, Mission & Philosophy": "/missionforvision",
   "Founder's Message": "/foundersmessage",
   "Admission Process": "/admissionsprocess",
-  "Calendar & Downloads":"/calendar",
+  "Calendar & Downloads": "/calendar",
   IGNITE: "/ignite",
   Gallery: "/gallery",
   "Beyond Books": "/beyond-books",
@@ -66,7 +65,11 @@ const ROUTE_OVERRIDES: Record<string, string> = {
 const SOCIAL_LINKS = [
   { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/bmischool/#" },
   { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/buddingmindsinternationalschool/" },
-  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/budding-minds-international-school-15585419b"},
+  {
+    name: "LinkedIn",
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/budding-minds-international-school-15585419b",
+  },
   { name: "YouTube", icon: Youtube, href: "https://www.youtube.com/@BMIS" },
 ]
 
@@ -102,20 +105,22 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
 
   const handleNavigation = (item: (typeof NAV_ITEMS)[0]) => {
     if (item.subItems.length === 0) {
-      const route =
-        item.label === "My School One"
-          ? "https://myschoolone.com/App.php"
-          : ROUTE_OVERRIDES[item.label] || `/${item.label.toLowerCase().replace(/\s+/g, "-")}`
       onClose()
-
       if (item.label === "My School One") {
-        window.open(route, "_blank", "noopener,noreferrer")
+        window.open("https://myschoolone.com/buddingminds", "_blank", "noopener,noreferrer")
       } else {
+        const route = ROUTE_OVERRIDES[item.label] || `/${item.label.toLowerCase().replace(/\s+/g, "-")}`
         window.location.href = route
       }
     } else {
       setActive(active === item.label ? null : item.label)
     }
+  }
+
+  // Handle desktop navigation with consistent behavior
+  const handleDesktopNavigation = (item: (typeof NAV_ITEMS)[0], e: React.MouseEvent) => {
+    e.preventDefault()
+    handleNavigation(item)
   }
 
   return (
@@ -194,11 +199,6 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
           <div className="flex-1 flex flex-col justify-center items-end text-right gap-3 xl:gap-4">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0
-              const route =
-                item.label === "My School One"
-                  ? "https://myschoolone.com/App.php"
-                  : ROUTE_OVERRIDES[item.label] || `/${item.label.toLowerCase().replace(/\s+/g, "-")}`
-
               const sharedClass = `cursor-pointer text-[clamp(0.9rem,1.5vw,1.2rem)] font-medium transition-all hover:underline hover:text-[#850000] ${
                 active === item.label ? "text-[#850000]" : "text-[#1E293B]"
               }`
@@ -212,21 +212,9 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                   onMouseEnter={() => handleMouseEnter(item.label, index)}
                 >
                   {isLink ? (
-                    item.label === "My School One" ? (
-                      <a
-                        href="https://myschoolone.com/App.php"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={onClose}
-                        className={sharedClass}
-                      >
-                        {item.label}
-                      </a>
-                    ) : (
-                      <Link href={route} onClick={onClose} className={sharedClass}>
-                        {item.label}
-                      </Link>
-                    )
+                    <div onClick={(e) => handleDesktopNavigation(item, e)} className={sharedClass}>
+                      {item.label}
+                    </div>
                   ) : (
                     <div className={sharedClass}>{item.label}</div>
                   )}
@@ -284,6 +272,7 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
               })}
             </div>
           )}
+
           {/* Social Icons - Center aligned with labels */}
           <div className="absolute bottom-6 w-full flex justify-center z-50">
             <div className="flex gap-6 items-center text-[#1E293B] opacity-80 hover:opacity-100 transition">

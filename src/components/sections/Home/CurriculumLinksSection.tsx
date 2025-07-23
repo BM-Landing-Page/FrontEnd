@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, BookOpen, Users } from "lucide-react"
+import { BookOpen, Users } from "lucide-react"
 
 // Local bubble component for section
 function SectionBubble({
@@ -140,10 +140,6 @@ export default function CurriculumLinksSection() {
                         {link.title}
                       </h3>
                       <p className="text-sm text-gray-600 mb-4 line-clamp-2">{link.description}</p>
-                      <div className="flex items-center text-sm font-medium" style={{ color: link.accentColor }}>
-                        Learn More
-                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                      </div>
                     </div>
                   </div>
                 </div>
