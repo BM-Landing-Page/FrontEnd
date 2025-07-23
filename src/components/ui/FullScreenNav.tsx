@@ -53,7 +53,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "IGCSE & Senior Programmes": "/igcseandsenioryears",
   "Pedagogy & Tools": "/pedagogytools",
   "Vision, Mission & Philosophy": "/missionforvision",
-  "alumni": "/alumni",
+  "Alumni": "/alumni",
   "Founder's Message": "/foundersmessage",
   "Admission Process": "/admissionsprocess",
   "Calendar & Downloads": "/calendar",
