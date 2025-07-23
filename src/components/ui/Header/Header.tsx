@@ -1,12 +1,7 @@
+
 "use client";
 
 import Image from "next/image";
-import { Playfair_Display } from "next/font/google";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["700"],
-});
 
 interface HeaderProps {
   openNav: () => void;
@@ -28,12 +23,12 @@ export default function Header({ openNav }: HeaderProps) {
           <Image
             src="/images/logo.png"
             alt="Budding Minds Logo"
-            width={70}
-            height={70}
+            width={90}  // Increased logo size
+            height={90} // Increased logo size
             className="rounded-full"
           />
           <span
-            className={`text-2xl font-bold tracking-wide text-[#1E293B] ${playfair.className}`}
+            className="text-2xl font-bold tracking-wide text-[#1E293B] font-calibri" // Changed font to Calibri
           >
             Budding Minds International School
           </span>
@@ -63,3 +58,4 @@ export default function Header({ openNav }: HeaderProps) {
     </header>
   );
 }
+

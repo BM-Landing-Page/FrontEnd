@@ -64,17 +64,17 @@ const Admissions = () => {
         transition={{ duration: 1 }}
         className="relative h-[50vh] flex items-center overflow-hidden"
       >
-        {/* Background Image - Covers entire hero */}
+        {/* Background Image - Covers entire hero, centered */}
         <div className="absolute inset-0">
           <Image
-            src="/placeholder.svg?height=600&width=1200"
-            alt="Children learning in classroom"
+            src="/images/admission-hero-banner.jpg"
+            alt="Happy children at school with colorful fence"
             fill
-            className="object-cover"
+            className="object-cover object-center"
             priority
           />
           {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-black/10 to-black/15"></div>
         </div>
 
         {/* Content Container */}
@@ -129,6 +129,7 @@ const Admissions = () => {
             <h2 className="text-4xl font-bold mb-4 text-gray-800">Eligibility Criteria</h2>
             <p className="text-xl text-gray-600">Eligible Age (as on 1st June 2025)</p>
           </motion.div>
+
           <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
             variants={staggerContainer}
@@ -184,6 +185,7 @@ const Admissions = () => {
             <h2 className="text-4xl font-bold mb-4 text-gray-800">Admission Process</h2>
             <p className="text-xl text-gray-600">Academic Year 2025–26</p>
           </motion.div>
+
           <motion.div
             className="space-y-8"
             variants={staggerContainer}
@@ -416,6 +418,7 @@ const Admissions = () => {
             <h2 className="text-4xl font-bold mb-4 text-gray-800">Required Documentation</h2>
             <p className="text-xl text-gray-600">Parents must keep the following documents ready</p>
           </motion.div>
+
           <motion.div
             className="grid md:grid-cols-2 gap-8 mb-8"
             variants={staggerContainer}
@@ -457,6 +460,7 @@ const Admissions = () => {
                 ))}
               </ul>
             </motion.div>
+
             <motion.div
               className="p-8 rounded-xl"
               style={{ backgroundColor: "#E9DAC1" }}
