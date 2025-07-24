@@ -1,5 +1,4 @@
 "use client"
-
 import { GraduationCap, Calendar, FileText, Users, CheckCircle, AlertCircle, FileCheck, Clock } from "lucide-react"
 import Image from "next/image"
 import { motion } from "framer-motion"
@@ -54,6 +53,14 @@ const Admissions = () => {
   const gradesRef = useScrollAnimation()
   const ctaRef = useScrollAnimation()
 
+  const handleApplicationClick = () => {
+    window.open(
+      "https://buddingminds.myschoolone.com/cloud/Admission/EnquiryForm.php?ksjdkjsd=MQ==",
+      "_blank",
+      "noopener,noreferrer",
+    )
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section with Background Image */}
@@ -67,7 +74,7 @@ const Admissions = () => {
         {/* Background Image - Covers entire hero, centered */}
         <div className="absolute inset-0">
           <Image
-            src="/images/admission-hero-banner.jpg"
+            src="/placeholder.svg?height=600&width=1200"
             alt="Happy children at school with colorful fence"
             fill
             className="object-cover object-center"
@@ -76,7 +83,6 @@ const Admissions = () => {
           {/* Overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-black/10 to-black/15"></div>
         </div>
-
         {/* Content Container */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <motion.div
@@ -109,6 +115,7 @@ const Admissions = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
               whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(84, 186, 185, 0.3)" }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleApplicationClick}
             >
               Start Your Application
             </motion.div>
@@ -129,7 +136,6 @@ const Admissions = () => {
             <h2 className="text-4xl font-bold mb-4 text-gray-800">Eligibility Criteria</h2>
             <p className="text-xl text-gray-600">Eligible Age (as on 1st June 2025)</p>
           </motion.div>
-
           <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
             variants={staggerContainer}
@@ -185,7 +191,6 @@ const Admissions = () => {
             <h2 className="text-4xl font-bold mb-4 text-gray-800">Admission Process</h2>
             <p className="text-xl text-gray-600">Academic Year 2025–26</p>
           </motion.div>
-
           <motion.div
             className="space-y-8"
             variants={staggerContainer}
@@ -418,7 +423,6 @@ const Admissions = () => {
             <h2 className="text-4xl font-bold mb-4 text-gray-800">Required Documentation</h2>
             <p className="text-xl text-gray-600">Parents must keep the following documents ready</p>
           </motion.div>
-
           <motion.div
             className="grid md:grid-cols-2 gap-8 mb-8"
             variants={staggerContainer}
@@ -460,7 +464,6 @@ const Admissions = () => {
                 ))}
               </ul>
             </motion.div>
-
             <motion.div
               className="p-8 rounded-xl"
               style={{ backgroundColor: "#E9DAC1" }}
@@ -588,6 +591,7 @@ const Admissions = () => {
               transition: { duration: 0.3 },
             }}
             whileTap={{ scale: 0.95 }}
+            onClick={handleApplicationClick}
           >
             Begin Application Process
           </motion.div>

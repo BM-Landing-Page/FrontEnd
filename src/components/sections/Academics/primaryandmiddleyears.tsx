@@ -115,6 +115,22 @@ export default function PrimaryAndMiddleYears() {
     { label: "Karate", emoji: "🥋" },
   ]
 
+  const handlePrimaryClick = () => {
+    window.open(
+      "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-primary/",
+      "_blank",
+      "noopener,noreferrer",
+    )
+  }
+
+  const handleLowerSecondaryClick = () => {
+    window.open(
+      "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-lower-secondary/",
+      "_blank",
+      "noopener,noreferrer",
+    )
+  }
+
   return (
     <div className="min-h-screen bg-white text-gray-800 font-sans">
       {/* Hero Banner Section */}
@@ -232,6 +248,60 @@ export default function PrimaryAndMiddleYears() {
       <Section title="Subjects Offered in Lower Secondary (Grades 6–8)" bg={colors.white}>
         <SubjectsTable data={lowerSecondarySubjectsData} type="secondary" />
       </Section>
+
+      {/* Call to Action Buttons Section */}
+      <motion.section
+        className="py-16 px-4"
+        style={{ backgroundColor: colors.darkTeal }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={fadeInUpVariants}
+      >
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.h2 className="text-4xl font-extrabold mb-8 text-white" variants={fadeInUpVariants}>
+            Learn More About Cambridge Programmes
+          </motion.h2>
+          <motion.p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto" variants={fadeInUpVariants}>
+            Explore the official Cambridge International resources to discover more about our curriculum programmes.
+          </motion.p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <motion.button
+              onClick={handlePrimaryClick}
+              className="inline-flex items-center px-8 py-4 font-semibold rounded-lg cursor-pointer text-gray-800 transition-all duration-300 hover:shadow-lg min-w-[200px]"
+              style={{ backgroundColor: colors.lightTeal }}
+              variants={fadeInUpVariants}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 10px 25px rgba(158, 210, 198, 0.3)",
+                transition: { duration: 0.3 },
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Cambridge Primary
+            </motion.button>
+            <motion.button
+              onClick={handleLowerSecondaryClick}
+              className="inline-flex items-center px-8 py-4 font-semibold rounded-lg cursor-pointer text-white transition-all duration-300 hover:shadow-lg min-w-[200px] border-2"
+              style={{
+                backgroundColor: "transparent",
+                borderColor: colors.lightTeal,
+                color: "white",
+              }}
+              variants={fadeInUpVariants}
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: colors.lightTeal,
+                color: "#374151",
+                transition: { duration: 0.3 },
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Lower Secondary
+            </motion.button>
+          </div>
+        </div>
+      </motion.section>
     </div>
   )
 }
@@ -291,9 +361,16 @@ const SubjectsTable = ({
             <tr key={index} className={index % 2 === 0 ? "bg-[#FFFFFF]" : "bg-[#F7ECDE]"}>
               {headers.map((head, idx) => {
                 const key = head.toLowerCase().replace(/ /g, "")
+                const cellContent = row[key]
                 return (
                   <td key={idx} className="px-6 py-4 whitespace-nowrap text-base text-gray-700">
-                    {row[key]}
+                    {cellContent === "✔" ? (
+                      <span style={{ color: "#54BAB9" }} className="font-bold text-lg">
+                        ✔
+                      </span>
+                    ) : (
+                      cellContent
+                    )}
                   </td>
                 )
               })}

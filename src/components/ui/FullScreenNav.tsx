@@ -1,5 +1,4 @@
 "use client"
-
 import { X, Instagram, Facebook, Linkedin, Youtube } from "lucide-react"
 import type React from "react"
 import Link from "next/link"
@@ -10,7 +9,7 @@ const NAV_ITEMS = [
   { label: "My School One", subItems: [] },
   {
     label: "About BMIS",
-    subItems: ["Vision, Mission & Philosophy", "Founder's Message", "BMIS Journey", "Leadership Team", "Alumni"],
+    subItems: ["Vision, Mission & Philosophy", "Founder's Message", "BMIS Journey", "Leadership Team","Calendar", "Alumni"],
   },
   {
     label: "Academics",
@@ -39,7 +38,6 @@ const NAV_ITEMS = [
       "FAQs or Myths Busted",
     ],
   },
-  { label: "Parent Hub", subItems: ["Communication Tools", "Calendar & Downloads", "Parent Testimonials"] },
   { label: "Newsroom", subItems: ["School Updates", "Student Achievements", "Thought Pieces", "BM Gazette"] },
   { label: "Career", subItems: [] },
   { label: "Contact Us", subItems: ["Location & Details", "Socials"] },
@@ -56,13 +54,17 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Pedagogy & Tools": "/pedagogytools",
   "Vision, Mission & Philosophy": "/missionforvision",
   "SLC Overview": "/slcoverview",
+  "A Day at BMIS": "/adayatbm",
+  "Events & Celebrations": "/eventsandcelebration",
+  "Student Voice": "/studentvoice",
   "Beyond Books": "/beyondbooks",
   "Student Profiles": "/studentprofile",
   "Leadership Projects": "/leadershipprojects",
   Alumni: "/alumni",
   "Founder's Message": "/foundersmessage",
+  "Register Now": "https://buddingminds.myschoolone.com/cloud/Admission/EnquiryForm.php?ksjdkjsd=MQ==",
   "Admission Process": "/admissionsprocess",
-  "Calendar & Downloads": "/calendar",
+  "Calendar": "/calendar",
   Gallery: "/gallery",
   Career: "/career",
 }
@@ -82,15 +84,25 @@ interface FullScreenNavProps {
   onClose: () => void
 }
 
+// Helper function to check if URL is external
+const isExternalUrl = (url: string): boolean => {
+  return url.startsWith("http://") || url.startsWith("https://")
+}
+
 export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   const [active, setActive] = useState<string | null>(null)
   const [hoverTop, setHoverTop] = useState<number | null>(null)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const handleSubItemClick = () => {
+  const handleSubItemClick = (href: string) => {
     setActive(null)
     onClose()
+
+    // Check if it's an external URL and open in new tab
+    if (isExternalUrl(href)) {
+      window.open(href, "_blank", "noopener,noreferrer")
+    }
   }
 
   const handleMouseEnter = (label: string, index: number) => {
@@ -115,7 +127,13 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
         window.open("https://myschoolone.com/buddingminds", "_blank", "noopener,noreferrer")
       } else {
         const route = ROUTE_OVERRIDES[item.label] || `/${item.label.toLowerCase().replace(/\s+/g, "-")}`
-        window.location.href = route
+
+        // Check if it's an external URL and open in new tab
+        if (isExternalUrl(route)) {
+          window.open(route, "_blank", "noopener,noreferrer")
+        } else {
+          window.location.href = route
+        }
       }
     } else {
       setActive(active === item.label ? null : item.label)
@@ -157,12 +175,27 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                     const defaultHref = `/${item.label.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-")}/${sub
                       .toLowerCase()
                       .replace(/\s+/g, "-")}`
+                    const finalHref = overrideHref || defaultHref
+
+                    // For external URLs, use regular div with onClick instead of Link
+                    if (isExternalUrl(finalHref)) {
+                      return (
+                        <div
+                          key={sub}
+                          onClick={() => handleSubItemClick(finalHref)}
+                          className="hover:text-[#850000] transition-colors cursor-pointer"
+                        >
+                          {sub}
+                        </div>
+                      )
+                    }
+
                     return (
                       <Link
                         key={sub}
-                        href={overrideHref || defaultHref}
+                        href={finalHref}
                         className="hover:text-[#850000] transition-colors"
-                        onClick={handleSubItemClick}
+                        onClick={() => handleSubItemClick(finalHref)}
                       >
                         {sub}
                       </Link>
@@ -263,12 +296,27 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                 const defaultHref = `/${active.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-")}/${sub
                   .toLowerCase()
                   .replace(/\s+/g, "-")}`
+                const finalHref = overrideHref || defaultHref
+
+                // For external URLs, use regular div with onClick instead of Link
+                if (isExternalUrl(finalHref)) {
+                  return (
+                    <div
+                      key={sub}
+                      onClick={() => handleSubItemClick(finalHref)}
+                      className="hover:text-[#850000] transition-colors py-1 cursor-pointer"
+                    >
+                      {sub}
+                    </div>
+                  )
+                }
+
                 return (
                   <Link
                     key={sub}
-                    href={overrideHref || defaultHref}
+                    href={finalHref}
                     className="hover:text-[#850000] transition-colors py-1"
-                    onClick={handleSubItemClick}
+                    onClick={() => handleSubItemClick(finalHref)}
                   >
                     {sub}
                   </Link>
@@ -276,7 +324,6 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
               })}
             </div>
           )}
-
           {/* Social Icons - Center aligned with labels */}
           <div className="absolute bottom-6 w-full flex justify-center z-50">
             <div className="flex gap-6 items-center text-[#1E293B] opacity-80 hover:opacity-100 transition">
