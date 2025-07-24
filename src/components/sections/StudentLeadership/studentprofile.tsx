@@ -4,7 +4,6 @@ import { Globe, Calendar, Palette, Trophy } from "lucide-react"
 
 export default function StudentProfile() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
 
   const departments = [
     {
@@ -214,72 +213,72 @@ export default function StudentProfile() {
         ></div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="space-y-16">
             {departments.map((dept, deptIndex) => (
-              <div
-                key={deptIndex}
-                className="bg-white rounded-lg shadow-lg border-t-4 p-6 hover:shadow-xl transition-all duration-300"
-                style={{ borderTopColor: dept.color }}
-              >
-                <div className="flex items-center mb-4">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-white mr-3"
-                    style={{ backgroundColor: dept.color }}
-                  >
-                    {dept.icon}
+              <div key={deptIndex} className="max-w-7xl mx-auto">
+                <div className="text-center mb-12">
+                  <div className="flex items-center justify-center mb-6">
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center text-white mr-4"
+                      style={{ backgroundColor: dept.color }}
+                    >
+                      {dept.icon}
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-800">{dept.name}</h2>
                   </div>
-                  <h2 className="text-xl font-bold text-gray-800">{dept.name}</h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">{dept.description}</p>
+                  <h4 className="text-xl font-semibold text-gray-800 mb-8">Leadership Team</h4>
                 </div>
 
-                <p className="text-gray-600 text-sm mb-6 leading-relaxed">{dept.description}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
+                  {dept.leaders.map((leader, leaderIndex) => {
+                    const cardId = `${deptIndex}-${leaderIndex}`
+                    const isExpanded = expandedCard === cardId
 
-                <div>
-                  <h4 className="text-base font-semibold text-gray-800 mb-4">Leadership Team</h4>
-                  <div className="space-y-3">
-                    {dept.leaders.map((leader, leaderIndex) => {
-                      const cardId = `${deptIndex}-${leaderIndex}`
-                      const isExpanded = expandedCard === cardId
-                      const isHovered = hoveredCard === cardId
-
-                      return (
-                        <div key={leaderIndex} className="relative">
-                          <div
-                            className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer border border-gray-200 hover:border-gray-300 hover:shadow-sm"
-                            onClick={() => toggleCard(cardId)}
-                            onMouseEnter={() => setHoveredCard(cardId)}
-                            onMouseLeave={() => setHoveredCard(null)}
-                          >
-                            <div className="w-14 h-14 rounded-full bg-gray-300 flex-shrink-0 overflow-hidden border-2 border-gray-200">
+                    return (
+                      <div key={leaderIndex} className="relative group w-full max-w-xs">
+                        <div
+                          className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 relative h-80 flex flex-col"
+                          onClick={() => toggleCard(cardId)}
+                        >
+                          {/* Main Card Content */}
+                          <div className="p-6 flex flex-col items-center justify-center h-full">
+                            <div className="w-32 h-32 bg-gray-300 rounded-lg overflow-hidden mb-4 relative flex-shrink-0">
                               <img
-                                src={`/placeholder.svg?height=56&width=56&query=student+portrait+${leader.name.replace(" ", "+")}`}
+                                src={`/placeholder.svg?height=128&width=128&query=student+portrait+${leader.name.replace(" ", "+")}`}
                                 alt={leader.name}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                               />
                             </div>
-                            <div>
-                              <p className="font-semibold text-gray-800 text-sm">{leader.name}</p>
-                              <p className="text-xs text-gray-600">{leader.role}</p>
+                            <div className="text-center flex-grow flex flex-col justify-center">
+                              <h3 className="font-bold text-gray-800 text-lg mb-2 leading-tight">{leader.name}</h3>
+                              <p className="text-sm text-gray-600 leading-relaxed">{leader.role}</p>
                             </div>
                           </div>
 
-                          {/* Hover Tooltip */}
-                          {isHovered && (
-                            <div className="absolute left-16 top-0 z-50 bg-white p-3 rounded-lg shadow-lg border border-gray-200 max-w-xs transform -translate-y-2 pointer-events-none">
-                              <div className="absolute left-0 top-3 w-0 h-0 border-t-4 border-b-4 border-r-4 border-transparent border-r-white transform -translate-x-1"></div>
-                              <p className="text-xs text-gray-700 leading-relaxed">{leader.shortDesc}</p>
+                          {/* Hover Overlay */}
+                          <div
+                            className="absolute inset-0 opacity-0 group-hover:opacity-95 transition-all duration-500 ease-in-out flex items-center justify-center p-6 rounded-lg"
+                            style={{ backgroundColor: dept.color }}
+                          >
+                            <div className="text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                              <h3 className="font-bold text-xl mb-3">{leader.name}</h3>
+                              <p className="text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
+                                {leader.shortDesc}
+                              </p>
                             </div>
-                          )}
-
-                          {/* Expanded Content */}
-                          {isExpanded && (
-                            <div className="mt-2 p-3 bg-gray-50 rounded-md border border-gray-100">
-                              <p className="text-gray-600 text-xs leading-relaxed">{leader.fullDesc}</p>
-                            </div>
-                          )}
+                          </div>
                         </div>
-                      )
-                    })}
-                  </div>
+
+                        {/* Expanded Content */}
+                        {isExpanded && (
+                          <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white rounded-lg border border-gray-200 shadow-lg z-40">
+                            <p className="text-gray-600 text-sm leading-relaxed">{leader.fullDesc}</p>
+                          </div>
+                        )}
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             ))}

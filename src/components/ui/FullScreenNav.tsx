@@ -27,7 +27,6 @@ const NAV_ITEMS = [
     subItems: ["A Day at BMIS", "Events & Celebrations", "Student Voice", "Gallery", "Beyond Books"],
   },
   { label: "Student Leadership", subItems: ["SLC Overview", "Student Profiles", "Leadership Projects"] },
-  { label: "IGNITE", subItems: [] },
   {
     label: "BM PD Academy",
     subItems: [
@@ -54,15 +53,14 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Pedagogy & Tools": "/pedagogytools",
   "Vision, Mission & Philosophy": "/missionforvision",
   "SLC Overview": "/slcoverview",
+  "Beyond Books": "/beyondbooks",
   "Student Profiles": "/studentprofile",
   "Leadership Projects": "/leadershipprojects",
   "Alumni": "/alumni",
   "Founder's Message": "/foundersmessage",
   "Admission Process": "/admissionsprocess",
   "Calendar & Downloads": "/calendar",
-  IGNITE: "/ignite",
   Gallery: "/gallery",
-  "Beyond Books": "/beyond-books",
   
 }
 
