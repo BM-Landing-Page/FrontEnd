@@ -1,4 +1,5 @@
 "use client"
+
 import { X, Instagram, Facebook, Linkedin, Youtube } from "lucide-react"
 import type React from "react"
 import Link from "next/link"
@@ -40,6 +41,7 @@ const NAV_ITEMS = [
   },
   { label: "Parent Hub", subItems: ["Communication Tools", "Calendar & Downloads", "Parent Testimonials"] },
   { label: "Newsroom", subItems: ["School Updates", "Student Achievements", "Thought Pieces", "BM Gazette"] },
+  { label: "Career", subItems: [] },
   { label: "Contact Us", subItems: ["Location & Details", "Socials"] },
 ]
 
@@ -57,12 +59,12 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Beyond Books": "/beyondbooks",
   "Student Profiles": "/studentprofile",
   "Leadership Projects": "/leadershipprojects",
-  "Alumni": "/alumni",
+  Alumni: "/alumni",
   "Founder's Message": "/foundersmessage",
   "Admission Process": "/admissionsprocess",
   "Calendar & Downloads": "/calendar",
   Gallery: "/gallery",
-  
+  Career: "/career",
 }
 
 const SOCIAL_LINKS = [
@@ -205,7 +207,6 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
               const sharedClass = `cursor-pointer text-[clamp(0.9rem,1.5vw,1.2rem)] font-medium transition-all hover:underline hover:text-[#850000] ${
                 active === item.label ? "text-[#850000]" : "text-[#1E293B]"
               }`
-
               return (
                 <div
                   key={item.label}
