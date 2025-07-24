@@ -72,10 +72,10 @@ export default function SLCOverview() {
         <div
           className="absolute inset-0 bg-gradient-to-br from-[#F7ECDE] via-[#E9DAC1] to-[#9ED2C6]"
           style={{
-            backgroundImage: `url('/placeholder.svg?height=800&width=1200')`,
+            backgroundImage: `url('/images/slcoverview.jpg')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundBlendMode: "overlay",
+            backgroundBlendMode: "overlay", 
           }}
         />
         <div className="absolute inset-0 bg-black/20" />

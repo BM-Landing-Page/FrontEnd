@@ -1,9 +1,21 @@
 "use client"
+
 import { useState } from "react"
 import { Globe, Calendar, Palette, Trophy } from "lucide-react"
 
 export default function StudentProfile() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
+
+  // Helper function to extract first name for image path
+  const getFirstName = (fullName: string) => {
+    const firstName = fullName.split(" ")[0]
+    // Handle cases like "B. Priyadharishini" - use the second part if first is just an initial
+    if (firstName.length <= 2 && firstName.includes(".")) {
+      const secondName = fullName.split(" ")[1]
+      return secondName || firstName.replace(".", "")
+    }
+    return firstName
+  }
 
   const departments = [
     {
@@ -11,7 +23,7 @@ export default function StudentProfile() {
       icon: <Globe className="w-6 h-6" />,
       color: "#54BAB9",
       description:
-        "The Outreach and Inclusion Department leads service-learning and outreach initiatives, connecting students with local and global communities.",
+        "Leading service-learning and outreach initiatives, connecting students with local and global communities.",
       leaders: [
         {
           name: "Prakriti P",
@@ -43,8 +55,7 @@ export default function StudentProfile() {
       name: "Events and Engagement",
       icon: <Calendar className="w-6 h-6" />,
       color: "#9ED2C6",
-      description:
-        "The Events & Engagement Department plans and executes vibrant school events that boost school spirit.",
+      description: "Planning and executing vibrant school events that boost school spirit and community engagement.",
       leaders: [
         {
           name: "Varun Niilesh",
@@ -152,16 +163,13 @@ export default function StudentProfile() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Banner */}
       <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
         <div
           className="absolute inset-0 bg-gradient-to-br from-[#54BAB9] via-[#9ED2C6] to-[#E9DAC1]"
           style={{
-            backgroundImage: `url('/placeholder.svg?height=800&width=1200')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundBlendMode: "overlay",
+            background: "linear-gradient(135deg, #54BAB9 0%, #9ED2C6 50%, #E9DAC1 100%)",
           }}
         />
         <div className="absolute inset-0 bg-black/20" />
@@ -188,97 +196,189 @@ export default function StudentProfile() {
               At BMIS, we are dedicated to fostering the next generation leaders. This year, we are excited to begin the
               process for the student leadership cabinet selection process designed to make a real impact on our school
               community. Previously, student leaders were chosen through a council member nomination and election
-              system. We have moved on to a department-based leadership cabinet focusing on:
+              system. We have moved on to a department-based leadership cabinet.
             </p>
           </div>
         </div>
       </section>
 
+      {/* Leadership Team Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Leadership Team</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Meet our Student President and Assistant Student President leading the cabinet
+            </p>
+          </div>
+
+          <div className="flex justify-center gap-8 max-w-4xl mx-auto">
+            {/* SPL Card - Events and Engagement theme color */}
+            <div className="relative group w-full max-w-xs">
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 relative h-80 flex flex-col">
+                <div className="p-6 flex flex-col items-center justify-center h-full">
+                  <div className="w-32 h-32 bg-gray-300 rounded-lg overflow-hidden mb-4 relative flex-shrink-0">
+                    <img
+                      src="/images/student/Varun.jpg"
+                      alt="Varun Niilesh"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.style.display = "none"
+                        const parent = target.parentElement
+                        if (parent) {
+                          parent.innerHTML = `
+                            <div class="w-full h-full bg-[#9ED2C6] flex items-center justify-center text-white font-bold text-2xl">
+                              VN
+                            </div>
+                          `
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="text-center flex-grow flex flex-col justify-center">
+                    <h3 className="font-bold text-gray-800 text-lg mb-2 leading-tight">Varun Niilesh</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">Head of Events and Engagement (SPL)</p>
+                  </div>
+                </div>
+
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-95 transition-all duration-500 ease-in-out flex items-center justify-center p-6 rounded-lg"
+                  style={{ backgroundColor: "#9ED2C6" }}
+                >
+                  <div className="text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <h3 className="font-bold text-xl mb-3">Varun Niilesh</h3>
+                    <p className="text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
+                      Dynamic SPL with friendly nature, former Assistant Head known for organizing major school events
+                      and inspiring peers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ASPL Card - Sports and Wellness theme color */}
+            <div className="relative group w-full max-w-xs">
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 relative h-80 flex flex-col">
+                <div className="p-6 flex flex-col items-center justify-center h-full">
+                  <div className="w-32 h-32 bg-gray-300 rounded-lg overflow-hidden mb-4 relative flex-shrink-0">
+                    <img
+                      src="/images/student/Anjana.jpg"
+                      alt="Anjana E"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.style.display = "none"
+                        const parent = target.parentElement
+                        if (parent) {
+                          parent.innerHTML = `
+                            <div class="w-full h-full bg-[#F7ECDE] flex items-center justify-center text-gray-800 font-bold text-2xl">
+                              AE
+                            </div>
+                          `
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="text-center flex-grow flex flex-col justify-center">
+                    <h3 className="font-bold text-gray-800 text-lg mb-2 leading-tight">Anjana E</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      Assistant Head of Sports and Wellness (ASPL)
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-95 transition-all duration-500 ease-in-out flex items-center justify-center p-6 rounded-lg"
+                  style={{ backgroundColor: "#F7ECDE" }}
+                >
+                  <div className="text-center text-gray-800 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <h3 className="font-bold text-xl mb-3">Anjana E</h3>
+                    <p className="text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
+                      Dedicated ASPL focused on promoting sports and wellness initiatives throughout the school
+                      community.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Department Profiles */}
-      <section className="py-16 md:py-24 relative overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#F7ECDE]/40 via-[#E9DAC1]/30 to-[#9ED2C6]/40"></div>
-        <div className="absolute inset-0 bg-gradient-to-tl from-[#54BAB9]/20 via-transparent to-[#F7ECDE]/30 animate-pulse"></div>
-
-        {/* Floating Elements */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-[#54BAB9]/10 rounded-full blur-xl animate-bounce"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-[#E9DAC1]/15 rounded-full blur-lg animate-pulse"></div>
-        <div
-          className="absolute bottom-20 left-1/4 w-40 h-40 bg-[#9ED2C6]/10 rounded-full blur-2xl animate-bounce"
-          style={{ animationDelay: "2s" }}
-        ></div>
-        <div
-          className="absolute bottom-40 right-1/3 w-28 h-28 bg-[#F7ECDE]/20 rounded-full blur-xl animate-pulse"
-          style={{ animationDelay: "1s" }}
-        ></div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="space-y-16">
+      <section className="py-16 md:py-24 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
             {departments.map((dept, deptIndex) => (
-              <div key={deptIndex} className="max-w-7xl mx-auto">
-                <div className="text-center mb-12">
-                  <div className="flex items-center justify-center mb-6">
+              <div
+                key={deptIndex}
+                className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden transform hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+              >
+                {/* Colored top border */}
+                <div className="h-1 w-full" style={{ backgroundColor: dept.color }}></div>
+
+                <div className="p-8">
+                  <div className="flex items-center mb-6">
                     <div
-                      className="w-16 h-16 rounded-full flex items-center justify-center text-white mr-4"
+                      className="w-12 h-12 rounded-full flex items-center justify-center text-white mr-4 flex-shrink-0 transform transition-transform duration-300 hover:scale-110"
                       style={{ backgroundColor: dept.color }}
                     >
                       {dept.icon}
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-800">{dept.name}</h2>
+                    <h2 className="text-xl font-bold text-gray-800">{dept.name}</h2>
                   </div>
-                  <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">{dept.description}</p>
-                  <h4 className="text-xl font-semibold text-gray-800 mb-8">Leadership Team</h4>
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
-                  {dept.leaders.map((leader, leaderIndex) => {
-                    const cardId = `${deptIndex}-${leaderIndex}`
-                    const isExpanded = expandedCard === cardId
+                  <p className="text-gray-600 mb-8 leading-relaxed text-sm">{dept.description}</p>
 
-                    return (
-                      <div key={leaderIndex} className="relative group w-full max-w-xs">
+                  <h3 className="text-base font-semibold text-gray-800 mb-6">Leadership Team</h3>
+
+                  <div className="space-y-6">
+                    {dept.leaders.map((leader, leaderIndex) => {
+                      const firstName = getFirstName(leader.name)
+                      return (
                         <div
-                          className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 relative h-80 flex flex-col"
-                          onClick={() => toggleCard(cardId)}
+                          key={leaderIndex}
+                          className="flex items-start group cursor-pointer p-3 -m-3 rounded-lg hover:bg-gray-50 transition-all duration-200 relative"
                         >
-                          {/* Main Card Content */}
-                          <div className="p-6 flex flex-col items-center justify-center h-full">
-                            <div className="w-32 h-32 bg-gray-300 rounded-lg overflow-hidden mb-4 relative flex-shrink-0">
-                              <img
-                                src={`/placeholder.svg?height=128&width=128&query=student+portrait+${leader.name.replace(" ", "+")}`}
-                                alt={leader.name}
-                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                              />
-                            </div>
-                            <div className="text-center flex-grow flex flex-col justify-center">
-                              <h3 className="font-bold text-gray-800 text-lg mb-2 leading-tight">{leader.name}</h3>
-                              <p className="text-sm text-gray-600 leading-relaxed">{leader.role}</p>
-                            </div>
+                          <div className="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4 flex-shrink-0 transform transition-transform duration-300 group-hover:scale-105">
+                            <img
+                              src={`/images/student/${firstName}.jpg`}
+                              alt={leader.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement
+                                target.style.display = "none"
+                                const parent = target.parentElement
+                                if (parent) {
+                                  parent.innerHTML = `
+                                    <div class="w-full h-full bg-gray-300 flex items-center justify-center text-gray-600 font-medium text-sm">
+                                      ${leader.name
+                                        .split(" ")
+                                        .map((n) => n[0])
+                                        .join("")
+                                        .substring(0, 2)}
+                                    </div>
+                                  `
+                                }
+                              }}
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-gray-900 text-base mb-1 group-hover:text-gray-700 transition-colors duration-200">
+                              {leader.name}
+                            </h4>
+                            <p className="text-sm text-gray-600 leading-relaxed">{leader.role}</p>
                           </div>
 
-                          {/* Hover Overlay */}
-                          <div
-                            className="absolute inset-0 opacity-0 group-hover:opacity-95 transition-all duration-500 ease-in-out flex items-center justify-center p-6 rounded-lg"
-                            style={{ backgroundColor: dept.color }}
-                          >
-                            <div className="text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                              <h3 className="font-bold text-xl mb-3">{leader.name}</h3>
-                              <p className="text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
-                                {leader.shortDesc}
-                              </p>
-                            </div>
+                          {/* Hover description tooltip */}
+                          <div className="absolute left-0 top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
+                            <p className="text-sm text-gray-700 leading-relaxed">{leader.shortDesc}</p>
                           </div>
                         </div>
-
-                        {/* Expanded Content */}
-                        {isExpanded && (
-                          <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white rounded-lg border border-gray-200 shadow-lg z-40">
-                            <p className="text-gray-600 text-sm leading-relaxed">{leader.fullDesc}</p>
-                          </div>
-                        )}
-                      </div>
-                    )
-                  })}
+                      )
+                    })}
+                  </div>
                 </div>
               </div>
             ))}

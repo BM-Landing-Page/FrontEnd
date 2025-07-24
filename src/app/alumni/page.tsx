@@ -1,5 +1,5 @@
-import Alumni from "@/components/sections/About/alumni"
+import Alumni from "@/components/sections/About/alumni" // ✅ This is correct for default export
 
-export default function alumnus() {
+export default function AlumnusPage() {
   return <Alumni />
 }

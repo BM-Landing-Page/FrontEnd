@@ -1,8 +1,7 @@
 "use client"
-
 import type React from "react"
-
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 // Animation variants with correct type cast for `ease`
 const fadeInUpVariants = {
@@ -120,16 +119,22 @@ export default function PrimaryAndMiddleYears() {
     <div className="min-h-screen bg-white text-gray-800 font-sans">
       {/* Hero Banner Section */}
       <motion.section
-        className="relative h-[50vh] bg-cover bg-center flex items-center justify-center text-white p-4"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(/placeholder.svg?height=500&width=1500&query=school%20children%20learning%20in%20classroom)`,
-        }}
+        className="relative h-[50vh] bg-cover bg-center flex items-center justify-center text-white p-4 overflow-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUpVariants}
       >
-        <div className="text-center max-w-3xl mx-auto">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/primaryandmiddleyears.jpg"
+            alt="Primary and Middle Years Students"
+            fill
+            className="object-cover object-center"
+          />
+        </div>
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="relative z-10 text-center max-w-3xl mx-auto">
           <motion.h1 className="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg" variants={fadeInUpVariants}>
             Empowering Future Leaders
           </motion.h1>
@@ -147,7 +152,7 @@ export default function PrimaryAndMiddleYears() {
           step-by-step learning journey that prepares students exceptionally well for secondary education.
         </p>
         <p className="text-xl leading-relaxed mb-12 text-center max-w-3xl mx-auto">
-          CPP not only develops academic competence but also allows teachers and parents to track each child’s growth.
+          CPP not only develops academic competence but also allows teachers and parents to track each child's growth.
           From Grade 2 onwards, students take Progression Tests in English, Math, and Science to benchmark their
           performance globally.
         </p>
@@ -268,6 +273,7 @@ const SubjectsTable = ({
     type === "primary"
       ? ["Grade", "English", "Math", "EVS", "Languages", "Global Studies", "ICT", "Robotics", "PE"]
       : ["Grade", "English", "Math", "Science", "Languages", "Global Studies", "ICT", "Robotics", "PE"]
+
   return (
     <div className="overflow-x-auto mb-12 border border-gray-200 rounded-xl shadow-xl">
       <table className="min-w-full divide-y divide-gray-200">

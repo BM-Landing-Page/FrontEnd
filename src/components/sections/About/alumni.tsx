@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
@@ -114,21 +113,22 @@ const universities = {
 export default function Alumni() {
   const [activeMainTab, setActiveMainTab] = useState<"voices" | "universities">("voices")
   const [activeBatch, setActiveBatch] = useState<"2024" | "2023" | "2022">("2022")
-
   const batches = ["2022", "2023", "2024"] as const
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative h-96 overflow-hidden" style={{ backgroundColor: "#F7ECDE" }}>
+      <div className="relative h-96 overflow-hidden bg-gray-100">
         <div className="absolute inset-0">
           <Image
-            src="/placeholder.svg?height=400&width=1200"
+            src="/images/alumni.jpg"
             alt="Alumni Hero Banner"
             fill
-            className="object-cover opacity-20"
+            className="object-cover object-top opacity-40"
+            style={{ objectPosition: "50% 20%" }}
           />
         </div>
+        <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative z-10 flex items-center justify-center h-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
