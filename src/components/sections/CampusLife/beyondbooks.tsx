@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import {
@@ -367,13 +366,12 @@ export default function BeyondBooks() {
                     </Card>
                   </div>
                   <div className="text-center mt-12">
-                    <Button
-                      size="lg"
-                      className="bg-white hover:bg-gray-50 text-gray-900 font-bold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200"
+                    <button
+                      className="bg-white hover:bg-gray-50 text-gray-900 font-bold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 rounded-md"
                       style={{ color: "#1f2937" }}
                     >
                       Explore our IGNITE Gallery
-                    </Button>
+                    </button>
                   </div>
                 </div>
               </div>
