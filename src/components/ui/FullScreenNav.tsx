@@ -47,6 +47,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   Home: "/",
   "Curriculum Overview": "curriculum",
   "Leadership Team": "ourteam",
+  "BMIS Journey": "bmisjourney",
   "Early Years": "/earlyyears",
   "Primary & Middle Years": "/primaryandmiddleyears",
   "IGCSE & Senior Programmes": "/igcseandsenioryears",

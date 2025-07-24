@@ -1,7 +1,6 @@
 "use client"
 
 import { MapPin, Phone, Mail, Clock, Instagram } from "lucide-react"
-import Image from "next/image"
 
 export default function ContactSection() {
   const contactInfo = [
@@ -96,27 +95,17 @@ export default function ContactSection() {
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Our Location</h3>
 
               {/* Large Map */}
-              <div
-                className="relative cursor-pointer rounded-xl overflow-hidden hover:opacity-90 transition-opacity mb-4"
-                onClick={() =>
-                  window.open(
-                    "https://www.google.com/maps/place/Budding+Minds+International+School/@12.913338,80.085048,13z/data=!4m6!3m5!1s0x3a52f40d74a48f9f:0x9ea4fc2bd20689d5!8m2!3d12.9153175!4d80.0523987!16s%2Fg%2F11bt_jlq0s?hl=en-IN&entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D",
-                    "_blank",
-                  )
-                }
-              >
-                <Image
-                  src="/images/budding-minds-map.png"
-                  alt="Budding Minds International School Location"
-                  width={400}
-                  height={300}
-                  className="w-full h-72 object-cover"
+              <div className="relative rounded-xl overflow-hidden mb-4">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8817225979697!2d80.04982377519597!3d12.915322716109431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f40d74a48f9f%3A0x9ea4fc2bd20689d5!2sBudding%20Minds%20International%20School!5e0!3m2!1sen!2sin!4v1753324389206!5m2!1sen!2sin"
+                  width="100%"
+                  height="300"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-72 rounded-xl"
                 />
-                <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
-                  <div className="bg-white/90 px-4 py-2 rounded-lg shadow-lg">
-                    <span className="text-sm font-medium text-gray-900">📍 Click to view on Google Maps</span>
-                  </div>
-                </div>
               </div>
 
               {/* Location Details */}
@@ -133,7 +122,6 @@ export default function ContactSection() {
                     </p>
                   </div>
                 </div>
-
                 <div className="flex items-center space-x-3">
                   <Clock className="w-5 h-5 text-[#9ED2C6]" />
                   <div>
