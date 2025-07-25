@@ -24,7 +24,7 @@ const NAV_ITEMS = [
   { label: "Admissions", subItems: ["Admission Process", "Register Now"] },
   {
     label: "Campus Life",
-    subItems: ["A Day at BMIS", "Events & Celebrations", "Student Voice", "Gallery", "Beyond Books"],
+    subItems: ["A Day at BMIS", "Events & Celebrations", "Gallery", "Beyond Books"],
   },
   { label: "Student Leadership", subItems: ["SLC Overview", "Student Profiles", "Leadership Projects"] },
   {
@@ -70,6 +70,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Apply Now": "pdform",
   "About the Academy": "/abouttheacademy",
   "Pedagogy & Modules": "/pedagogyandmodule",
+  "BM Gazette": "/bmgazette",
   "PD Community": "/pdcommunity",
   "Contact Us": "contactus",
 }

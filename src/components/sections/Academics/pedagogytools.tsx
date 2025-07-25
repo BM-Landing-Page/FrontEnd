@@ -23,7 +23,7 @@ export default function PedagogyTools() {
         {/* Hero Section */}
         <section className="relative h-96 md:h-[500px] overflow-hidden">
           <Image
-            src="/placeholder.svg?height=500&width=1200"
+            src="/images/pedagogytools.jpg"
             alt="Academic learning environment"
             fill
             className="object-cover"

@@ -1,20 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import {
-  BookOpen,
-  Heart,
-  Users,
-  Palette,
-  Music,
-  Globe,
-  Star,
-  Play,
-  Target,
-  Lightbulb,
-  Award,
-  ArrowRight,
-} from "lucide-react"
+import Image from "next/image"
+import { BookOpen, Heart, Users, Palette, Globe, Star, Play, Target, Lightbulb, Award, ArrowRight } from "lucide-react"
 
 export default function EarlyYears() {
   const [isVisible, setIsVisible] = useState(false)
@@ -68,17 +56,30 @@ export default function EarlyYears() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 text-center" style={{ backgroundColor: "#F7ECDE" }}>
-        <div className="max-w-4xl mx-auto">
+      <section className="relative px-4 text-center overflow-hidden h-[75vh] flex items-center justify-center">
+        {/* Hero Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/earlyyears.jpg"
+            alt="Early Years Learning Environment"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Semi-transparent overlay for text readability */}
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        <div className="max-w-4xl mx-auto relative z-10">
           <div
             className={`transform transition-all duration-1000 ${
               isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
             }`}
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-800">
-              Early Years at <span style={{ color: "#54BAB9" }}>Budding Minds</span>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+              Early Years at <span style={{ color: "#9ED2C6" }}>Budding Minds</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-700 mb-8 font-light">
+            <p className="text-xl md:text-2xl text-white/95 mb-8 font-light drop-shadow-md">
               Where learning begins with wonder, joy, and love.
             </p>
             <div className="w-24 h-1 mx-auto rounded-full" style={{ backgroundColor: "#9ED2C6" }}></div>
@@ -87,11 +88,11 @@ export default function EarlyYears() {
 
         {/* Decorative elements */}
         <div
-          className="absolute top-10 left-10 w-20 h-20 rounded-full opacity-20 animate-bounce"
+          className="absolute top-10 left-10 w-20 h-20 rounded-full opacity-30 animate-bounce z-10"
           style={{ backgroundColor: "#E9DAC1" }}
         ></div>
         <div
-          className="absolute bottom-10 right-10 w-16 h-16 rounded-full opacity-20 animate-pulse"
+          className="absolute bottom-10 right-10 w-16 h-16 rounded-full opacity-30 animate-pulse z-10"
           style={{ backgroundColor: "#9ED2C6" }}
         ></div>
       </section>
@@ -144,7 +145,6 @@ export default function EarlyYears() {
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Foundation for Lifelong Learning</h2>
             <p className="text-xl text-gray-600">EYFS-Aligned Learning Areas</p>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {learningAreas.map((area, index) => (
               <div
@@ -174,7 +174,6 @@ export default function EarlyYears() {
             <h2 className="text-4xl font-bold text-white mb-4">Early Readers & Writers</h2>
             <p className="text-xl text-white/90">Kindergarten Programme Excellence</p>
           </div>
-
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
@@ -184,7 +183,6 @@ export default function EarlyYears() {
                   setting a strong foundation for primary school success.
                 </p>
               </div>
-
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
                 <h3 className="text-2xl font-bold text-white mb-4">Daily Structure</h3>
                 <ul className="text-white/90 space-y-2">
@@ -195,7 +193,6 @@ export default function EarlyYears() {
                 </ul>
               </div>
             </div>
-
             <div className="relative">
               <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 text-center">
                 <div className="flex justify-center space-x-4 mb-6">
@@ -236,7 +233,10 @@ export default function EarlyYears() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#54BAB9" }}>
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: "#54BAB9" }}
+                  >
                     <Heart className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -245,7 +245,10 @@ export default function EarlyYears() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#54BAB9" }}>
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: "#54BAB9" }}
+                  >
                     <Star className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -255,14 +258,16 @@ export default function EarlyYears() {
                 </div>
               </div>
             </div>
-
             {/* Numeracy */}
             <div className="space-y-6">
               <h3 className="text-3xl font-bold text-gray-800">Numeracy Through Play</h3>
               <div className="space-y-4">
                 {/* Points */}
                 <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#9ED2C6" }}>
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: "#9ED2C6" }}
+                  >
                     <Play className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -271,7 +276,10 @@ export default function EarlyYears() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#9ED2C6" }}>
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: "#9ED2C6" }}
+                  >
                     <Palette className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -280,7 +288,10 @@ export default function EarlyYears() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#9ED2C6" }}>
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: "#9ED2C6" }}
+                  >
                     <Target className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -301,18 +312,22 @@ export default function EarlyYears() {
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Holistic, Thematic Learning</h2>
             <p className="text-xl text-gray-600">Theme-Based Curriculum Since 2004</p>
           </div>
-
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             {themes.map((theme, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div className="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: "#54BAB9" }}>
+              <div
+                key={index}
+                className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow duration-300"
+              >
+                <div
+                  className="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: "#54BAB9" }}
+                >
                   <Lightbulb className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="font-semibold text-gray-800">{theme}</h4>
               </div>
             ))}
           </div>
-
           <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8">
             <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Integrated Learning Benefits</h3>
             <div className="grid md:grid-cols-2 gap-6">
@@ -330,9 +345,6 @@ export default function EarlyYears() {
           </div>
         </div>
       </section>
-
-      {/* Technology Integration and CTA remain unchanged */}
-      {/* ... */}
     </div>
   )
 }

@@ -1,7 +1,8 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import { Play } from "lucide-react"
 
 // Local bubble component for section
@@ -70,22 +71,40 @@ export default function VideosShowcase() {
 
   const videos = [
     {
-      id: "VIDEO_ID_1",
-      title: "Campus Life & Learning",
+      id: "ax2Q6k5Rak0",
+      title: "BM Life in Style",
       description: "Take a virtual tour of our vibrant campus and see learning in action.",
-      thumbnail: "/placeholder.svg?height=200&width=300",
+      thumbnail: `https://img.youtube.com/vi/ax2Q6k5Rak0/hqdefault.jpg`,
     },
     {
-      id: "VIDEO_ID_2",
-      title: "Student Success Stories",
+      id: "hf3LXo76IzU",
+      title: "Feel the Beat",
       description: "Hear from our students and families about their educational journey.",
-      thumbnail: "/placeholder.svg?height=200&width=300",
+      thumbnail: `https://img.youtube.com/vi/hf3LXo76IzU/hqdefault.jpg`,
     },
   ]
 
   const openVideo = (videoId: string) => {
     const url = `https://www.youtube.com/watch?v=${videoId}`
     window.open(url, "_blank")
+  }
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement
+    const currentSrc = target.src
+
+    // Try different thumbnail sizes in order of preference
+    if (currentSrc.includes("hqdefault.jpg")) {
+      target.src = currentSrc.replace("hqdefault.jpg", "mqdefault.jpg")
+    } else if (currentSrc.includes("mqdefault.jpg")) {
+      target.src = currentSrc.replace("mqdefault.jpg", "default.jpg")
+    } else {
+      target.src = "/placeholder.svg?height=200&width=300&text=Video+Thumbnail"
+    }
+  }
+
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    console.log("Thumbnail loaded successfully:", e.currentTarget.src)
   }
 
   return (
@@ -114,25 +133,23 @@ export default function VideosShowcase() {
                     className="relative cursor-pointer rounded-xl overflow-hidden mb-4 group-hover:scale-105 transition-transform duration-300"
                     onClick={() => openVideo(video.id)}
                   >
-                    <Image
+                    <img
                       src={video.thumbnail || "/placeholder.svg"}
                       alt={video.title}
-                      width={300}
-                      height={200}
                       className="w-full h-40 object-cover"
+                      onError={handleImageError}
+                      onLoad={handleImageLoad}
+                      crossOrigin="anonymous"
                     />
-
                     {/* Play button overlay */}
                     <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/30 transition-colors">
                       <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                         <Play className="w-6 h-6 text-[#54BAB9] ml-1" fill="currentColor" />
                       </div>
                     </div>
-
                     {/* Gradient overlay */}
                     <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent"></div>
                   </div>
-
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-[#54BAB9] transition-colors">
                       {video.title}
@@ -151,16 +168,12 @@ export default function VideosShowcase() {
         <div className="flex items-center space-x-4 w-full max-w-md">
           {/* First line */}
           <div className="flex-1 h-1 bg-[#54BAB9] rounded-full"></div>
-
           {/* First circle */}
           <div className="w-4 h-4 bg-[#9ED2C6] rounded-full"></div>
-
           {/* Second line */}
           <div className="flex-1 h-1 bg-[#54BAB9] rounded-full"></div>
-
           {/* Second circle (cream/beige) */}
           <div className="w-4 h-4 bg-[#E9DAC1] rounded-full"></div>
-
           {/* Third line */}
           <div className="flex-1 h-1 bg-[#54BAB9] rounded-full"></div>
         </div>

@@ -194,7 +194,8 @@ export default function CalendarPage() {
       <div
         className="relative h-[50vh] bg-cover bg-center flex items-center justify-center text-center p-4"
         style={{
-          backgroundImage: `url('/placeholder.svg?height=1080&width=1920')`,
+          backgroundImage: `url('/images/calendar.jpg')`,
+
         }}
       >
         <div className="absolute inset-0 bg-black/50" /> {/* Overlay */}

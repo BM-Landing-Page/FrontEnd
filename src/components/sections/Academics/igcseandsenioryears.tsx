@@ -5,14 +5,13 @@ export default function IGCSEAndSeniorYears() {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Banner - Image Only */}
-      <section className="relative h-[50vh] overflow-hidden">
+      <section className="relative h-[75vh] overflow-hidden">
         <img
-          src="/placeholder.svg?height=800&width=1600"
+          src="/images/igcse.jpg"
           alt="Cambridge IGCSE at BMIS - Students in modern academic environment"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-top object-cover"
         />
       </section>
-
       <div className="max-w-7xl mx-auto px-6 py-20 space-y-24">
         {/* Section 1: Introduction - Enhanced with stats */}
         <section className="relative">
@@ -21,28 +20,23 @@ export default function IGCSEAndSeniorYears() {
             <div className="absolute top-0 right-0 w-64 h-64 opacity-5">
               <BookOpen className="w-full h-full" />
             </div>
-
             <div className="relative z-10 max-w-4xl mx-auto">
               <div className="text-center space-y-8">
                 <div className="inline-flex items-center px-6 py-3 bg-white rounded-full shadow-sm">
                   <Star className="w-5 h-5 mr-2 text-yellow-500" />
                   <span className="font-semibold text-gray-800">Global Academic Excellence</span>
                 </div>
-
                 <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-4">
                   Cambridge IGCSE at BMIS
                 </h1>
-
                 <h2 className="text-2xl md:text-3xl font-light text-gray-600 mb-8">
                   The World's Most Popular Qualification for Ages 14–16
                 </h2>
-
                 <p className="text-xl leading-relaxed text-gray-700 max-w-3xl mx-auto">
                   Cambridge IGCSE is a globally recognized qualification designed for students aged 14 to 16. Trusted by
                   educators and accepted by leading universities and employers worldwide, it serves as a strong academic
                   foundation and an international passport to future opportunities.
                 </p>
-
                 {/* Stats row */}
                 <div className="grid md:grid-cols-3 gap-8 mt-12">
                   <div className="text-center">
@@ -62,7 +56,6 @@ export default function IGCSEAndSeniorYears() {
             </div>
           </div>
         </section>
-
         {/* Section 2: Career Guidance Conference - Enhanced with better visual flow */}
         <section className="space-y-12">
           <div className="text-center space-y-6">
@@ -77,11 +70,9 @@ export default function IGCSEAndSeniorYears() {
               teacher expertise.
             </p>
           </div>
-
           <div className="relative">
             {/* Connection lines for desktop */}
             <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-gray-300 to-transparent transform -translate-y-1/2"></div>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="group relative">
                 <div
@@ -101,7 +92,6 @@ export default function IGCSEAndSeniorYears() {
                   </div>
                 </div>
               </div>
-
               <div className="group relative">
                 <div
                   className="rounded-2xl p-8 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl relative overflow-hidden"
@@ -120,7 +110,6 @@ export default function IGCSEAndSeniorYears() {
                   </div>
                 </div>
               </div>
-
               <div className="group relative">
                 <div
                   className="rounded-2xl p-8 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl relative overflow-hidden"
@@ -139,7 +128,6 @@ export default function IGCSEAndSeniorYears() {
                   </div>
                 </div>
               </div>
-
               <div className="group relative">
                 <div
                   className="rounded-2xl p-8 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl relative overflow-hidden"
@@ -161,14 +149,12 @@ export default function IGCSEAndSeniorYears() {
             </div>
           </div>
         </section>
-
         {/* Section 3: IGCSE Curriculum - Enhanced table design */}
         <section className="relative">
           <div className="rounded-3xl p-12 md:p-16 relative overflow-hidden" style={{ backgroundColor: "#E9DAC1" }}>
             <div className="absolute top-0 left-0 w-96 h-96 opacity-5">
               <BookOpen className="w-full h-full transform -rotate-12" />
             </div>
-
             <div className="relative z-10 space-y-12">
               <div className="text-center space-y-6">
                 <div className="inline-flex items-center px-6 py-3 bg-white rounded-full shadow-sm">
@@ -181,7 +167,6 @@ export default function IGCSEAndSeniorYears() {
                   Minimum 5 subjects required (excluding Global Perspectives).
                 </p>
               </div>
-
               <div className="overflow-x-auto">
                 <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
                   <table className="w-full">
@@ -226,14 +211,12 @@ export default function IGCSEAndSeniorYears() {
             </div>
           </div>
         </section>
-
         {/* Section 4: Cambridge ICE Award - Enhanced with better visual hierarchy */}
         <section className="relative">
           <div className="rounded-3xl p-12 md:p-16 relative overflow-hidden" style={{ backgroundColor: "#9ED2C6" }}>
             <div className="absolute bottom-0 right-0 w-80 h-80 opacity-5">
               <Award className="w-full h-full" />
             </div>
-
             <div className="relative z-10 space-y-12">
               <div className="text-center space-y-6">
                 <div className="inline-flex items-center px-6 py-3 bg-white rounded-full shadow-sm">
@@ -242,7 +225,6 @@ export default function IGCSEAndSeniorYears() {
                 </div>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Cambridge ICE Award</h2>
               </div>
-
               <div className="max-w-5xl mx-auto">
                 <div className="bg-white rounded-2xl p-10 shadow-xl mb-10">
                   <p className="text-xl text-gray-700 leading-relaxed text-center mb-8">
@@ -250,7 +232,6 @@ export default function IGCSEAndSeniorYears() {
                     who undertake a broad curriculum. To qualify, a student must pass at least seven IGCSE subjects,
                     including:
                   </p>
-
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="flex items-center p-6 bg-gradient-to-r from-blue-50 to-teal-50 rounded-xl">
                       <div className="w-4 h-4 rounded-full mr-4" style={{ backgroundColor: "#54BAB9" }}></div>
@@ -264,7 +245,6 @@ export default function IGCSEAndSeniorYears() {
                     </div>
                   </div>
                 </div>
-
                 <div className="bg-white rounded-2xl p-10 shadow-2xl border-4" style={{ borderColor: "#54BAB9" }}>
                   <div className="text-center mb-8">
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">Compulsory Subjects</h3>
@@ -314,28 +294,24 @@ export default function IGCSEAndSeniorYears() {
             </div>
           </div>
         </section>
-
         {/* Section 5: Global Perspectives - Enhanced with visual elements */}
         <section className="relative">
           <div className="rounded-3xl p-12 md:p-16 relative overflow-hidden" style={{ backgroundColor: "#F7ECDE" }}>
             <div className="absolute top-0 left-0 w-72 h-72 opacity-5">
               <Users className="w-full h-full" />
             </div>
-
             <div className="relative z-10 max-w-5xl mx-auto">
               <div className="text-center space-y-8">
                 <div className="inline-flex items-center px-6 py-3 bg-white rounded-full shadow-sm">
                   <Globe className="w-5 h-5 mr-2 text-green-600" />
                   <span className="font-semibold text-gray-800">Global Leadership</span>
                 </div>
-
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
                   Global Perspectives
                   <span className="block text-2xl md:text-3xl font-light text-gray-600 mt-2">
                     Student Leadership Programme
                   </span>
                 </h2>
-
                 <div className="bg-white rounded-2xl p-10 shadow-xl">
                   <div className="space-y-8">
                     <p className="text-xl text-gray-700 leading-relaxed">
@@ -355,14 +331,12 @@ export default function IGCSEAndSeniorYears() {
             </div>
           </div>
         </section>
-
         {/* Section 6: Cambridge Advanced */}
         <section className="relative">
           <div className="rounded-3xl p-12 md:p-16 relative overflow-hidden" style={{ backgroundColor: "#54BAB9" }}>
             <div className="absolute top-0 right-0 w-96 h-96 opacity-10">
               <GraduationCap className="w-full h-full text-white" />
             </div>
-
             <div className="relative z-10 space-y-12">
               <div className="text-center space-y-6">
                 <div className="inline-flex items-center px-6 py-3 bg-white bg-opacity-20 rounded-full backdrop-blur-sm">
@@ -375,7 +349,6 @@ export default function IGCSEAndSeniorYears() {
                   AS and A Levels. These qualifications encourage in-depth subject mastery and independent thinking.
                 </p>
               </div>
-
               <div className="overflow-x-auto">
                 <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
                   <table className="w-full">
@@ -422,7 +395,6 @@ export default function IGCSEAndSeniorYears() {
             </div>
           </div>
         </section>
-
         {/* Section 7: Cambridge IPQ */}
         <section className="relative">
           <div className="rounded-3xl p-12 md:p-16 relative overflow-hidden" style={{ backgroundColor: "#E9DAC1" }}>
@@ -436,7 +408,6 @@ export default function IGCSEAndSeniorYears() {
                   Cambridge International Project Qualification
                 </h2>
               </div>
-
               <div className="grid md:grid-cols-2 gap-10">
                 <div className="bg-white rounded-2xl p-10 shadow-xl transform hover:scale-105 transition-transform duration-300">
                   <div
@@ -451,7 +422,6 @@ export default function IGCSEAndSeniorYears() {
                     skills including evaluation, analysis, synthesis, and effective communication.
                   </p>
                 </div>
-
                 <div className="bg-white rounded-2xl p-10 shadow-xl transform hover:scale-105 transition-transform duration-300">
                   <div
                     className="w-16 h-16 mb-6 rounded-full flex items-center justify-center"
@@ -466,7 +436,6 @@ export default function IGCSEAndSeniorYears() {
                   </p>
                 </div>
               </div>
-
               <div
                 className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-10 shadow-xl border-l-8"
                 style={{ borderColor: "#54BAB9" }}
@@ -482,14 +451,12 @@ export default function IGCSEAndSeniorYears() {
             </div>
           </div>
         </section>
-
         {/* Section 8: Global Recognition - Enhanced CTA section */}
         <section className="relative">
           <div className="rounded-3xl p-12 md:p-16 relative overflow-hidden" style={{ backgroundColor: "#9ED2C6" }}>
             <div className="absolute bottom-0 left-0 w-80 h-80 opacity-5">
               <Globe className="w-full h-full" />
             </div>
-
             <div className="relative z-10 max-w-5xl mx-auto text-center space-y-12">
               <div className="space-y-6">
                 <div className="inline-flex items-center px-6 py-3 bg-white rounded-full shadow-sm">
@@ -503,7 +470,6 @@ export default function IGCSEAndSeniorYears() {
                   education is a testament to their academic strength and global readiness.
                 </p>
               </div>
-
               <div className="bg-white rounded-2xl p-10 shadow-2xl">
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <Link

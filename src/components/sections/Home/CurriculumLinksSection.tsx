@@ -77,7 +77,7 @@ export default function CurriculumLinksSection() {
       icon: BookOpen,
       gradient: "from-[#F7ECDE] to-[#E9DAC1]",
       accentColor: "#9ED2C6",
-      thumbnail: "/placeholder.svg?height=120&width=200",
+      thumbnail: "/images/earlyyearshome.jpg",
     },
     {
       title: "Primary & Middle Years",
@@ -86,7 +86,7 @@ export default function CurriculumLinksSection() {
       icon: Users,
       gradient: "from-[#E9DAC1] to-[#9ED2C6]",
       accentColor: "#54BAB9",
-      thumbnail: "/placeholder.svg?height=120&width=200",
+      thumbnail: "/images/primaryhome.jpg",
     },
   ]
 
@@ -114,26 +114,23 @@ export default function CurriculumLinksSection() {
             return (
               <Link key={index} href={link.href} className="group block">
                 <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#9ED2C6] to-[#54BAB9] p-1 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                  <div className="bg-white rounded-xl p-6 h-64">
+                  <div className="bg-white rounded-xl p-6 h-96">
                     {/* Thumbnail Image */}
                     <div className="relative overflow-hidden rounded-xl mb-4 group-hover:scale-105 transition-transform duration-300">
                       <Image
                         src={link.thumbnail || "/placeholder.svg"}
                         alt={link.title}
-                        width={200}
-                        height={120}
-                        className="w-full h-32 object-cover"
+                        width={400}
+                        height={200}
+                        className="w-full h-56 object-cover"
                       />
-
                       {/* Gradient overlay */}
                       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent"></div>
-
                       {/* Icon overlay */}
                       <div className="absolute top-3 left-3 p-2 rounded-lg bg-white/90 shadow-sm">
                         <IconComponent className="w-5 h-5" style={{ color: link.accentColor }} />
                       </div>
                     </div>
-
                     {/* Content */}
                     <div>
                       <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
@@ -154,16 +151,12 @@ export default function CurriculumLinksSection() {
         <div className="flex items-center space-x-4 w-full max-w-md">
           {/* First line */}
           <div className="flex-1 h-1 bg-[#54BAB9] rounded-full"></div>
-
           {/* First circle */}
           <div className="w-4 h-4 bg-[#9ED2C6] rounded-full"></div>
-
           {/* Second line */}
           <div className="flex-1 h-1 bg-[#54BAB9] rounded-full"></div>
-
           {/* Second circle (cream/beige) */}
           <div className="w-4 h-4 bg-[#E9DAC1] rounded-full"></div>
-
           {/* Third line */}
           <div className="flex-1 h-1 bg-[#54BAB9] rounded-full"></div>
         </div>

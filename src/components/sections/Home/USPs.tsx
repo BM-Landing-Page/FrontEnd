@@ -4,7 +4,7 @@ import { Award, BookOpen, Star, Users } from "lucide-react"
 
 export default function USPs() {
   const stats = [
-    { number: "5000+", label: "Alumni Worldwide", icon: Users },
+    { number: "40+", label: "Alumni Worldwide", icon: Users },
     { number: "98%", label: "University Acceptance", icon: Award },
     { number: "50+", label: "Expert Faculty", icon: Star },
     { number: "20", label: "Years of Excellence", icon: BookOpen },
