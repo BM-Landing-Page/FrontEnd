@@ -11,10 +11,10 @@ export default function PDCommunity() {
     { name: "Ms. Aaliya Sultana R", role: "PDQ coordinator & Trainer", image: "/images/trainers/aaliya.jpg" },
     { name: "Ms. Anuradha", role: "Trainer", image: "/images/trainers/anuradha.jpg" },
     { name: "Ms. Anita", role: "Trainer", image: "/images/trainers/anita.jpg" },
-    { name: "Ms. Sujatha Chandran", role: "Trainer and Reviewer", image: "/images/trainers/sujatha.jpg" },
+    { name: "Ms. Sujatha Chandran", role: "Trainer and Reviewer", image: "/images/trainers/sujatha.png" },
     { name: "Ms. Akhila", role: "Trainer", image: "/images/trainers/akhila.jpg" },
-    { name: "Ms. Vaishali", role: "Trainer", image: "/images/trainers/vaishali.jpg" },
-    { name: "Ms. Srividya", role: "Trainer", image: "/images/trainers/srividya.jpg" },
+    { name: "Ms. Vaishali", role: "Trainer", image: "/images/trainers/vaishali.png" },
+    { name: "Ms. Srividya", role: "Trainer", image: "/images/trainers/srividya.png" },
     { name: "Ms. Radha", role: "Trainer and Reviewer", image: "/images/trainers/radha.jpg" },
     { name: "Ms. Wahidha", role: "Trainer and Reviewer", image: "/images/trainers/wahidha.jpg" },
   ]
@@ -60,7 +60,7 @@ export default function PDCommunity() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Banner */}
       <div className="relative h-64 md:h-80 lg:h-96 w-full overflow-hidden">
-        <Image src="/placeholder.svg?height=400&width=1200" alt="PD Community" fill className="object-cover" />
+        <Image src="/images/pdcommunity.jpg" alt="PD Community" fill className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30 flex items-center justify-center">
           <div className="text-center text-white px-4 max-w-4xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">PD Community</h1>
@@ -109,16 +109,15 @@ export default function PDCommunity() {
                 learning journey
               </p>
             </div>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {trainers.map((trainer, index) => (
                 <div
                   key={index}
                   className="bg-white rounded-2xl shadow-lg p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
                 >
-                  <div className="w-20 h-20 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] rounded-full mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-20 h-20 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] rounded-full mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 overflow-hidden">
                     <Image
-                      src={trainer.image || "/placeholder.svg"}
+                      src={trainer.image || "/placeholder.svg?height=80&width=80&query=professional trainer portrait"}
                       alt={trainer.name}
                       width={80}
                       height={80}
@@ -144,7 +143,6 @@ export default function PDCommunity() {
                 journey
               </p>
             </div>
-
             <div className="grid lg:grid-cols-2 gap-8">
               {testimonials.map((testimonial, index) => (
                 <div
@@ -152,7 +150,6 @@ export default function PDCommunity() {
                   className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
                 >
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#9ED2C6]/20 to-[#54BAB9]/20 rounded-full -translate-y-16 translate-x-16"></div>
-
                   <div className="relative">
                     <div className="flex items-start justify-between mb-6">
                       <div className="flex-1">
@@ -164,7 +161,6 @@ export default function PDCommunity() {
                       </div>
                       <div className="text-4xl text-[#9ED2C6] ml-4">💬</div>
                     </div>
-
                     <blockquote className="text-gray-700 leading-relaxed italic text-lg relative">
                       <span className="text-4xl text-[#54BAB9] absolute -top-2 -left-2">"</span>
                       <span className="relative z-10">{testimonial.testimonial}</span>

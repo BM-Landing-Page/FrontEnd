@@ -5,7 +5,7 @@ export default function PedagogyAndModules() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Banner */}
       <div className="relative h-64 md:h-80 lg:h-96 w-full overflow-hidden">
-        <Image src="/placeholder.svg?height=400&width=1200" alt="Pedagogy and Modules" fill className="object-cover" />
+        <Image src="/images/pedagogymodules.jpg" alt="Pedagogy and Modules" fill className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30 flex items-center justify-center">
           <div className="text-center text-white px-4 max-w-4xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Pedagogy & Modules</h1>

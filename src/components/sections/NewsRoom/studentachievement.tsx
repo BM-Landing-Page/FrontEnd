@@ -96,7 +96,7 @@ export default function StudentAchievement() {
       <div className="relative h-96 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/placeholder.svg?height=400&width=1200&text=Students+celebrating+achievements+with+trophies+and+medals"
+            src="/images/studentachievement.jpg"
             alt="Student Achievements"
             className="w-full h-full object-cover"
           />

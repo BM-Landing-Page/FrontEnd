@@ -6,7 +6,7 @@ export default function AboutTheAcademy() {
       {/* Hero Banner */}
       <div className="relative h-64 md:h-80 lg:h-96 w-full overflow-hidden">
         <Image
-          src="/placeholder.svg?height=400&width=1200"
+          src="/images/abouttheacademy.jpg"
           alt="Budding Minds Professional Development Academy"
           fill
           className="object-cover"

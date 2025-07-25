@@ -62,7 +62,7 @@ export default function BeyondBooks() {
               }`}
             >
               <Image
-                src={src || "/placeholder.svg"}
+                src={src || "/images/beyondbooks.jpg"}
                 alt={`Hero image ${index + 1}`}
                 fill
                 className="object-cover"

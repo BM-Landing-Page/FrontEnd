@@ -15,7 +15,7 @@ export default function SchoolUpdate() {
       <div className="relative h-96 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/placeholder.svg?height=400&width=1200"
+            src="/images/schoolupdate.jpg"
             alt="School Campus"
             className="w-full h-full object-cover"
           />

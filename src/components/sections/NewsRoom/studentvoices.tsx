@@ -202,7 +202,7 @@ Let us learn and cross over the pandemic. And be good for all living things!`,
       {/* Hero Banner */}
       <div className="relative h-96 overflow-hidden">
         <img
-          src="/placeholder.svg?height=400&width=1200&text=Student+Voices"
+          src="/images/studentvoices.jpg"
           alt="Student Voices"
           className="w-full h-full object-cover"
         />

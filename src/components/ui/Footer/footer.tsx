@@ -27,7 +27,6 @@ export default function Footer() {
                 <MapPin className="w-5 h-5 mr-2" style={{ color: "#F7ECDE" }} />
                 Get In Touch
               </h3>
-
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <MapPin className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "#E9DAC1" }} />
@@ -37,7 +36,6 @@ export default function Footer() {
                     <p>Manimangalam, TamilNadu - 601301</p>
                   </div>
                 </div>
-
                 <div className="flex items-center space-x-3">
                   <Mail className="w-5 h-5" style={{ color: "#E9DAC1" }} />
                   <a
@@ -47,7 +45,6 @@ export default function Footer() {
                     bmis@buddingminds.net
                   </a>
                 </div>
-
                 <div className="flex items-center space-x-3">
                   <Phone className="w-5 h-5" style={{ color: "#E9DAC1" }} />
                   <a href="tel:+919840391815" className="text-white/90 hover:text-white transition-colors font-medium">
@@ -57,24 +54,13 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Cambridge Assessment */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-              <div className="flex items-center space-x-4">
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: "#F7ECDE" }}
-                >
-                  <img
-                    src="/placeholder.svg?height=40&width=40&text=Cambridge"
-                    alt="Cambridge Assessment"
-                    className="w-10 h-10"
-                  />
-                </div>
-                <div>
-                  <p className="text-white font-semibold text-lg">Cambridge Assessment</p>
-                  <p className="text-white/80">International Education</p>
-                </div>
-              </div>
+            {/* Cambridge Assessment - Logo Only */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+              <img
+                src="/images/cambridge.png"
+                alt="Cambridge Assessment International Education"
+                className="w-full h-auto object-contain max-h-20"
+              />
             </div>
           </div>
 
@@ -127,7 +113,6 @@ export default function Footer() {
                 >
                   <Facebook className="w-5 h-5 text-white" />
                 </a>
-
                 <a
                   href="https://www.instagram.com/bm_anokha_25/"
                   target="_blank"
@@ -137,7 +122,6 @@ export default function Footer() {
                 >
                   <Instagram className="w-5 h-5 text-white" />
                 </a>
-
                 <a
                   href="https://www.instagram.com/buddingmindspdq/?igsh=MTl4eHRiNWhxc2M3NQ%3D%3D&utm_source=qr"
                   target="_blank"
@@ -147,7 +131,6 @@ export default function Footer() {
                 >
                   <Instagram className="w-5 h-5 text-white" />
                 </a>
-
                 <a
                   href="https://www.linkedin.com/in/budding-minds-international-school-15585419b/?originalSubdomain=in"
                   target="_blank"
@@ -158,7 +141,6 @@ export default function Footer() {
                   <Linkedin className="w-5 h-5 text-white" />
                 </a>
               </div>
-
               {/* Additional Instagram Links */}
               <div className="mt-4 space-y-2">
                 <a

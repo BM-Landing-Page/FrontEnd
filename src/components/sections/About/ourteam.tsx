@@ -94,7 +94,7 @@ export default function OurTeam() {
       {/* Hero Banner */}
       <section className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
         <Image
-          src="/placeholder.svg?height=400&width=1200"
+          src="/images/ourteam.jpg"
           alt="Our Team Hero"
           fill
           className="object-cover"
