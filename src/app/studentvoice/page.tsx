@@ -1,4 +1,4 @@
-import StudentVoices from "@/components/sections/CampusLife/studentvoices"
+import StudentVoices from "@/components/sections/NewsRoom/studentvoices"
 
 export default function VoicesPage() {
   return <StudentVoices />

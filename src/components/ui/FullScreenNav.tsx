@@ -31,11 +31,9 @@ const NAV_ITEMS = [
     label: "BM PD Academy",
     subItems: [
       "About the Academy",
-      "Vision & Outcomes",
       "Pedagogy & Modules",
-      "Candidate Voice",
-      "Gallery / Media",
-      "FAQs or Myths Busted",
+      "PD Community",
+      "Apply Now",
     ],
   },
   { label: "Newsroom", subItems: ["School Updates", "Student Achievements", "Thought Pieces", "BM Gazette"] },
@@ -56,7 +54,9 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "SLC Overview": "/slcoverview",
   "A Day at BMIS": "/adayatbm",
   "Events & Celebrations": "/eventsandcelebration",
-  "Student Voice": "/studentvoice",
+  "School Updates": "/schoolupdate",
+  "Student Achievements": "/studentachievement",
+  "Thought Pieces": "/studentvoice",
   "Beyond Books": "/beyondbooks",
   "Student Profiles": "/studentprofile",
   "Leadership Projects": "/leadershipprojects",
@@ -67,6 +67,10 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Calendar": "/calendar",
   Gallery: "/gallery",
   Career: "/career",
+  "Apply Now": "pdform",
+  "About the Academy": "/abouttheacademy",
+  "Pedagogy & Modules": "/pedagogyandmodule",
+  "PD Community": "/pdcommunity",
 }
 
 const SOCIAL_LINKS = [
