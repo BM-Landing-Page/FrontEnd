@@ -202,7 +202,7 @@ export default function AnimatedGallery() {
         <div className="flex items-center justify-between">
           <div className="animate-slide-in-left">
             <h1 className="text-4xl md:text-6xl font-light text-gray-800 tracking-wider animate-gradient-text">
-              OUR JOURNEY
+              OUR GALLERY
             </h1>
             <div className="w-24 h-px bg-[#54BAB9] mt-2 animate-expand"></div>
           </div>
