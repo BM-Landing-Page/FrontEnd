@@ -1,7 +1,7 @@
 // src/lib/api.ts
 
 // ✅ API Base URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://backend-edhc.onrender.com"
 
 // ✅ Common API Response Interface
 export interface ApiResponse<T> {
