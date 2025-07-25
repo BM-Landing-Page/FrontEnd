@@ -1,7 +1,8 @@
 // src/lib/api.ts
 
-// ✅ API Base URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://backend-edhc.onrender.com"
+// ✅ API Base URL — Updated to use Render-hosted backend
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || "https://backend-edhc.onrender.com"
 
 // ✅ Common API Response Interface
 export interface ApiResponse<T> {
@@ -49,13 +50,16 @@ export const fetchTeamMembers = async (): Promise<ApiResponse<TeamMember[]>> => 
     console.error("Error fetching team members:", error)
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to fetch team members",
+      error:
+        error instanceof Error ? error.message : "Failed to fetch team members",
     }
   }
 }
 
 // Fetch team member by ID
-export const fetchTeamMemberById = async (id: number): Promise<ApiResponse<TeamMember>> => {
+export const fetchTeamMemberById = async (
+  id: number
+): Promise<ApiResponse<TeamMember>> => {
   try {
     const response = await fetch(`${API_BASE_URL}/team/${id}`)
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
@@ -65,15 +69,20 @@ export const fetchTeamMemberById = async (id: number): Promise<ApiResponse<TeamM
     console.error("Error fetching team member:", error)
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to fetch team member",
+      error:
+        error instanceof Error ? error.message : "Failed to fetch team member",
     }
   }
 }
 
 // Fetch team members by department
-export const fetchTeamMembersByDepartment = async (department: string): Promise<ApiResponse<TeamMember[]>> => {
+export const fetchTeamMembersByDepartment = async (
+  department: string
+): Promise<ApiResponse<TeamMember[]>> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/team?department=${encodeURIComponent(department)}`)
+    const response = await fetch(
+      `${API_BASE_URL}/team?department=${encodeURIComponent(department)}`
+    )
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
     const data = await response.json()
     return { success: true, data }
@@ -81,7 +90,10 @@ export const fetchTeamMembersByDepartment = async (department: string): Promise<
     console.error("Error fetching team members by department:", error)
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to fetch team members by department",
+      error:
+        error instanceof Error
+          ? error.message
+          : "Failed to fetch team members by department",
     }
   }
 }
@@ -112,13 +124,16 @@ export const fetchGalleryItems = async (): Promise<ApiResponse<GalleryItem[]>> =
     console.error("Error fetching gallery items:", error)
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to fetch gallery items",
+      error:
+        error instanceof Error ? error.message : "Failed to fetch gallery items",
     }
   }
 }
 
 // Create gallery item (protected)
-export const createGalleryItem = async (formData: FormData): Promise<ApiResponse<any>> => {
+export const createGalleryItem = async (
+  formData: FormData
+): Promise<ApiResponse<any>> => {
   try {
     const response = await fetch(`${API_BASE_URL}/data`, {
       method: "POST",
@@ -131,7 +146,8 @@ export const createGalleryItem = async (formData: FormData): Promise<ApiResponse
     console.error("Error creating gallery item:", error)
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to create gallery item",
+      error:
+        error instanceof Error ? error.message : "Failed to create gallery item",
     }
   }
 }
@@ -156,13 +172,16 @@ export const updateGalleryItem = async (
     console.error("Error updating gallery item:", error)
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to update gallery item",
+      error:
+        error instanceof Error ? error.message : "Failed to update gallery item",
     }
   }
 }
 
 // Delete gallery item (protected)
-export const deleteGalleryItem = async (id: number): Promise<ApiResponse<any>> => {
+export const deleteGalleryItem = async (
+  id: number
+): Promise<ApiResponse<any>> => {
   try {
     const response = await fetch(`${API_BASE_URL}/data/${id}`, {
       method: "DELETE",
@@ -177,7 +196,8 @@ export const deleteGalleryItem = async (id: number): Promise<ApiResponse<any>> =
     console.error("Error deleting gallery item:", error)
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to delete gallery item",
+      error:
+        error instanceof Error ? error.message : "Failed to delete gallery item",
     }
   }
 }
