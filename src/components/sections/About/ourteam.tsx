@@ -165,7 +165,7 @@ export default function OurTeam() {
                       style={{ borderColor: "#54BAB9" }}
                     >
                       <Image
-                        src={member.image || "/placeholder.svg?height=300&width=300"}
+                        src={member.image_url || "/placeholder.svg?height=300&width=300"}
                         alt={member.name}
                         fill
                         className="object-cover"
@@ -209,7 +209,7 @@ export default function OurTeam() {
                 {/* Profile Photo - Rounded Square */}
                 <div className="relative w-32 h-32 rounded-2xl overflow-hidden bg-white/20 flex-shrink-0">
                   <Image
-                    src={selectedMember.image || "/placeholder.svg?height=300&width=300"}
+                    src={selectedMember.image_url || "/placeholder.svg?height=300&width=300"}
                     alt={selectedMember.name}
                     fill
                     className="object-cover"
@@ -243,95 +243,106 @@ export default function OurTeam() {
                   </div>
 
                   {/* Key Achievements Section */}
-                  <div>
-                    <div className="flex items-center gap-3 mb-6">
-                      <Award className="w-6 h-6" style={{ color: "#54BAB9" }} />
-                      <h3 className="text-2xl font-bold text-gray-800">Key Achievements</h3>
+                  {selectedMember.achievements && selectedMember.achievements.length > 0 && (
+                    <div>
+                      <div className="flex items-center gap-3 mb-6">
+                        <Award className="w-6 h-6" style={{ color: "#54BAB9" }} />
+                        <h3 className="text-2xl font-bold text-gray-800">Key Achievements</h3>
+                      </div>
+                      <div className="space-y-4">
+                        {selectedMember.achievements.map((achievement, index) => (
+                          <div
+                            key={achievement.id || index}
+                            className="p-4 rounded-2xl text-gray-700 font-medium"
+                            style={{ backgroundColor: "#54BAB9", color: "white" }}
+                          >
+                            {achievement.description}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="space-y-4">
-                      {selectedMember.achievement1 && (
-                        <div
-                          className="p-4 rounded-2xl text-gray-700 font-medium"
-                          style={{ backgroundColor: "#54BAB9", color: "white" }}
-                        >
-                          {selectedMember.achievement1}
-                        </div>
-                      )}
-                      {selectedMember.achievement2 && (
-                        <div
-                          className="p-4 rounded-2xl text-gray-700 font-medium"
-                          style={{ backgroundColor: "#54BAB9", color: "white" }}
-                        >
-                          {selectedMember.achievement2}
-                        </div>
-                      )}
-                      {selectedMember.achievement3 && (
-                        <div
-                          className="p-4 rounded-2xl text-gray-700 font-medium"
-                          style={{ backgroundColor: "#54BAB9", color: "white" }}
-                        >
-                          {selectedMember.achievement3}
-                        </div>
-                      )}
-                      {selectedMember.achievement4 && (
-                        <div
-                          className="p-4 rounded-2xl text-gray-700 font-medium"
-                          style={{ backgroundColor: "#54BAB9", color: "white" }}
-                        >
-                          {selectedMember.achievement4}
-                        </div>
-                      )}
-                    </div>
-                  </div>
+                  )}
                 </div>
 
                 {/* Right Column - Info and Contact */}
                 <div className="space-y-6">
                   {/* Education */}
-                  <div
-                    className="p-4 rounded-xl border-2"
-                    style={{ borderColor: "#9ED2C6", backgroundColor: "#F7ECDE" }}
-                  >
-                    <div className="flex items-start gap-3">
-                      <GraduationCap className="w-5 h-5 mt-1" style={{ color: "#54BAB9" }} />
-                      <div>
-                        <h4 className="font-semibold mb-2" style={{ color: "#54BAB9" }}>
-                          Education
-                        </h4>
-                        <p className="text-sm text-gray-700 leading-relaxed">{selectedMember.education_background}</p>
+                  {selectedMember.education_background && (
+                    <div
+                      className="p-4 rounded-xl border-2"
+                      style={{ borderColor: "#9ED2C6", backgroundColor: "#F7ECDE" }}
+                    >
+                      <div className="flex items-start gap-3">
+                        <GraduationCap className="w-5 h-5 mt-1" style={{ color: "#54BAB9" }} />
+                        <div>
+                          <h4 className="font-semibold mb-2" style={{ color: "#54BAB9" }}>
+                            Education
+                          </h4>
+                          <p className="text-sm text-gray-700 leading-relaxed">{selectedMember.education_background}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* Experience */}
-                  <div
-                    className="p-4 rounded-xl border-2"
-                    style={{ borderColor: "#9ED2C6", backgroundColor: "#E9DAC1" }}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Calendar className="w-5 h-5" style={{ color: "#54BAB9" }} />
-                      <div>
-                        <h4 className="font-semibold mb-1" style={{ color: "#54BAB9" }}>
-                          Experience
-                        </h4>
-                        <p className="text-lg font-bold text-gray-800">{selectedMember.years_experience}+ years</p>
+                  {selectedMember.years_experience && (
+                    <div
+                      className="p-4 rounded-xl border-2"
+                      style={{ borderColor: "#9ED2C6", backgroundColor: "#E9DAC1" }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Calendar className="w-5 h-5" style={{ color: "#54BAB9" }} />
+                        <div>
+                          <h4 className="font-semibold mb-1" style={{ color: "#54BAB9" }}>
+                            Experience
+                          </h4>
+                          <p className="text-lg font-bold text-gray-800">{selectedMember.years_experience}+ years</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
+
+                  {/* Joined Date */}
+                  {selectedMember.joined_month && selectedMember.joined_year && (
+                    <div
+                      className="p-4 rounded-xl border-2"
+                      style={{ borderColor: "#9ED2C6", backgroundColor: "rgba(158, 210, 198, 0.2)" }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Calendar className="w-5 h-5" style={{ color: "#54BAB9" }} />
+                        <div>
+                          <h4 className="font-semibold mb-1" style={{ color: "#54BAB9" }}>
+                            Joined
+                          </h4>
+                          <p className="text-sm text-gray-700">
+                            {new Date(selectedMember.joined_year, selectedMember.joined_month - 1).toLocaleDateString(
+                              "en-US",
+                              {
+                                month: "long",
+                                year: "numeric",
+                              },
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Get in Touch Section */}
-                  <div className="p-6 rounded-2xl" style={{ backgroundColor: "#54BAB9" }}>
-                    <h3 className="text-xl font-bold text-white mb-4">Get in Touch</h3>
-                    <div className="space-y-3">
-                      <button
-                        className="w-full flex items-center gap-3 p-3 rounded-xl bg-white/20 hover:bg-white/30 transition-colors text-white"
-                        onClick={() => window.open(selectedMember.linkedin_url, "_blank")}
-                      >
-                        <Linkedin className="w-5 h-5" />
-                        LinkedIn Profile
-                      </button>
+                  {selectedMember.linkedin_url && (
+                    <div className="p-6 rounded-2xl" style={{ backgroundColor: "#54BAB9" }}>
+                      <h3 className="text-xl font-bold text-white mb-4">Get in Touch</h3>
+                      <div className="space-y-3">
+                        <button
+                          className="w-full flex items-center gap-3 p-3 rounded-xl bg-white/20 hover:bg-white/30 transition-colors text-white"
+                          onClick={() => window.open(selectedMember.linkedin_url, "_blank")}
+                        >
+                          <Linkedin className="w-5 h-5" />
+                          LinkedIn Profile
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
