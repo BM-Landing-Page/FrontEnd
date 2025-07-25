@@ -38,7 +38,7 @@ const NAV_ITEMS = [
   },
   { label: "Newsroom", subItems: ["School Updates", "Student Achievements", "Thought Pieces", "BM Gazette"] },
   { label: "Career", subItems: [] },
-  { label: "Contact Us", subItems: ["Location & Details", "Socials"] },
+  { label: "Contact Us", subItems: [] },
 ]
 
 const ROUTE_OVERRIDES: Record<string, string> = {
@@ -60,7 +60,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Beyond Books": "/beyondbooks",
   "Student Profiles": "/studentprofile",
   "Leadership Projects": "/leadershipprojects",
-  Alumni: "/alumni",
+  "Alumni": "/alumni",
   "Founder's Message": "/foundersmessage",
   "Register Now": "https://buddingminds.myschoolone.com/cloud/Admission/EnquiryForm.php?ksjdkjsd=MQ==",
   "Admission Process": "/admissionsprocess",
@@ -71,6 +71,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "About the Academy": "/abouttheacademy",
   "Pedagogy & Modules": "/pedagogyandmodule",
   "PD Community": "/pdcommunity",
+  "Contact Us": "contactus",
 }
 
 const SOCIAL_LINKS = [
