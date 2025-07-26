@@ -7,7 +7,7 @@ import { fetchTeamMembers, type TeamMember } from "@/services/api"
 
 const departments = [
   { key: "chief executive", label: "Chief Executive" },
-  { key: "admin team", label: "Admin Team" },
+  { key: "admin team", label: "Operations Team" },
   { key: "facilitators team", label: "Facilitators Team" },
   { key: "support staff", label: "Support Staff" },
   { key: "franchise team", label: "Franchise Team" },

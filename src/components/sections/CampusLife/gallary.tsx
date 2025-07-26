@@ -22,7 +22,6 @@ export default function AnimatedGallery() {
         setLoading(true)
         setError(null)
         const response = await fetchGalleryItems()
-
         if (response.success && response.data) {
           setGalleryItems(response.data)
         } else {
@@ -48,7 +47,6 @@ export default function AnimatedGallery() {
         behavior: "smooth",
       })
       setCurrentIndex(index)
-
       setTimeout(() => setIsTransitioning(false), 800)
     }
   }
@@ -68,7 +66,6 @@ export default function AnimatedGallery() {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (galleryItems.length === 0) return
-
       if (event.key === "ArrowLeft") {
         event.preventDefault()
         goToPrevious()
@@ -318,45 +315,16 @@ export default function AnimatedGallery() {
                     }}
                   />
 
-                  {/* Hover overlay with description */}
+                  {/* Hover overlay with description only */}
                   <div
                     className={`absolute inset-6 rounded-2xl bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end transition-all duration-500 ${
                       hoveredItem === item.id ? "opacity-100 backdrop-blur-sm" : "opacity-0"
                     }`}
                   >
                     <div className="p-8 text-white animate-slide-up">
-                      <div className="mb-4 flex items-center space-x-4">
-                        <span
-                          className="text-4xl font-thin opacity-60 animate-glow"
-                          style={{
-                            color:
-                              index % 4 === 0
-                                ? "#F7ECDE"
-                                : index % 4 === 1
-                                  ? "#E9DAC1"
-                                  : index % 4 === 2
-                                    ? "#9ED2C6"
-                                    : "#54BAB9",
-                          }}
-                        >
-                          {(index + 1).toString().padStart(2, "0")}
-                        </span>
-                        <div className="text-sm opacity-75">
-                          <span className="bg-white/20 px-2 py-1 rounded-full mr-2">{item.category}</span>
-                          <span className="bg-white/20 px-2 py-1 rounded-full">{item.year}</span>
-                        </div>
-                      </div>
                       <p className="text-lg md:text-xl leading-relaxed font-light animate-fade-in-delayed">
                         {item.description}
                       </p>
-                      <div className="flex items-center space-x-3 mt-4 animate-slide-in-left">
-                        <div className="w-2 h-2 rounded-full bg-white/60 animate-pulse" />
-                        <div className="w-12 h-px bg-white/40 animate-expand" />
-                        <div
-                          className="w-1 h-1 rounded-full bg-white/60 animate-pulse"
-                          style={{ animationDelay: "0.5s" }}
-                        />
-                      </div>
                     </div>
                   </div>
                 </div>

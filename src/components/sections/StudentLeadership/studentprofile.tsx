@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import { Globe, Calendar, Palette, Trophy } from "lucide-react"
 
@@ -164,24 +163,29 @@ export default function StudentProfile() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Banner */}
+      {/* Hero Banner with Image */}
       <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+        {/* Background Image */}
         <div
-          className="absolute inset-0 bg-gradient-to-br from-[#54BAB9] via-[#9ED2C6] to-[#E9DAC1]"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            background: "linear-gradient(135deg, #54BAB9 0%, #9ED2C6 50%, #E9DAC1 100%)",
+            backgroundImage: "url('/images/hero-leadership.jpg')",
           }}
         />
-        <div className="absolute inset-0 bg-black/20" />
+        {/* Gradient Overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50" />
+        {/* Additional colored overlay to maintain brand colors */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#54BAB9]/20 via-[#9ED2C6]/10 to-[#E9DAC1]/20" />
+
         <div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center text-center">
           <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               Student Leadership Cabinet
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl text-white/95 mb-8 leading-relaxed drop-shadow-md">
               Meet Our Dedicated Leaders Making a Real Impact
             </p>
-            <div className="bg-white/20 text-white border border-white/30 rounded-full text-lg px-6 py-2 inline-block">
+            <div className="bg-white/20 backdrop-blur-sm text-white border border-white/30 rounded-full text-lg px-6 py-2 inline-block">
               2025-2026 Profiles
             </div>
           </div>
@@ -211,7 +215,6 @@ export default function StudentProfile() {
               Meet our Student President and Assistant Student President leading the cabinet
             </p>
           </div>
-
           <div className="flex justify-center gap-8 max-w-4xl mx-auto">
             {/* SPL Card - Events and Engagement theme color */}
             <div className="relative group w-full max-w-xs">
@@ -241,7 +244,6 @@ export default function StudentProfile() {
                     <p className="text-sm text-gray-600 leading-relaxed">Head of Events and Engagement (SPL)</p>
                   </div>
                 </div>
-
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-95 transition-all duration-500 ease-in-out flex items-center justify-center p-6 rounded-lg"
                   style={{ backgroundColor: "#9ED2C6" }}
@@ -256,7 +258,6 @@ export default function StudentProfile() {
                 </div>
               </div>
             </div>
-
             {/* ASPL Card - Sports and Wellness theme color */}
             <div className="relative group w-full max-w-xs">
               <div className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 relative h-80 flex flex-col">
@@ -287,7 +288,6 @@ export default function StudentProfile() {
                     </p>
                   </div>
                 </div>
-
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-95 transition-all duration-500 ease-in-out flex items-center justify-center p-6 rounded-lg"
                   style={{ backgroundColor: "#F7ECDE" }}
@@ -317,7 +317,6 @@ export default function StudentProfile() {
               >
                 {/* Colored top border */}
                 <div className="h-1 w-full" style={{ backgroundColor: dept.color }}></div>
-
                 <div className="p-8">
                   <div className="flex items-center mb-6">
                     <div
@@ -328,11 +327,8 @@ export default function StudentProfile() {
                     </div>
                     <h2 className="text-xl font-bold text-gray-800">{dept.name}</h2>
                   </div>
-
                   <p className="text-gray-600 mb-8 leading-relaxed text-sm">{dept.description}</p>
-
                   <h3 className="text-base font-semibold text-gray-800 mb-6">Leadership Team</h3>
-
                   <div className="space-y-6">
                     {dept.leaders.map((leader, leaderIndex) => {
                       const firstName = getFirstName(leader.name)
@@ -370,7 +366,6 @@ export default function StudentProfile() {
                             </h4>
                             <p className="text-sm text-gray-600 leading-relaxed">{leader.role}</p>
                           </div>
-
                           {/* Hover description tooltip */}
                           <div className="absolute left-0 top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
                             <p className="text-sm text-gray-700 leading-relaxed">{leader.shortDesc}</p>
