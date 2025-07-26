@@ -22,10 +22,10 @@ export default function BeyondBooks() {
 
   // Updated with 4 actual hero images
   const heroImages = [
-    "/images/hero-ignite.jpg",
-    "/images/hero-interschool.jpg",
-    "/images/hero-intraschool.jpg",
-    "/images/hero-excellence.jpg",
+    "/images/hero-ignite.JPG",
+    "/images/hero-interschool.JPG",
+    "/images/hero-intraschool.JPG",
+    "/images/hero-excellence.JPG",
   ]
 
   useEffect(() => {
