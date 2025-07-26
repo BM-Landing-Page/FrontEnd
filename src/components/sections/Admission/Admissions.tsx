@@ -74,7 +74,7 @@ const Admissions = () => {
         {/* Background Image - Covers entire hero, centered */}
         <div className="absolute inset-0">
           <Image
-            src="/placeholder.svg?height=600&width=1200"
+            src="/images/admission-hero-banner.jpg"
             alt="Happy children at school with colorful fence"
             fill
             className="object-cover object-center"

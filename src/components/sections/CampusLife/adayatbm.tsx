@@ -147,7 +147,7 @@ export default function ADayAtBM() {
       {/* Hero Banner */}
       <div className="relative h-96 overflow-hidden">
         <img
-          src="/images/adaytbm.jpg"
+          src="/images/adayatbm.jpg"
           alt="A Day at BM"
           className="w-full h-full object-cover"
         />

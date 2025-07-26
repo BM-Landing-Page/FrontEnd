@@ -20,11 +20,12 @@ export default function BeyondBooks() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [activeTab, setActiveTab] = useState("ignite")
 
+  // Updated with 4 actual hero images
   const heroImages = [
-    "/placeholder.svg?height=600&width=1200",
-    "/placeholder.svg?height=600&width=1200",
-    "/placeholder.svg?height=600&width=1200",
-    "/placeholder.svg?height=600&width=1200",
+    "/images/hero-ignite.jpg",
+    "/images/hero-interschool.jpg",
+    "/images/hero-intraschool.jpg",
+    "/images/hero-excellence.jpg",
   ]
 
   useEffect(() => {
@@ -62,8 +63,8 @@ export default function BeyondBooks() {
               }`}
             >
               <Image
-                src={src || "/images/beyondbooks.jpg"}
-                alt={`Hero image ${index + 1}`}
+                src={src || "/placeholder.svg"}
+                alt={`Beyond Books - ${tabs[index]?.label || `Hero ${index + 1}`}`}
                 fill
                 className="object-cover"
                 priority={index === 0}
@@ -152,7 +153,6 @@ export default function BeyondBooks() {
               })}
             </div>
           </div>
-
           {/* Tab Content */}
           <div className="space-y-12">
             {/* IGNITE Content */}
@@ -167,7 +167,6 @@ export default function BeyondBooks() {
                   <p className="text-2xl text-white/90 font-light">Where Learning Goes Beyond the Classroom</p>
                   <div className="w-24 h-1 bg-white/50 mx-auto mt-6"></div>
                 </div>
-
                 {/* What is IGNITE Section */}
                 <div className="grid lg:grid-cols-3 gap-8">
                   <Card className="lg:col-span-2 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0">
@@ -190,7 +189,6 @@ export default function BeyondBooks() {
                       </div>
                     </CardContent>
                   </Card>
-
                   <Card className="shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0">
                     <CardContent
                       className="p-8 h-full flex flex-col justify-center"
@@ -208,7 +206,6 @@ export default function BeyondBooks() {
                     </CardContent>
                   </Card>
                 </div>
-
                 {/* Why IGNITE Section */}
                 <div
                   className="py-16 px-8 rounded-2xl shadow-lg"
@@ -247,7 +244,6 @@ export default function BeyondBooks() {
                         </p>
                       </CardContent>
                     </Card>
-
                     <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-0 overflow-hidden">
                       <div className="h-2" style={{ backgroundColor: "#9ED2C6" }}></div>
                       <CardContent className="p-6 text-center">
@@ -266,7 +262,6 @@ export default function BeyondBooks() {
                         </p>
                       </CardContent>
                     </Card>
-
                     <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-0 overflow-hidden">
                       <div className="h-2" style={{ backgroundColor: "#F7ECDE" }}></div>
                       <CardContent className="p-6 text-center">
@@ -285,7 +280,6 @@ export default function BeyondBooks() {
                         </p>
                       </CardContent>
                     </Card>
-
                     <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-0 overflow-hidden">
                       <div className="h-2" style={{ backgroundColor: "#E9DAC1" }}></div>
                       <CardContent className="p-6 text-center">
@@ -306,7 +300,6 @@ export default function BeyondBooks() {
                     </Card>
                   </div>
                 </div>
-
                 {/* How IGNITE Works Section */}
                 <div
                   className="py-16 px-8 rounded-2xl shadow-lg"
@@ -332,7 +325,6 @@ export default function BeyondBooks() {
                         </p>
                       </CardContent>
                     </Card>
-
                     <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-0">
                       <CardContent className="p-6 text-center">
                         <div
@@ -348,7 +340,6 @@ export default function BeyondBooks() {
                         </p>
                       </CardContent>
                     </Card>
-
                     <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-0">
                       <CardContent className="p-6 text-center">
                         <div
@@ -376,7 +367,6 @@ export default function BeyondBooks() {
                 </div>
               </div>
             )}
-
             {/* InterSchool Content */}
             {activeTab === "interschool" && (
               <div className="space-y-12 animate-in fade-in duration-500">
@@ -392,7 +382,6 @@ export default function BeyondBooks() {
                   </p>
                   <div className="w-24 h-1 mx-auto mt-6" style={{ backgroundColor: "#54BAB9" }}></div>
                 </div>
-
                 <div className="grid gap-8">
                   <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
                     <div
@@ -438,7 +427,6 @@ export default function BeyondBooks() {
                       </div>
                     </CardContent>
                   </Card>
-
                   <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
                     <div
                       className="h-2"
@@ -483,7 +471,6 @@ export default function BeyondBooks() {
                       </div>
                     </CardContent>
                   </Card>
-
                   <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
                     <div
                       className="h-2"
@@ -528,7 +515,6 @@ export default function BeyondBooks() {
                     </CardContent>
                   </Card>
                 </div>
-
                 <Card className="shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0">
                   <CardContent
                     className="p-8 text-center"
@@ -542,7 +528,6 @@ export default function BeyondBooks() {
                 </Card>
               </div>
             )}
-
             {/* IntraSchool Content */}
             {activeTab === "intraschool" && (
               <div className="space-y-12 animate-in fade-in duration-500">
@@ -558,7 +543,6 @@ export default function BeyondBooks() {
                   </p>
                   <div className="w-24 h-1 bg-white/50 mx-auto mt-6"></div>
                 </div>
-
                 <div className="grid md:grid-cols-2 gap-8">
                   <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
                     <div className="h-2" style={{ backgroundColor: "#F7ECDE" }}></div>
@@ -599,7 +583,6 @@ export default function BeyondBooks() {
                       </div>
                     </CardContent>
                   </Card>
-
                   <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
                     <div className="h-2" style={{ backgroundColor: "#9ED2C6" }}></div>
                     <CardContent className="p-8 h-full">
@@ -633,7 +616,6 @@ export default function BeyondBooks() {
                       </div>
                     </CardContent>
                   </Card>
-
                   <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
                     <div className="h-2" style={{ backgroundColor: "#E9DAC1" }}></div>
                     <CardContent className="p-8 h-full">
@@ -666,7 +648,6 @@ export default function BeyondBooks() {
                       </div>
                     </CardContent>
                   </Card>
-
                   <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
                     <div className="h-2" style={{ backgroundColor: "#54BAB9" }}></div>
                     <CardContent className="p-8 h-full">
@@ -703,7 +684,6 @@ export default function BeyondBooks() {
                     </CardContent>
                   </Card>
                 </div>
-
                 <Card className="shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0">
                   <CardContent
                     className="p-8 text-center"
@@ -718,7 +698,6 @@ export default function BeyondBooks() {
                 </Card>
               </div>
             )}
-
             {/* 20 Years Excellence Content */}
             {activeTab === "excellence" && (
               <div className="space-y-12 animate-in fade-in duration-500">
@@ -734,7 +713,6 @@ export default function BeyondBooks() {
                   </p>
                   <div className="w-24 h-1 bg-white/50 mx-auto mt-6"></div>
                 </div>
-
                 {/* BM Reverie */}
                 <Card className="shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
                   <div className="h-2" style={{ background: "linear-gradient(90deg, #F7ECDE 0%, #54BAB9 100%)" }}></div>
@@ -796,7 +774,6 @@ export default function BeyondBooks() {
                     </div>
                   </CardContent>
                 </Card>
-
                 {/* Music Album & Memoir */}
                 <div className="grid lg:grid-cols-2 gap-8">
                   {/* Music Album */}
@@ -844,7 +821,6 @@ export default function BeyondBooks() {
                       </div>
                     </CardContent>
                   </Card>
-
                   {/* The Memoir */}
                   <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
                     <div
@@ -881,7 +857,6 @@ export default function BeyondBooks() {
                     </CardContent>
                   </Card>
                 </div>
-
                 <Card className="shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0">
                   <CardContent
                     className="p-8 text-center"

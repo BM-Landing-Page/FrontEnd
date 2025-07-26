@@ -7,7 +7,7 @@ export default function LeadershipProjects() {
       {/* Hero Banner */}
       <div className="relative py-20 px-4 text-center overflow-hidden" style={{ minHeight: "60vh" }}>
         <Image
-          src="/images/leadership-hero.png"
+          src="/images/leadership-hero.jpg"
           alt="Students collaborating on leadership projects"
           fill
           className="object-cover"

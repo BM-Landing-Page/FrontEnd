@@ -8,6 +8,9 @@ const images = [
   { url: "/images/Herobannerbg.jpg", alt: "Hero Background 1" },
   { url: "/images/Herobannerbg1.jpg", alt: "Hero Background 2" },
   { url: "/images/Herobannerbg2.jpg", alt: "Hero Background 3" },
+  { url: "/images/Herobannerbg3.jpg", alt: "Hero Background 4" },
+  { url: "/images/Herobannerbg4.jpg", alt: "Hero Background 5" },
+  { url: "/images/Herobannerbg5.jpg", alt: "Hero Background 6" },
 ];
 
 export default function HeroBanner() {

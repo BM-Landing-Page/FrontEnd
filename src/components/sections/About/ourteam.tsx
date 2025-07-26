@@ -6,7 +6,6 @@ import Image from "next/image"
 import { fetchTeamMembers, type TeamMember } from "@/services/api"
 
 const departments = [
-  { key: "all", label: "All Team" },
   { key: "chief executive", label: "Chief Executive" },
   { key: "admin team", label: "Admin Team" },
   { key: "facilitators team", label: "Facilitators Team" },
@@ -15,7 +14,7 @@ const departments = [
 ]
 
 export default function OurTeam() {
-  const [activeTab, setActiveTab] = useState("all")
+  const [activeTab, setActiveTab] = useState("chief executive") // Default to first category
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
@@ -27,23 +26,19 @@ export default function OurTeam() {
     const loadTeamMembers = async () => {
       setLoading(true)
       setError(null)
-
       const result = await fetchTeamMembers()
-
       if (result.success && result.data) {
         setTeamMembers(result.data)
       } else {
         setError(result.error || "Failed to load team members")
       }
-
       setLoading(false)
     }
-
     loadTeamMembers()
   }, [])
 
-  const filteredTeam =
-    activeTab === "all" ? teamMembers : teamMembers.filter((member) => member.department === activeTab)
+  // Filter team members by selected department
+  const filteredTeam = teamMembers.filter((member) => member.department === activeTab)
 
   const handleCardClick = (member: TeamMember) => {
     setSelectedMember(member)
@@ -59,14 +54,10 @@ export default function OurTeam() {
   const LoadingSkeleton = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {[...Array(8)].map((_, index) => (
-        <div
-          key={index}
-          className="border-2 rounded-lg bg-white shadow-sm animate-pulse"
-          style={{ borderColor: "#9ED2C6" }}
-        >
-          <div className="p-6 text-center">
-            <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gray-200"></div>
-            <div className="h-6 bg-gray-200 rounded mb-2"></div>
+        <div key={index} className="rounded-2xl bg-white shadow-lg overflow-hidden animate-pulse">
+          <div className="w-full h-64 bg-gray-200"></div>
+          <div className="p-4 text-center">
+            <div className="h-5 bg-gray-200 rounded mb-2"></div>
             <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
           </div>
         </div>
@@ -94,7 +85,7 @@ export default function OurTeam() {
       {/* Hero Banner */}
       <section className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
         <Image
-          src="/images/ourteam.jpg"
+          src="/placeholder.svg?height=400&width=1200"
           alt="Our Team Hero"
           fill
           className="object-cover"
@@ -147,7 +138,7 @@ export default function OurTeam() {
             <div className="text-center py-12">
               <div className="text-gray-500 text-lg mb-4">No team members found</div>
               <p className="text-gray-400">
-                {activeTab === "all" ? "No team members available." : `No team members in ${activeTab} department.`}
+                No team members in {departments.find((d) => d.key === activeTab)?.label} department.
               </p>
             </div>
           ) : (
@@ -155,32 +146,29 @@ export default function OurTeam() {
               {filteredTeam.map((member) => (
                 <div
                   key={member.id}
-                  className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 border-2 hover:border-opacity-100 rounded-lg bg-white shadow-sm"
-                  style={{ borderColor: "#9ED2C6" }}
+                  className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 rounded-2xl bg-white shadow-lg overflow-hidden"
                   onClick={() => handleCardClick(member)}
                 >
-                  <div className="p-6 text-center">
-                    <div
-                      className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4"
-                      style={{ borderColor: "#54BAB9" }}
-                    >
-                      <Image
-                        src={member.image_url || "/placeholder.svg?height=300&width=300"}
-                        alt={member.name}
-                        fill
-                        className="object-cover"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement
-                          target.src = "/placeholder.svg?height=300&width=300"
-                        }}
-                      />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2" style={{ color: "#54BAB9" }}>
+                  {/* Large Image Section */}
+                  <div className="relative w-full h-64 overflow-hidden">
+                    <Image
+                      src={member.image_url || "/placeholder.svg?height=400&width=300&query=professional headshot"}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.src = "/placeholder.svg?height=400&width=300"
+                      }}
+                    />
+                  </div>
+
+                  {/* Text Content Below */}
+                  <div className="p-4 text-center">
+                    <h3 className="text-lg font-bold mb-1" style={{ color: "#54BAB9" }}>
                       {member.name}
                     </h3>
-                    <p className="text-sm font-medium" style={{ color: "#9ED2C6" }}>
-                      {member.role}
-                    </p>
+                    <p className="text-sm font-medium text-gray-600">{member.role}</p>
                   </div>
                 </div>
               ))}
@@ -204,12 +192,13 @@ export default function OurTeam() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-
               <div className="flex items-center gap-6">
-                {/* Profile Photo - Rounded Square */}
-                <div className="relative w-32 h-32 rounded-2xl overflow-hidden bg-white/20 flex-shrink-0">
+                {/* Profile Photo - Square */}
+                <div className="relative w-40 h-40 rounded-2xl overflow-hidden bg-white/20 flex-shrink-0 shadow-lg">
                   <Image
-                    src={selectedMember.image_url || "/placeholder.svg?height=300&width=300"}
+                    src={
+                      selectedMember.image_url || "/placeholder.svg?height=300&width=300&query=professional headshot"
+                    }
                     alt={selectedMember.name}
                     fill
                     className="object-cover"
@@ -219,7 +208,6 @@ export default function OurTeam() {
                     }}
                   />
                 </div>
-
                 {/* Name and Role */}
                 <div>
                   <h2 className="text-4xl font-bold text-white mb-2">{selectedMember.name}</h2>
@@ -227,7 +215,6 @@ export default function OurTeam() {
                 </div>
               </div>
             </div>
-
             {/* White Content Area */}
             <div className="p-8 bg-white overflow-y-auto max-h-[60vh]">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -241,7 +228,6 @@ export default function OurTeam() {
                     </div>
                     <p className="text-gray-600 leading-relaxed text-lg">{selectedMember.description}</p>
                   </div>
-
                   {/* Key Achievements Section */}
                   {selectedMember.achievements && selectedMember.achievements.length > 0 && (
                     <div>
@@ -263,7 +249,6 @@ export default function OurTeam() {
                     </div>
                   )}
                 </div>
-
                 {/* Right Column - Info and Contact */}
                 <div className="space-y-6">
                   {/* Education */}
@@ -283,7 +268,6 @@ export default function OurTeam() {
                       </div>
                     </div>
                   )}
-
                   {/* Experience */}
                   {selectedMember.years_experience && (
                     <div
@@ -301,7 +285,6 @@ export default function OurTeam() {
                       </div>
                     </div>
                   )}
-
                   {/* Joined Date */}
                   {selectedMember.joined_month && selectedMember.joined_year && (
                     <div
@@ -327,7 +310,6 @@ export default function OurTeam() {
                       </div>
                     </div>
                   )}
-
                   {/* Get in Touch Section */}
                   {selectedMember.linkedin_url && (
                     <div className="p-6 rounded-2xl" style={{ backgroundColor: "#54BAB9" }}>
