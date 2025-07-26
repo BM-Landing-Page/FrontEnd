@@ -11,6 +11,7 @@ const images = [
   { url: "/images/Herobannerbg3.jpg", alt: "Hero Background 4" },
   { url: "/images/Herobannerbg4.jpg", alt: "Hero Background 5" },
   { url: "/images/Herobannerbg5.jpg", alt: "Hero Background 6" },
+  { url: "/images/Herobannerbg6.jpg", alt: "Hero Background 7" },
 ];
 
 export default function HeroBanner() {
