@@ -20,6 +20,113 @@ export interface PaginationInfo {
 
 //
 // ========================
+// ✅ BLOG SECTION
+// ========================
+//
+
+export interface Blog {
+  id: number
+  title: string
+  content: string
+  author: string
+  thumbnail: string
+  feature: boolean
+  created_at: string
+}
+
+// Fetch all blogs
+export const fetchBlogs = async (): Promise<ApiResponse<Blog[]>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/blog`)
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error fetching blogs:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch blogs",
+    }
+  }
+}
+
+// Fetch blog by ID
+export const fetchBlogById = async (id: number): Promise<ApiResponse<Blog>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/blog/${id}`)
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error fetching blog:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch blog",
+    }
+  }
+}
+
+// Create blog (protected)
+export const createBlog = async (formData: FormData): Promise<ApiResponse<any>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/blog`, {
+      method: "POST",
+      body: formData,
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error creating blog:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to create blog",
+    }
+  }
+}
+
+// Update blog (protected)
+export const updateBlog = async (id: number, formData: FormData): Promise<ApiResponse<any>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/blog/${id}`, {
+      method: "PUT",
+      body: formData,
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error updating blog:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to update blog",
+    }
+  }
+}
+
+// Delete blog (protected)
+export const deleteBlog = async (id: number): Promise<ApiResponse<any>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/blog/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error deleting blog:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to delete blog",
+    }
+  }
+}
+
+//
+// ========================
 // ✅ TEAM MEMBERS SECTION
 // ========================
 //
@@ -113,9 +220,7 @@ export interface GalleryItem {
 export const fetchGalleryItems = async (page = 1, limit = 6): Promise<ApiResponse<GalleryItem[]>> => {
   try {
     const response = await fetch(`${API_BASE_URL}/data?page=${page}&limit=${limit}`)
-
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
-
     const data = await response.json()
 
     // If your backend doesn't support pagination yet, we'll simulate it
@@ -123,14 +228,12 @@ export const fetchGalleryItems = async (page = 1, limit = 6): Promise<ApiRespons
       const startIndex = (page - 1) * limit
       const endIndex = startIndex + limit
       const paginatedData = data.slice(startIndex, endIndex)
-
       const pagination: PaginationInfo = {
         currentPage: page,
         totalPages: Math.ceil(data.length / limit),
         totalItems: data.length,
         hasMore: endIndex < data.length,
       }
-
       return {
         success: true,
         data: paginatedData,
