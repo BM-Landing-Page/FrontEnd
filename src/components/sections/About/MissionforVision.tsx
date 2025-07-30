@@ -1,5 +1,5 @@
-import { BookOpen, Users, Target, Heart, Award, Star, Lightbulb, Users2 } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+import { BookOpen, Users, Target, Heart, Award, Star, Lightbulb, Users2, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 const About = () => {
   const coreValues = [
@@ -57,9 +57,18 @@ const About = () => {
           backgroundImage: `url('/images/about.jpg')`,
         }}
       >
+        {/* Navigation Button at Top - positioned within hero section */}
+        <div className="absolute top-4 right-4 z-30">
+          <Link href="/foundersmessage">
+            <div className="bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white shadow-lg px-4 py-2 rounded-md flex items-center gap-2 transition-colors cursor-pointer">
+              Founder's Message
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </Link>
+        </div>
+
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-black/40"></div>
-
         <div className="relative z-10 max-w-4xl mx-auto px-4">
           <div className="inline-flex items-center gap-2 bg-[#54BAB9] text-white px-6 py-2 rounded-full mb-6">
             <BookOpen className="w-5 h-5" />
@@ -92,17 +101,16 @@ const About = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {coreValues.map((value, index) => (
-              <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-6 text-center">
-                  <div
-                    className={`${value.color} rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4`}
-                  >
-                    <value.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{value.title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-sm">{value.description}</p>
-                </CardContent>
-              </Card>
+              <div
+                key={index}
+                className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 text-center"
+              >
+                <div className={`${value.color} rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4`}>
+                  <value.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">{value.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-sm">{value.description}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -159,37 +167,32 @@ const About = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Mission */}
-            <Card className="border-none shadow-lg">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="bg-[#54BAB9] rounded-full w-12 h-12 flex items-center justify-center">
-                    <Target className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800">Our Mission</h3>
+            <div className="bg-white rounded-lg shadow-lg p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="bg-[#54BAB9] rounded-full w-12 h-12 flex items-center justify-center">
+                  <Target className="w-6 h-6 text-white" />
                 </div>
-                <p className="text-gray-700 leading-relaxed">
-                  Grounded in our values, BMIS is dedicated to intercultural understanding and the development of each
-                  child's unique talents.
-                </p>
-              </CardContent>
-            </Card>
-
+                <h3 className="text-2xl font-bold text-gray-800">Our Mission</h3>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                Grounded in our values, BMIS is dedicated to intercultural understanding and the development of each
+                child's unique talents.
+              </p>
+            </div>
             {/* Vision */}
-            <Card className="border-none shadow-lg">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="bg-[#9ED2C6] rounded-full w-12 h-12 flex items-center justify-center">
-                    <Users2 className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800">Our Vision</h3>
+            <div className="bg-white rounded-lg shadow-lg p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="bg-[#9ED2C6] rounded-full w-12 h-12 flex items-center justify-center">
+                  <Users2 className="w-6 h-6 text-white" />
                 </div>
-                <p className="text-gray-700 leading-relaxed italic">
-                  "Budding Minds develops student leaders by providing opportunities to build 21st-century skills,
-                  supported by a nurturing infrastructure for holistic learning, and guided by a competent and empowered
-                  community."
-                </p>
-              </CardContent>
-            </Card>
+                <h3 className="text-2xl font-bold text-gray-800">Our Vision</h3>
+              </div>
+              <p className="text-gray-700 leading-relaxed italic">
+                "Budding Minds develops student leaders by providing opportunities to build 21st-century skills,
+                supported by a nurturing infrastructure for holistic learning, and guided by a competent and empowered
+                community."
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -198,9 +201,17 @@ const About = () => {
       <section className="py-16 px-4 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">At BMIS, we are not just shaping minds—we are shaping futures.</h2>
-          <p className="text-lg opacity-90">
+          <p className="text-lg opacity-90 mb-8">
             Join us in our mission to build healthy minds and create tomorrow's leaders.
           </p>
+
+          {/* Navigation Button at Bottom */}
+          <Link href="/foundermessage">
+            <div className="inline-flex items-center gap-2 bg-white text-[#54BAB9] hover:bg-gray-100 font-semibold px-8 py-3 text-lg shadow-lg rounded-md transition-colors cursor-pointer">
+              Read Founder's Message
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
         </div>
       </section>
     </div>

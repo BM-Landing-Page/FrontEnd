@@ -1,8 +1,8 @@
 "use client"
-
 import { useState, useEffect } from "react"
-import { Linkedin, Award, GraduationCap, Calendar } from "lucide-react"
+import { Linkedin, Award, GraduationCap, Calendar, ArrowRight } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { fetchTeamMembers, type TeamMember } from "@/services/api"
 
 const departments = [
@@ -84,13 +84,7 @@ export default function OurTeam() {
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
       <section className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
-        <Image
-          src="/images/ourteam.jpg"
-          alt="Our Team Hero"
-          fill
-          className="object-cover"
-          priority
-        />
+        <Image src="/images/ourteam.jpg" alt="Our Team Hero" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
@@ -162,7 +156,6 @@ export default function OurTeam() {
                       }}
                     />
                   </div>
-
                   {/* Text Content Below */}
                   <div className="p-4 text-center">
                     <h3 className="text-lg font-bold mb-1" style={{ color: "#54BAB9" }}>
@@ -174,6 +167,18 @@ export default function OurTeam() {
               ))}
             </div>
           )}
+
+          {/* Navigation Button */}
+          <div className="flex justify-center mt-16">
+            <Link href="/alumni">
+              <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+                <div className="text-center">
+                  <div className="font-semibold text-lg">Alumni</div>
+                </div>
+                <ArrowRight className="w-5 h-5" />
+              </div>
+            </Link>
+          </div>
         </div>
       </section>
 

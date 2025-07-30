@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { GraduationCap, Users, BookOpen, Award, Globe, TrendingUp, Target, Star } from "lucide-react"
+
+import { GraduationCap, Users, BookOpen, Award, Globe, TrendingUp, Target, Star, ArrowRight } from "lucide-react"
 
 export default function IGCSEAndSeniorYears() {
   return (
@@ -493,6 +494,16 @@ export default function IGCSEAndSeniorYears() {
             </div>
           </div>
         </section>
+        <div className="flex justify-center mt-8">
+        <Link href="/pedagogytools">
+          <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+            <div className="text-center">
+              <div className="font-semibold text-lg">Pedagogy Tools</div>
+            </div>
+            <ArrowRight className="w-5 h-5" />
+          </div>
+        </Link>
+      </div>
       </div>
     </div>
   )

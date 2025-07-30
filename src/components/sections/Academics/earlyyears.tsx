@@ -1,4 +1,6 @@
 "use client"
+import Link from "next/link"
+
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
@@ -342,6 +344,16 @@ export default function EarlyYears() {
                 <li>• Cultural awareness and global perspectives</li>
               </ul>
             </div>
+          </div>
+          <div className="flex justify-center mt-12 relative z-20">
+            <Link href="/primaryandmiddleyears" className="inline-block">
+              <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+                <div className="text-center">
+                 <div className="font-semibold text-lg">Primary and Middle Years</div>
+                </div>
+                <ArrowRight className="w-5 h-5" />
+              </div>
+            </Link>
           </div>
         </div>
       </section>

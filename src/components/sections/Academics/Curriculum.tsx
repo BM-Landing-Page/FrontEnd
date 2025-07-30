@@ -1,4 +1,6 @@
 "use client"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 export default function Curriculum() {
   return (
@@ -14,7 +16,6 @@ export default function Curriculum() {
         >
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
-
         {/* Hero Content */}
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
@@ -85,7 +86,6 @@ export default function Curriculum() {
             }}
           ></div>
         </div>
-
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: "#54BAB9" }}>
@@ -95,7 +95,6 @@ export default function Curriculum() {
               The world's most trusted international education programme
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div className="text-4xl font-bold mb-2" style={{ color: "#54BAB9" }}>
@@ -155,7 +154,6 @@ export default function Curriculum() {
             }}
           ></div>
         </div>
-
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: "#54BAB9" }}>
@@ -165,7 +163,6 @@ export default function Curriculum() {
               Four seamless stages designed to unlock every student's potential
             </p>
           </div>
-
           {/* Timeline - Desktop Horizontal */}
           <div className="hidden lg:block">
             <div className="grid grid-cols-4 gap-8">
@@ -188,7 +185,6 @@ export default function Curriculum() {
                   <p className="text-gray-700">Foundation learning with creativity and curiosity</p>
                 </div>
               </div>
-
               {/* Stage 2 */}
               <div className="text-center">
                 <div
@@ -208,7 +204,6 @@ export default function Curriculum() {
                   <p className="text-gray-700">Building critical thinking and subject expertise</p>
                 </div>
               </div>
-
               {/* Stage 3 */}
               <div className="text-center">
                 <div
@@ -228,7 +223,6 @@ export default function Curriculum() {
                   <p className="text-gray-700">IGCSE qualifications and specialized learning</p>
                 </div>
               </div>
-
               {/* Stage 4 */}
               <div className="text-center">
                 <div
@@ -250,7 +244,6 @@ export default function Curriculum() {
               </div>
             </div>
           </div>
-
           {/* Timeline - Mobile Vertical */}
           <div className="lg:hidden space-y-8">
             {[
@@ -351,7 +344,6 @@ export default function Curriculum() {
             }}
           ></div>
         </div>
-
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: "#54BAB9" }}>
@@ -361,7 +353,6 @@ export default function Curriculum() {
               Discover the advantages that make Cambridge the world's preferred curriculum
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Benefit 1 */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
@@ -391,7 +382,6 @@ export default function Curriculum() {
                 Accepted by top universities worldwide, opening doors to international opportunities and career paths.
               </p>
             </div>
-
             {/* Benefit 2 */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
@@ -421,7 +411,6 @@ export default function Curriculum() {
                 challenges.
               </p>
             </div>
-
             {/* Benefit 3 */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
@@ -445,7 +434,6 @@ export default function Curriculum() {
                 Adaptable curriculum that accommodates different learning styles and individual student needs.
               </p>
             </div>
-
             {/* Benefit 4 */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
@@ -474,7 +462,6 @@ export default function Curriculum() {
                 Over 150 years of educational innovation and continuous improvement in teaching methodologies.
               </p>
             </div>
-
             {/* Benefit 5 */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
@@ -503,7 +490,6 @@ export default function Curriculum() {
                 Emphasizes values, ethics, and personal development alongside academic achievement.
               </p>
             </div>
-
             {/* Benefit 6 */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
@@ -545,7 +531,6 @@ export default function Curriculum() {
             background: `linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 50%, #9ED2C6 100%)`,
           }}
         ></div>
-
         {/* Light Floating elements only */}
         <div className="absolute inset-0 pointer-events-none">
           <div
@@ -579,7 +564,6 @@ export default function Curriculum() {
             }}
           ></div>
         </div>
-
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: "#54BAB9" }}>
             Ready to Begin the Journey?
@@ -603,7 +587,16 @@ export default function Curriculum() {
             </button>
           </div>
         </div>
-
+        <div className="flex justify-center mt-12 relative z-20">
+          <Link href="/earlyyears" className="inline-block">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-lg">Early Years</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
+        </div>
         {/* CSS Animation */}
         <style jsx>{`
           @keyframes float {

@@ -2,6 +2,8 @@
 import type React from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 // Animation variants with correct type cast for `ease`
 const fadeInUpVariants = {
@@ -300,6 +302,27 @@ export default function PrimaryAndMiddleYears() {
               Lower Secondary
             </motion.button>
           </div>
+
+          {/* Navigation Button to IGCSE and Middle Years */}
+          <div className="flex justify-center mt-12">
+            <Link href="/igcseandsenioryears">
+              <motion.div
+                className="flex items-center gap-3 bg-white text-[#54BAB9] hover:bg-gray-100 px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer"
+                variants={fadeInUpVariants}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 10px 25px rgba(255, 255, 255, 0.3)",
+                  transition: { duration: 0.3 },
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div className="text-center">
+                  <div className="font-semibold text-lg">IGCSE & Senior Years</div>
+                </div>
+                <ArrowRight className="w-5 h-5" />
+              </motion.div>
+            </Link>
+          </div>
         </div>
       </motion.section>
     </div>
@@ -332,13 +355,7 @@ const Section = ({
 )
 
 // Table Generator
-const SubjectsTable = ({
-  data,
-  type,
-}: {
-  data: any[]
-  type: "primary" | "secondary"
-}) => {
+const SubjectsTable = ({ data, type }: { data: any[]; type: "primary" | "secondary" }) => {
   const headers =
     type === "primary"
       ? ["Grade", "English", "Math", "EVS", "Languages", "Global Studies", "ICT", "Robotics", "PE"]
