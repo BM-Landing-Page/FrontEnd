@@ -1,16 +1,14 @@
 "use client"
-
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
-import { fetchGalleryItems, type GalleryItem } from "../../../services/api"
+import { fetchGalleryItems, type GalleryItem } from "@/services/api"
 
 export default function AnimatedGallery() {
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null)
   const [scrollX, setScrollX] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -34,7 +32,6 @@ export default function AnimatedGallery() {
         setLoading(false)
       }
     }
-
     loadGalleryItems()
   }, [])
 
@@ -74,7 +71,6 @@ export default function AnimatedGallery() {
         goToNext()
       }
     }
-
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [currentIndex, galleryItems.length])
@@ -91,7 +87,6 @@ export default function AnimatedGallery() {
         }
       }
     }
-
     const container = containerRef.current
     if (container) {
       container.addEventListener("scroll", handleScroll)
@@ -282,8 +277,6 @@ export default function AnimatedGallery() {
                   currentIndex === index ? "animate-scale-in" : ""
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
-                onMouseEnter={() => setHoveredItem(item.id)}
-                onMouseLeave={() => setHoveredItem(null)}
               >
                 {/* Dynamic glow effect */}
                 <div
@@ -314,19 +307,6 @@ export default function AnimatedGallery() {
                       target.src = "/placeholder.svg?height=600&width=800&text=Image+Not+Available"
                     }}
                   />
-
-                  {/* Hover overlay with description only */}
-                  <div
-                    className={`absolute inset-6 rounded-2xl bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end transition-all duration-500 ${
-                      hoveredItem === item.id ? "opacity-100 backdrop-blur-sm" : "opacity-0"
-                    }`}
-                  >
-                    <div className="p-8 text-white animate-slide-up">
-                      <p className="text-lg md:text-xl leading-relaxed font-light animate-fade-in-delayed">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Animated corner elements */}
