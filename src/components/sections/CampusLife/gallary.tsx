@@ -1,27 +1,40 @@
 "use client"
-import { useState, useEffect, useRef } from "react"
+
+import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
-import { fetchGalleryItems, type GalleryItem } from "@/services/api"
+import { ChevronLeft, ChevronRight, Loader2, Plus } from "lucide-react"
+import { fetchGalleryItems, type GalleryItem, type PaginationInfo } from "@/services/api"
 
 export default function AnimatedGallery() {
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [scrollX, setScrollX] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [pagination, setPagination] = useState<PaginationInfo>({
+    currentPage: 1,
+    totalPages: 1,
+    totalItems: 0,
+    hasMore: false,
+  })
 
-  // Fetch gallery data on component mount
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set())
+
+  // Load initial gallery data
   useEffect(() => {
-    const loadGalleryItems = async () => {
+    const loadInitialGalleryItems = async () => {
       try {
         setLoading(true)
         setError(null)
-        const response = await fetchGalleryItems()
+        const response = await fetchGalleryItems(1, 6)
         if (response.success && response.data) {
           setGalleryItems(response.data)
+          if (response.pagination) {
+            setPagination(response.pagination)
+          }
         } else {
           setError(response.error || "Failed to load gallery items")
         }
@@ -32,8 +45,40 @@ export default function AnimatedGallery() {
         setLoading(false)
       }
     }
-    loadGalleryItems()
+
+    loadInitialGalleryItems()
   }, [])
+
+  // Load more images
+  const loadMoreImages = useCallback(async () => {
+    if (loadingMore || !pagination.hasMore) return
+
+    try {
+      setLoadingMore(true)
+      const nextPage = pagination.currentPage + 1
+      const response = await fetchGalleryItems(nextPage, 6)
+      if (response.success && response.data) {
+        setGalleryItems((prev) => [...prev, ...response.data!])
+        if (response.pagination) {
+          setPagination(response.pagination)
+        }
+      }
+    } catch (err) {
+      console.error("Error loading more images:", err)
+    } finally {
+      setLoadingMore(false)
+    }
+  }, [loadingMore, pagination.hasMore, pagination.currentPage])
+
+  // Auto-load more images when approaching the end
+  useEffect(() => {
+    if (galleryItems.length > 0 && pagination.hasMore) {
+      const threshold = Math.max(1, galleryItems.length - 3) // Load more when 3 items from end
+      if (currentIndex >= threshold) {
+        loadMoreImages()
+      }
+    }
+  }, [currentIndex, galleryItems.length, pagination.hasMore, loadMoreImages])
 
   const scrollToIndex = (index: number) => {
     if (containerRef.current && !isTransitioning && galleryItems.length > 0) {
@@ -71,6 +116,7 @@ export default function AnimatedGallery() {
         goToNext()
       }
     }
+
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [currentIndex, galleryItems.length])
@@ -87,12 +133,31 @@ export default function AnimatedGallery() {
         }
       }
     }
+
     const container = containerRef.current
     if (container) {
       container.addEventListener("scroll", handleScroll)
       return () => container.removeEventListener("scroll", handleScroll)
     }
   }, [galleryItems.length, currentIndex])
+
+  // Lazy loading: preload images near current index
+  useEffect(() => {
+    const preloadRange = 2 // Preload 2 images before and after current
+    const startIndex = Math.max(0, currentIndex - preloadRange)
+    const endIndex = Math.min(galleryItems.length - 1, currentIndex + preloadRange)
+
+    for (let i = startIndex; i <= endIndex; i++) {
+      const item = galleryItems[i]
+      if (item && !loadedImages.has(item.id)) {
+        const img = new window.Image()
+        img.onload = () => {
+          setLoadedImages((prev) => new Set([...prev, item.id]))
+        }
+        img.src = item.image_url
+      }
+    }
+  }, [currentIndex, galleryItems, loadedImages])
 
   // Loading state
   if (loading) {
@@ -199,6 +264,7 @@ export default function AnimatedGallery() {
             <div className="w-24 h-px bg-[#54BAB9] mt-2 animate-expand"></div>
           </div>
           <div className="text-right text-gray-600 animate-slide-in-right">
+            <p className="text-sm opacity-80">{`${currentIndex + 1} of ${pagination.totalItems}`}</p>
             <p className="text-xs opacity-60 mt-1 animate-pulse-soft">Use ← → keys or click arrows</p>
           </div>
         </div>
@@ -226,6 +292,21 @@ export default function AnimatedGallery() {
           className="text-gray-700 group-hover:text-[#54BAB9] transition-all duration-300 group-hover:scale-110"
         />
       </button>
+
+      {/* Load More Button (when not auto-loading) */}
+      {pagination.hasMore && currentIndex >= galleryItems.length - 1 && (
+        <button
+          onClick={loadMoreImages}
+          disabled={loadingMore}
+          className="absolute right-8 bottom-24 z-20 bg-[#54BAB9]/80 backdrop-blur-sm hover:bg-[#54BAB9]/90 text-white rounded-full p-3 shadow-lg transition-all duration-500 hover:scale-110 group disabled:opacity-50"
+        >
+          {loadingMore ? (
+            <Loader2 size={24} className="animate-spin" />
+          ) : (
+            <Plus size={24} className="group-hover:rotate-90 transition-transform duration-300" />
+          )}
+        </button>
+      )}
 
       {/* Horizontal Scrolling Container */}
       <div
@@ -296,17 +377,23 @@ export default function AnimatedGallery() {
 
                 {/* Main image */}
                 <div className="relative overflow-hidden rounded-3xl shadow-2xl bg-white p-6 transition-all duration-700 group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-shimmer">
-                  <Image
-                    src={item.image_url || "/placeholder.svg"}
-                    alt={item.description}
-                    width={800}
-                    height={600}
-                    className="w-full h-auto object-cover rounded-2xl max-h-[70vh] transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement
-                      target.src = "/placeholder.svg?height=600&width=800&text=Image+Not+Available"
-                    }}
-                  />
+                  {loadedImages.has(item.id) ? (
+                    <Image
+                      src={item.image_url || "/placeholder.svg"}
+                      alt={item.description}
+                      width={800}
+                      height={600}
+                      className="w-full h-auto object-cover rounded-2xl max-h-[70vh] transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.src = "/placeholder.svg?height=600&width=800&text=Image+Not+Available"
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-[400px] bg-gray-100 rounded-2xl flex items-center justify-center">
+                      <Loader2 className="w-8 h-8 animate-spin text-[#54BAB9]" />
+                    </div>
+                  )}
                 </div>
 
                 {/* Animated corner elements */}
@@ -322,17 +409,34 @@ export default function AnimatedGallery() {
             </div>
           </div>
         ))}
+
+        {/* Loading more indicator */}
+        {loadingMore && (
+          <div className="flex-none w-screen h-full flex items-center justify-center px-16">
+            <div className="text-center">
+              <Loader2 className="w-12 h-12 animate-spin text-[#54BAB9] mx-auto mb-4" />
+              <p className="text-gray-600">Loading more images...</p>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Animated progress bar */}
+      {/* Enhanced progress bar with pagination info */}
       {galleryItems.length > 0 && (
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-slide-up">
           <div className="bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg animate-float">
-            <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] rounded-full transition-all duration-700 animate-shimmer"
-                style={{ width: `${((currentIndex + 1) / galleryItems.length) * 100}%` }}
-              />
+            <div className="flex items-center space-x-4">
+              <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] rounded-full transition-all duration-700 animate-shimmer"
+                  style={{ width: `${((currentIndex + 1) / pagination.totalItems) * 100}%` }}
+                />
+              </div>
+              {pagination.hasMore && (
+                <span className="text-xs text-gray-500 whitespace-nowrap">
+                  +{pagination.totalItems - galleryItems.length} more
+                </span>
+              )}
             </div>
           </div>
         </div>
