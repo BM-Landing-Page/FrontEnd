@@ -1,4 +1,4 @@
-import { MapPin, Mail, Phone, Facebook, Instagram, Linkedin, ExternalLink } from "lucide-react"
+import { MapPin, Mail, Phone, Facebook, Instagram, Linkedin, ExternalLink, Youtube, Clock } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -50,6 +50,10 @@ export default function Footer() {
                   <a href="tel:+919840391815" className="text-white/90 hover:text-white transition-colors font-medium">
                     +91-98403 91815
                   </a>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Clock className="w-5 h-5" style={{ color: "#E9DAC1" }} />
+                  <span className="text-white/90 font-medium">Mon–Fri: 8:00 AM – 4:00 PM</span>
                 </div>
               </div>
             </div>
@@ -114,7 +118,7 @@ export default function Footer() {
                   <Facebook className="w-5 h-5 text-white" />
                 </a>
                 <a
-                  href="https://www.instagram.com/bm_anokha_25/"
+                  href="https://www.instagram.com/bmischool/?hl=en"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center p-3 rounded-xl transition-all duration-300 hover:scale-105"
@@ -123,13 +127,13 @@ export default function Footer() {
                   <Instagram className="w-5 h-5 text-white" />
                 </a>
                 <a
-                  href="https://www.instagram.com/buddingmindspdq/?igsh=MTl4eHRiNWhxc2M3NQ%3D%3D&utm_source=qr"
+                  href="https://www.youtube.com/@BMIS"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center p-3 rounded-xl transition-all duration-300 hover:scale-105"
                   style={{ backgroundColor: "#E9DAC1" }}
                 >
-                  <Instagram className="w-5 h-5 text-white" />
+                  <Youtube className="w-5 h-5 text-white" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/budding-minds-international-school-15585419b/?originalSubdomain=in"
@@ -141,18 +145,8 @@ export default function Footer() {
                   <Linkedin className="w-5 h-5 text-white" />
                 </a>
               </div>
-              {/* Additional Instagram Links */}
-              <div className="mt-4 space-y-2">
-                <a
-                  href="https://www.instagram.com/bmischool/?hl=en"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 transition-colors text-white/90 hover:text-white text-sm"
-                >
-                  <span>Main Instagram</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </div>
+              
+              
             </div>
           </div>
         </div>

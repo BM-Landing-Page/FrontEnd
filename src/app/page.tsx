@@ -5,7 +5,7 @@ import HeroBanner from "@/components/sections/Home/HeroBanner"
 import USPs from "@/components/sections/Home/USPs"
 import CurriculumLinksSection from "@/components/sections/Home/CurriculumLinksSection"
 import VideosShowcase from "@/components/sections/Home/VideosShowcaseSection"
-import ContactSection from "@/components/sections/Home/ContactSection"
+//import ContactSection from "@/components/sections/Home/ContactSection"
 
 // Floating Bubble component
 function FloatingBubble({
@@ -79,7 +79,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
           <CurriculumLinksSection />
           <VideosShowcase />
-          <ContactSection />
+
         </div>
       </div>
     </main>
