@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
-import { Globe, Calendar, Palette, Trophy } from "lucide-react"
+import Link from "next/link"
+import { Globe, Calendar, Palette, Trophy, ArrowRight } from "lucide-react"
 
 export default function StudentProfile() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
@@ -380,6 +381,19 @@ export default function StudentProfile() {
           </div>
         </div>
       </section>
+      {/* Next Button - Centered */}
+      <div className="py-12 bg-white">
+        <div className="flex justify-center">
+          <Link href="/leadershipprojects" className="inline-block">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-lg">Leadership Projects</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

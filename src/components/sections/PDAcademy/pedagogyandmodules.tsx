@@ -1,4 +1,6 @@
 import Image from "next/image"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 export default function PedagogyAndModules() {
   return (
@@ -176,6 +178,19 @@ export default function PedagogyAndModules() {
                 🎓 Internationally Recognized • 🌟 Career Enhancement • 🔬 Research-Based
               </p>
             </div>
+          </div>
+        </div>
+        {/* Next Button - Centered */}
+        <div className="py-12 bg-white">
+          <div className="flex justify-center">
+            <Link href="/pdcommunity" className="inline-block">
+              <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+                <div className="text-center">
+                  <div className="font-semibold text-lg">PD Community</div>
+                </div>
+                <ArrowRight className="w-5 h-5" />
+              </div>
+            </Link>
           </div>
         </div>
       </div>

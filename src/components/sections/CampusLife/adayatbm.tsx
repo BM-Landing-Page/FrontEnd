@@ -1,7 +1,7 @@
 "use client"
-
 import { useState } from "react"
-import { Clock, Users, BookOpen, Coffee, Utensils, Trophy, MapPin } from "lucide-react"
+import Link from "next/link"
+import { Clock, Users, BookOpen, Coffee, Utensils, Trophy, MapPin, ArrowRight } from "lucide-react"
 
 export default function ADayAtBM() {
   const [selectedPeriod, setSelectedPeriod] = useState(0)
@@ -169,7 +169,6 @@ export default function ADayAtBM() {
               Our carefully structured day balances academic learning with breaks and enrichment activities
             </p>
           </div>
-
           <div className="grid gap-6">
             {dailyFlow.map((period, index) => (
               <div
@@ -211,7 +210,6 @@ export default function ADayAtBM() {
               Different grade levels experience tailored learning environments designed for their developmental needs
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 gap-12">
             {learningMethods.map((method, index) => (
               <div key={index} className="bg-white rounded-3xl p-8 shadow-lg">
@@ -220,7 +218,6 @@ export default function ADayAtBM() {
                 </div>
                 <h3 className="text-2xl font-bold text-[#54BAB9] mb-4">{method.title}</h3>
                 <p className="text-gray-700 mb-6 leading-relaxed">{method.description}</p>
-
                 <div className="space-y-3">
                   {method.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-3">
@@ -244,7 +241,6 @@ export default function ADayAtBM() {
               Holistic development through diverse co-curricular activities and enrichment programs
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {activities.map((activity, index) => (
               <div
@@ -272,6 +268,20 @@ export default function ADayAtBM() {
         </div>
       </div>
 
+      {/* Next Button - Centered */}
+      <div className="py-12 bg-white">
+        <div className="flex justify-center">
+          <Link href="/eventsandcelebration" className="inline-block">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-lg">Events and Celebration</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
+        </div>
+      </div>
+
       {/* Key Information */}
       <div className="py-20 bg-gradient-to-r from-[#9ED2C6] to-[#54BAB9]">
         <div className="max-w-6xl mx-auto px-6">
@@ -295,6 +305,8 @@ export default function ADayAtBM() {
           </div>
         </div>
       </div>
+
+      
     </div>
   )
 }

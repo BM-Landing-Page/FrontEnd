@@ -61,9 +61,7 @@ export default function USPs() {
             Our holistic approach seamlessly blends academic excellence with character development in a supportive,
             future-focused environment.
           </p>
-          <button className="mt-4 px-6 py-3 bg-[#54BAB9] text-white rounded-full shadow-md hover:scale-105 transition-transform font-semibold text-sm">
-            Discover More →
-          </button>
+          
         </motion.div>
 
         {/* Right Stats Cards */}

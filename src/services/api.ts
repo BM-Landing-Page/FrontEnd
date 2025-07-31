@@ -20,6 +20,289 @@ export interface PaginationInfo {
 
 //
 // ========================
+// ✅ CAREER SECTION
+// ========================
+//
+
+export interface CareerApplication {
+  id?: number
+  first_name: string
+  last_name?: string
+  gender: string
+  email: string
+  phone?: string
+  date_of_birth: string
+  marital_status?: string
+  languages_known?: string[]
+  address?: string
+  how_did_you_know_us?: string
+  educational_qualification?: string
+  work_experience?: string
+  area_of_expertise?: string
+  reason_to_associate: string
+  submitted_at?: string
+}
+
+export interface CareerFormData {
+  firstName: string
+  lastName: string
+  gender: string
+  email: string
+  phone: string
+  dateOfBirth: string
+  maritalStatus: string
+  languages: string[]
+  address: string
+  howKnowUs: string
+  education: string
+  experience: string
+  expertise: string
+  motivation: string
+}
+
+// Create career application
+export const createCareerApplication = async (formData: CareerFormData): Promise<ApiResponse<any>> => {
+  try {
+    // Map frontend field names to backend expected field names
+    const applicationData: Omit<CareerApplication, "id" | "submitted_at"> = {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      gender: formData.gender,
+      email: formData.email,
+      phone: formData.phone,
+      date_of_birth: formData.dateOfBirth,
+      marital_status: formData.maritalStatus,
+      languages_known: formData.languages,
+      address: formData.address,
+      how_did_you_know_us: formData.howKnowUs,
+      educational_qualification: formData.education,
+      work_experience: formData.experience,
+      area_of_expertise: formData.expertise,
+      reason_to_associate: formData.motivation,
+    }
+
+    const response = await fetch(`${API_BASE_URL}/career`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(applicationData),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error creating career application:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to submit career application",
+    }
+  }
+}
+
+// Fetch all career applications (protected)
+export const fetchCareerApplications = async (): Promise<ApiResponse<CareerApplication[]>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/career`)
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error fetching career applications:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch career applications",
+    }
+  }
+}
+
+// Update career application (protected)
+export const updateCareerApplication = async (
+  id: number,
+  updates: Partial<CareerApplication>,
+): Promise<ApiResponse<any>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/career/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updates),
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error updating career application:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to update career application",
+    }
+  }
+}
+
+// Delete career application (protected)
+export const deleteCareerApplication = async (id: number): Promise<ApiResponse<any>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/career/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error deleting career application:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to delete career application",
+    }
+  }
+}
+
+//
+// ========================
+// ✅ PD APPLICATION SECTION
+// ========================
+//
+
+export interface PDApplication {
+  id?: number
+  first_name: string
+  last_name: string
+  date_of_birth: string
+  educational_qualification?: string
+  institution_name?: string
+  designation?: string
+  address?: string
+  email: string
+  mobile?: string
+  reason: string
+  submitted_at?: string
+}
+
+export interface PDFormData {
+  firstName: string
+  lastName: string
+  dateOfBirth: string
+  educationalQualification: string
+  institutionName: string
+  designation: string
+  address: string
+  email: string
+  mobile: string
+  reason: string
+}
+
+// Create PD application
+export const createPDApplication = async (formData: PDFormData): Promise<ApiResponse<any>> => {
+  try {
+    // Map frontend field names to backend expected field names
+    const applicationData: Omit<PDApplication, "id" | "submitted_at"> = {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      date_of_birth: formData.dateOfBirth,
+      educational_qualification: formData.educationalQualification,
+      institution_name: formData.institutionName,
+      designation: formData.designation,
+      address: formData.address,
+      email: formData.email,
+      mobile: formData.mobile,
+      reason: formData.reason,
+    }
+
+    const response = await fetch(`${API_BASE_URL}/applications`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(applicationData),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error creating PD application:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to submit PD application",
+    }
+  }
+}
+
+// Fetch all PD applications (protected)
+export const fetchPDApplications = async (): Promise<ApiResponse<PDApplication[]>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/applications`)
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error fetching PD applications:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch PD applications",
+    }
+  }
+}
+
+// Update PD application (protected)
+export const updatePDApplication = async (id: number, updates: Partial<PDApplication>): Promise<ApiResponse<any>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/applications/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updates),
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error updating PD application:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to update PD application",
+    }
+  }
+}
+
+// Delete PD application (protected)
+export const deletePDApplication = async (id: number): Promise<ApiResponse<any>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/applications/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error deleting PD application:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to delete PD application",
+    }
+  }
+}
+
+//
+// ========================
 // ✅ BLOG SECTION
 // ========================
 //
@@ -222,7 +505,6 @@ export const fetchGalleryItems = async (page = 1, limit = 6): Promise<ApiRespons
     const response = await fetch(`${API_BASE_URL}/data?page=${page}&limit=${limit}`)
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
     const data = await response.json()
-
     // If your backend doesn't support pagination yet, we'll simulate it
     if (Array.isArray(data)) {
       const startIndex = (page - 1) * limit
@@ -240,7 +522,6 @@ export const fetchGalleryItems = async (page = 1, limit = 6): Promise<ApiRespons
         pagination,
       }
     }
-
     // If backend returns paginated response
     return { success: true, data: data.items || data, pagination: data.pagination }
   } catch (error) {

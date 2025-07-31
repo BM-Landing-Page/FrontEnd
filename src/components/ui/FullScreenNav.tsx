@@ -24,7 +24,7 @@ const NAV_ITEMS = [
   { label: "Admissions", subItems: ["Admission Process", "Register Now"] },
   {
     label: "Campus Life",
-    subItems: ["A Day at BMIS", "Events & Celebrations", "Gallery", "Beyond Books"],
+    subItems: ["A Day at BMIS", "Events & Celebrations","Beyond Books", "Gallery" ],
   },
   { label: "Student Leadership", subItems: ["SLC Overview", "Student Profiles", "Leadership Projects"] },
   {

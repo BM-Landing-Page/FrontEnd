@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import {
@@ -14,6 +15,8 @@ import {
   Heart,
   ChevronLeft,
   ChevronRight,
+  Instagram,
+  ArrowRight,
 } from "lucide-react"
 
 export default function BeyondBooks() {
@@ -153,6 +156,7 @@ export default function BeyondBooks() {
               })}
             </div>
           </div>
+
           {/* Tab Content */}
           <div className="space-y-12">
             {/* IGNITE Content */}
@@ -367,6 +371,7 @@ export default function BeyondBooks() {
                 </div>
               </div>
             )}
+
             {/* InterSchool Content */}
             {activeTab === "interschool" && (
               <div className="space-y-12 animate-in fade-in duration-500">
@@ -376,10 +381,33 @@ export default function BeyondBooks() {
                   style={{ background: "linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 100%)" }}
                 >
                   <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">InterSchool Events</h2>
-                  <p className="text-xl text-gray-700 max-w-4xl mx-auto">
+                  <p className="text-xl text-gray-700 max-w-4xl mx-auto mb-6">
                     Designed to spark collaboration, creativity, and critical thinking by bringing students from
                     different schools together through shared passions and challenges.
                   </p>
+
+                  {/* Instagram Handle */}
+                  <div className="flex items-center justify-center gap-3 mb-6">
+                    <div
+                      className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg"
+                      style={{ background: "linear-gradient(135deg, #54BAB9 0%, #9ED2C6 100%)" }}
+                    >
+                      <Instagram className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="text-left">
+
+                      <a
+                        href="https://www.instagram.com/bm_anokha_25/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-lg font-bold hover:underline transition-all duration-300"
+                        style={{ color: "#54BAB9" }}
+                      >
+                        @buddingminds_interschool
+                      </a>
+                    </div>
+                  </div>
+
                   <div className="w-24 h-1 mx-auto mt-6" style={{ backgroundColor: "#54BAB9" }}></div>
                 </div>
                 <div className="grid gap-8">
@@ -528,6 +556,7 @@ export default function BeyondBooks() {
                 </Card>
               </div>
             )}
+
             {/* IntraSchool Content */}
             {activeTab === "intraschool" && (
               <div className="space-y-12 animate-in fade-in duration-500">
@@ -698,6 +727,7 @@ export default function BeyondBooks() {
                 </Card>
               </div>
             )}
+
             {/* 20 Years Excellence Content */}
             {activeTab === "excellence" && (
               <div className="space-y-12 animate-in fade-in duration-500">
@@ -873,6 +903,19 @@ export default function BeyondBooks() {
           </div>
         </div>
       </section>
+      {/* Next Button - Centered */}
+      <div className="py-12 bg-white">
+        <div className="flex justify-center">
+          <Link href="/gallery" className="inline-block">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-lg">Gallery</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,8 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { Users, Calendar, Target, Award, Heart, Palette, Trophy, Globe } from "lucide-react"
+import Link from "next/link"
+import { Users, Calendar, Target, Award, Heart, Palette, Trophy, Globe, ArrowRight } from "lucide-react"
 
 export default function SLCOverview() {
   const departments = [
@@ -214,6 +215,19 @@ export default function SLCOverview() {
           </Card>
         </div>
       </section>
+      {/* Next Button - Centered */}
+      <div className="py-12 bg-white">
+        <div className="flex justify-center">
+          <Link href="/studentprofile" className="inline-block">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-lg">Student Profiles</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

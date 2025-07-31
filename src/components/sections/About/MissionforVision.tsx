@@ -206,7 +206,7 @@ const About = () => {
           </p>
 
           {/* Navigation Button at Bottom */}
-          <Link href="/foundermessage">
+          <Link href="/foundersmessage">
             <div className="inline-flex items-center gap-2 bg-white text-[#54BAB9] hover:bg-gray-100 font-semibold px-8 py-3 text-lg shadow-lg rounded-md transition-colors cursor-pointer">
               Read Founder's Message
               <ArrowRight className="w-5 h-5" />

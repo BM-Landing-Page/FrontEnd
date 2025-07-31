@@ -302,7 +302,6 @@ export default function PrimaryAndMiddleYears() {
               Lower Secondary
             </motion.button>
           </div>
-
           {/* Navigation Button to IGCSE and Middle Years */}
           <div className="flex justify-center mt-12">
             <Link href="/igcseandsenioryears">
@@ -381,13 +380,7 @@ const SubjectsTable = ({ data, type }: { data: any[]; type: "primary" | "seconda
                 const cellContent = row[key]
                 return (
                   <td key={idx} className="px-6 py-4 whitespace-nowrap text-base text-gray-700">
-                    {cellContent === "✔" ? (
-                      <span style={{ color: "#54BAB9" }} className="font-bold text-lg">
-                        ✔
-                      </span>
-                    ) : (
-                      cellContent
-                    )}
+                    {cellContent === "✔" ? <span className="font-bold text-lg text-[#54BAB9]">✔</span> : cellContent}
                   </td>
                 )
               })}

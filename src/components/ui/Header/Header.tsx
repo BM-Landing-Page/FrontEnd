@@ -25,7 +25,7 @@ export default function Header({ openNav }: HeaderProps) {
             alt="Budding Minds Logo"
             width={50} // Reduced from 70
             height={50} // Reduced from 70
-            className="rounded-full sm:w-[60px] sm:h-[60px]" // Reduced from 90px
+            className="rounded-full sm:w-[70px] sm:h-[60px]" // Reduced from 90px
           />
           <span className="text-base sm:text-xl font-bold tracking-wide text-[#1E293B] font-calibri leading-tight">
             <span className="block sm:inline">Budding Minds</span>

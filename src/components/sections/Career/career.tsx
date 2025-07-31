@@ -1,11 +1,10 @@
 "use client"
-
 import type React from "react"
-
 import { useState } from "react"
+import { createCareerApplication, type CareerFormData } from "@/services/api"
 
 export default function CareerForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<CareerFormData>({
     firstName: "",
     lastName: "",
     gender: "",
@@ -22,6 +21,12 @@ export default function CareerForm() {
     motivation: "",
   })
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null
+    message: string
+  }>({ type: null, message: "" })
+
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [showGenderDropdown, setShowGenderDropdown] = useState(false)
   const [showMaritalDropdown, setShowMaritalDropdown] = useState(false)
@@ -32,8 +37,12 @@ export default function CareerForm() {
   const maritalOptions = ["Single", "Married", "Divorced", "Widowed"]
   const sourceOptions = ["LinkedIn", "Other Social Media", "Friend", "Known Source"]
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: keyof CareerFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    // Clear any previous error messages when user starts typing
+    if (submitStatus.type === "error") {
+      setSubmitStatus({ type: null, message: "" })
+    }
   }
 
   const handleLanguageChange = (language: string) => {
@@ -45,9 +54,79 @@ export default function CareerForm() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = (): string | null => {
+    if (!formData.firstName.trim()) return "First name is required"
+    if (!formData.gender) return "Gender is required"
+    if (!formData.email.trim()) return "Email is required"
+    if (!formData.dateOfBirth) return "Date of birth is required"
+    if (!formData.motivation.trim()) return "Please share why you want to join Budding Minds"
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) return "Please enter a valid email address"
+
+    return null
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
+
+    // Validate form
+    const validationError = validateForm()
+    if (validationError) {
+      setSubmitStatus({
+        type: "error",
+        message: validationError,
+      })
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: "" })
+
+    try {
+      const response = await createCareerApplication(formData)
+
+      if (response.success) {
+        setSubmitStatus({
+          type: "success",
+          message: "Your application has been submitted successfully! We will get back to you soon.",
+        })
+
+        // Reset form after successful submission
+        setFormData({
+          firstName: "",
+          lastName: "",
+          gender: "",
+          email: "",
+          phone: "",
+          dateOfBirth: "",
+          maritalStatus: "",
+          languages: [],
+          address: "",
+          howKnowUs: "",
+          education: "",
+          experience: "",
+          expertise: "",
+          motivation: "",
+        })
+
+        // Scroll to top to show success message
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: response.error || "Failed to submit application. Please try again.",
+        })
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: "An unexpected error occurred. Please try again.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const formatDate = (dateString: string) => {
@@ -59,6 +138,22 @@ export default function CareerForm() {
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "white" }}>
       <div style={{ maxWidth: "1024px", margin: "0 auto", padding: "24px" }}>
+        {/* Status Messages */}
+        {submitStatus.type && (
+          <div
+            style={{
+              padding: "16px",
+              borderRadius: "8px",
+              marginBottom: "24px",
+              backgroundColor: submitStatus.type === "success" ? "#dcfce7" : "#fef2f2",
+              border: `2px solid ${submitStatus.type === "success" ? "#16a34a" : "#dc2626"}`,
+              color: submitStatus.type === "success" ? "#15803d" : "#dc2626",
+            }}
+          >
+            <p style={{ margin: 0, fontWeight: "500" }}>{submitStatus.message}</p>
+          </div>
+        )}
+
         {/* Introduction Section */}
         <div
           style={{
@@ -138,7 +233,6 @@ export default function CareerForm() {
                 Personal Information
               </h2>
             </div>
-
             <div style={{ padding: "24px" }}>
               {/* First Name and Last Name */}
               <div
@@ -633,7 +727,6 @@ export default function CareerForm() {
                 Professional Information
               </h2>
             </div>
-
             <div style={{ padding: "24px" }}>
               {/* Educational Qualification */}
               <div style={{ marginBottom: "24px" }}>
@@ -745,10 +838,11 @@ export default function CareerForm() {
                     color: "#374151",
                   }}
                 >
-                  Why do you want to be associated with Budding Minds?
+                  Why do you want to be associated with Budding Minds? <span style={{ color: "#ef4444" }}>*</span>
                 </label>
                 <textarea
                   rows={5}
+                  required
                   value={formData.motivation}
                   onChange={(e) => handleInputChange("motivation", e.target.value)}
                   placeholder="Please share your motivation for joining our team..."
@@ -773,21 +867,31 @@ export default function CareerForm() {
           <div style={{ display: "flex", justifyContent: "center", paddingTop: "24px" }}>
             <button
               type="submit"
+              disabled={isSubmitting}
               style={{
                 padding: "16px 48px",
-                backgroundColor: "#54BAB9",
+                backgroundColor: isSubmitting ? "#9ca3af" : "#54BAB9",
                 color: "white",
                 fontSize: "1.125rem",
                 fontWeight: "600",
                 border: "none",
                 borderRadius: "8px",
-                cursor: "pointer",
+                cursor: isSubmitting ? "not-allowed" : "pointer",
                 transition: "background-color 0.2s",
+                opacity: isSubmitting ? 0.7 : 1,
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#4a9d9c")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#54BAB9")}
+              onMouseEnter={(e) => {
+                if (!isSubmitting) {
+                  e.currentTarget.style.backgroundColor = "#4a9d9c"
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isSubmitting) {
+                  e.currentTarget.style.backgroundColor = "#54BAB9"
+                }
+              }}
             >
-              Submit Application
+              {isSubmitting ? "Submitting..." : "Submit Application"}
             </button>
           </div>
         </form>
