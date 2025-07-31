@@ -1,5 +1,8 @@
+
+import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { MapPin, Calendar, Building2, Plane, Users, Sparkles, ArrowRight } from "lucide-react"
+
 
 export default function SchoolUpdate() {
   return (
@@ -185,6 +188,19 @@ export default function SchoolUpdate() {
               </div>
             </CardContent>
           </Card>
+        </div>
+        {/* Next Button - Centered */}
+        <div className="py-12 bg-white">
+          <div className="flex justify-center">
+            <Link href="/studentachievement" className="inline-block">
+              <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+                <div className="text-center">
+                  <div className="font-semibold text-lg">Student Achievement</div>
+                </div>
+                <ArrowRight className="w-5 h-5" />
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

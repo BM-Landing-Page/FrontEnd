@@ -1,5 +1,7 @@
+import Link from "next/link"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Trophy, Medal, Award, Star, Globe, Crown, Target } from "lucide-react"
+import { Trophy, Medal, Award, Star, Globe, Crown, Target, ArrowRight } from "lucide-react"
 
 export default function StudentAchievement() {
   const achievements = [
@@ -254,6 +256,19 @@ export default function StudentAchievement() {
               </CardContent>
             </div>
           </Card>
+        </div>
+        {/* Next Button - Centered */}
+        <div className="py-12 bg-white">
+          <div className="flex justify-center">
+            <Link href="/studentvoice" className="inline-block">
+              <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+                <div className="text-center">
+                  <div className="font-semibold text-lg">Thought Pieces</div>
+                </div>
+                <ArrowRight className="w-5 h-5" />
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
