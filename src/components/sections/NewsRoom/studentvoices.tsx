@@ -1,7 +1,7 @@
 "use client"
-
+import Link from "next/link"
 import { useState, useEffect } from "react"
-import { MessageCircle, User, Calendar, BookOpen, Globe, Heart, Lightbulb, Star, X, Loader2 } from "lucide-react"
+import { MessageCircle, User, Calendar, BookOpen, Globe, Heart, Lightbulb, Star, X, Loader2, ArrowRight } from "lucide-react"
 import { fetchBlogs, type Blog } from "@/services/api"
 
 interface Story {
@@ -381,6 +381,19 @@ export default function StudentVoices() {
           </div>
         </div>
       </div>
+      {/* Next Button - Centered */}
+        <div className="py-12 bg-white">
+          <div className="flex justify-center">
+            <Link href="/bmgazette" className="inline-block">
+              <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+                <div className="text-center">
+                  <div className="font-semibold text-lg">BM Gazette</div>
+                </div>
+                <ArrowRight className="w-5 h-5" />
+              </div>
+            </Link>
+          </div>
+        </div>
     </div>
   )
 }

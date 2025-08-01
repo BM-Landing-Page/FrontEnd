@@ -155,19 +155,7 @@ export default function BMGazette() {
                   </div>
                 </div>
 
-                {/* CTA Badge */}
-                <div className="mt-8 flex items-center gap-4">
-                  <div
-                    className="flex items-center gap-3 px-6 py-3 rounded-full shadow-lg animate-pulse"
-                    style={{ backgroundColor: "#9ED2C6" }}
-                  >
-                    <Sparkles size={20} style={{ color: "#54BAB9" }} />
-                    <span className="text-xl font-bold" style={{ color: "#54BAB9" }}>
-                      Check it out!
-                    </span>
-                  </div>
-                  <ArrowRight className="text-[#54BAB9] animate-bounce-x" size={24} />
-                </div>
+                
               </div>
             </div>
           </div>
