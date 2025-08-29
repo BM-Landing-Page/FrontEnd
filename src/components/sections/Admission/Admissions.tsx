@@ -221,7 +221,7 @@ const Admissions = () => {
                     <motion.div whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                       <FileText className="w-6 h-6 mr-2" style={{ color: "#54BAB9" }} />
                     </motion.div>
-                    Submission of Enquiry Form
+                    Submission of Application Form
                   </h3>
                   <ul className="space-y-2 text-gray-600">
                     <motion.li
@@ -231,7 +231,7 @@ const Admissions = () => {
                       transition={{ delay: 0.2 }}
                     >
                       <CheckCircle className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" style={{ color: "#9ED2C6" }} />
-                      Parents must complete the online enquiry form with accurate details
+                      Parents must complete the online Application form with accurate details
                     </motion.li>
                     <motion.li
                       className="flex items-start"
