@@ -21,7 +21,7 @@ const NAV_ITEMS = [
       "Pedagogy & Tools",
     ],
   },
-  { label: "Admissions", subItems: ["Admission Process", "Register Now"] },
+  { label: "Admissions", subItems: ["Admission Process", "Application Form"] },
   {
     label: "Campus Life",
     subItems: ["A Day at BMIS", "Events & Celebrations","Beyond Books", "Gallery" ],
@@ -62,7 +62,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Leadership Projects": "/leadershipprojects",
   "Alumni": "/alumni",
   "Founder's Message": "/foundersmessage",
-  "Register Now": "https://buddingminds.myschoolone.com/cloud/Admission/EnquiryForm.php?ksjdkjsd=MQ==",
+  "Application Form": "https://myschoolone.com/Web/Admission/ApplicationFormV2.php?iid=MTM=&ksjdkjsd=MQ==",
   "Admission Process": "/admissionsprocess",
   "Calendar": "/calendar",
   Gallery: "/gallery",

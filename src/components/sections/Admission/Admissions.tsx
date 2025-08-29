@@ -55,7 +55,7 @@ const Admissions = () => {
 
   const handleApplicationClick = () => {
     window.open(
-      "https://buddingminds.myschoolone.com/cloud/Admission/EnquiryForm.php?ksjdkjsd=MQ==",
+      "https://myschoolone.com/Web/Admission/ApplicationFormV2.php?iid=MTM=&ksjdkjsd=MQ==",
       "_blank",
       "noopener,noreferrer",
     )
@@ -97,7 +97,7 @@ const Admissions = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Admissions – Academic Year 2025–26
+              Admissions
             </motion.h1>
             <motion.p
               className="text-xl max-w-3xl mx-auto text-white/90 mb-8"
@@ -134,7 +134,7 @@ const Admissions = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold mb-4 text-gray-800">Eligibility Criteria</h2>
-            <p className="text-xl text-gray-600">Eligible Age (as on 1st June 2025)</p>
+            <p className="text-xl text-gray-600">Eligible Age (as on 1st June of the Academic Year)</p>
           </motion.div>
           <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
@@ -143,10 +143,10 @@ const Admissions = () => {
             animate={eligibilityRef.isInView ? "animate" : "initial"}
           >
             {[
-              { age: "2+", title: "Play Group", years: "2 years", bg: "#F7ECDE" },
-              { age: "3+", title: "Preschool", years: "3 years", bg: "#E9DAC1" },
-              { age: "4+", title: "Pre-Primary 1", years: "4 years", bg: "#F7ECDE" },
-              { age: "5+", title: "Pre-Primary 2", years: "5 years", bg: "#F7ECDE" },
+              { age: "1.9+", title: "Play Group", years: "1.9 years", bg: "#F7ECDE" },
+              { age: "2.6+", title: "Preschool", years: "2.6 years", bg: "#E9DAC1" },
+              { age: "3.6+", title: "Pre-Primary 1", years: "3.6 years", bg: "#F7ECDE" },
+              { age: "4.6+", title: "Pre-Primary 2", years: "4.6 years", bg: "#F7ECDE" },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -189,7 +189,6 @@ const Admissions = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold mb-4 text-gray-800">Admission Process</h2>
-            <p className="text-xl text-gray-600">Academic Year 2025–26</p>
           </motion.div>
           <motion.div
             className="space-y-8"
