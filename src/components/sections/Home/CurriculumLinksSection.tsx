@@ -101,7 +101,7 @@ export default function CurriculumLinksSection() {
 
       <div className="relative z-10">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Our Curriculum at Budding Minds</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">Our Curriculum</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Discover our educational pathways designed to nurture and inspire students at every stage of their learning
             journey

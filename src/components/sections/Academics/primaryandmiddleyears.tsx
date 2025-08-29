@@ -225,7 +225,7 @@ export default function PrimaryAndMiddleYears() {
           9–10. It is designed for learners aged 11 to 14.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <FeatureCard title="English & English as a Second Language" icon="🗣️" />
+          <FeatureCard title="English " icon="🗣️" />
           <FeatureCard title="Mathematics" icon="🔢" />
           <FeatureCard title="Science" icon="🔬" />
         </div>

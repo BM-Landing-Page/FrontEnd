@@ -53,16 +53,7 @@ export default function HeroBanner() {
         <h2 className="text-4xl md:text-6xl font-extrabold mt-1">SOMETHING</h2>
       </div>
 
-      {/* Bottom Left Caption */}
-      <div className="absolute bottom-4 left-4 md:left-6 z-20 text-xs md:text-base text-white space-y-1">
-        <div className="flex items-center gap-2 md:gap-3">
-          <Search size={12} className="md:size-4" />
-          <span className="font-semibold text-[10px] md:text-sm">
-            PARENTS | STUDENTS | STAFF
-          </span>
-        </div>
-        <p className="text-[10px] md:text-sm">#BeTheStartOfSomething</p>
-      </div>
+    
 
       {/* Bottom Right Dots */}
       <div className="absolute bottom-4 right-4 md:right-6 z-20 flex items-center space-x-2">
