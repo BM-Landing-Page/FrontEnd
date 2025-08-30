@@ -97,11 +97,7 @@ export default function StudentAchievement() {
       {/* Hero Banner */}
       <div className="relative h-96 overflow-hidden">
         <div className="absolute inset-0">
-          <img
-            src="/images/studentachievement.jpg"
-            alt="Student Achievements"
-            className="w-full h-full object-cover"
-          />
+          <img src="/images/studentachievement.jpg" alt="Student Achievements" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#54BAB9]/90 via-[#9ED2C6]/85 to-[#E9DAC1]/90"></div>
         </div>
 
@@ -117,99 +113,58 @@ export default function StudentAchievement() {
 
       {/* Achievement Categories Section */}
       <div className="container mx-auto px-4 py-12 max-w-7xl relative">
-        <div className="flex justify-center gap-6 flex-wrap mb-16">
-          <div className="px-8 py-4 rounded-full bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] text-white font-bold text-lg shadow-xl hover:scale-105 transition-all border-2 border-white">
-            🌍 World Records
-          </div>
-          <div className="px-8 py-4 rounded-full bg-gradient-to-r from-[#9ED2C6] to-[#E9DAC1] text-white font-bold text-lg shadow-xl hover:scale-105 transition-all border-2 border-white">
-            🏆 Championships
-          </div>
-          <div className="px-8 py-4 rounded-full bg-gradient-to-r from-[#E9DAC1] to-[#54BAB9] text-white font-bold text-lg shadow-xl hover:scale-105 transition-all border-2 border-white">
-            📚 Excellence
-          </div>
-        </div>
-
         {/* Uniform Achievement Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {achievements.map((student, index) => {
             const IconComponent = student.icon
+            const firstName = student.name.split(" ")[0]
 
             return (
               <Card
                 key={index}
-                className="border-4 bg-white hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 h-full flex flex-col shadow-lg"
-                style={{ borderColor: student.borderColor }}
+                className="border rounded-xl bg-white hover:shadow-md transition-shadow duration-200 h-full flex flex-col"
               >
-                <CardHeader className="pb-4 flex-shrink-0 relative" style={{ backgroundColor: student.headerBg }}>
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-4">
-                      <div
-                        className="p-4 rounded-xl text-white shadow-lg"
-                        style={{ backgroundColor: student.borderColor }}
-                      >
-                        <IconComponent className="h-7 w-7" />
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="h-9 w-9 rounded-md border border-[#54BAB9]/30 grid place-items-center text-[#54BAB9] bg-white">
+                        <IconComponent className="h-5 w-5" />
                       </div>
-                      <div className="text-5xl drop-shadow-lg">{student.emoji}</div>
+                      <div>
+                        <CardTitle className="text-xl font-semibold text-gray-900">{student.name}</CardTitle>
+                        <CardDescription className="text-sm text-gray-600">{student.title}</CardDescription>
+                      </div>
                     </div>
+
                     {student.grade && (
-                      <div
-                        className="px-4 py-2 rounded-full text-sm font-bold border-2 shadow-md"
-                        style={{
-                          backgroundColor: "white",
-                          color: student.borderColor,
-                          borderColor: student.borderColor,
-                        }}
-                      >
+                      <span className="px-2 py-1 rounded-full border border-[#54BAB9]/30 text-xs text-gray-700 bg-white">
                         {student.grade}
-                      </div>
+                      </span>
                     )}
                   </div>
-
-                  <CardTitle className="text-2xl mb-3 font-black drop-shadow-sm" style={{ color: student.borderColor }}>
-                    {student.name}
-                  </CardTitle>
-                  <CardDescription className="text-lg font-bold text-gray-800">{student.title}</CardDescription>
                 </CardHeader>
 
-                <CardContent className="pt-6 flex-grow flex flex-col">
-                  <div className="space-y-5 flex-grow">
-                    <div
-                      className="bg-gray-50 p-4 rounded-xl border-l-4"
-                      style={{ borderLeftColor: student.borderColor }}
-                    >
-                      <p className="text-gray-800 font-semibold leading-relaxed">{student.achievement}</p>
+                <CardContent className="pt-4 flex-grow">
+                  <div className="space-y-4">
+                    <div className="p-3 rounded-md bg-gray-50 border-l-2" style={{ borderLeftColor: "#54BAB9" }}>
+                      <p className="text-sm text-gray-800 leading-relaxed">{student.achievement}</p>
                     </div>
 
-                    <div className="space-y-4 flex-grow">
+                    <ul className="space-y-2">
                       {student.awards.map((award, awardIndex) => (
-                        <div
-                          key={awardIndex}
-                          className="p-5 rounded-xl border-3 shadow-md hover:shadow-lg transition-all"
-                          style={{
-                            backgroundColor: awardIndex % 2 === 0 ? student.headerBg : "white",
-                            borderColor: student.borderColor,
-                          }}
-                        >
-                          <div className="flex items-start gap-4">
-                            <span className="text-3xl drop-shadow-sm">🏆</span>
-                            <span className="text-sm font-bold leading-relaxed text-gray-800">{award}</span>
-                          </div>
-                        </div>
+                        <li key={awardIndex} className="flex items-start gap-2">
+                          <span
+                            className="mt-1 h-2 w-2 rounded-full"
+                            style={{ backgroundColor: "#54BAB9" }}
+                            aria-hidden="true"
+                          />
+                          <span className="text-sm text-gray-700 leading-relaxed">{award}</span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
 
-                    <div className="pt-4 text-center">
-                      <div
-                        className="inline-flex items-center gap-3 px-6 py-3 rounded-full border-3 shadow-lg hover:scale-105 transition-all"
-                        style={{
-                          borderColor: student.borderColor,
-                          backgroundColor: student.headerBg,
-                          color: student.borderColor,
-                        }}
-                      >
-                        <span className="text-2xl">🎉</span>
-                        <span className="font-black text-lg">Congratulations, {student.name.split(" ")[0]}!</span>
-                      </div>
+                    <div className="pt-2">
+                      <p className="text-xs text-gray-500">Congratulations, {firstName}.</p>
                     </div>
                   </div>
                 </CardContent>
@@ -257,6 +212,7 @@ export default function StudentAchievement() {
             </div>
           </Card>
         </div>
+
         {/* Next Button - Centered */}
         <div className="py-12 bg-white">
           <div className="flex justify-center">

@@ -84,7 +84,7 @@ const universities = {
     "IIIT Hyderabad",
     "IIT Gandhinagar",
     "Vellore Institute of Technology",
-    "SRM",
+    "SRM Institute of Science and Technology",
     "Sri Ramachandra College Engineering and Technology",
     "Chennai Institute of Technology",
     "Sathyabama University",
@@ -105,7 +105,7 @@ const universities = {
     "Amrita Vishwa Vidyapeetham",
     "Indian Institute of Psychology & Research (IIPR)",
     "Vellore Institute of Technology",
-    "SRM",
+    "SRM Institute of Science and Technology",
     "Chandigarh University",
   ],
 }
@@ -329,7 +329,7 @@ export default function Alumni() {
             {[
               { number: "50+", label: "Alumni Worldwide", icon: Users },
               { number: "30+", label: "Universities", icon: MapPin },
-              { number: "3", label: "Graduating Batches", icon: Calendar },
+              { number: "3", label: "Graduated Batches", icon: Calendar },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

@@ -122,18 +122,14 @@ export default function EarlyYears() {
               </div>
             </div>
             <div className="relative">
-              <div className="w-full h-80 rounded-2xl shadow-lg overflow-hidden" style={{ backgroundColor: "#E9DAC1" }}>
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div
-                      className="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: "#54BAB9" }}
-                    >
-                      <Heart className="w-12 h-12 text-white" />
-                    </div>
-                    <p className="text-gray-700 font-medium">Nurturing Excellence Since 2004</p>
-                  </div>
-                </div>
+              {/* <CHANGE> Replace icon box with image placeholder */}
+              <div className="w-full h-80 rounded-2xl shadow-lg overflow-hidden">
+                <img
+                  src="/placeholder.svg?height=320&width=640"
+                  alt="Founders' Vision image placeholder"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
@@ -173,21 +169,21 @@ export default function EarlyYears() {
       <section className="py-16 px-4" style={{ backgroundColor: "#9ED2C6" }}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-white mb-4">Early Readers & Writers</h2>
-            <p className="text-xl text-white/90">Kindergarten Programme Excellence</p>
+            <h2 className="text-4xl font-bold text-black mb-4">Early Readers & Writers</h2>
+            <p className="text-xl text-black/90">Kindergarten Programme Excellence</p>
           </div>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h3 className="text-2xl font-bold text-white mb-4">Our Goal</h3>
-                <p className="text-white/90 text-lg">
+                <h3 className="text-2xl font-bold text-black mb-4">Our Goal</h3>
+                <p className="text-black/90 text-lg">
                   By the end of kindergarten, children confidently read Level 1 books and write complete paragraphs,
                   setting a strong foundation for primary school success.
                 </p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h3 className="text-2xl font-bold text-white mb-4">Daily Structure</h3>
-                <ul className="text-white/90 space-y-2">
+                <h3 className="text-2xl font-bold text-black mb-4">Daily Structure</h3>
+                <ul className="text-black/90 space-y-2">
                   <li>• PP1 & PP2 structured learning routines</li>
                   <li>• Self-dependence activities (eating, dressing)</li>
                   <li>• Guided nap time for emotional regulation</li>
@@ -199,14 +195,14 @@ export default function EarlyYears() {
               <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 text-center">
                 <div className="flex justify-center space-x-4 mb-6">
                   <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                    <BookOpen className="w-8 h-8 text-white" />
+                    <BookOpen className="w-8 h-8 text-black" />
                   </div>
-                  <ArrowRight className="w-8 h-8 text-white mt-4" />
+                  <ArrowRight className="w-8 h-8 text-black mt-4" />
                   <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                    <Award className="w-8 h-8 text-white" />
+                    <Award className="w-8 h-8 text-black" />
                   </div>
                 </div>
-                <p className="text-white text-lg font-medium">Learning Journey Progress</p>
+                <p className="text-black text-lg font-medium">Learning Journey Progress</p>
               </div>
             </div>
           </div>

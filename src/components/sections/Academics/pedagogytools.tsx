@@ -119,7 +119,7 @@ export default function PedagogyTools() {
             </section>
 
             {/* Cambridge IGCSE - Side-by-side Layout */}
-            <section className="bg-gradient-to-r from-[#9ED2C6] to-[#54BAB9] rounded-2xl p-8 md:p-12 shadow-lg text-white">
+            <section className="bg-gradient-to-r from-[#9ED2C6] to-[#54BAB9] rounded-2xl p-8 md:p-12 shadow-lg text-black">
               <div className="flex flex-col lg:flex-row gap-8">
                 <div className="lg:w-1/2">
                   <div className="flex items-center gap-3 mb-6">

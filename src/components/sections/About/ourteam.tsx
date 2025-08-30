@@ -161,7 +161,11 @@ export default function OurTeam() {
                     <h3 className="text-lg font-bold mb-1" style={{ color: "#54BAB9" }}>
                       {member.name}
                     </h3>
-                    <p className="text-sm font-medium text-gray-600">{member.role}</p>
+                      <div className="space-y-1">
+                        <p className="text-sm font-medium text-gray-600">{member.education_background}</p>
+                        <p className="text-sm font-medium text-gray-600">{member.role}</p>
+                      </div>
+
                   </div>
                 </div>
               ))}
