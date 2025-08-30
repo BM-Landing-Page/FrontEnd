@@ -1,5 +1,5 @@
 import { MapPin, Mail, Phone, Facebook, Instagram, Linkedin, ExternalLink, Youtube, Clock } from "lucide-react"
-
+import Link from "next/link"
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden" style={{ backgroundColor: "#54BAB9" }}>
@@ -92,15 +92,17 @@ export default function Footer() {
           {/* Quick Links & Social */}
           <div className="lg:col-span-2 space-y-6">
             {/* Parent Voice */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-              <h3 className="text-xl font-semibold mb-4 text-white" style={{ color: "#F7ECDE" }}>
-                Parent Voice
-              </h3>
-              <p className="text-white/80 text-sm leading-relaxed">
-                Your voice matters! We actively involve parents in shaping our educational journey and welcome your
-                valuable feedback.
-              </p>
-            </div>
+            <Link href="/parentvoice" passHref>
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 cursor-pointer transition hover:shadow-lg">
+                <h3 className="text-xl font-semibold mb-4 text-white" style={{ color: "#F7ECDE" }}>
+                  Parent Voice
+                </h3>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Your voice matters! We actively involve parents in shaping our educational journey and welcome your
+                  valuable feedback.
+                </p>
+              </div>
+            </Link>
 
             {/* Social Media */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">

@@ -610,3 +610,80 @@ export const deleteGalleryItem = async (id: number): Promise<ApiResponse<any>> =
     }
   }
 }
+
+
+//
+// ========================
+// ✅ PARENTS' VOICE (Feedback)
+// ========================
+//
+
+export interface ParentFeedbackItem {
+  id?: number
+  parent_name: string
+  student_name: string
+  grade: number | string
+  desc: string
+  created_at?: string
+}
+
+export interface ParentFeedbackForm {
+  parentName: string
+  studentName: string
+  grade: string
+  description: string
+}
+
+// Send feedback via email (Public)
+export const sendParentFeedbackEmail = async (form: ParentFeedbackForm): Promise<ApiResponse<{ message: string }>> => {
+  try {
+    const payload = {
+      parent_name: form.parentName,
+      student_name: form.studentName,
+      grade: form.grade,
+      desc: form.description,
+    }
+
+    const res = await fetch(`${API_BASE_URL}/feedback/send-email`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}))
+      throw new Error(err?.error || `HTTP error! status: ${res.status}`)
+    }
+
+    const data = await res.json().catch(() => ({ message: "Feedback sent" }))
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error sending parent feedback email:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to send parent feedback",
+    }
+  }
+}
+
+// View feedback list (Public)
+// Note: Controller getAllFeedback suggests GET /feedback returns an array.
+export const fetchParentFeedback = async (): Promise<ApiResponse<ParentFeedbackItem[]>> => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/feedback`, { cache: "no-store" })
+    if (!res.ok) {
+      const errText = await res.text().catch(() => "")
+      throw new Error(errText || `HTTP error! status: ${res.status}`)
+    }
+    const data = (await res.json()) as ParentFeedbackItem[] | { data: any }
+    // Normalize array shape
+    const items = Array.isArray(data) ? data : ((data as any)?.data ?? [])
+    return { success: true, data: items }
+  } catch (error) {
+    console.error("Error fetching parent feedback:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch feedback",
+    }
+  }
+}
