@@ -19,19 +19,19 @@ export default function Header({ openNav }: HeaderProps) {
     >
       <div className="flex items-center justify-between px-4 sm:px-6 py-2">
         {/* Logo and School Name */}
-        <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+        <div className="flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-4 flex-shrink-0 text-center sm:text-left">
           <Image
             src="/images/logo.png"
             alt="Budding Minds Logo"
-            width={120} // Reduced from 70
-            height={100} // Reduced from 70
-            //className="rounded-full sm:w-[120px] sm:h-[100px]" // Reduced from 90px
+            width={70}
+            height={70}
           />
-          <span className="text-base sm:text-xl font-bold tracking-wide text-[#1E293B] font-calibri leading-tight">
-            <span className="block sm:inline">Budding Minds</span>
-            <span className="block sm:inline sm:ml-2">International School</span>
+          <span className="text-sm sm:text-xl font-bold tracking-wide text-[#1E293B] font-calibri leading-tight">
+            <span className="block">BUDDING MINDS</span>
+            <span className="block">INTERNATIONAL SCHOOL</span>
           </span>
         </div>
+
 
         {/* Search Bar - Centered between logo and hamburger */}
         <div className="flex-1 flex justify-center mx-4 max-w-md">
