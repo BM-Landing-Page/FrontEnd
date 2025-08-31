@@ -188,18 +188,19 @@ export default function Searchbar() {
           )}
         </form>
       </div>
+
       {/* Mobile Search */}
       <div className="md:hidden">
         {!isExpanded ? (
           <button
             onClick={() => setIsExpanded(true)}
             className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 
-                      rounded-full transition-colors duration-200"
+                     rounded-full transition-colors duration-200"
           >
             <Search className="w-5 h-5" />
           </button>
         ) : (
-          <div className="absolute left-0 top-full mt-2 w-full px-4 z-50">
+          <div className="absolute right-0 top-full mt-2 w-80 z-50">
             <form onSubmit={handleSubmit} className="relative">
               <div className="relative flex items-center">
                 <input
@@ -211,23 +212,23 @@ export default function Searchbar() {
                   placeholder="Search pages..."
                   autoFocus
                   className="w-full px-4 py-3 pr-20 text-sm border border-gray-300 rounded-lg
-                             bg-white shadow-lg
-                              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                            placeholder-gray-500 text-gray-700"
+                           bg-white shadow-lg
+                           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                           placeholder-gray-500 text-gray-700"
                 />
-                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
+                <div className="absolute right-1 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
                   <button
                     type="submit"
-                    className="p-2 text-gray-500 hover:text-blue-600 
-                              hover:bg-blue-50 rounded-full transition-colors duration-200"
+                    className="p-1.5 text-gray-500 hover:text-blue-600 
+                             hover:bg-blue-50 rounded-full transition-colors duration-200"
                   >
                     <Search className="w-4 h-4" />
                   </button>
                   <button
                     type="button"
                     onClick={handleClear}
-                    className="p-2 text-gray-500 hover:text-red-600 
-                              hover:bg-red-50 rounded-full transition-colors duration-200"
+                    className="p-1.5 text-gray-500 hover:text-red-600 
+                             hover:bg-red-50 rounded-full transition-colors duration-200"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -236,7 +237,7 @@ export default function Searchbar() {
 
               {/* Mobile Suggestions Dropdown */}
               {showSuggestions && suggestions.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-72 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-y-auto">
                   {suggestions.map((suggestion, index) => (
                     <div
                       key={`${suggestion.route}-${index}`}
@@ -261,7 +262,6 @@ export default function Searchbar() {
         )}
       </div>
 
-      
       {/* Mobile overlay to close search when clicking outside */}
       {isExpanded && <div className="fixed inset-0 z-40 md:hidden" onClick={handleClear} />}
     </div>
