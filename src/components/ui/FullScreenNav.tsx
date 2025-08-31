@@ -3,6 +3,7 @@ import { X, Instagram, Facebook, Linkedin, Youtube } from "lucide-react"
 import type React from "react"
 import Link from "next/link"
 import { useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 
 const NAV_ITEMS = [
   { label: "Home", subItems: [] },
@@ -90,7 +91,6 @@ interface FullScreenNavProps {
   onClose: () => void
 }
 
-// Helper function to check if URL is external
 const isExternalUrl = (url: string): boolean => {
   return url.startsWith("http://") || url.startsWith("https://")
 }
@@ -100,19 +100,18 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
   const [hoverTop, setHoverTop] = useState<number | null>(null)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   const handleSubItemClick = (href: string) => {
     setActive(null)
     onClose()
 
-    // Check if it's an external URL and open in new tab
     if (isExternalUrl(href)) {
       window.open(href, "_blank", "noopener,noreferrer")
     }
   }
 
   const handleMouseEnter = (label: string, index: number) => {
-    // Only set active if the item has sub-items
     const item = NAV_ITEMS.find((nav) => nav.label === label)
     if (item && item.subItems.length > 0) {
       setActive(label)
@@ -134,7 +133,6 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
       } else {
         const route = ROUTE_OVERRIDES[item.label] || `/${item.label.toLowerCase().replace(/\s+/g, "-")}`
 
-        // Check if it's an external URL and open in new tab
         if (isExternalUrl(route)) {
           window.open(route, "_blank", "noopener,noreferrer")
         } else {
@@ -146,7 +144,6 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
     }
   }
 
-  // Handle desktop navigation with consistent behavior
   const handleDesktopNavigation = (item: (typeof NAV_ITEMS)[0], e: React.MouseEvent) => {
     e.preventDefault()
     handleNavigation(item)
@@ -183,7 +180,6 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                       .replace(/\s+/g, "-")}`
                     const finalHref = overrideHref || defaultHref
 
-                    // For external URLs, use regular div with onClick instead of Link
                     if (isExternalUrl(finalHref)) {
                       return (
                         <div
@@ -196,15 +192,20 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                       )
                     }
 
+                    // Internal link: close menu then navigate programmatically
                     return (
-                      <Link
+                      <a
                         key={sub}
                         href={finalHref}
                         className="hover:text-[#850000] transition-colors"
-                        onClick={() => handleSubItemClick(finalHref)}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          onClose()
+                          router.push(finalHref)
+                        }}
                       >
                         {sub}
-                      </Link>
+                      </a>
                     )
                   })}
                 </div>
@@ -292,7 +293,6 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                 // Keep submenu open when hovering over it
               }}
               onMouseLeave={() => {
-                // Only close when leaving the submenu
                 setActive(null)
                 setHoverTop(null)
               }}
@@ -304,7 +304,6 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
                   .replace(/\s+/g, "-")}`
                 const finalHref = overrideHref || defaultHref
 
-                // For external URLs, use regular div with onClick instead of Link
                 if (isExternalUrl(finalHref)) {
                   return (
                     <div
