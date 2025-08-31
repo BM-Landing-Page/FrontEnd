@@ -27,7 +27,7 @@ export default function Curriculum() {
           <p className="text-lg md:text-xl lg:text-2xl mb-6 leading-relaxed max-w-3xl mx-auto opacity-95">
             Preparing tomorrow's leaders through world-class education from ages 5 to 19
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               className="px-6 py-3 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg"
               style={{ backgroundColor: "#54BAB9", color: "white" }}
@@ -37,7 +37,7 @@ export default function Curriculum() {
             <button className="px-6 py-3 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg border-2 border-white text-white hover:bg-white hover:text-gray-800">
               Download Brochure
             </button>
-          </div>
+          </div> */}
         </div>
       </section>
 
