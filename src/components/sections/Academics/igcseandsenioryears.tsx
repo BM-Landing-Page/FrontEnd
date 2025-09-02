@@ -487,7 +487,7 @@ export default function IGCSEAndSeniorYears() {
                     style={{ color: "#54BAB9", borderColor: "#54BAB9" }}
                   >
                     <TrendingUp className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform duration-300" />
-                    Applying to Indian Universities →
+                    Recogonition by Indian Universities →
                   </Link>
                 </div>
               </div>
