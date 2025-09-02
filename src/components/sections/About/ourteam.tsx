@@ -84,7 +84,13 @@ export default function OurTeam() {
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
       <section className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
-        <Image src="/images/ourteam.jpg" alt="Our Team Hero" fill className="object-cover" priority />
+        <Image
+          src="/images/ourteam.jpg"
+          alt="Our Team Hero"
+          fill
+          className="object-cover object-top md:object-center"
+          priority
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
@@ -149,7 +155,7 @@ export default function OurTeam() {
                       src={member.image_url || "/placeholder.svg?height=400&width=300&query=professional headshot"}
                       alt={member.name}
                       fill
-                      className="object-cover"
+                      className="object-cover object-top"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
                         target.src = "/placeholder.svg?height=400&width=300"
@@ -161,11 +167,10 @@ export default function OurTeam() {
                     <h3 className="text-lg font-bold mb-1" style={{ color: "#54BAB9" }}>
                       {member.name}
                     </h3>
-                      <div className="space-y-1">
-                        <p className="text-sm font-medium text-gray-600">{member.education_background}</p>
-                        <p className="text-sm font-medium text-gray-600">{member.role}</p>
-                      </div>
-
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium text-gray-600">{member.education_background}</p>
+                      <p className="text-sm font-medium text-gray-600">{member.role}</p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -210,7 +215,7 @@ export default function OurTeam() {
                     }
                     alt={selectedMember.name}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement
                       target.src = "/placeholder.svg?height=300&width=300"
