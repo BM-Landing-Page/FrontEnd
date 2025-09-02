@@ -28,19 +28,6 @@ export default function TabSwitcher({
         <button
           type="button"
           role="tab"
-          aria-selected={active === "submit"}
-          onClick={() => onChange("submit")}
-          className="flex-1 rounded-full px-4 py-2 text-sm font-medium transition-colors"
-          style={{
-            backgroundColor: active === "submit" ? colors.primary : "transparent",
-            color: active === "submit" ? "#FFFFFF" : "inherit",
-          }}
-        >
-          Submit Feedback
-        </button>
-        <button
-          type="button"
-          role="tab"
           aria-selected={active === "view"}
           onClick={() => onChange("view")}
           className="flex-1 rounded-full px-4 py-2 text-sm font-medium transition-colors"
@@ -51,6 +38,20 @@ export default function TabSwitcher({
         >
           View Feedback
         </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={active === "submit"}
+          onClick={() => onChange("submit")}
+          className="flex-1 rounded-full px-4 py-2 text-sm font-medium transition-colors"
+          style={{
+            backgroundColor: active === "submit" ? colors.primary : "transparent",
+            color: active === "submit" ? "#FFFFFF" : "inherit",
+          }}
+        >
+          Submit Feedback
+        </button>
+        
       </div>
     </div>
   )

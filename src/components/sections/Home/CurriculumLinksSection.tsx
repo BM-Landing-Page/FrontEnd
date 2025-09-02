@@ -1,9 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
-import { BookOpen, Users } from "lucide-react"
+import { BookOpen, Users, ArrowRight } from "lucide-react"
 
 // Local bubble component for section
 function SectionBubble({
@@ -145,7 +146,25 @@ export default function CurriculumLinksSection() {
           })}
         </div>
       </div>
-
+      <div className="flex justify-center mt-12">
+        <Link href="/igcseandsenioryears">
+          <motion.div
+            className="flex items-center gap-3 bg-white text-[#54BAB9] hover:bg-gray-100 px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer"
+                //variants={fadeInUpVariants}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 10px 25px rgba(255, 255, 255, 0.3)",
+              transition: { duration: 0.3 },
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="text-center">
+              <div className="font-semibold text-lg">IGCSE & Senior Years</div>
+            </div>
+            <ArrowRight className="w-5 h-5" />
+          </motion.div>
+        </Link>
+      </div>
       {/* Section Separator */}
       <div className="flex justify-center items-center py-8">
         <div className="flex items-center space-x-4 w-full max-w-md">
@@ -161,6 +180,7 @@ export default function CurriculumLinksSection() {
           <div className="flex-1 h-1 bg-[#54BAB9] rounded-full"></div>
         </div>
       </div>
+      
     </section>
   )
 }

@@ -16,8 +16,7 @@ const COLORS = {
 }
 
 export default function ParentVoiceSection() {
-  const [activeTab, setActiveTab] = useState<"submit" | "view">("submit")
-
+  const [activeTab, setActiveTab] = useState<"submit" | "view">("view")
   return (
     <section className="w-full" style={{ backgroundColor: COLORS.bg }}>
       {/* Hero - full-bleed image with text overlay */}

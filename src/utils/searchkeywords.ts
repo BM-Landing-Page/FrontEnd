@@ -74,7 +74,8 @@ export const searchKeywordGroups: Record<string, string[]> = {
   ],
   "/beyondbooks": [
     "beyond books", "extracurricular", "sports", "clubs", "activities", "art", "music", "drama",
-    "dance", "yoga", "co-curricular", "after school", "non academic", "hobbies", "student clubs", "creative activities"
+    "dance", "yoga", "co-curricular", "after school", "non academic", "hobbies", "student clubs", "creative activities", "ignite", "interschool","intraschool", "20 years",
+    "excellence", "celebrating 20 years", "20th anniversary", "20 years of excellence", "school anniversary", "milestone celebration", "two decades"
   ],
   "/studentprofile": [
     "student profiles", "student stories", "our students", "student portfolio", "profile",
@@ -136,6 +137,7 @@ export const searchKeywordGroups: Record<string, string[]> = {
     "contact", "contact us", "location", "reach us", "get in touch", "phone", "email",
     "address", "directions", "find us", "call us", "school contact", "get directions", "email address"
   ]
+  
 }
 
 
