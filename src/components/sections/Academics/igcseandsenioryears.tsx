@@ -474,7 +474,7 @@ export default function IGCSEAndSeniorYears() {
               <div className="bg-white rounded-2xl p-10 shadow-2xl">
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <Link
-                    href="#"
+                    href="https://www.cambridgeinternational.org/programmes-and-qualifications/recognition-and-acceptance/#:~:text=We%20provide%20extra%20guidance%20on%20university%20recognition%20of,us%20with%20formal%20written%20acceptance%20of%20Cambridge%20qualifications"
                     className="group inline-flex items-center px-10 py-5 text-white font-bold rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                     style={{ background: "linear-gradient(135deg, #54BAB9 0%, #9ED2C6 100%)" }}
                   >
@@ -482,7 +482,7 @@ export default function IGCSEAndSeniorYears() {
                     Cambridge Recognition Worldwide →
                   </Link>
                   <Link
-                    href="#"
+                    href="https://www.cambridgeinternational.org/programmes-and-qualifications/recognition-and-acceptance/country/india/"
                     className="group inline-flex items-center px-10 py-5 bg-white font-bold rounded-2xl shadow-xl border-3 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                     style={{ color: "#54BAB9", borderColor: "#54BAB9" }}
                   >
