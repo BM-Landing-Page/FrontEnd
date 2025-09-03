@@ -62,6 +62,21 @@ export default function HomePage() {
     setBubbles(newBubbles)
   }, [])
 
+  // ⬇️ Adjust Chatbase bubble position after script loads
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const chatBubble = document.getElementById("chatbase-bubble")
+      if (chatBubble) {
+        chatBubble.style.bottom = "90px"
+        chatBubble.style.right = "20px"
+        chatBubble.style.zIndex = "50"
+        clearInterval(interval) // stop once applied
+      }
+    }, 500)
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <main className="min-h-screen bg-white relative overflow-hidden">
       {/* Floating Bubbles */}

@@ -69,7 +69,7 @@ export default function HeroBanner() {
         ))}
       </div>
 
-      {/* WhatsApp Floating Button */}
+      {/* WhatsApp Floating Button
       <a
         href="https://wa.me/919840391815"
         target="_blank"
@@ -77,7 +77,7 @@ export default function HeroBanner() {
         className="fixed bottom-5 right-5 md:bottom-6 md:right-6 z-40 bg-[#54BAB9] hover:bg-[#459a99] p-3 rounded-full shadow-lg"
       >
         <FaWhatsapp size={20} className="text-white" />
-      </a>
+      </a> */}
     </div>
   );
 }
