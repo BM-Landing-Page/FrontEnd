@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Script from "next/script"
 import HeroBanner from "@/components/sections/Home/HeroBanner"
 import USPs from "@/components/sections/Home/USPs"
 import CurriculumLinksSection from "@/components/sections/Home/CurriculumLinksSection"
 import VideosShowcase from "@/components/sections/Home/VideosShowcaseSection"
-//import ContactSection from "@/components/sections/Home/ContactSection"
 
 // Floating Bubble component
 function FloatingBubble({
@@ -79,9 +79,37 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
           <CurriculumLinksSection />
           <VideosShowcase />
-
         </div>
       </div>
+
+      {/* Chatbase Script */}
+      <Script id="chatbase-embed" strategy="afterInteractive">
+        {`
+          (function(){
+            if(!window.chatbase||window.chatbase("getState")!=="initialized"){
+              window.chatbase=(...arguments)=>{
+                if(!window.chatbase.q){window.chatbase.q=[]}
+                window.chatbase.q.push(arguments)
+              };
+              window.chatbase=new Proxy(window.chatbase,{
+                get(target,prop){
+                  if(prop==="q"){return target.q}
+                  return(...args)=>target(prop,...args)
+                }
+              })
+            }
+            const onLoad=function(){
+              const script=document.createElement("script");
+              script.src="https://www.chatbase.co/embed.min.js";
+              script.id="wD_OAIHDFcqe9v2oO9GTH";
+              script.domain="www.chatbase.co";
+              document.body.appendChild(script)
+            };
+            if(document.readyState==="complete"){onLoad()}
+            else{window.addEventListener("load",onLoad)}
+          })();
+        `}
+      </Script>
     </main>
   )
 }
