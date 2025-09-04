@@ -23,7 +23,7 @@ export default function ParentVoiceSection() {
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
         <div className="relative h-64 md:h-96 lg:h-[28rem]">
           <img
-            src="/parents-and-child-at-school-minimal.png"
+            src="/images/parentvoice.jpg"
             alt="Parents and child at school"
             className="absolute inset-0 h-full w-full object-cover"
           />
