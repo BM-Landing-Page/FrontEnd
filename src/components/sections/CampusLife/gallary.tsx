@@ -21,26 +21,65 @@ export default function AnimatedGallery() {
   })
 
   const containerRef = useRef<HTMLDivElement>(null)
-  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set())
+  const [imageLoadStates, setImageLoadStates] = useState<Map<number, 'loading' | 'loaded' | 'error'>>(new Map())
+  const imageCache = useRef<Map<string, HTMLImageElement>>(new Map())
+  const preloadQueue = useRef<Set<number>>(new Set())
+  
+  // Intersection Observer for lazy loading
+  const observerRef = useRef<IntersectionObserver | null>(null)
+  const imageRefs = useRef<Map<number, HTMLDivElement>>(new Map())
 
-  // Load initial gallery data
+  // Initialize intersection observer
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const itemId = parseInt(entry.target.getAttribute('data-item-id') || '0')
+            preloadImage(itemId)
+          }
+        })
+      },
+      {
+        rootMargin: '50px',
+        threshold: 0.1
+      }
+    )
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect()
+      }
+    }
+  }, [])
+
+  // Load initial gallery data - load more images initially
   useEffect(() => {
     const loadInitialGalleryItems = async () => {
       try {
         setLoading(true)
         setError(null)
-        const response = await fetchGalleryItems(1, 6)
+        console.log("🔄 Loading initial gallery items...")
+        
+        // Load 5 images initially instead of 1 for better UX
+        const response = await fetchGalleryItems(1, 5)
+        console.log("📦 API Response:", response)
+        
         if (response.success && response.data) {
+          console.log("✅ Gallery items loaded:", response.data)
           setGalleryItems(response.data)
+          
           if (response.pagination) {
+            console.log("📄 Pagination info:", response.pagination)
             setPagination(response.pagination)
           }
         } else {
+          console.error("❌ API Error:", response.error)
           setError(response.error || "Failed to load gallery items")
         }
       } catch (err) {
+        console.error("💥 Exception:", err)
         setError("An unexpected error occurred")
-        console.error("Error loading gallery:", err)
       } finally {
         setLoading(false)
       }
@@ -49,22 +88,113 @@ export default function AnimatedGallery() {
     loadInitialGalleryItems()
   }, [])
 
-  // Load more images
+  // Smart image preloading with priorities and caching
+  const preloadImage = useCallback((itemId: number) => {
+    const item = galleryItems.find(g => g.id === itemId)
+    if (!item || imageLoadStates.get(itemId) === 'loaded' || preloadQueue.current.has(itemId)) {
+      return
+    }
+
+    preloadQueue.current.add(itemId)
+    setImageLoadStates(prev => new Map(prev.set(itemId, 'loading')))
+
+    // Check cache first
+    if (imageCache.current.has(item.image_url)) {
+      setImageLoadStates(prev => new Map(prev.set(itemId, 'loaded')))
+      preloadQueue.current.delete(itemId)
+      return
+    }
+
+    const img = new window.Image()
+    img.sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+    
+    img.onload = () => {
+      imageCache.current.set(item.image_url, img)
+      setImageLoadStates(prev => new Map(prev.set(itemId, 'loaded')))
+      preloadQueue.current.delete(itemId)
+    }
+    
+    img.onerror = () => {
+      setImageLoadStates(prev => new Map(prev.set(itemId, 'error')))
+      preloadQueue.current.delete(itemId)
+      console.error(`Failed to load image: ${item.image_url}`)
+    }
+
+    img.src = item.image_url
+  }, [galleryItems, imageLoadStates])
+
+  // Priority-based image loading
+  useEffect(() => {
+    if (galleryItems.length === 0) return
+
+    // Priority 1: Current image (immediate)
+    if (galleryItems[currentIndex]) {
+      preloadImage(galleryItems[currentIndex].id)
+    }
+
+    // Priority 2: Adjacent images (50ms delay)
+    const adjacentItems = [
+      galleryItems[currentIndex - 1],
+      galleryItems[currentIndex + 1]
+    ].filter(Boolean)
+
+    adjacentItems.forEach((item, index) => {
+      setTimeout(() => preloadImage(item.id), 50 + (index * 25))
+    })
+
+    // Priority 3: Extended range (200ms delay, lower priority)
+    const extendedRange = 2
+    for (let i = Math.max(0, currentIndex - extendedRange); 
+         i <= Math.min(galleryItems.length - 1, currentIndex + extendedRange); 
+         i++) {
+      if (i !== currentIndex && i !== currentIndex - 1 && i !== currentIndex + 1) {
+        setTimeout(() => preloadImage(galleryItems[i].id), 200 + (Math.abs(i - currentIndex) * 100))
+      }
+    }
+  }, [currentIndex, galleryItems, preloadImage])
+
+  // Improved load more function
   const loadMoreImages = useCallback(async () => {
-    if (loadingMore || !pagination.hasMore) return
+    console.log("🔄 loadMoreImages called")
+    console.log("📊 Load state:", {
+      loadingMore,
+      hasMore: pagination.hasMore,
+      currentPage: pagination.currentPage
+    })
+    
+    if (loadingMore || !pagination.hasMore) {
+      console.log("⚠️ Load blocked:", { loadingMore, hasMore: pagination.hasMore })
+      return
+    }
 
     try {
       setLoadingMore(true)
+      setError(null)
+      
       const nextPage = pagination.currentPage + 1
-      const response = await fetchGalleryItems(nextPage, 6)
-      if (response.success && response.data) {
-        setGalleryItems((prev) => [...prev, ...response.data!])
+      console.log("📄 Loading page:", nextPage)
+      
+      const response = await fetchGalleryItems(nextPage, 5) // Load 5 at a time
+      console.log("📦 Load more response:", response)
+      
+      if (response.success && response.data && response.data.length > 0) {
+        console.log("✅ New items loaded:", response.data.length)
+        setGalleryItems((prev) => {
+          const newItems = [...prev, ...response.data!]
+          console.log("📊 Total items now:", newItems.length)
+          return newItems
+        })
+        
         if (response.pagination) {
+          console.log("📄 Updated pagination:", response.pagination)
           setPagination(response.pagination)
         }
+      } else {
+        console.warn("No more items to load")
       }
     } catch (err) {
-      console.error("Error loading more images:", err)
+      console.error("💥 Load more error:", err)
+      setError("Failed to load more images")
     } finally {
       setLoadingMore(false)
     }
@@ -73,41 +203,115 @@ export default function AnimatedGallery() {
   // Auto-load more images when approaching the end
   useEffect(() => {
     if (galleryItems.length > 0 && pagination.hasMore) {
-      const threshold = Math.max(1, galleryItems.length - 3) // Load more when 3 items from end
-      if (currentIndex >= threshold) {
+      const threshold = Math.max(1, galleryItems.length - 2)
+      if (currentIndex >= threshold && !loadingMore) {
         loadMoreImages()
       }
     }
-  }, [currentIndex, galleryItems.length, pagination.hasMore, loadMoreImages])
+  }, [currentIndex, galleryItems.length, pagination.hasMore, loadingMore, loadMoreImages])
 
-  const scrollToIndex = (index: number) => {
-    if (containerRef.current && !isTransitioning && galleryItems.length > 0) {
-      setIsTransitioning(true)
-      const itemWidth = containerRef.current.clientWidth
-      containerRef.current.scrollTo({
-        left: index * itemWidth,
-        behavior: "smooth",
+  // Improved scroll handling
+  const scrollToIndex = useCallback((index: number) => {
+    console.log("🎯 scrollToIndex called with:", index)
+    console.log("📊 Container state:", {
+      containerExists: !!containerRef.current,
+      isTransitioning,
+      galleryItemsLength: galleryItems.length
+    })
+    
+    if (!containerRef.current || isTransitioning || galleryItems.length === 0) {
+      console.log("❌ Scroll blocked:", {
+        noContainer: !containerRef.current,
+        isTransitioning,
+        noItems: galleryItems.length === 0
       })
-      setCurrentIndex(index)
-      setTimeout(() => setIsTransitioning(false), 800)
+      return
     }
-  }
+    
+    // Ensure index is valid
+    const validIndex = Math.max(0, Math.min(index, galleryItems.length - 1))
+    
+    setIsTransitioning(true)
+    
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      if (containerRef.current) {
+        const itemWidth = containerRef.current.clientWidth
+        console.log("📏 Item width:", itemWidth)
+        console.log("🎯 Scrolling to:", validIndex * itemWidth)
+        
+        containerRef.current.scrollTo({
+          left: validIndex * itemWidth,
+          behavior: "smooth",
+        })
+        setCurrentIndex(validIndex)
+      }
+      
+      setTimeout(() => {
+        console.log("✅ Transition complete")
+        setIsTransitioning(false)
+      }, 300)
+    })
+  }, [isTransitioning, galleryItems.length])
 
-  const goToPrevious = () => {
-    if (galleryItems.length === 0) return
+  const goToPrevious = useCallback(() => {
+    console.log("🔍 goToPrevious called")
+    console.log("📊 Current state:", {
+      currentIndex,
+      galleryItemsLength: galleryItems.length,
+      isTransitioning
+    })
+    
+    if (galleryItems.length === 0) {
+      console.log("⚠️ No gallery items available")
+      return
+    }
+    
+    // Load more if we're at the beginning and there might be more pages
+    if (currentIndex === 0 && pagination.hasMore && !loadingMore) {
+      loadMoreImages()
+    }
+    
     const newIndex = currentIndex > 0 ? currentIndex - 1 : galleryItems.length - 1
+    console.log("⬅️ Moving to index:", newIndex)
     scrollToIndex(newIndex)
-  }
+  }, [currentIndex, galleryItems.length, scrollToIndex, pagination.hasMore, loadingMore, loadMoreImages])
 
-  const goToNext = () => {
-    if (galleryItems.length === 0) return
+  const goToNext = useCallback(() => {
+    console.log("🔍 goToNext called")
+    console.log("📊 Current state:", {
+      currentIndex,
+      galleryItemsLength: galleryItems.length,
+      isTransitioning,
+      pagination
+    })
+    
+    if (galleryItems.length === 0) {
+      console.log("⚠️ No gallery items available")
+      return
+    }
+    
+    // If we only have 1 item and there are more to load, load them first
+    if (galleryItems.length === 1 && pagination.hasMore && !loadingMore) {
+      console.log("🔄 Loading more items before navigation...")
+      loadMoreImages()
+      return
+    }
+    
+    // If we're at the last item, try to load more
+    if (currentIndex >= galleryItems.length - 1 && pagination.hasMore && !loadingMore) {
+      loadMoreImages()
+    }
+    
     const newIndex = currentIndex < galleryItems.length - 1 ? currentIndex + 1 : 0
+    console.log("➡️ Moving to index:", newIndex)
     scrollToIndex(newIndex)
-  }
+  }, [currentIndex, galleryItems.length, scrollToIndex, pagination.hasMore, loadingMore, loadMoreImages])
 
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (galleryItems.length === 0) return
+      if (galleryItems.length === 0 || isTransitioning) return
       if (event.key === "ArrowLeft") {
         event.preventDefault()
         goToPrevious()
@@ -119,59 +323,146 @@ export default function AnimatedGallery() {
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [currentIndex, galleryItems.length])
+  }, [goToPrevious, goToNext, galleryItems.length, isTransitioning])
 
+  // Debounced scroll handler
   useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout
+    
     const handleScroll = () => {
       if (containerRef.current && galleryItems.length > 0) {
         const scrollLeft = containerRef.current.scrollLeft
         setScrollX(scrollLeft)
-        const itemWidth = containerRef.current.clientWidth
-        const newIndex = Math.round(scrollLeft / itemWidth)
-        if (newIndex !== currentIndex) {
-          setCurrentIndex(newIndex)
-        }
+        
+        clearTimeout(scrollTimeout)
+        scrollTimeout = setTimeout(() => {
+          const itemWidth = containerRef.current!.clientWidth
+          const newIndex = Math.round(scrollLeft / itemWidth)
+          if (newIndex !== currentIndex && newIndex >= 0 && newIndex < galleryItems.length) {
+            setCurrentIndex(newIndex)
+          }
+        }, 100) // Increased debounce time
       }
     }
 
     const container = containerRef.current
     if (container) {
-      container.addEventListener("scroll", handleScroll)
-      return () => container.removeEventListener("scroll", handleScroll)
+      container.addEventListener("scroll", handleScroll, { passive: true })
+      return () => {
+        container.removeEventListener("scroll", handleScroll)
+        clearTimeout(scrollTimeout)
+      }
     }
   }, [galleryItems.length, currentIndex])
 
-  // Lazy loading: preload images near current index
-  useEffect(() => {
-    const preloadRange = 2 // Preload 2 images before and after current
-    const startIndex = Math.max(0, currentIndex - preloadRange)
-    const endIndex = Math.min(galleryItems.length - 1, currentIndex + preloadRange)
+  // Optimized image component
+  const OptimizedImage = ({ item, index }: { item: GalleryItem; index: number }) => {
+    const loadState = imageLoadStates.get(item.id) || 'loading'
+    const isActive = index === currentIndex
+    const isAdjacent = Math.abs(index - currentIndex) <= 1
+    const shouldRender = Math.abs(index - currentIndex) <= 2
 
-    for (let i = startIndex; i <= endIndex; i++) {
-      const item = galleryItems[i]
-      if (item && !loadedImages.has(item.id)) {
-        const img = new window.Image()
-        img.onload = () => {
-          setLoadedImages((prev) => new Set([...prev, item.id]))
-        }
-        img.src = item.image_url
+    useEffect(() => {
+      const element = imageRefs.current.get(item.id)
+      if (element && observerRef.current) {
+        element.setAttribute('data-item-id', item.id.toString())
+        observerRef.current.observe(element)
       }
+      
+      return () => {
+        if (element && observerRef.current) {
+          observerRef.current.unobserve(element)
+        }
+      }
+    }, [item.id])
+
+    if (!shouldRender) {
+      return (
+        <div
+          ref={(el) => {
+            if (el) {
+              imageRefs.current.set(item.id, el)
+            } else {
+              imageRefs.current.delete(item.id)
+            }
+          }}
+          className="w-full h-[400px] bg-gray-50 rounded-2xl flex items-center justify-center"
+        >
+          <div className="w-8 h-8 bg-gray-200 rounded-full" />
+        </div>
+      )
     }
-  }, [currentIndex, galleryItems, loadedImages])
+
+    if (loadState === 'error') {
+      return (
+        <div className="w-full h-[400px] bg-gray-100 rounded-2xl flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-12 h-12 bg-red-100 rounded-full mx-auto mb-2 flex items-center justify-center">
+              <svg className="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <p className="text-sm text-gray-500">Image unavailable</p>
+          </div>
+        </div>
+      )
+    }
+
+    if (loadState === "loading") {
+      return (
+        <div
+          ref={(el) => {
+            if (el) {
+              imageRefs.current.set(item.id, el)
+            } else {
+              imageRefs.current.delete(item.id)
+            }
+          }}
+          className="w-full h-[400px] bg-gray-50 rounded-2xl flex items-center justify-center"
+        >
+          <div className="text-center">
+            <Loader2 className="w-8 h-8 animate-spin text-[#54BAB9] mx-auto mb-2" />
+            <p className="text-xs text-gray-500">Loading...</p>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div
+        ref={(el) => {
+          if (el) {
+            imageRefs.current.set(item.id, el)
+          } else {
+            imageRefs.current.delete(item.id)
+          }
+        }}
+      >
+        <Image
+          src={item.image_url}
+          alt={item.description || `Gallery image ${index + 1}`}
+          width={800}
+          height={600}
+          className="w-full h-auto object-cover rounded-2xl max-h-[70vh] transition-all duration-300 group-hover:scale-105"
+          priority={isActive || isAdjacent}
+          loading={isActive || isAdjacent ? "eager" : "lazy"}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkrHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyxxxzCsVIHvzz7/wB5/9k="
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+          quality={isActive ? 90 : 75}
+        />
+      </div>
+    )
+  }
 
   // Loading state
   if (loading) {
     return (
       <div className="h-screen bg-gradient-to-br from-white via-[#F7ECDE]/20 to-[#E9DAC1]/30 flex items-center justify-center">
-        <div className="text-center animate-fade-in-up">
-          <Loader2 className="w-16 h-16 animate-spin text-[#54BAB9] mx-auto mb-6" />
-          <h2 className="text-2xl font-light text-gray-700 mb-2">Loading Gallery</h2>
-          <p className="text-gray-500">Fetching beautiful memories...</p>
-          <div className="flex justify-center mt-4 space-x-1">
-            <div className="w-2 h-2 bg-[#54BAB9] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-            <div className="w-2 h-2 bg-[#9ED2C6] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-            <div className="w-2 h-2 bg-[#E9DAC1] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
-          </div>
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 animate-spin text-[#54BAB9] mx-auto mb-4" />
+          <h2 className="text-xl font-light text-gray-700 mb-2">Loading Gallery</h2>
+          <p className="text-gray-500">Please wait...</p>
         </div>
       </div>
     )
@@ -181,18 +472,13 @@ export default function AnimatedGallery() {
   if (error) {
     return (
       <div className="h-screen bg-gradient-to-br from-white via-[#F7ECDE]/20 to-[#E9DAC1]/30 flex items-center justify-center">
-        <div className="text-center animate-fade-in-up max-w-md mx-auto px-6">
-          <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-            <svg className="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"
-              />
+        <div className="text-center max-w-md mx-auto px-6">
+          <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
           </div>
-          <h2 className="text-2xl font-light text-gray-700 mb-3">Unable to Load Gallery</h2>
+          <h2 className="text-xl font-light text-gray-700 mb-3">Unable to Load Gallery</h2>
           <p className="text-gray-500 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
@@ -209,24 +495,14 @@ export default function AnimatedGallery() {
   if (galleryItems.length === 0) {
     return (
       <div className="h-screen bg-gradient-to-br from-white via-[#F7ECDE]/20 to-[#E9DAC1]/30 flex items-center justify-center">
-        <div className="text-center animate-fade-in-up max-w-md mx-auto px-6">
-          <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 animate-float">
-            <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
+        <div className="text-center max-w-md mx-auto px-6">
+          <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <h2 className="text-2xl font-light text-gray-700 mb-3">No Memories Yet</h2>
-          <p className="text-gray-500 mb-4">The gallery is empty. Check back later for new memories and moments!</p>
-          <div className="flex justify-center space-x-2">
-            <div className="w-3 h-3 bg-[#F7ECDE] rounded-full animate-pulse" />
-            <div className="w-3 h-3 bg-[#E9DAC1] rounded-full animate-pulse" style={{ animationDelay: "0.5s" }} />
-            <div className="w-3 h-3 bg-[#9ED2C6] rounded-full animate-pulse" style={{ animationDelay: "1s" }} />
-          </div>
+          <h2 className="text-xl font-light text-gray-700 mb-3">No Images Yet</h2>
+          <p className="text-gray-500">The gallery is empty. Check back later!</p>
         </div>
       </div>
     )
@@ -234,38 +510,37 @@ export default function AnimatedGallery() {
 
   return (
     <div className="h-screen bg-gradient-to-br from-white via-[#F7ECDE]/20 to-[#E9DAC1]/30 overflow-hidden relative">
-      {/* Animated Background Particles */}
+      {/* Simplified background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 12 }).map((_, i) => (
+        {Array.from({ length: 3 }).map((_, i) => (
           <div
             key={i}
-            className={`absolute rounded-full opacity-20 animate-float-${i % 4}`}
+            className="absolute rounded-full opacity-10 animate-pulse"
             style={{
-              width: `${8 + (i % 3) * 4}px`,
-              height: `${8 + (i % 3) * 4}px`,
-              backgroundColor: i % 4 === 0 ? "#F7ECDE" : i % 4 === 1 ? "#E9DAC1" : i % 4 === 2 ? "#9ED2C6" : "#54BAB9",
-              left: `${10 + ((i * 8) % 80)}%`,
-              top: `${15 + ((i * 12) % 70)}%`,
-              animationDelay: `${i * 0.8}s`,
-              animationDuration: `${4 + (i % 3)}s`,
-              transform: `translateX(${scrollX * (0.1 + (i % 3) * 0.05)}px)`,
+              width: `${12 + i * 8}px`,
+              height: `${12 + i * 8}px`,
+              backgroundColor: i % 2 === 0 ? "#54BAB9" : "#9ED2C6",
+              left: `${20 + i * 30}%`,
+              top: `${20 + i * 20}%`,
+              animationDelay: `${i * 2}s`,
+              animationDuration: `${4 + i}s`,
             }}
           />
         ))}
       </div>
 
       {/* Header */}
-      <div className="absolute top-0 left-0 right-0 z-20 p-8">
+      <div className="absolute top-0 left-0 right-0 z-20 p-6">
         <div className="flex items-center justify-between">
-          <div className="animate-slide-in-left">
-            <h1 className="text-4xl md:text-6xl font-light text-gray-800 tracking-wider animate-gradient-text">
-              OUR GALLERY
+          <div>
+            <h1 className="text-3xl md:text-5xl font-light text-gray-800 tracking-wide">
+              GALLERY
             </h1>
-            <div className="w-24 h-px bg-[#54BAB9] mt-2 animate-expand"></div>
+            <div className="w-16 h-px bg-[#54BAB9] mt-2"></div>
           </div>
-          <div className="text-right text-gray-600 animate-slide-in-right">
-            <p className="text-sm opacity-80">{`${currentIndex + 1} of ${pagination.totalItems}`}</p>
-            <p className="text-xs opacity-60 mt-1 animate-pulse-soft">Use ← → keys or click arrows</p>
+          <div className="text-right text-gray-600">
+            <p className="text-sm">{`${currentIndex + 1} of ${Math.max(galleryItems.length, pagination.totalItems)}`}</p>
+            <p className="text-xs opacity-60 mt-1">← → keys or arrows</p>
           </div>
         </div>
       </div>
@@ -274,137 +549,47 @@ export default function AnimatedGallery() {
       <button
         onClick={goToPrevious}
         disabled={isTransitioning || galleryItems.length === 0}
-        className="absolute left-8 top-1/2 transform -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full p-4 shadow-lg transition-all duration-500 hover:scale-125 hover:rotate-12 group animate-bounce-in-left disabled:opacity-50 disabled:cursor-not-allowed"
+        className="absolute left-6 top-1/2 transform -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <ChevronLeft
-          size={32}
-          className="text-gray-700 group-hover:text-[#54BAB9] transition-all duration-300 group-hover:scale-110"
-        />
+        <ChevronLeft size={24} className="text-gray-700 hover:text-[#54BAB9] transition-colors" />
       </button>
 
       <button
         onClick={goToNext}
         disabled={isTransitioning || galleryItems.length === 0}
-        className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full p-4 shadow-lg transition-all duration-500 hover:scale-125 hover:-rotate-12 group animate-bounce-in-right disabled:opacity-50 disabled:cursor-not-allowed"
+        className="absolute right-6 top-1/2 transform -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <ChevronRight
-          size={32}
-          className="text-gray-700 group-hover:text-[#54BAB9] transition-all duration-300 group-hover:scale-110"
-        />
+        <ChevronRight size={24} className="text-gray-700 hover:text-[#54BAB9] transition-colors" />
       </button>
 
-      {/* Load More Button (when not auto-loading) */}
+      {/* Load More Button */}
       {pagination.hasMore && currentIndex >= galleryItems.length - 1 && (
         <button
           onClick={loadMoreImages}
           disabled={loadingMore}
-          className="absolute right-8 bottom-24 z-20 bg-[#54BAB9]/80 backdrop-blur-sm hover:bg-[#54BAB9]/90 text-white rounded-full p-3 shadow-lg transition-all duration-500 hover:scale-110 group disabled:opacity-50"
+          className="absolute right-6 bottom-20 z-20 bg-[#54BAB9]/80 backdrop-blur-sm hover:bg-[#54BAB9]/90 text-white rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 disabled:opacity-50"
         >
-          {loadingMore ? (
-            <Loader2 size={24} className="animate-spin" />
-          ) : (
-            <Plus size={24} className="group-hover:rotate-90 transition-transform duration-300" />
-          )}
+          {loadingMore ? <Loader2 size={20} className="animate-spin" /> : <Plus size={20} />}
         </button>
       )}
 
       {/* Horizontal Scrolling Container */}
       <div
         ref={containerRef}
-        className="flex h-full overflow-x-auto overflow-y-hidden pt-32 pb-16 scroll-smooth snap-x snap-mandatory"
+        className="flex h-full overflow-x-auto overflow-y-hidden pt-24 pb-12 scroll-smooth snap-x snap-mandatory"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {/* Hide scrollbar */}
         <style jsx>{`
-          div::-webkit-scrollbar {
-            display: none;
-          }
+          div::-webkit-scrollbar { display: none; }
         `}</style>
 
         {galleryItems.map((item, index) => (
-          <div key={item.id} className="flex-none w-screen h-full flex items-center justify-center px-16 snap-center">
-            <div className="relative max-w-5xl mx-auto">
-              {/* Animated background elements */}
-              <div
-                className="absolute -top-12 -left-12 w-32 h-32 rounded-full opacity-10 animate-pulse-glow"
-                style={{
-                  backgroundColor:
-                    index % 4 === 0 ? "#F7ECDE" : index % 4 === 1 ? "#E9DAC1" : index % 4 === 2 ? "#9ED2C6" : "#54BAB9",
-                  animationDelay: `${index * 0.5}s`,
-                  transform: `translateX(${scrollX * 0.1}px) rotate(${scrollX * 0.05}deg)`,
-                }}
-              />
-              <div
-                className="absolute -bottom-16 -right-16 w-24 h-24 rounded-full opacity-10 animate-spin-slow"
-                style={{
-                  backgroundColor: index % 4 === 2 ? "#9ED2C6" : "#54BAB9",
-                  animationDelay: `${index * 0.3}s`,
-                  transform: `translateX(${scrollX * -0.08}px)`,
-                }}
-              />
-
-              {/* Orbiting elements */}
-              <div
-                className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full opacity-30 animate-orbit"
-                style={{
-                  backgroundColor: "#54BAB9",
-                  animationDelay: `${index * 0.2}s`,
-                }}
-              />
-
-              {/* Image container */}
-              <div
-                className={`relative group cursor-pointer animate-fade-in-up ${
-                  currentIndex === index ? "animate-scale-in" : ""
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Dynamic glow effect */}
-                <div
-                  className="absolute -inset-8 rounded-3xl opacity-20 blur-2xl transition-all duration-700 group-hover:opacity-50 group-hover:blur-3xl animate-pulse-glow"
-                  style={{
-                    background: `linear-gradient(135deg, ${
-                      index % 4 === 0
-                        ? "#F7ECDE"
-                        : index % 4 === 1
-                          ? "#E9DAC1"
-                          : index % 4 === 2
-                            ? "#9ED2C6"
-                            : "#54BAB9"
-                    }, transparent)`,
-                  }}
-                />
-
-                {/* Main image */}
-                <div className="relative overflow-hidden rounded-3xl shadow-2xl bg-white p-6 transition-all duration-700 group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-shimmer">
-                  {loadedImages.has(item.id) ? (
-                    <Image
-                      src={item.image_url || "/placeholder.svg"}
-                      alt={item.description}
-                      width={800}
-                      height={600}
-                      className="w-full h-auto object-cover rounded-2xl max-h-[70vh] transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement
-                        target.src = "/placeholder.svg?height=600&width=800&text=Image+Not+Available"
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-[400px] bg-gray-100 rounded-2xl flex items-center justify-center">
-                      <Loader2 className="w-8 h-8 animate-spin text-[#54BAB9]" />
-                    </div>
-                  )}
+          <div key={item.id} className="flex-none w-screen h-full flex items-center justify-center px-12 snap-center">
+            <div className="relative max-w-4xl mx-auto">
+              <div className="relative group">
+                <div className="relative overflow-hidden rounded-2xl shadow-xl bg-white p-4 transition-all duration-300 group-hover:scale-102">
+                  <OptimizedImage item={item} index={index} />
                 </div>
-
-                {/* Animated corner elements */}
-                <div
-                  className="absolute top-2 left-2 w-6 h-6 border-l-3 border-t-3 rounded-tl-lg opacity-60 animate-draw-border"
-                  style={{ borderColor: "#54BAB9" }}
-                />
-                <div
-                  className="absolute bottom-2 right-2 w-6 h-6 border-r-3 border-b-3 rounded-br-lg opacity-60 animate-draw-border"
-                  style={{ borderColor: "#9ED2C6", animationDelay: "0.3s" }}
-                />
               </div>
             </div>
           </div>
@@ -412,53 +597,33 @@ export default function AnimatedGallery() {
 
         {/* Loading more indicator */}
         {loadingMore && (
-          <div className="flex-none w-screen h-full flex items-center justify-center px-16">
+          <div className="flex-none w-screen h-full flex items-center justify-center px-12">
             <div className="text-center">
-              <Loader2 className="w-12 h-12 animate-spin text-[#54BAB9] mx-auto mb-4" />
-              <p className="text-gray-600">Loading more images...</p>
+              <Loader2 className="w-8 h-8 animate-spin text-[#54BAB9] mx-auto mb-2" />
+              <p className="text-gray-600 text-sm">Loading more...</p>
             </div>
           </div>
         )}
       </div>
 
-      {/* Enhanced progress bar with pagination info */}
+      {/* Progress bar */}
       {galleryItems.length > 0 && (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-slide-up">
-          <div className="bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg animate-float">
-            <div className="flex items-center space-x-4">
-              <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
+          <div className="bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+            <div className="flex items-center space-x-3">
+              <div className="w-24 h-1 bg-gray-200 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] rounded-full transition-all duration-700 animate-shimmer"
-                  style={{ width: `${((currentIndex + 1) / pagination.totalItems) * 100}%` }}
+                  className="h-full bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] rounded-full transition-all duration-300"
+                  style={{ width: `${((currentIndex + 1) / Math.max(galleryItems.length, pagination.totalItems)) * 100}%` }}
                 />
               </div>
               {pagination.hasMore && (
-                <span className="text-xs text-gray-500 whitespace-nowrap">
-                  +{pagination.totalItems - galleryItems.length} more
-                </span>
+                <span className="text-xs text-gray-500">+{pagination.totalItems - galleryItems.length} more</span>
               )}
             </div>
           </div>
         </div>
       )}
-
-      {/* More floating decorative elements */}
-      <div
-        className="absolute top-1/4 left-20 w-4 h-4 rounded-full opacity-30 animate-float-reverse"
-        style={{ backgroundColor: "#F7ECDE", transform: `translateX(${scrollX * 0.15}px)` }}
-      />
-      <div
-        className="absolute top-3/4 right-32 w-6 h-6 rounded-full opacity-20 animate-bounce-slow"
-        style={{ backgroundColor: "#9ED2C6", animationDelay: "2s", transform: `translateX(${scrollX * -0.1}px)` }}
-      />
-      <div
-        className="absolute top-1/2 right-20 w-2 h-2 rounded-full opacity-40 animate-pulse-glow"
-        style={{ backgroundColor: "#54BAB9", animationDelay: "1s", transform: `translateX(${scrollX * 0.2}px)` }}
-      />
-      <div
-        className="absolute top-1/3 left-1/3 w-3 h-3 rounded-full opacity-25 animate-spin-slow"
-        style={{ backgroundColor: "#E9DAC1", transform: `translateX(${scrollX * 0.05}px)` }}
-      />
     </div>
   )
 }
