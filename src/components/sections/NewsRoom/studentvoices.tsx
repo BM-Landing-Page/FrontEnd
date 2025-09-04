@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
-import { useState, useEffect } from "react"
-import { MessageCircle, User, Calendar, BookOpen, Globe, Heart, Lightbulb, Star, X, Loader2, ArrowRight } from "lucide-react"
+import { useState, useEffect, useMemo } from "react"
+import { MessageCircle, User, Calendar, BookOpen, Globe, Heart, Lightbulb, Star, X, Loader2, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { fetchBlogs, type Blog } from "@/services/api"
 
 interface Story {
@@ -84,9 +84,14 @@ const formatDate = (dateString: string): string => {
 
 export default function StudentVoices() {
   const [selectedStory, setSelectedStory] = useState<Story | null>(null)
-  const [stories, setStories] = useState<Story[]>([])
+  const [allStories, setAllStories] = useState<Story[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [selectedTheme, setSelectedTheme] = useState<keyof typeof themeData | "all">("all")
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1)
+  const storiesPerPage = 6
 
   useEffect(() => {
     const loadBlogs = async () => {
@@ -111,7 +116,7 @@ export default function StudentVoices() {
               thumbnail: blog.thumbnail,
             }
           })
-          setStories(transformedStories)
+          setAllStories(transformedStories)
         } else {
           setError(response.error || "Failed to load stories")
         }
@@ -125,6 +130,69 @@ export default function StudentVoices() {
 
     loadBlogs()
   }, [])
+
+  // Filter stories by theme and paginate
+  const { paginatedStories, totalPages, filteredStoriesCount } = useMemo(() => {
+    const filtered = selectedTheme === "all" 
+      ? allStories 
+      : allStories.filter(story => story.storyTheme === selectedTheme)
+    
+    const totalPages = Math.ceil(filtered.length / storiesPerPage)
+    const startIndex = (currentPage - 1) * storiesPerPage
+    const paginatedStories = filtered.slice(startIndex, startIndex + storiesPerPage)
+    
+    return {
+      paginatedStories,
+      totalPages,
+      filteredStoriesCount: filtered.length
+    }
+  }, [allStories, selectedTheme, currentPage, storiesPerPage])
+
+  // Reset to page 1 when theme filter changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [selectedTheme])
+
+  const handleThemeFilter = (theme: keyof typeof themeData | "all") => {
+    setSelectedTheme(theme)
+  }
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage)
+    // Scroll to top of stories section
+    document.getElementById('stories-section')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  // Generate page numbers for pagination
+  const getPageNumbers = () => {
+    const pages = []
+    const maxVisiblePages = 5
+
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i)
+      }
+    } else {
+      const startPage = Math.max(1, currentPage - 2)
+      const endPage = Math.min(totalPages, currentPage + 2)
+
+      if (startPage > 1) {
+        pages.push(1)
+        if (startPage > 2) pages.push('...')
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i)
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) pages.push('...')
+        pages.push(totalPages)
+      }
+    }
+
+    return pages
+  }
 
   if (loading) {
     return (
@@ -166,135 +234,217 @@ export default function StudentVoices() {
       </div>
 
       {/* Stories Section */}
-      <div className="py-24 bg-white">
+      <div id="stories-section" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           {/* Theme Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <button
+              onClick={() => handleThemeFilter("all")}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
+                selectedTheme === "all" 
+                  ? "bg-[#54BAB9] text-white" 
+                  : "bg-gray-100 hover:bg-gray-200"
+              }`}
+            >
+              <span className="text-sm font-medium">All Stories</span>
+            </button>
             {Object.entries(themeData).map(([key, themeInfo]) => (
-              <div key={key} className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full">
-                <themeInfo.icon className="w-4 h-4 text-[#54BAB9]" />
-                <span className="text-sm font-medium text-gray-700">{themeInfo.label}</span>
-              </div>
+              <button
+                key={key}
+                onClick={() => handleThemeFilter(key as keyof typeof themeData)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
+                  selectedTheme === key 
+                    ? "bg-[#54BAB9] text-white" 
+                    : "bg-gray-100 hover:bg-gray-200"
+                }`}
+              >
+                <themeInfo.icon className="w-4 h-4" />
+                <span className="text-sm font-medium">{themeInfo.label}</span>
+              </button>
             ))}
           </div>
 
+          {/* Results Info */}
+          {filteredStoriesCount > 0 && (
+            <div className="text-center mb-8">
+              <p className="text-gray-600">
+                {selectedTheme === "all" ? (
+                  <>Showing {Math.min((currentPage - 1) * storiesPerPage + 1, filteredStoriesCount)}-{Math.min(currentPage * storiesPerPage, filteredStoriesCount)} of {filteredStoriesCount} stories</>
+                ) : (
+                  <>Showing {Math.min((currentPage - 1) * storiesPerPage + 1, filteredStoriesCount)}-{Math.min(currentPage * storiesPerPage, filteredStoriesCount)} of {filteredStoriesCount} {themeData[selectedTheme].label.toLowerCase()} stories</>
+                )}
+              </p>
+            </div>
+          )}
+
           {/* Stories Grid */}
-          {stories.length === 0 ? (
+          {filteredStoriesCount === 0 ? (
             <div className="text-center py-16">
               <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-600 mb-2">No Stories Yet</h3>
-              <p className="text-gray-500">Check back soon for inspiring student stories!</p>
+              <h3 className="text-2xl font-bold text-gray-600 mb-2">
+                {selectedTheme === "all" ? "No Stories Yet" : `No ${themeData[selectedTheme].label} Stories Yet`}
+              </h3>
+              <p className="text-gray-500">
+                {selectedTheme === "all" 
+                  ? "Check back soon for inspiring student stories!" 
+                  : "Try selecting a different theme or check back later."}
+              </p>
             </div>
           ) : (
-            <div className="grid gap-12">
-              {stories.map((storyItem) => {
-                const IconComponent = themeData[storyItem.storyTheme].icon
-                return (
-                  <article key={storyItem.id} className="group">
-                    <div
-                      className={`relative overflow-hidden rounded-3xl bg-gradient-to-r ${storyItem.color} p-1 hover:shadow-2xl transition-all duration-500`}
-                    >
-                      <div className="bg-white rounded-3xl p-8 md:p-12 h-full">
-                        <div className="grid md:grid-cols-3 gap-8">
-                          {/* Story Content */}
-                          <div className="md:col-span-2 space-y-6">
-                            {/* Header */}
-                            <div className="flex flex-wrap items-center gap-4 mb-6">
-                              <div className={`p-3 rounded-2xl bg-gradient-to-r ${storyItem.color}`}>
-                                <IconComponent className="w-6 h-6 text-white" />
-                              </div>
-                              <div>
-                                <h2 className="text-2xl md:text-3xl font-bold text-[#54BAB9] group-hover:text-[#54BAB9]/80 transition-colors">
-                                  {storyItem.title}
-                                </h2>
-                                <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
-                                  <div className="flex items-center gap-2">
-                                    <User className="w-4 h-4" />
-                                    <span className="font-medium">{storyItem.author}</span>
-                                  </div>
-                                  <div className="flex items-center gap-2">
-                                    <BookOpen className="w-4 h-4" />
-                                    <span>{storyItem.grade}</span>
-                                  </div>
-                                  <div className="flex items-center gap-2">
-                                    <Calendar className="w-4 h-4" />
-                                    <span>{storyItem.date}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Thumbnail */}
-                            {storyItem.thumbnail && (
-                              <div className="rounded-2xl overflow-hidden">
-                                <img
-                                  src={storyItem.thumbnail || "/placeholder.svg"}
-                                  alt={storyItem.title}
-                                  className="w-full h-48 object-cover"
-                                />
-                              </div>
-                            )}
-
-                            {/* Excerpt */}
-                            <div className="bg-gray-50 p-6 rounded-2xl border-l-4 border-[#54BAB9]">
-                              <p className="text-lg font-medium text-gray-800 italic leading-relaxed">
-                                "{storyItem.excerpt}"
-                              </p>
-                            </div>
-
-                            {/* Content Preview */}
-                            <div className="prose prose-gray max-w-none">
-                              <p className="text-gray-700 leading-relaxed">
-                                {storyItem.fullContent.substring(0, 300)}...
-                              </p>
-                            </div>
-
-                            {/* Read More Button */}
-                            <button
-                              onClick={() => setSelectedStory(storyItem)}
-                              className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${storyItem.color} text-white font-medium rounded-xl hover:shadow-lg transition-all duration-300 group-hover:scale-105`}
-                            >
-                              <span>Read Full Story</span>
-                              <MessageCircle className="w-4 h-4" />
-                            </button>
-                          </div>
-
-                          {/* Sidebar */}
-                          <div className="space-y-6">
-                            {/* Author Card */}
-                            <div className="bg-gray-50 p-6 rounded-2xl">
-                              <div className="flex items-center gap-4 mb-4">
-                                <div className="w-12 h-12 bg-[#54BAB9] rounded-full flex items-center justify-center">
-                                  <User className="w-6 h-6 text-white" />
+            <>
+              <div className="grid gap-12 mb-16">
+                {paginatedStories.map((storyItem) => {
+                  const IconComponent = themeData[storyItem.storyTheme].icon
+                  return (
+                    <article key={storyItem.id} className="group">
+                      <div
+                        className={`relative overflow-hidden rounded-3xl bg-gradient-to-r ${storyItem.color} p-1 hover:shadow-2xl transition-all duration-500`}
+                      >
+                        <div className="bg-white rounded-3xl p-8 md:p-12 h-full">
+                          <div className="grid md:grid-cols-3 gap-8">
+                            {/* Story Content */}
+                            <div className="md:col-span-2 space-y-6">
+                              {/* Header */}
+                              <div className="flex flex-wrap items-center gap-4 mb-6">
+                                <div className={`p-3 rounded-2xl bg-gradient-to-r ${storyItem.color}`}>
+                                  <IconComponent className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                  <h3 className="font-bold text-gray-800">{storyItem.author}</h3>
-                                  <p className="text-sm text-gray-600">{storyItem.grade}</p>
+                                  <h2 className="text-2xl md:text-3xl font-bold text-[#54BAB9] group-hover:text-[#54BAB9]/80 transition-colors">
+                                    {storyItem.title}
+                                  </h2>
+                                  <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
+                                    <div className="flex items-center gap-2">
+                                      <User className="w-4 h-4" />
+                                      <span className="font-medium">{storyItem.author}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                      <BookOpen className="w-4 h-4" />
+                                      <span>{storyItem.grade}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                      <Calendar className="w-4 h-4" />
+                                      <span>{storyItem.date}</span>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                              <p className="text-sm text-gray-600">
-                                Student perspective on navigating challenges and finding growth opportunities.
-                              </p>
+
+                              {/* Thumbnail */}
+                              {storyItem.thumbnail && (
+                                <div className="rounded-2xl overflow-hidden">
+                                  <img
+                                    src={storyItem.thumbnail || "/placeholder.svg"}
+                                    alt={storyItem.title}
+                                    className="w-full h-48 object-cover"
+                                  />
+                                </div>
+                              )}
+
+                              {/* Excerpt */}
+                              <div className="bg-gray-50 p-6 rounded-2xl border-l-4 border-[#54BAB9]">
+                                <p className="text-lg font-medium text-gray-800 italic leading-relaxed">
+                                  "{storyItem.excerpt}"
+                                </p>
+                              </div>
+
+                              {/* Content Preview */}
+                              <div className="prose prose-gray max-w-none">
+                                <p className="text-gray-700 leading-relaxed">
+                                  {storyItem.fullContent.substring(0, 300)}...
+                                </p>
+                              </div>
+
+                              {/* Read More Button */}
+                              <button
+                                onClick={() => setSelectedStory(storyItem)}
+                                className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${storyItem.color} text-white font-medium rounded-xl hover:shadow-lg transition-all duration-300 group-hover:scale-105`}
+                              >
+                                <span>Read Full Story</span>
+                                <MessageCircle className="w-4 h-4" />
+                              </button>
                             </div>
 
-                            {/* Theme Badge */}
-                            <div
-                              className={`p-4 rounded-2xl bg-gradient-to-r ${storyItem.color} text-white text-center`}
-                            >
-                              <div className="flex items-center justify-center gap-2 mb-2">
-                                <IconComponent className="w-5 h-5" />
-                                <span className="font-semibold">{themeData[storyItem.storyTheme].label}</span>
+                            {/* Sidebar */}
+                            <div className="space-y-6">
+                              {/* Author Card */}
+                              <div className="bg-gray-50 p-6 rounded-2xl">
+                                <div className="flex items-center gap-4 mb-4">
+                                  <div className="w-12 h-12 bg-[#54BAB9] rounded-full flex items-center justify-center">
+                                    <User className="w-6 h-6 text-white" />
+                                  </div>
+                                  <div>
+                                    <h3 className="font-bold text-gray-800">{storyItem.author}</h3>
+                                    <p className="text-sm text-gray-600">{storyItem.grade}</p>
+                                  </div>
+                                </div>
+                                <p className="text-sm text-gray-600">
+                                  Student perspective on navigating challenges and finding growth opportunities.
+                                </p>
                               </div>
-                              <p className="text-sm opacity-90">Core theme of this story</p>
+
+                              {/* Theme Badge */}
+                              <div
+                                className={`p-4 rounded-2xl bg-gradient-to-r ${storyItem.color} text-white text-center`}
+                              >
+                                <div className="flex items-center justify-center gap-2 mb-2">
+                                  <IconComponent className="w-5 h-5" />
+                                  <span className="font-semibold">{themeData[storyItem.storyTheme].label}</span>
+                                </div>
+                                <p className="text-sm opacity-90">Core theme of this story</p>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </article>
-                )
-              })}
-            </div>
+                    </article>
+                  )
+                })}
+              </div>
+
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-2">
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    <span className="text-sm font-medium">Previous</span>
+                  </button>
+
+                  <div className="flex items-center gap-2">
+                    {getPageNumbers().map((page, index) => (
+                      page === '...' ? (
+                        <span key={`ellipsis-${index}`} className="px-2 text-sm text-gray-400">...</span>
+                      ) : (
+                        <button
+                          key={page}
+                          onClick={() => handlePageChange(page as number)}
+                          className={`w-10 h-10 rounded-lg text-sm font-medium transition-colors ${
+                            currentPage === page
+                              ? "bg-[#54BAB9] text-white"
+                              : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      )
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <span className="text-sm font-medium">Next</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

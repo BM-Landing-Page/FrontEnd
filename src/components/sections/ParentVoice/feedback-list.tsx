@@ -4,12 +4,35 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import useSWR from "swr"
 import { fetchParentFeedback, type ParentFeedbackItem } from "@/services/api"
 
+interface PaginatedResponse {
+  data: ParentFeedbackItem[]
+  totalItems: number
+  totalPages: number
+  currentPage: number
+  itemsPerPage: number
+}
+
 export default function FeedbackList({
   colors,
 }: {
   colors: { primary: string; accent: string; surface1: string; surface2: string; bg: string }
 }) {
-  const { data, error, isLoading, mutate } = useSWR(
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10 // Adjust as needed
+
+  // OPTION 1: If your API already supports pagination, use this:
+  // const { data, error, isLoading, mutate } = useSWR(
+  //   `/feedback?page=${currentPage}&limit=${itemsPerPage}`,
+  //   async () => {
+  //     const res = await fetchParentFeedback({ page: currentPage, limit: itemsPerPage })
+  //     if (!res.success) throw new Error(res.error || "Failed to fetch")
+  //     return res.data as PaginatedResponse
+  //   },
+  //   { revalidateOnFocus: false },
+  // )
+
+  // OPTION 2: If your API returns all items and you want client-side pagination:
+  const { data: allData, error, isLoading, mutate } = useSWR(
     "/feedback",
     async () => {
       const res = await fetchParentFeedback()
@@ -19,13 +42,32 @@ export default function FeedbackList({
     { revalidateOnFocus: false },
   )
 
+  // Create paginated data from all items
+  const data = useMemo((): PaginatedResponse | undefined => {
+    if (!allData) return undefined
+    
+    const totalItems = allData.length
+    const totalPages = Math.ceil(totalItems / itemsPerPage)
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    const paginatedItems = allData.slice(startIndex, endIndex)
+
+    return {
+      data: paginatedItems,
+      totalItems,
+      totalPages,
+      currentPage,
+      itemsPerPage
+    }
+  }, [allData, currentPage, itemsPerPage])
+
   const [selected, setSelected] = useState<ParentFeedbackItem | null>(null)
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
 
   // Sort newest first for a cleaner "Recent" feel
   const items = useMemo(() => {
-    if (!data) return []
-    return [...data].sort((a, b) => {
+    if (!data?.data) return []
+    return [...data.data].sort((a, b) => {
       const ta = a.created_at ? new Date(a.created_at).getTime() : 0
       const tb = b.created_at ? new Date(b.created_at).getTime() : 0
       return tb - ta
@@ -56,12 +98,59 @@ export default function FeedbackList({
     return initials.toUpperCase()
   }
 
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage)
+    // Close modal when navigating to prevent confusion
+    setSelected(null)
+  }
+
+  const totalPages = data?.totalPages || 0
+  const totalItems = data?.totalItems || 0
+
+  // Generate page numbers for pagination
+  const getPageNumbers = () => {
+    const pages = []
+    const maxVisiblePages = 5
+
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i)
+      }
+    } else {
+      const startPage = Math.max(1, currentPage - 2)
+      const endPage = Math.min(totalPages, currentPage + 2)
+
+      if (startPage > 1) {
+        pages.push(1)
+        if (startPage > 2) pages.push('...')
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i)
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) pages.push('...')
+        pages.push(totalPages)
+      }
+    }
+
+    return pages
+  }
+
   return (
     <div className="rounded-2xl border p-4 md:p-6" style={{ borderColor: colors.surface1, backgroundColor: colors.bg }}>
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold" style={{ color: colors.primary }}>
-          Recent Feedback
-        </h2>
+        <div>
+          <h2 className="text-lg font-semibold" style={{ color: colors.primary }}>
+            Recent Feedback
+          </h2>
+          {totalItems > 0 && (
+            <p className="mt-1 text-xs opacity-75">
+              Showing {Math.min((currentPage - 1) * itemsPerPage + 1, totalItems)}-{Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems} items
+            </p>
+          )}
+        </div>
         <button
           type="button"
           onClick={() => mutate()}
@@ -139,6 +228,58 @@ export default function FeedbackList({
           )
         })}
       </ul>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="mt-6 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="rounded-lg px-3 py-2 text-xs font-medium transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ backgroundColor: colors.surface1 }}
+            >
+              Previous
+            </button>
+            
+            <div className="flex items-center gap-1">
+              {getPageNumbers().map((page, index) => (
+                page === '...' ? (
+                  <span key={`ellipsis-${index}`} className="px-2 text-xs opacity-50">...</span>
+                ) : (
+                  <button
+                    key={page}
+                    type="button"
+                    onClick={() => handlePageChange(page as number)}
+                    className="rounded-lg px-3 py-2 text-xs font-medium transition-colors"
+                    style={{
+                      backgroundColor: currentPage === page ? colors.accent : colors.surface1,
+                      color: currentPage === page ? colors.primary : undefined
+                    }}
+                  >
+                    {page}
+                  </button>
+                )
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="rounded-lg px-3 py-2 text-xs font-medium transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ backgroundColor: colors.surface1 }}
+            >
+              Next
+            </button>
+          </div>
+
+          <div className="text-xs opacity-75">
+            Page {currentPage} of {totalPages}
+          </div>
+        </div>
+      )}
 
       {/* Modal popup for full feedback */}
       {selected && (
