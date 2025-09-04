@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react"
 import Script from "next/script"
+import { FaWhatsapp } from "react-icons/fa"
 import HeroBanner from "@/components/sections/Home/HeroBanner"
 import USPs from "@/components/sections/Home/USPs"
 import CurriculumLinksSection from "@/components/sections/Home/CurriculumLinksSection"
 import VideosShowcase from "@/components/sections/Home/VideosShowcaseSection"
+import ContactSection from "@/components/sections/Home/ContactSection"
 
 // Floating Bubble component
 function FloatingBubble({
@@ -94,8 +96,19 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
           <CurriculumLinksSection />
           <VideosShowcase />
+          <ContactSection />
         </div>
       </div>
+
+      <a
+        href="https://wa.me/919840391815"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-32 right-5 md:bottom-36 md:right-6 z-40 bg-[#54BAB9] hover:bg-[#54BAB9] p-3 rounded-full shadow-lg transition-colors duration-200 hover:scale-110 transform"
+        aria-label="Contact us on WhatsApp"
+      >
+        <FaWhatsapp size={24} className="text-white" />
+      </a>
 
       {/* Chatbase Script */}
       <Script id="chatbase-embed" strategy="afterInteractive">
