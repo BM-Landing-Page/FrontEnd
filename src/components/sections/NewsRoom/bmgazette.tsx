@@ -39,8 +39,11 @@ export default function BMGazette() {
       <div className="relative">
         {/* Hero Banner */}
         <div className="relative w-full h-[80vh] overflow-hidden">
-          <Image src="/images/bmgazatte.jpg" alt="BM Gazette Banner" fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/60" />
+          <Image src="/images/bmgazatte.jpg" alt="BM Gazette Banner" fill className="object-cover opacity-40" priority />
+          {/* Light overlay instead of dark */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/20 to-white/40" />
+          {/* Additional light background for better text visibility */}
+          <div className="absolute inset-0 bg-white/10 backdrop-blur-[1px]" />
 
           {/* Floating Decorative Elements */}
           <div
@@ -62,35 +65,35 @@ export default function BMGazette() {
 
           {/* Hero Content */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-white max-w-5xl px-4">
+            <div className="text-center max-w-5xl px-4">
               <div className="mb-8">
-                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 tracking-tight">
+                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 tracking-tight text-gray-800">
                   <span className="inline-block animate-slide-down">The</span>{" "}
-                  <span className="inline-block animate-slide-down-delayed bg-gradient-to-r from-[#9ED2C6] to-[#54BAB9] bg-clip-text text-transparent">
+                  <span className="inline-block animate-slide-down-delayed bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] bg-clip-text text-transparent">
                     BM Gazette
                   </span>
                 </h1>
-                <div className="flex items-center justify-center gap-4 text-xl md:text-2xl mb-8 animate-fade-in-up">
-                  <Sparkles className="text-[#9ED2C6]" />
+                <div className="flex items-center justify-center gap-4 text-xl md:text-2xl mb-8 animate-fade-in-up text-gray-700">
+                  <Sparkles className="text-[#54BAB9]" />
                   <span>Voices • Creativity • Community</span>
-                  <Sparkles className="text-[#9ED2C6]" />
+                  <Sparkles className="text-[#54BAB9]" />
                 </div>
               </div>
 
               {/* Stats Bar */}
-              <div className="inline-flex items-center gap-8 bg-white/10 backdrop-blur-md rounded-full px-8 py-4 border border-white/20 animate-slide-up">
-                <div className="flex items-center gap-2 text-sm md:text-base">
-                  <Users size={20} className="text-[#9ED2C6]" />
+              <div className="inline-flex items-center gap-8 bg-white/80 backdrop-blur-md rounded-full px-8 py-4 border border-white/40 shadow-lg animate-slide-up">
+                <div className="flex items-center gap-2 text-sm md:text-base text-gray-700">
+                  <Users size={20} className="text-[#54BAB9]" />
                   <span>Student-Led</span>
                 </div>
-                <div className="w-px h-6 bg-white/30" />
-                <div className="flex items-center gap-2 text-sm md:text-base">
-                  <BookOpen size={20} className="text-[#9ED2C6]" />
+                <div className="w-px h-6 bg-gray-300" />
+                <div className="flex items-center gap-2 text-sm md:text-base text-gray-700">
+                  <BookOpen size={20} className="text-[#54BAB9]" />
                   <span>2 Editions</span>
                 </div>
-                <div className="w-px h-6 bg-white/30" />
-                <div className="flex items-center gap-2 text-sm md:text-base">
-                  <Heart size={20} className="text-[#9ED2C6]" />
+                <div className="w-px h-6 bg-gray-300" />
+                <div className="flex items-center gap-2 text-sm md:text-base text-gray-700">
+                  <Heart size={20} className="text-[#54BAB9]" />
                   <span>Community</span>
                 </div>
               </div>
@@ -100,8 +103,8 @@ export default function BMGazette() {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse" />
+          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-gray-500 rounded-full mt-2 animate-pulse" />
           </div>
         </div>
       </div>
