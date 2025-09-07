@@ -204,20 +204,13 @@ export default function FeedbackList({
                         <div className="text-sm font-medium" style={{ color: colors.primary }}>
                           {item.parent_name}
                         </div>
-                        <div className="mt-0.5 flex items-center gap-2 text-xs opacity-75">
-                          <span className="truncate">Student: {item.student_name}</span>
-                          <span aria-hidden="true">•</span>
-                          {date ? <time dateTime={date.toISOString()}>{date.toLocaleDateString()}</time> : null}
-                        </div>
+                        {date && (
+                          <div className="mt-0.5 text-xs opacity-75">
+                            <time dateTime={date.toISOString()}>{date.toLocaleDateString()}</time>
+                          </div>
+                        )}
                       </div>
                     </div>
-
-                    <span
-                      className="shrink-0 rounded-full px-2 py-0.5 text-xs"
-                      style={{ backgroundColor: colors.surface2 }}
-                    >
-                      Grade {item.grade}
-                    </span>
                   </div>
 
                   {/* Glimpse: two-line preview */}
@@ -318,9 +311,6 @@ export default function FeedbackList({
                       >
                         {selected.parent_name}
                       </h3>
-                      <p className="mt-0.5 text-xs opacity-75">
-                        Student: {selected.student_name} • Grade {selected.grade}
-                      </p>
                     </div>
                   </div>
                   <button
@@ -338,9 +328,6 @@ export default function FeedbackList({
 
               <div className="p-4 md:p-5 overflow-y-auto">
                 <p className="text-sm leading-relaxed text-pretty">{selected.desc}</p>
-                {selected.created_at ? (
-                  <div className="mt-3 text-xs opacity-70">{new Date(selected.created_at).toLocaleString()}</div>
-                ) : null}
               </div>
             </div>
           </div>
