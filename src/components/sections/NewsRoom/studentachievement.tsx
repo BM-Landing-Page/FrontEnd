@@ -98,7 +98,7 @@ export default function StudentAchievement() {
       <div className="relative h-96 overflow-hidden">
         <div className="absolute inset-0">
           <img src="/images/studentachievement.jpg" alt="Student Achievements" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#54BAB9]/90 via-[#9ED2C6]/85 to-[#E9DAC1]/90"></div>
+
         </div>
 
         <div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center text-center">

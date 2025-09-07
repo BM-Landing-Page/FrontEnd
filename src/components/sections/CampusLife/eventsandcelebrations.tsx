@@ -66,7 +66,7 @@ export default function EventsAndCelebrations() {
           alt="School Celebrations"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#54BAB9]/80 to-[#9ED2C6]/60"></div>
+        {/*<div className="absolute inset-0 bg-gradient-to-r from-[#54BAB9]/80 to-[#9ED2C6]/60"></div>*/}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
             <h1 className="text-6xl font-bold mb-4">Events & Celebrations</h1>

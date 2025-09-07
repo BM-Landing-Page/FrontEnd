@@ -203,39 +203,8 @@ export default function PedagogyTools() {
               </div>
             </section>
 
-            {/* International Benchmark Tests - Simple Layout */}
-            <section className="bg-gradient-to-r from-[#E9DAC1] to-[#F7ECDE] rounded-2xl p-8 md:p-12 shadow-lg">
-              <div className="flex flex-col lg:flex-row gap-8">
-                <div className="lg:w-1/3">
-                  <div className="bg-[#54BAB9] p-6 rounded-xl text-white">
-                    <Globe className="w-8 h-8 mb-3" />
-                    <h2 className="text-2xl md:text-3xl font-bold mb-2">International Benchmark Tests</h2>
-                    <p className="text-sm opacity-90">Grades 3-10 • ACER Developed</p>
-                  </div>
-                </div>
 
-                <div className="lg:w-2/3 grid md:grid-cols-2 gap-6">
-                  <div className="bg-white p-6 rounded-xl shadow-sm">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3">Subjects</h3>
-                    <ul className="space-y-2 text-sm text-gray-700">
-                      <li>• English Language</li>
-                      <li>• Mathematics</li>
-                      <li>• Science</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-white p-6 rounded-xl shadow-sm">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3">Features</h3>
-                    <ul className="space-y-2 text-sm text-gray-700">
-                      <li>• Updated yearly</li>
-                      <li>• Skill-based assessment</li>
-                      <li>• International comparison</li>
-                      <li>• Detailed reports</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </section>
+            
           </div>
         </main>
       </div>

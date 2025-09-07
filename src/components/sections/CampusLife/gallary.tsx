@@ -24,12 +24,13 @@ export default function AnimatedGallery() {
   const [imageLoadStates, setImageLoadStates] = useState<Map<number, 'loading' | 'loaded' | 'error'>>(new Map())
   const imageCache = useRef<Map<string, HTMLImageElement>>(new Map())
   const preloadQueue = useRef<Set<number>>(new Set())
+  const preloadingPromises = useRef<Map<number, Promise<void>>>(new Map())
   
-  // Intersection Observer for lazy loading
+  // Intersection Observer for aggressive preloading
   const observerRef = useRef<IntersectionObserver | null>(null)
   const imageRefs = useRef<Map<number, HTMLDivElement>>(new Map())
 
-  // Initialize intersection observer
+  // Initialize intersection observer with more aggressive settings
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -41,8 +42,8 @@ export default function AnimatedGallery() {
         })
       },
       {
-        rootMargin: '50px',
-        threshold: 0.1
+        rootMargin: '200px', // Increased from 50px for earlier loading
+        threshold: 0.01 // Reduced threshold for earlier triggering
       }
     )
 
@@ -53,7 +54,7 @@ export default function AnimatedGallery() {
     }
   }, [])
 
-  // Load initial gallery data - load more images initially
+  // Load initial gallery data - optimized for faster initial load
   useEffect(() => {
     const loadInitialGalleryItems = async () => {
       try {
@@ -61,13 +62,24 @@ export default function AnimatedGallery() {
         setError(null)
         console.log("🔄 Loading initial gallery items...")
         
-        // Load 5 images initially instead of 1 for better UX
-        const response = await fetchGalleryItems(1, 5)
+        // Load more images initially for better UX
+        const response = await fetchGalleryItems(1, 10) // Increased from 5 to 10
         console.log("📦 API Response:", response)
         
         if (response.success && response.data) {
           console.log("✅ Gallery items loaded:", response.data)
           setGalleryItems(response.data)
+          
+          // Immediately start preloading the first few images
+          response.data.slice(0, 3).forEach((item, index) => {
+            if (item?.id) {
+              setTimeout(() => {
+                preloadImage(item.id).catch(error => {
+                  console.warn(`Failed to preload initial item ${item.id}:`, error)
+                })
+              }, index * 10) // Minimal delay
+            }
+          })
           
           if (response.pagination) {
             console.log("📄 Pagination info:", response.pagination)
@@ -88,79 +100,102 @@ export default function AnimatedGallery() {
     loadInitialGalleryItems()
   }, [])
 
-  // Smart image preloading with priorities and caching
+  // Optimized image preloading with concurrent loading and promise caching
   const preloadImage = useCallback((itemId: number) => {
     const item = galleryItems.find(g => g.id === itemId)
-    if (!item || imageLoadStates.get(itemId) === 'loaded' || preloadQueue.current.has(itemId)) {
-      return
+    if (!item) return Promise.resolve()
+
+    // Return existing promise if already preloading
+    if (preloadingPromises.current.has(itemId)) {
+      return preloadingPromises.current.get(itemId)!
     }
 
-    preloadQueue.current.add(itemId)
+    // Skip if already loaded
+    if (imageLoadStates.get(itemId) === 'loaded' || imageCache.current.has(item.image_url)) {
+      setImageLoadStates(prev => new Map(prev.set(itemId, 'loaded')))
+      return Promise.resolve()
+    }
+
     setImageLoadStates(prev => new Map(prev.set(itemId, 'loading')))
 
-    // Check cache first
-    if (imageCache.current.has(item.image_url)) {
-      setImageLoadStates(prev => new Map(prev.set(itemId, 'loaded')))
-      preloadQueue.current.delete(itemId)
-      return
-    }
+    const promise = new Promise<void>((resolve, reject) => {
+      const img = new window.Image()
+      
+      // Optimize image loading with proper sizes and priorities
+      img.sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+      img.loading = 'eager' // Force eager loading for preloaded images
+      img.decoding = 'async' // Enable async decoding
+      
+      img.onload = () => {
+        imageCache.current.set(item.image_url, img)
+        setImageLoadStates(prev => new Map(prev.set(itemId, 'loaded')))
+        preloadingPromises.current.delete(itemId)
+        resolve()
+      }
+      
+      img.onerror = (error) => {
+        setImageLoadStates(prev => new Map(prev.set(itemId, 'error')))
+        preloadingPromises.current.delete(itemId)
+        console.error(`Failed to load image: ${item.image_url}`, error)
+        reject(error)
+      }
 
-    const img = new window.Image()
-    img.sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-    
-    img.onload = () => {
-      imageCache.current.set(item.image_url, img)
-      setImageLoadStates(prev => new Map(prev.set(itemId, 'loaded')))
-      preloadQueue.current.delete(itemId)
-    }
-    
-    img.onerror = () => {
-      setImageLoadStates(prev => new Map(prev.set(itemId, 'error')))
-      preloadQueue.current.delete(itemId)
-      console.error(`Failed to load image: ${item.image_url}`)
-    }
+      img.src = item.image_url
+    })
 
-    img.src = item.image_url
+    preloadingPromises.current.set(itemId, promise)
+    return promise
   }, [galleryItems, imageLoadStates])
 
-  // Priority-based image loading
+  // Aggressive concurrent image loading
   useEffect(() => {
     if (galleryItems.length === 0) return
 
-    // Priority 1: Current image (immediate)
-    if (galleryItems[currentIndex]) {
-      preloadImage(galleryItems[currentIndex].id)
-    }
+    const preloadBatch = async () => {
+      // Priority 1: Current and adjacent images (immediate, concurrent)
+      const immediateItems = [
+        galleryItems[currentIndex],
+        galleryItems[currentIndex - 1],
+        galleryItems[currentIndex + 1]
+      ].filter(Boolean)
 
-    // Priority 2: Adjacent images (50ms delay)
-    const adjacentItems = [
-      galleryItems[currentIndex - 1],
-      galleryItems[currentIndex + 1]
-    ].filter(Boolean)
+      // Load these concurrently without delay
+      const immediatePromises = immediateItems.map(item => preloadImage(item.id))
+      
+      try {
+        await Promise.all(immediatePromises)
+      } catch (error) {
+        console.warn('Some immediate images failed to load:', error)
+      }
 
-    adjacentItems.forEach((item, index) => {
-      setTimeout(() => preloadImage(item.id), 50 + (index * 25))
-    })
+      // Priority 2: Extended range (concurrent batch loading)
+      const extendedRange = 3 // Increased range
+      const extendedItems = []
+      
+      for (let i = Math.max(0, currentIndex - extendedRange); 
+           i <= Math.min(galleryItems.length - 1, currentIndex + extendedRange); 
+           i++) {
+        if (i !== currentIndex && i !== currentIndex - 1 && i !== currentIndex + 1) {
+          extendedItems.push(galleryItems[i])
+        }
+      }
 
-    // Priority 3: Extended range (200ms delay, lower priority)
-    const extendedRange = 2
-    for (let i = Math.max(0, currentIndex - extendedRange); 
-         i <= Math.min(galleryItems.length - 1, currentIndex + extendedRange); 
-         i++) {
-      if (i !== currentIndex && i !== currentIndex - 1 && i !== currentIndex + 1) {
-        setTimeout(() => preloadImage(galleryItems[i].id), 200 + (Math.abs(i - currentIndex) * 100))
+      // Load extended range with minimal delay, in batches
+      const batchSize = 3
+      for (let i = 0; i < extendedItems.length; i += batchSize) {
+        const batch = extendedItems.slice(i, i + batchSize)
+        setTimeout(() => {
+          Promise.allSettled(batch.map(item => preloadImage(item.id)))
+        }, 50) // Reduced from 200ms
       }
     }
+
+    preloadBatch()
   }, [currentIndex, galleryItems, preloadImage])
 
-  // Improved load more function
+  // Optimized load more function
   const loadMoreImages = useCallback(async () => {
     console.log("🔄 loadMoreImages called")
-    console.log("📊 Load state:", {
-      loadingMore,
-      hasMore: pagination.hasMore,
-      currentPage: pagination.currentPage
-    })
     
     if (loadingMore || !pagination.hasMore) {
       console.log("⚠️ Load blocked:", { loadingMore, hasMore: pagination.hasMore })
@@ -174,14 +209,21 @@ export default function AnimatedGallery() {
       const nextPage = pagination.currentPage + 1
       console.log("📄 Loading page:", nextPage)
       
-      const response = await fetchGalleryItems(nextPage, 5) // Load 5 at a time
+      const response = await fetchGalleryItems(nextPage, 10) // Increased batch size
       console.log("📦 Load more response:", response)
       
       if (response.success && response.data && response.data.length > 0) {
         console.log("✅ New items loaded:", response.data.length)
+        
         setGalleryItems((prev) => {
           const newItems = [...prev, ...response.data!]
           console.log("📊 Total items now:", newItems.length)
+          
+          // Immediately start preloading the first few new images
+          response.data!.slice(0, 2).forEach((item, index) => {
+            setTimeout(() => preloadImage(item.id), index * 20)
+          })
+          
           return newItems
         })
         
@@ -198,48 +240,31 @@ export default function AnimatedGallery() {
     } finally {
       setLoadingMore(false)
     }
-  }, [loadingMore, pagination.hasMore, pagination.currentPage])
+  }, [loadingMore, pagination.hasMore, pagination.currentPage, preloadImage])
 
-  // Auto-load more images when approaching the end
+  // More aggressive auto-loading
   useEffect(() => {
     if (galleryItems.length > 0 && pagination.hasMore) {
-      const threshold = Math.max(1, galleryItems.length - 2)
+      const threshold = Math.max(1, galleryItems.length - 3) // Increased threshold
       if (currentIndex >= threshold && !loadingMore) {
         loadMoreImages()
       }
     }
   }, [currentIndex, galleryItems.length, pagination.hasMore, loadingMore, loadMoreImages])
 
-  // Improved scroll handling
+  // Optimized scroll handling with requestAnimationFrame
   const scrollToIndex = useCallback((index: number) => {
-    console.log("🎯 scrollToIndex called with:", index)
-    console.log("📊 Container state:", {
-      containerExists: !!containerRef.current,
-      isTransitioning,
-      galleryItemsLength: galleryItems.length
-    })
-    
     if (!containerRef.current || isTransitioning || galleryItems.length === 0) {
-      console.log("❌ Scroll blocked:", {
-        noContainer: !containerRef.current,
-        isTransitioning,
-        noItems: galleryItems.length === 0
-      })
       return
     }
     
-    // Ensure index is valid
     const validIndex = Math.max(0, Math.min(index, galleryItems.length - 1))
-    
     setIsTransitioning(true)
     
-    // Use requestAnimationFrame to ensure DOM is ready
+    // Use requestAnimationFrame for smoother animation
     requestAnimationFrame(() => {
       if (containerRef.current) {
         const itemWidth = containerRef.current.clientWidth
-        console.log("📏 Item width:", itemWidth)
-        console.log("🎯 Scrolling to:", validIndex * itemWidth)
-        
         containerRef.current.scrollTo({
           left: validIndex * itemWidth,
           behavior: "smooth",
@@ -247,64 +272,32 @@ export default function AnimatedGallery() {
         setCurrentIndex(validIndex)
       }
       
-      setTimeout(() => {
-        console.log("✅ Transition complete")
-        setIsTransitioning(false)
-      }, 300)
+      // Reduced transition timeout
+      setTimeout(() => setIsTransitioning(false), 200) // Reduced from 300ms
     })
   }, [isTransitioning, galleryItems.length])
 
   const goToPrevious = useCallback(() => {
-    console.log("🔍 goToPrevious called")
-    console.log("📊 Current state:", {
-      currentIndex,
-      galleryItemsLength: galleryItems.length,
-      isTransitioning
-    })
+    if (galleryItems.length === 0) return
     
-    if (galleryItems.length === 0) {
-      console.log("⚠️ No gallery items available")
-      return
-    }
-    
-    // Load more if we're at the beginning and there might be more pages
-    if (currentIndex === 0 && pagination.hasMore && !loadingMore) {
+    // More aggressive loading trigger
+    if (currentIndex <= 1 && pagination.hasMore && !loadingMore) {
       loadMoreImages()
     }
     
     const newIndex = currentIndex > 0 ? currentIndex - 1 : galleryItems.length - 1
-    console.log("⬅️ Moving to index:", newIndex)
     scrollToIndex(newIndex)
   }, [currentIndex, galleryItems.length, scrollToIndex, pagination.hasMore, loadingMore, loadMoreImages])
 
   const goToNext = useCallback(() => {
-    console.log("🔍 goToNext called")
-    console.log("📊 Current state:", {
-      currentIndex,
-      galleryItemsLength: galleryItems.length,
-      isTransitioning,
-      pagination
-    })
+    if (galleryItems.length === 0) return
     
-    if (galleryItems.length === 0) {
-      console.log("⚠️ No gallery items available")
-      return
-    }
-    
-    // If we only have 1 item and there are more to load, load them first
-    if (galleryItems.length === 1 && pagination.hasMore && !loadingMore) {
-      console.log("🔄 Loading more items before navigation...")
-      loadMoreImages()
-      return
-    }
-    
-    // If we're at the last item, try to load more
-    if (currentIndex >= galleryItems.length - 1 && pagination.hasMore && !loadingMore) {
+    // Load more aggressively when approaching end
+    if (currentIndex >= galleryItems.length - 2 && pagination.hasMore && !loadingMore) {
       loadMoreImages()
     }
     
     const newIndex = currentIndex < galleryItems.length - 1 ? currentIndex + 1 : 0
-    console.log("➡️ Moving to index:", newIndex)
     scrollToIndex(newIndex)
   }, [currentIndex, galleryItems.length, scrollToIndex, pagination.hasMore, loadingMore, loadMoreImages])
 
@@ -325,24 +318,25 @@ export default function AnimatedGallery() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [goToPrevious, goToNext, galleryItems.length, isTransitioning])
 
-  // Debounced scroll handler
+  // Optimized scroll handler with reduced debounce
   useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout
+    let rafId: number
     
     const handleScroll = () => {
-      if (containerRef.current && galleryItems.length > 0) {
-        const scrollLeft = containerRef.current.scrollLeft
-        setScrollX(scrollLeft)
-        
-        clearTimeout(scrollTimeout)
-        scrollTimeout = setTimeout(() => {
-          const itemWidth = containerRef.current!.clientWidth
+      if (rafId) cancelAnimationFrame(rafId)
+      
+      rafId = requestAnimationFrame(() => {
+        if (containerRef.current && galleryItems.length > 0) {
+          const scrollLeft = containerRef.current.scrollLeft
+          setScrollX(scrollLeft)
+          
+          const itemWidth = containerRef.current.clientWidth
           const newIndex = Math.round(scrollLeft / itemWidth)
           if (newIndex !== currentIndex && newIndex >= 0 && newIndex < galleryItems.length) {
             setCurrentIndex(newIndex)
           }
-        }, 100) // Increased debounce time
-      }
+        }
+      })
     }
 
     const container = containerRef.current
@@ -350,17 +344,17 @@ export default function AnimatedGallery() {
       container.addEventListener("scroll", handleScroll, { passive: true })
       return () => {
         container.removeEventListener("scroll", handleScroll)
-        clearTimeout(scrollTimeout)
+        if (rafId) cancelAnimationFrame(rafId)
       }
     }
   }, [galleryItems.length, currentIndex])
 
-  // Optimized image component
+  // Highly optimized image component
   const OptimizedImage = ({ item, index }: { item: GalleryItem; index: number }) => {
     const loadState = imageLoadStates.get(item.id) || 'loading'
     const isActive = index === currentIndex
-    const isAdjacent = Math.abs(index - currentIndex) <= 1
-    const shouldRender = Math.abs(index - currentIndex) <= 2
+    const isNear = Math.abs(index - currentIndex) <= 2
+    const shouldRender = Math.abs(index - currentIndex) <= 4 // Increased render range
 
     useEffect(() => {
       const element = imageRefs.current.get(item.id)
@@ -388,7 +382,7 @@ export default function AnimatedGallery() {
           }}
           className="w-full h-[400px] bg-gray-50 rounded-2xl flex items-center justify-center"
         >
-          <div className="w-8 h-8 bg-gray-200 rounded-full" />
+          <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
         </div>
       )
     }
@@ -441,21 +435,22 @@ export default function AnimatedGallery() {
         <Image
           src={item.image_url}
           alt={item.description || `Gallery image ${index + 1}`}
-          width={800}
-          height={600}
-          className="w-full h-auto object-cover rounded-2xl max-h-[70vh] transition-all duration-300 group-hover:scale-105"
-          priority={isActive || isAdjacent}
-          loading={isActive || isAdjacent ? "eager" : "lazy"}
+          width={1200}
+          height={900}
+          className="w-full h-auto object-cover rounded-2xl max-h-[70vh] transition-all duration-200 group-hover:scale-105"
+          priority={isActive || isNear}
+          loading={isActive || isNear ? "eager" : "lazy"}
           placeholder="blur"
           blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkrHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyxxxzCsVIHvzz7/wB5/9k="
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-          quality={isActive ? 90 : 75}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+          quality={isActive ? 95 : 80}
+          unoptimized={false} // Enable Next.js optimization
         />
       </div>
     )
   }
 
-  // Loading state
+  // Rest of the component remains the same...
   if (loading) {
     return (
       <div className="h-screen bg-gradient-to-br from-white via-[#F7ECDE]/20 to-[#E9DAC1]/30 flex items-center justify-center">
@@ -468,7 +463,6 @@ export default function AnimatedGallery() {
     )
   }
 
-  // Error state
   if (error) {
     return (
       <div className="h-screen bg-gradient-to-br from-white via-[#F7ECDE]/20 to-[#E9DAC1]/30 flex items-center justify-center">
@@ -491,7 +485,6 @@ export default function AnimatedGallery() {
     )
   }
 
-  // Empty state
   if (galleryItems.length === 0) {
     return (
       <div className="h-screen bg-gradient-to-br from-white via-[#F7ECDE]/20 to-[#E9DAC1]/30 flex items-center justify-center">
@@ -587,7 +580,7 @@ export default function AnimatedGallery() {
           <div key={item.id} className="flex-none w-screen h-full flex items-center justify-center px-12 snap-center">
             <div className="relative max-w-4xl mx-auto">
               <div className="relative group">
-                <div className="relative overflow-hidden rounded-2xl shadow-xl bg-white p-4 transition-all duration-300 group-hover:scale-102">
+                <div className="relative overflow-hidden rounded-2xl shadow-xl bg-white p-4 transition-all duration-200 group-hover:scale-102">
                   <OptimizedImage item={item} index={index} />
                 </div>
               </div>
