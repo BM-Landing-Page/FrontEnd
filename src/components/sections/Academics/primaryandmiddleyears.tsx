@@ -135,6 +135,16 @@ export default function PrimaryAndMiddleYears() {
 
   return (
     <div className="min-h-screen bg-white text-gray-800 font-sans">
+      <style jsx>{`
+        .checkmark-black {
+          color: #000000 !important;
+          fill: #000000 !important;
+        }
+        .checkmark-black * {
+          color: #000000 !important;
+          fill: #000000 !important;
+        }
+      `}</style>
       {/* Hero Banner Section */}
       <motion.section
         className="relative h-[50vh] bg-cover bg-center flex items-center justify-center text-white p-4 overflow-hidden"
@@ -380,7 +390,13 @@ const SubjectsTable = ({ data, type }: { data: any[]; type: "primary" | "seconda
                 const cellContent = row[key]
                 return (
                   <td key={idx} className="px-6 py-4 whitespace-nowrap text-base text-gray-700">
-                    {cellContent === "✔" ? <span className="font-bold text-lg text-[#54BAB9]">✔</span> : cellContent}
+                    {cellContent === "✔" ? (
+                      <span className="font-bold text-lg checkmark-black">
+                        ✔
+                      </span>
+                    ) : (
+                      cellContent
+                    )}
                   </td>
                 )
               })}

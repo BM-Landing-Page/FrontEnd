@@ -186,7 +186,7 @@ export default function IGCSEAndSeniorYears() {
                     </thead>
                     <tbody>
                       {[
-                        { group: "Group I", category: "Languages", subjects: "English, French, Hindi, Tamil" },
+                        { group: "Group I", category: "Languages", subjects: "English, French, Hindi, Tamil, German" },
                         {
                           group: "Group II",
                           category: "Humanities & Social Sciences",
