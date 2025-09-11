@@ -1,8 +1,7 @@
-// src/lib/api.ts
-// ✅ API Base URL — Updated to use Render-hosted backend
+// API Base URL — Updated to use Render-hosted backend
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://backend-edhc.onrender.com"
 
-// ✅ Common API Response Interface
+// Common API Response Interface
 export interface ApiResponse<T> {
   success: boolean
   data?: T
@@ -10,7 +9,7 @@ export interface ApiResponse<T> {
   pagination?: PaginationInfo
 }
 
-// ✅ Pagination Interface
+// Pagination Interface
 export interface PaginationInfo {
   currentPage: number
   totalPages: number
@@ -414,7 +413,7 @@ export const deleteBlog = async (id: number): Promise<ApiResponse<any>> => {
 // ========================
 //
 
-export interface Achievement {
+export interface TeamMemberAchievement {
   id: number
   description: string
   created_at: string
@@ -433,7 +432,7 @@ export interface TeamMember {
   joined_month: number
   joined_year: number
   priority: number
-  achievements: Achievement[]
+  achievements: TeamMemberAchievement[]
 }
 
 // Fetch all team members
@@ -611,7 +610,6 @@ export const deleteGalleryItem = async (id: number): Promise<ApiResponse<any>> =
   }
 }
 
-
 //
 // ========================
 // ✅ PARENTS' VOICE (Feedback)
@@ -685,5 +683,174 @@ export const fetchParentFeedback = async (): Promise<ApiResponse<ParentFeedbackI
       success: false,
       error: error instanceof Error ? error.message : "Failed to fetch feedback",
     }
+  }
+}
+
+//
+// ========================
+// ✅ ACHIEVEMENTS SECTION
+// ========================
+//
+
+export interface Achievement {
+  id?: number
+  name: string
+  grade?: string
+  tagline: string
+  title: string
+  desc: string
+  created_at?: string
+}
+
+// Fetch all achievements
+export const fetchAchievements = async (): Promise<ApiResponse<Achievement[]>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/achievements`)
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error fetching achievements:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch achievements",
+    }
+  }
+}
+
+// Create achievement (protected)
+export const createAchievement = async (
+  achievementData: Omit<Achievement, "id" | "created_at">,
+): Promise<ApiResponse<any>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/achievements`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(achievementData),
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error creating achievement:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to create achievement",
+    }
+  }
+}
+
+// Update achievement (protected)
+export const updateAchievement = async (id: number, updates: Partial<Achievement>): Promise<ApiResponse<any>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/achievements/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updates),
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error updating achievement:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to update achievement",
+    }
+  }
+}
+
+// Delete achievement (protected)
+export const deleteAchievement = async (id: number): Promise<ApiResponse<any>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/achievements/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error deleting achievement:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to delete achievement",
+    }
+  }
+}
+
+
+export interface PopupData {
+  id?: number
+  image?: string
+  url?: string
+  created_at?: string
+}
+
+// Get the current popup
+export const getPopup = async (): Promise<PopupData | null> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/popup`)
+    if (!response.ok) {
+      if (response.status === 404) return null
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error("Error fetching popup:", error)
+    return null
+  }
+}
+
+// Create or update popup
+export const createPopup = async (formData: FormData): Promise<PopupData | null> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/popup`, {
+      method: "POST",
+      body: formData,
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error("Error creating popup:", error)
+    return null
+  }
+}
+
+// Update existing popup
+export const updatePopup = async (formData: FormData): Promise<PopupData | null> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/popup`, {
+      method: "PUT",
+      body: formData,
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error("Error updating popup:", error)
+    return null
+  }
+}
+
+// Delete popup
+export const deletePopup = async (): Promise<boolean> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/popup`, {
+      method: "DELETE",
+    })
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    return true
+  } catch (error) {
+    console.error("Error deleting popup:", error)
+    return false
   }
 }

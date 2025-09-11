@@ -1,88 +1,107 @@
+"use client"
+
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Trophy, Medal, Award, Star, Globe, Crown, Target, ArrowRight } from "lucide-react"
+import { Trophy, Medal, Award, Star, Globe, Crown, Target, ArrowRight, Loader2 } from "lucide-react"
+import { fetchAchievements, type Achievement } from "@/services/api"
+
+interface DisplayAchievement extends Achievement {
+  icon: any
+  borderColor: string
+  headerBg: string
+  emoji: string
+  awards: string[]
+}
 
 export default function StudentAchievement() {
-  const achievements = [
-    {
-      name: "Shree Achyutha Raju",
-      grade: "Grade 4",
-      title: "BMIS Skates Ahead!",
-      achievement: "Represented Tamil Nadu at 62nd National Skating Championship",
-      awards: ["GOLD in Street Skateboarding", "SILVER in Park Skateboarding"],
-      icon: Medal,
-      borderColor: "#54BAB9",
-      headerBg: "#F7ECDE",
-      emoji: "🛹",
-    },
-    {
-      name: "Hariharan",
-      grade: "9th Grade",
-      title: "Young Journalist in Making",
-      achievement: "Best Profile Article in Media Makers Fellowship",
-      awards: ["Article: 'Chennai's Best Kept Secret? Hint: It's Served in a Clay Pot'"],
-      icon: Award,
-      borderColor: "#9ED2C6",
-      headerBg: "#E9DAC1",
-      emoji: "📰",
-    },
-    {
-      name: "Rohan J",
-      grade: "",
-      title: "A World Record for Numbers",
-      achievement: "International Number Master - New World Record",
-      awards: ["Recited number names up to 102 digits", "Noble Book of World Records"],
-      icon: Globe,
-      borderColor: "#54BAB9",
-      headerBg: "#F7ECDE",
-      emoji: "🔢",
-    },
-    {
-      name: "Jeisrikrishna",
-      grade: "7th Grade",
-      title: "Chess Master Extraordinaire",
-      achievement: "Guinness World Record",
-      awards: ["Fastest chess set arrangement blindfolded: 31.16 seconds"],
-      icon: Crown,
-      borderColor: "#E9DAC1",
-      headerBg: "#9ED2C6",
-      emoji: "♟️",
-    },
-    {
-      name: "Sanjeev Krishna G",
-      grade: "5 years old",
-      title: "Strength & Determination",
-      achievement: "New World Record in Noble Book of World Records",
-      awards: ["Longest Distance Strolling (5 km) while Tugging 50 kg"],
-      icon: Trophy,
-      borderColor: "#54BAB9",
-      headerBg: "#F7ECDE",
-      emoji: "💪",
-    },
-    {
-      name: "K.S. Saadhana Anugrahaa",
-      grade: "",
-      title: "Outstanding Cambridge Learner",
-      achievement: "Highest score worldwide in Cambridge O Level Tamil",
-      awards: ["June 2023 Cambridge O Level Tamil examinations"],
-      icon: Star,
-      borderColor: "#9ED2C6",
-      headerBg: "#E9DAC1",
-      emoji: "📚",
-    },
-    {
-      name: "Varishta Sharravanan",
-      grade: "Grade 8",
-      title: "National Writing Excellence",
-      achievement: "Runner-Up in National Writing Bee",
-      awards: ["Outstanding storytelling, creativity, and expression"],
-      icon: Target,
-      borderColor: "#E9DAC1",
-      headerBg: "#9ED2C6",
-      emoji: "✍️",
-    },
-  ]
+  const [achievements, setAchievements] = useState<DisplayAchievement[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const getIconForAchievement = (title: string, tagline: string) => {
+    const text = (title + " " + tagline).toLowerCase()
+    if (text.includes("skating") || text.includes("sport")) return Medal
+    if (text.includes("journalist") || text.includes("writing")) return Award
+    if (text.includes("world record") || text.includes("record")) return Globe
+    if (text.includes("chess")) return Crown
+    if (text.includes("strength") || text.includes("physical")) return Trophy
+    if (text.includes("cambridge") || text.includes("academic")) return Star
+    return Target
+  }
+
+  const getColorScheme = (index: number) => {
+    const schemes = [
+      { borderColor: "#54BAB9", headerBg: "#F7ECDE", emoji: "🏆" },
+      { borderColor: "#9ED2C6", headerBg: "#E9DAC1", emoji: "🌟" },
+      { borderColor: "#54BAB9", headerBg: "#F7ECDE", emoji: "🎯" },
+      { borderColor: "#E9DAC1", headerBg: "#9ED2C6", emoji: "⭐" },
+    ]
+    return schemes[index % schemes.length]
+  }
+
+  useEffect(() => {
+    const loadAchievements = async () => {
+      try {
+        setLoading(true)
+        const response = await fetchAchievements()
+
+        if (response.success && response.data) {
+          // Transform backend data to display format
+          const transformedAchievements: DisplayAchievement[] = response.data.map((achievement, index) => {
+            const colorScheme = getColorScheme(index)
+            return {
+              ...achievement,
+              icon: getIconForAchievement(achievement.title, achievement.tagline),
+              borderColor: colorScheme.borderColor,
+              headerBg: colorScheme.headerBg,
+              emoji: colorScheme.emoji,
+              awards: achievement.desc ? achievement.desc.split("\n").filter((line) => line.trim()) : [],
+            }
+          })
+          setAchievements(transformedAchievements)
+        } else {
+          setError(response.error || "Failed to load achievements")
+        }
+      } catch (err) {
+        setError("An unexpected error occurred")
+        console.error("Error loading achievements:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadAchievements()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-white via-[#F7ECDE]/30 to-[#9ED2C6]/20 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-12 w-12 animate-spin text-[#54BAB9] mx-auto mb-4" />
+          <p className="text-xl text-gray-600">Loading achievements...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-white via-[#F7ECDE]/30 to-[#9ED2C6]/20 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-red-500 text-xl mb-4">⚠️ Error Loading Achievements</div>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-[#54BAB9] text-white px-6 py-2 rounded-lg hover:bg-[#54BAB9]/90 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-[#F7ECDE]/30 to-[#9ED2C6]/20">
@@ -98,7 +117,6 @@ export default function StudentAchievement() {
       <div className="relative h-96 overflow-hidden">
         <div className="absolute inset-0">
           <img src="/images/studentachievement.jpg" alt="Student Achievements" className="w-full h-full object-cover" />
-
         </div>
 
         <div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center text-center">
@@ -115,62 +133,71 @@ export default function StudentAchievement() {
       <div className="container mx-auto px-4 py-12 max-w-7xl relative">
         {/* Uniform Achievement Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {achievements.map((student, index) => {
-            const IconComponent = student.icon
-            const firstName = student.name.split(" ")[0]
+          {achievements.length > 0 ? (
+            achievements.map((student, index) => {
+              const IconComponent = student.icon
+              const firstName = student.name.split(" ")[0]
 
-            return (
-              <Card
-                key={index}
-                className="border rounded-xl bg-white hover:shadow-md transition-shadow duration-200 h-full flex flex-col"
-              >
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-md border border-[#54BAB9]/30 grid place-items-center text-[#54BAB9] bg-white">
-                        <IconComponent className="h-5 w-5" />
+              return (
+                <Card
+                  key={student.id || index}
+                  className="border rounded-xl bg-white hover:shadow-md transition-shadow duration-200 h-full flex flex-col"
+                >
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="h-9 w-9 rounded-md border border-[#54BAB9]/30 grid place-items-center text-[#54BAB9] bg-white">
+                          <IconComponent className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <CardTitle className="text-xl font-semibold text-gray-900">{student.name}</CardTitle>
+                          <CardDescription className="text-sm text-gray-600">{student.tagline}</CardDescription>
+                        </div>
                       </div>
-                      <div>
-                        <CardTitle className="text-xl font-semibold text-gray-900">{student.name}</CardTitle>
-                        <CardDescription className="text-sm text-gray-600">{student.title}</CardDescription>
+
+                      {student.grade && (
+                        <span className="px-2 py-1 rounded-full border border-[#54BAB9]/30 text-xs text-gray-700 bg-white">
+                          {student.grade}
+                        </span>
+                      )}
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="pt-4 flex-grow">
+                    <div className="space-y-4">
+                      <div
+                        className="p-3 rounded-md bg-gray-50 border-l-2"
+                        style={{ borderLeftColor: student.borderColor }}
+                      >
+                        <p className="text-sm text-gray-800 leading-relaxed">{student.title}</p>
+                      </div>
+
+                      <ul className="space-y-2">
+                        {student.awards.map((award, awardIndex) => (
+                          <li key={awardIndex} className="flex items-start gap-2">
+                            <span
+                              className="mt-1 h-2 w-2 rounded-full"
+                              style={{ backgroundColor: student.borderColor }}
+                              aria-hidden="true"
+                            />
+                            <span className="text-sm text-gray-700 leading-relaxed">{award}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="pt-2">
+                        <p className="text-xs text-gray-500">Congratulations, {firstName}.</p>
                       </div>
                     </div>
-
-                    {student.grade && (
-                      <span className="px-2 py-1 rounded-full border border-[#54BAB9]/30 text-xs text-gray-700 bg-white">
-                        {student.grade}
-                      </span>
-                    )}
-                  </div>
-                </CardHeader>
-
-                <CardContent className="pt-4 flex-grow">
-                  <div className="space-y-4">
-                    <div className="p-3 rounded-md bg-gray-50 border-l-2" style={{ borderLeftColor: "#54BAB9" }}>
-                      <p className="text-sm text-gray-800 leading-relaxed">{student.achievement}</p>
-                    </div>
-
-                    <ul className="space-y-2">
-                      {student.awards.map((award, awardIndex) => (
-                        <li key={awardIndex} className="flex items-start gap-2">
-                          <span
-                            className="mt-1 h-2 w-2 rounded-full"
-                            style={{ backgroundColor: "#54BAB9" }}
-                            aria-hidden="true"
-                          />
-                          <span className="text-sm text-gray-700 leading-relaxed">{award}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="pt-2">
-                      <p className="text-xs text-gray-500">Congratulations, {firstName}.</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )
-          })}
+                  </CardContent>
+                </Card>
+              )
+            })
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-gray-500 text-lg">No achievements found.</p>
+            </div>
+          )}
         </div>
 
         {/* Bottom Celebration Section */}

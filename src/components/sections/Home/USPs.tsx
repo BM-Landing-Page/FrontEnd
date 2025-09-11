@@ -1,6 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
 import { Award, BookOpen, Star, Users } from "lucide-react"
+import ScrollTicker from "./scroll-ticker"
 
 export default function USPs() {
   const stats = [
@@ -43,6 +44,17 @@ export default function USPs() {
         transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY }}
       />
 
+      <motion.div
+        className="text-center mb-12"
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-4xl font-bold text-[#54BAB9] mb-4">Why Choose Us</h2>
+        <div className="w-24 h-1 bg-[#54BAB9] mx-auto rounded-full"></div>
+      </motion.div>
+
       <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Left Text Block */}
         <motion.div
@@ -52,16 +64,11 @@ export default function USPs() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold text-[#54BAB9]">Why Choose Us?</h2>
-          <p className="text-[#1E293B] leading-relaxed">
-            For two decades, we've been pioneering educational innovation, creating confident, compassionate, and
-            creative learners who shape tomorrow.
+          <h3 className="text-2xl font-bold text-[#54BAB9] mb-4">Latest Updates</h3>
+          <ScrollTicker />
+          <p className="text-[#1E293B] leading-relaxed text-sm">
+            Stay updated with our latest announcements and achievements
           </p>
-          <p className="text-[#1E293B] leading-relaxed">
-            Our holistic approach seamlessly blends academic excellence with character development in a supportive,
-            future-focused environment.
-          </p>
-          
         </motion.div>
 
         {/* Right Stats Cards */}
