@@ -106,7 +106,7 @@ export default function HomePage() {
         href="https://wa.me/919840391815"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-32 right-5 md:bottom-36 md:right-6 z-40 bg-[#54BAB9] hover:bg-[#54BAB9] p-3 rounded-full shadow-lg transition-colors duration-200 hover:scale-110 transform"
+        className="fixed bottom-20 right-4 md:bottom-26 md:right-5 z-40 bg-[#54BAB9] hover:bg-[#54BAB9] p-3 rounded-full shadow-lg transition-colors duration-200 hover:scale-110 transform"
         aria-label="Contact us on WhatsApp"
       >
         <FaWhatsapp size={24} className="text-white" />
