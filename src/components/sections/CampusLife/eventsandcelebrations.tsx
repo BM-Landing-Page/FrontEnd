@@ -75,6 +75,31 @@ export default function EventsAndCelebrations() {
         </div>
       </div>
 
+      {/* Instagram Link Section - Right below hero banner */}
+      <div className="py-8 bg-gradient-to-r from-[#F7ECDE] to-[#9ED2C6]">
+        <div className="flex justify-center">
+          <Link 
+            href="https://www.instagram.com/buddingminds_events?igsh=MWs0b3hhYzZlaGY2NQ%3D%3D&utm_source=qr" 
+            className="inline-block"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="flex items-center gap-3 bg-white hover:bg-gray-50 text-[#54BAB9] px-8 py-4 rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl hover:scale-105 border border-[#54BAB9]/20">
+              <div className="flex items-center gap-2">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.987 11.987 6.62 0 11.987-5.367 11.987-11.987C24.003 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.611-3.132-1.551-.684-.94-.684-2.126 0-3.066.684-.94 1.835-1.551 3.132-1.551s2.448.611 3.132 1.551c.684.94.684 2.126 0 3.066-.684.94-1.835 1.551-3.132 1.551z"/>
+                </svg>
+                <div className="text-center">
+                  <div className="font-bold text-lg">Follow Our Events on Instagram</div>
+                  <div className="text-sm text-gray-600">@buddingminds_events</div>
+                </div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
+        </div>
+      </div>
+
       {/* Events Grid */}
       <div className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
@@ -156,6 +181,7 @@ export default function EventsAndCelebrations() {
           </div>
         </div>
       </div>
+
       {/* Next Button - Centered */}
       <div className="py-12 bg-white">
         <div className="flex justify-center">

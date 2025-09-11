@@ -8,6 +8,8 @@ import USPs from "@/components/sections/Home/USPs"
 import CurriculumLinksSection from "@/components/sections/Home/CurriculumLinksSection"
 import VideosShowcase from "@/components/sections/Home/VideosShowcaseSection"
 import ContactSection from "@/components/sections/Home/ContactSection"
+import Popup from "@/components/ui/popup"
+
 
 // Floating Bubble component
 function FloatingBubble({
@@ -138,6 +140,7 @@ export default function HomePage() {
           })();
         `}
       </Script>
+      <Popup />
     </main>
   )
 }
