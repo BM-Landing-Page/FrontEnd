@@ -223,7 +223,7 @@ export default function StudentVoices() {
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
       <div className="relative h-96 overflow-hidden">
-        <img src="/placeholder.svg?height=400&width=1200" alt="Student Voices" className="w-full h-full object-cover" />
+        <img src="/images/studentvoice.jpg" alt="Student Voices" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#54BAB9]/80 to-[#9ED2C6]/60"></div>
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">

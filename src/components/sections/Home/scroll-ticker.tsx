@@ -19,7 +19,7 @@ export default function ScrollTicker() {
         const response = await fetch("https://backend-edhc.onrender.com/scroll")
         if (response.ok) {
           const data = await response.json()
-          setScrollItems(data)
+          setScrollItems(data.reverse())
         }
       } catch (error) {
         console.error("Error fetching scroll items:", error)

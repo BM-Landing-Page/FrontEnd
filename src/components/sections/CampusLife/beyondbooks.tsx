@@ -360,14 +360,7 @@ export default function BeyondBooks() {
                       </CardContent>
                     </Card>
                   </div>
-                  <div className="text-center mt-12">
-                    <button
-                      className="bg-white hover:bg-gray-50 text-gray-900 font-bold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 rounded-md"
-                      style={{ color: "#1f2937" }}
-                    >
-                      Explore our IGNITE Gallery
-                    </button>
-                  </div>
+                  
                 </div>
               </div>
             )}
