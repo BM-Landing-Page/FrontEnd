@@ -75,7 +75,7 @@ export default function Popup({ onClose }: PopupProps) {
             }}
             className="inline-flex items-center justify-center px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl text-lg"
           >
-            Register Now
+            Discover More
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
