@@ -125,7 +125,7 @@ export default function EarlyYears() {
               {/* <CHANGE> Replace icon box with image placeholder */}
               <div className="w-full h-80 rounded-2xl shadow-lg overflow-hidden">
                 <img
-                  src="/images/earlyyearsbanner.JPG"
+                  src="/images/earlyyearsbanner.jpg"
                   alt="Founders' Vision image placeholder"
                   className="w-full h-full object-cover"
                   loading="lazy"
