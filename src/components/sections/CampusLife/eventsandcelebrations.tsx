@@ -62,7 +62,7 @@ export default function EventsAndCelebrations() {
       {/* Hero Banner */}
       <div className="relative h-96 overflow-hidden">
         <img
-          src="/images/events.jpg"
+          src="/images/events.JPG"
           alt="School Celebrations"
           className="w-full h-full object-cover"
         />

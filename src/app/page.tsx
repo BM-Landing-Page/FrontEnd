@@ -9,7 +9,7 @@ import CurriculumLinksSection from "@/components/sections/Home/CurriculumLinksSe
 import VideosShowcase from "@/components/sections/Home/VideosShowcaseSection"
 //import ContactSection from "@/components/sections/Home/ContactSection"
 import Popup from "@/components/ui/popup"
-
+//import HelpDialog from "@/components/ui/HelpDialog" // Add this import
 
 // Floating Bubble component
 function FloatingBubble({
@@ -140,7 +140,9 @@ export default function HomePage() {
           })();
         `}
       </Script>
+      
       <Popup />
+      {/* <HelpDialog /> Add this line */}
     </main>
   )
 }
