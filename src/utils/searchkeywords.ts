@@ -48,13 +48,10 @@ export const searchKeywordGroups: Record<string, string[]> = {
     "pedagogy", "teaching methods", "tools", "pedagogy tools", "teaching aids", "instructional methods",
     "learning tools", "educational technology", "teaching techniques", "learning strategies", "tools for teaching", "how we teach", "teaching platform"
   ],
-  "/admissions": [
-    "admissions", "admission", "join school", "how to apply", "register", "enrol", "enrollment",
-    "getting in", "new admission", "apply now", "start admission", "school application", "admission dates", "school joining", "apply for admission"
-  ],
   "/admissionsprocess": [
     "admission process", "how to apply", "steps to join", "application process", "procedure",
-    "admission procedure", "enrollment process", "application steps", "admission guide", "step-by-step admission", "registration steps", "how to join bmis"
+    "admission procedure", "enrollment process", "application steps", "admission guide", "step-by-step admission", "registration steps", "how to join bmis", "admissions", "admission", "join school", "how to apply", "register", "enrol", "enrollment",
+    "getting in", "new admission", "apply now", "start admission", "school application", "admission dates", "school joining", "apply for admission"
   ],
   "https://buddingminds.myschoolone.com/cloud/Admission/EnquiryForm.php?ksjdkjsd=MQ==": [
     "register now", "apply online", "admission form", "enquiry form", "online application",
