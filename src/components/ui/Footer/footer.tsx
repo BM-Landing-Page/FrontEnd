@@ -53,7 +53,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center space-x-3">
                   <Clock className="w-5 h-5" style={{ color: "#E9DAC1" }} />
-                  <span className="text-white/90 font-medium">Mon–Fri: 8:00 AM – 4:00 PM</span>
+                  <span className="text-white/90 font-medium">Mon–Fri: 9:00 AM – 4:00 PM</span>
                 </div>
               </div>
             </div>
