@@ -110,12 +110,12 @@ export default function PrimaryAndMiddleYears() {
     },
   ]
 
-  const Specials = [
-    { label: "Dance", emoji: "🎶" },
-    { label: "Music", emoji: "🎼" },
-    { label: "Arts & Crafts", emoji: "🎨" },
-    { label: "Karate", emoji: "🥋" },
-  ]
+  // const Specials = [
+  //   { label: "Dance", emoji: "🎶" },
+  //   { label: "Music", emoji: "🎼" },
+  //   { label: "Arts & Crafts", emoji: "🎨" },
+  //   { label: "Karate", emoji: "🥋" },
+  // ]
 
   const SpecialsGr58 = [
     { label: "Karate", emoji: "🥋" },
@@ -211,7 +211,7 @@ export default function PrimaryAndMiddleYears() {
         </div>
       </Section>
 
-      <Section title="Subjects Offered in Primary Grades (Grades 1–5)" bg={colors.white}>
+      {/* <Section title="Subjects Offered in Primary Grades (Grades 1–5)" bg={colors.white}>
         <SubjectsTable data={primarySubjectsData} type="primary" />
         <h3 className="text-3xl font-bold mb-8 text-[#54BAB9] text-center mt-12">Specials (Co-curricular):</h3>
         <div className="flex flex-wrap justify-center gap-4 text-lg leading-relaxed">
@@ -231,7 +231,7 @@ export default function PrimaryAndMiddleYears() {
             </motion.div>
           ))}
         </div>
-      </Section>
+      </Section> */}
 
       <Section title="Robotics: PLAY – CREATE – INNOVATE" bg={colors.lightTan}>
         <p className="text-xl leading-relaxed max-w-3xl mx-auto text-center">

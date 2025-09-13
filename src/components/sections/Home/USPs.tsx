@@ -66,8 +66,8 @@ export default function USPs() {
         >
           <h3 className="text-2xl font-bold text-[#54BAB9] mb-4">Latest Updates</h3>
           <ScrollTicker />
-          <p className="text-[#1E293B] leading-relaxed text-sm">
-            Stay updated with our latest announcements and achievements
+          <p className="text-[#54BAB9] leading-relaxed text-sm">
+           <b>Stay updated with our latest announcements and achievements</b> 
           </p>
         </motion.div>
 
