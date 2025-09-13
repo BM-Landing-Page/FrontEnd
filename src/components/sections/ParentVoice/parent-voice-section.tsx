@@ -38,7 +38,7 @@ export default function ParentVoiceSection() {
                   Parents’ Voice
                 </h1>
                 <p className="mt-2 text-pretty leading-relaxed">
-                  Share your thoughts to help us improve, and read what other parents are saying about their experience.
+                  Contribute your perspective and explore the experiences shared by peer parents.
                 </p>
                 <div
                   className="mt-4 inline-flex items-center rounded-full px-4 py-2 text-sm"
