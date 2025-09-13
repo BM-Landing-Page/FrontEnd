@@ -117,6 +117,24 @@ export default function PrimaryAndMiddleYears() {
     { label: "Karate", emoji: "🥋" },
   ]
 
+  const SpecialsGr58 = [
+    { label: "Karate", emoji: "🥋" },
+    { label: "Silambam", emoji: "🏹" },
+    { label: "Theatre", emoji: "🎭" },
+    { label: "Western Dance", emoji: "💃" },
+    { label: "Western Music", emoji: "🎸" },
+    { label: "Cookery", emoji: "👨‍🍳" },
+  ]
+
+  const ClubsGr58 = [
+    { label: "Debate", emoji: "🗣️" },
+    { label: "Quiz", emoji: "❓" },
+    { label: "Quanta", emoji: "🔬" },
+    { label: "Creative", emoji: "🎨" },
+    { label: "Archery", emoji: "🏹" },
+    { label: "Air-rifle Shooting", emoji: "🎯" },
+  ]
+
   const handlePrimaryClick = () => {
     window.open(
       "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-primary/",
@@ -195,7 +213,7 @@ export default function PrimaryAndMiddleYears() {
 
       <Section title="Subjects Offered in Primary Grades (Grades 1–5)" bg={colors.white}>
         <SubjectsTable data={primarySubjectsData} type="primary" />
-        <h3 className="text-3xl font-bold mb-8 text-[#54BAB9] text-center">Specials (Co-curricular):</h3>
+        <h3 className="text-3xl font-bold mb-8 text-[#54BAB9] text-center mt-12">Specials (Co-curricular):</h3>
         <div className="flex flex-wrap justify-center gap-4 text-lg leading-relaxed">
           {Specials.map((item, idx) => (
             <motion.div
@@ -230,7 +248,7 @@ export default function PrimaryAndMiddleYears() {
       </Section>
 
       <Section title="Cambridge Secondary Programme" bg={colors.lightTan}>
-        <p className="text-xl leading-relaxed mb-12 text-center max-w-3xl mx-auto">
+        <p className="text-xl leading-relaxed mb-12 max-w-3xl mx-auto text-center">
           The Cambridge Lower Secondary Programme (Grades 6–8) prepares students for the IGCSE curriculum in Grades
           9–10. It is designed for learners aged 11 to 14.
         </p>
@@ -259,6 +277,44 @@ export default function PrimaryAndMiddleYears() {
 
       <Section title="Subjects Offered in Lower Secondary (Grades 6–8)" bg={colors.white}>
         <SubjectsTable data={lowerSecondarySubjectsData} type="secondary" />
+
+        <h3 className="text-3xl font-bold mb-8 text-[#54BAB9] text-center mt-12">Specials Offered to Grades 5-8:</h3>
+        <div className="flex flex-wrap justify-center gap-4 text-lg leading-relaxed mb-12">
+          {SpecialsGr58.map((item, idx) => (
+            <motion.div
+              key={idx}
+              className="flex items-center gap-2 p-4 bg-[#9ED2C6] text-gray-900 rounded-full shadow-md"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={fadeInUpVariants}
+            >
+              <span role="img" aria-label={`${item.label} emoji`}>
+                {item.emoji}
+              </span>
+              {item.label}
+            </motion.div>
+          ))}
+        </div>
+
+        <h3 className="text-3xl font-bold mb-8 text-[#54BAB9] text-center">Clubs Offered to Grades 5-8:</h3>
+        <div className="flex flex-wrap justify-center gap-4 text-lg leading-relaxed">
+          {ClubsGr58.map((item, idx) => (
+            <motion.div
+              key={idx}
+              className="flex items-center gap-2 p-4 bg-[#F7ECDE] text-gray-900 rounded-full shadow-md border-2 border-[#54BAB9]"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={fadeInUpVariants}
+            >
+              <span role="img" aria-label={`${item.label} emoji`}>
+                {item.emoji}
+              </span>
+              {item.label}
+            </motion.div>
+          ))}
+        </div>
       </Section>
 
       {/* Call to Action Buttons Section */}
@@ -390,13 +446,7 @@ const SubjectsTable = ({ data, type }: { data: any[]; type: "primary" | "seconda
                 const cellContent = row[key]
                 return (
                   <td key={idx} className="px-6 py-4 whitespace-nowrap text-base text-gray-700">
-                    {cellContent === "✔" ? (
-                      <span className="font-bold text-lg checkmark-black">
-                        ✔
-                      </span>
-                    ) : (
-                      cellContent
-                    )}
+                    {cellContent === "✔" ? <span className="font-bold text-lg checkmark-black">✔</span> : cellContent}
                   </td>
                 )
               })}

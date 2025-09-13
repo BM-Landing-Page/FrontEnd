@@ -186,15 +186,31 @@ export default function IGCSEAndSeniorYears() {
                     </thead>
                     <tbody>
                       {[
-                        { group: "Group I", category: "Languages", subjects: "English, French, Hindi, Tamil, German" },
+                        {
+                          group: "Group I",
+                          category: "Languages",
+                          subjects: "English, French, Hindi, Tamil, German",
+                        },
                         {
                           group: "Group II",
                           category: "Humanities & Social Sciences",
                           subjects: "Environmental Management, Sociology, Economics",
                         },
-                        { group: "Group III", category: "Sciences", subjects: "Physics, Chemistry, Biology" },
-                        { group: "Group IV", category: "Mathematics", subjects: "Mathematics" },
-                        { group: "Group V", category: "Creative & Professional", subjects: "Computer Science" },
+                        {
+                          group: "Group III",
+                          category: "Sciences",
+                          subjects: "Physics, Chemistry, Biology",
+                        },
+                        {
+                          group: "Group IV",
+                          category: "Mathematics",
+                          subjects: "Mathematics",
+                        },
+                        {
+                          group: "Group V",
+                          category: "Creative & Professional",
+                          subjects: "Computer Science",
+                        },
                       ].map((row, index) => (
                         <tr
                           key={index}
@@ -373,7 +389,11 @@ export default function IGCSEAndSeniorYears() {
                           category: "Mathematics & Sciences",
                           subjects: "Mathematics, Physics, Chemistry, Biology, Computer Science",
                         },
-                        { group: "Group II", category: "Languages", subjects: "AS English Language, French, Tamil" },
+                        {
+                          group: "Group II",
+                          category: "Languages",
+                          subjects: "AS English Language, French, Tamil",
+                        },
                         {
                           group: "Group III",
                           category: "Arts & Humanities",
@@ -452,7 +472,176 @@ export default function IGCSEAndSeniorYears() {
             </div>
           </div>
         </section>
-        {/* Section 8: Global Recognition - Enhanced CTA section */}
+        {/* Section 8: Senior Programmes - NEW SECTION */}
+        <section className="relative">
+          <div className="rounded-3xl p-12 md:p-16 relative overflow-hidden" style={{ backgroundColor: "#F7ECDE" }}>
+            <div className="absolute top-0 right-0 w-64 h-64 opacity-5">
+              <Users className="w-full h-full" />
+            </div>
+            <div className="relative z-10 space-y-12">
+              <div className="text-center space-y-6">
+                <div className="inline-flex items-center px-6 py-3 bg-white rounded-full shadow-sm">
+                  <Star className="w-5 h-5 mr-2 text-purple-600" />
+                  <span className="font-semibold text-gray-800">Enrichment Programs</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Senior Programmes</h2>
+                <h3 className="text-2xl md:text-3xl font-light text-gray-600">Grades 9 - 12</h3>
+              </div>
+              <div className="bg-white rounded-2xl p-10 shadow-xl">
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div
+                    className="text-center p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+                    style={{ backgroundColor: "#9ED2C6" }}
+                  >
+                    <div
+                      className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: "#54BAB9" }}
+                    >
+                      <Users className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="font-bold text-gray-900 text-lg">Western Dance</div>
+                    <p className="text-gray-600 mt-2">Contemporary and classical dance forms</p>
+                  </div>
+                  <div
+                    className="text-center p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+                    style={{ backgroundColor: "#E9DAC1" }}
+                  >
+                    <div
+                      className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: "#54BAB9" }}
+                    >
+                      <BookOpen className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="font-bold text-gray-900 text-lg">Western Music</div>
+                    <p className="text-gray-600 mt-2">Instrumental and vocal music training</p>
+                  </div>
+                  <div
+                    className="text-center p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+                    style={{ backgroundColor: "#F7ECDE" }}
+                  >
+                    <div
+                      className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: "#54BAB9" }}
+                    >
+                      <Target className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="font-bold text-gray-900 text-lg">Silambam</div>
+                    <p className="text-gray-600 mt-2">Traditional Tamil martial art form</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 9: Certificate Programs - NEW SECTION */}
+        <section className="relative">
+          <div className="rounded-3xl p-12 md:p-16 relative overflow-hidden" style={{ backgroundColor: "#9ED2C6" }}>
+            <div className="absolute bottom-0 left-0 w-80 h-80 opacity-5">
+              <Award className="w-full h-full" />
+            </div>
+            <div className="relative z-10 space-y-12">
+              <div className="text-center space-y-6">
+                <div className="inline-flex items-center px-6 py-3 bg-white rounded-full shadow-sm">
+                  <Award className="w-5 h-5 mr-2 text-orange-600" />
+                  <span className="font-semibold text-gray-800">Specialized Learning</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Certificate Programs</h2>
+                <p className="text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+                  Specialized certificate programs designed to enhance skills and provide focused learning opportunities
+                  across different grade levels.
+                </p>
+              </div>
+
+              {/* Grades 9-10 Programs */}
+              <div className="bg-white rounded-2xl p-10 shadow-xl mb-8">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Certificate Programs for Grades 9-10</h3>
+                  <p className="text-gray-600">Foundation level specialized programs</p>
+                </div>
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div
+                    className="text-center p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+                    style={{ backgroundColor: "#F7ECDE" }}
+                  >
+                    <div
+                      className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: "#54BAB9" }}
+                    >
+                      <BookOpen className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="font-bold text-gray-900 text-lg">Media Studies</div>
+                    <p className="text-gray-600 mt-2">Digital media and communication skills</p>
+                  </div>
+                  <div
+                    className="text-center p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+                    style={{ backgroundColor: "#E9DAC1" }}
+                  >
+                    <div
+                      className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: "#54BAB9" }}
+                    >
+                      <Star className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="font-bold text-gray-900 text-lg">Arts & Design</div>
+                    <p className="text-gray-600 mt-2">Creative expression and design thinking</p>
+                  </div>
+                  <div
+                    className="text-center p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+                    style={{ backgroundColor: "#9ED2C6" }}
+                  >
+                    <div
+                      className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: "#54BAB9" }}
+                    >
+                      <Users className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="font-bold text-gray-900 text-lg">Food & Nutrition</div>
+                    <p className="text-gray-600 mt-2">Healthy living and culinary skills</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Grades 11-12 Programs */}
+              <div className="bg-white rounded-2xl p-10 shadow-xl border-4" style={{ borderColor: "#54BAB9" }}>
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Certificate Programs for Grades 11-12</h3>
+                  <p className="text-gray-600">Advanced level specialized programs</p>
+                </div>
+                <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                  <div
+                    className="text-center p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+                    style={{ backgroundColor: "#F7ECDE" }}
+                  >
+                    <div
+                      className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: "#54BAB9" }}
+                    >
+                      <Star className="w-10 h-10 text-white" />
+                    </div>
+                    <div className="font-bold text-gray-900 text-xl">Arts & Design</div>
+                    <p className="text-gray-600 mt-3">Advanced creative portfolio development</p>
+                  </div>
+                  <div
+                    className="text-center p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+                    style={{ backgroundColor: "#E9DAC1" }}
+                  >
+                    <div
+                      className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: "#54BAB9" }}
+                    >
+                      <Target className="w-10 h-10 text-white" />
+                    </div>
+                    <div className="font-bold text-gray-900 text-xl">Design & Technology</div>
+                    <p className="text-gray-600 mt-3">Innovation and technical design skills</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 10: Global Recognition - Enhanced CTA section */}
         <section className="relative">
           <div className="rounded-3xl p-12 md:p-16 relative overflow-hidden" style={{ backgroundColor: "#9ED2C6" }}>
             <div className="absolute bottom-0 left-0 w-80 h-80 opacity-5">
@@ -487,7 +676,7 @@ export default function IGCSEAndSeniorYears() {
                     style={{ color: "#54BAB9", borderColor: "#54BAB9" }}
                   >
                     <TrendingUp className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform duration-300" />
-                    Recogonition by Indian Universities →
+                    Recognition by Indian Universities →
                   </Link>
                 </div>
               </div>
@@ -495,15 +684,15 @@ export default function IGCSEAndSeniorYears() {
           </div>
         </section>
         <div className="flex justify-center mt-8">
-        <Link href="/pedagogytools">
-          <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
-            <div className="text-center">
-              <div className="font-semibold text-lg">Pedagogy Tools</div>
+          <Link href="/pedagogytools">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-lg">Pedagogy Tools</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
             </div>
-            <ArrowRight className="w-5 h-5" />
-          </div>
-        </Link>
-      </div>
+          </Link>
+        </div>
       </div>
     </div>
   )
