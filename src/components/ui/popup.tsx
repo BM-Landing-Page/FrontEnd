@@ -49,13 +49,13 @@ export default function Popup({ onClose }: PopupProps) {
         </button>
 
         {/* Image covering 4/5 of popup */}
-        <div className="relative h-4/5 w-full">
+        <div className="relative h-4/5 w-full bg-gray-100 flex items-center justify-center">
           {popupData.image ? (
             <Image
               src={popupData.image || "/placeholder.svg"}
               alt="Registration Banner"
               fill
-              className="object-cover"
+              className="object-contain"
               priority
             />
           ) : (

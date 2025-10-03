@@ -83,7 +83,7 @@ const About = () => {
       </section>
 
       {/* Introduction */}
-      <section className="py-16 px-4">
+      <section className="py-8 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-lg text-gray-700 leading-relaxed">
             At BMIS, we are committed to cultivating not only academic excellence but also strong values that prepare
@@ -93,22 +93,22 @@ const About = () => {
       </section>
 
       {/* Core Values Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-8 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-6">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Core Values</h2>
             <p className="text-lg text-gray-600">We believe that strong character builds strong futures</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {coreValues.map((value, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 text-center"
+                className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 text-center"
               >
-                <div className={`${value.color} rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4`}>
+                <div className={`${value.color} rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3`}>
                   <value.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">{value.title}</h3>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">{value.title}</h3>
                 <p className="text-gray-600 leading-relaxed text-sm">{value.description}</p>
               </div>
             ))}
@@ -117,17 +117,17 @@ const About = () => {
       </section>
 
       {/* What We Offer Section */}
-      <section className="py-16 px-4">
+      <section className="py-8 px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-6">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">What We Offer Our Students</h2>
             <p className="text-lg text-gray-600">We are dedicated to delivering an educational experience that is:</p>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-2">
             {offerings.map((offering, index) => (
               <div
                 key={index}
-                className="flex items-start gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-100"
+                className="flex items-start gap-4 bg-white rounded-lg p-3 shadow-sm border border-gray-100"
               >
                 <div className="bg-[#9ED2C6] rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 mt-1">
                   <Star className="w-5 h-5 text-white" />
@@ -140,17 +140,17 @@ const About = () => {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-8 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-6">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Philosophy</h2>
             <p className="text-lg text-gray-600">We believe that learning flourishes in an environment where:</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {philosophyPoints.map((point, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-[#9ED2C6] to-[#54BAB9] rounded-lg p-6 text-white shadow-lg"
+                className="bg-gradient-to-br from-[#9ED2C6] to-[#54BAB9] rounded-lg p-3 text-white shadow-lg"
               >
                 <div className="flex items-start gap-3">
                   <Lightbulb className="w-5 h-5 flex-shrink-0 mt-1" />
@@ -163,12 +163,12 @@ const About = () => {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-16 px-4">
+      <section className="py-8 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6">
             {/* Mission */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <div className="flex items-center gap-3 mb-6">
+            <div className="bg-white rounded-lg shadow-lg p-5">
+              <div className="flex items-center gap-3 mb-4">
                 <div className="bg-[#54BAB9] rounded-full w-12 h-12 flex items-center justify-center">
                   <Target className="w-6 h-6 text-white" />
                 </div>
@@ -180,8 +180,8 @@ const About = () => {
               </p>
             </div>
             {/* Vision */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <div className="flex items-center gap-3 mb-6">
+            <div className="bg-white rounded-lg shadow-lg p-5">
+              <div className="flex items-center gap-3 mb-4">
                 <div className="bg-[#9ED2C6] rounded-full w-12 h-12 flex items-center justify-center">
                   <Users2 className="w-6 h-6 text-white" />
                 </div>
@@ -198,10 +198,10 @@ const About = () => {
       </section>
 
       {/* Closing Statement */}
-      <section className="py-16 px-4 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] text-white">
+      <section className="py-8 px-4 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">At BMIS, we are not just shaping minds—we are shaping futures.</h2>
-          <p className="text-lg opacity-90 mb-8">
+          <h2 className="text-3xl font-bold mb-4">At BMIS, we are not just shaping minds—we are shaping futures.</h2>
+          <p className="text-lg opacity-90 mb-6">
             Join us in our mission to build healthy minds and create tomorrow's leaders.
           </p>
 

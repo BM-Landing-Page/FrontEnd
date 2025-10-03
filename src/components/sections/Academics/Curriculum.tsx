@@ -27,22 +27,11 @@ export default function Curriculum() {
           <p className="text-lg md:text-xl lg:text-2xl mb-6 leading-relaxed max-w-3xl mx-auto opacity-95">
             Preparing tomorrow's leaders through world-class education from ages 5 to 19
           </p>
-          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              className="px-6 py-3 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg"
-              style={{ backgroundColor: "#54BAB9", color: "white" }}
-            >
-              Explore Our Journey
-            </button>
-            <button className="px-6 py-3 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg border-2 border-white text-white hover:bg-white hover:text-gray-800">
-              Download Brochure
-            </button>
-          </div> */}
         </div>
       </section>
 
       {/* Cambridge at a Glance */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
         {/* Floating Bubbles - Only Light Beige and Soft Cream */}
         <div className="absolute inset-0 pointer-events-none">
           <div
@@ -87,35 +76,35 @@ export default function Curriculum() {
           ></div>
         </div>
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: "#54BAB9" }}>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: "#54BAB9" }}>
               Cambridge at a Glance
             </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
               The world's most trusted international education programme
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-              <div className="text-4xl font-bold mb-2" style={{ color: "#54BAB9" }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="text-center bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+              <div className="text-3xl font-bold mb-2" style={{ color: "#54BAB9" }}>
                 160+
               </div>
               <p className="text-gray-600 font-medium">Countries Worldwide</p>
             </div>
-            <div className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-              <div className="text-4xl font-bold mb-2" style={{ color: "#54BAB9" }}>
+            <div className="text-center bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+              <div className="text-3xl font-bold mb-2" style={{ color: "#54BAB9" }}>
                 10,000+
               </div>
               <p className="text-gray-600 font-medium">Schools Globally</p>
             </div>
-            <div className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-              <div className="text-4xl font-bold mb-2" style={{ color: "#54BAB9" }}>
+            <div className="text-center bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+              <div className="text-3xl font-bold mb-2" style={{ color: "#54BAB9" }}>
                 5-19
               </div>
               <p className="text-gray-600 font-medium">Age Range</p>
             </div>
-            <div className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-              <div className="text-4xl font-bold mb-2" style={{ color: "#54BAB9" }}>
+            <div className="text-center bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+              <div className="text-3xl font-bold mb-2" style={{ color: "#54BAB9" }}>
                 150+
               </div>
               <p className="text-gray-600 font-medium">Years of Excellence</p>
@@ -126,7 +115,7 @@ export default function Curriculum() {
 
       {/* Learning Journey Timeline */}
       <section
-        className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+        className="py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
         style={{
           background: `linear-gradient(180deg, white 0%, #F7ECDE 100%)`,
         }}
@@ -155,97 +144,97 @@ export default function Curriculum() {
           ></div>
         </div>
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: "#54BAB9" }}>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: "#54BAB9" }}>
               Your Learning Journey
             </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
               Four seamless stages designed to unlock every student's potential
             </p>
           </div>
           {/* Timeline - Desktop Horizontal */}
           <div className="hidden lg:block">
-            <div className="grid grid-cols-4 gap-8">
+            <div className="grid grid-cols-4 gap-6">
               {/* Stage 1 */}
               <div className="text-center">
                 <div
-                  className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center text-white font-bold text-2xl shadow-lg animate-pulse"
+                  className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-xl shadow-lg animate-pulse"
                   style={{ backgroundColor: "#54BAB9", animationDuration: "3s" }}
                 >
                   1
                 </div>
                 <div
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  className="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                   style={{ borderLeft: "4px solid #9ED2C6" }}
                 >
-                  <h3 className="text-xl font-bold mb-3" style={{ color: "#54BAB9" }}>
+                  <h3 className="text-lg font-bold mb-2" style={{ color: "#54BAB9" }}>
                     Primary
                   </h3>
                   <p className="text-gray-600 text-sm mb-2">Ages 5-11</p>
-                  <p className="text-gray-700">Foundation learning with creativity and curiosity</p>
+                  <p className="text-gray-700 text-sm">Foundation learning with creativity and curiosity</p>
                 </div>
               </div>
               {/* Stage 2 */}
               <div className="text-center">
                 <div
-                  className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center text-white font-bold text-2xl shadow-lg animate-pulse"
+                  className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-xl shadow-lg animate-pulse"
                   style={{ backgroundColor: "#54BAB9", animationDuration: "3s", animationDelay: "0.5s" }}
                 >
                   2
                 </div>
                 <div
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  className="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                   style={{ borderLeft: "4px solid #9ED2C6" }}
                 >
-                  <h3 className="text-xl font-bold mb-3" style={{ color: "#54BAB9" }}>
+                  <h3 className="text-lg font-bold mb-2" style={{ color: "#54BAB9" }}>
                     Lower Secondary
                   </h3>
                   <p className="text-gray-600 text-sm mb-2">Ages 11-14</p>
-                  <p className="text-gray-700">Building critical thinking and subject expertise</p>
+                  <p className="text-gray-700 text-sm">Building critical thinking and subject expertise</p>
                 </div>
               </div>
               {/* Stage 3 */}
               <div className="text-center">
                 <div
-                  className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center text-white font-bold text-2xl shadow-lg animate-pulse"
+                  className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-xl shadow-lg animate-pulse"
                   style={{ backgroundColor: "#54BAB9", animationDuration: "3s", animationDelay: "1s" }}
                 >
                   3
                 </div>
                 <div
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  className="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                   style={{ borderLeft: "4px solid #9ED2C6" }}
                 >
-                  <h3 className="text-xl font-bold mb-3" style={{ color: "#54BAB9" }}>
+                  <h3 className="text-lg font-bold mb-2" style={{ color: "#54BAB9" }}>
                     Upper Secondary
                   </h3>
                   <p className="text-gray-600 text-sm mb-2">Ages 14-16</p>
-                  <p className="text-gray-700">IGCSE qualifications and specialized learning</p>
+                  <p className="text-gray-700 text-sm">IGCSE qualifications and specialized learning</p>
                 </div>
               </div>
               {/* Stage 4 */}
               <div className="text-center">
                 <div
-                  className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center text-white font-bold text-2xl shadow-lg animate-pulse"
+                  className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-xl shadow-lg animate-pulse"
                   style={{ backgroundColor: "#54BAB9", animationDuration: "3s", animationDelay: "1.5s" }}
                 >
                   4
                 </div>
                 <div
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  className="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                   style={{ borderLeft: "4px solid #9ED2C6" }}
                 >
-                  <h3 className="text-xl font-bold mb-3" style={{ color: "#54BAB9" }}>
+                  <h3 className="text-lg font-bold mb-2" style={{ color: "#54BAB9" }}>
                     Advanced
                   </h3>
                   <p className="text-gray-600 text-sm mb-2">Ages 16-19</p>
-                  <p className="text-gray-700">A-Level preparation for university success</p>
+                  <p className="text-gray-700 text-sm">A-Level preparation for university success</p>
                 </div>
               </div>
             </div>
           </div>
           {/* Timeline - Mobile Vertical */}
-          <div className="lg:hidden space-y-8">
+          <div className="lg:hidden space-y-6">
             {[
               {
                 num: 1,
@@ -274,7 +263,7 @@ export default function Curriculum() {
             ].map((stage, index) => (
               <div key={stage.num} className="flex items-start space-x-4">
                 <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg flex-shrink-0 animate-pulse"
+                  className="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0 animate-pulse"
                   style={{
                     backgroundColor: "#54BAB9",
                     animationDuration: "3s",
@@ -284,14 +273,14 @@ export default function Curriculum() {
                   {stage.num}
                 </div>
                 <div
-                  className="flex-1 bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="flex-1 bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all duration-300"
                   style={{ borderLeft: "4px solid #9ED2C6" }}
                 >
-                  <h3 className="text-xl font-bold mb-2" style={{ color: "#54BAB9" }}>
+                  <h3 className="text-lg font-bold mb-2" style={{ color: "#54BAB9" }}>
                     {stage.title}
                   </h3>
                   <p className="text-gray-600 text-sm mb-2">{stage.age}</p>
-                  <p className="text-gray-700">{stage.desc}</p>
+                  <p className="text-gray-700 text-sm">{stage.desc}</p>
                 </div>
               </div>
             ))}
@@ -300,7 +289,7 @@ export default function Curriculum() {
       </section>
 
       {/* Why Choose Cambridge */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
         {/* Light Floating Bubbles Only */}
         <div className="absolute inset-0 pointer-events-none">
           <div
@@ -345,23 +334,23 @@ export default function Curriculum() {
           ></div>
         </div>
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: "#54BAB9" }}>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: "#54BAB9" }}>
               Why Choose Cambridge?
             </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
               Discover the advantages that make Cambridge the world's preferred curriculum
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Benefit 1 */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
-                className="w-16 h-16 rounded-full mb-6 flex items-center justify-center"
+                className="w-14 h-14 rounded-full mb-4 flex items-center justify-center"
                 style={{ backgroundColor: "#9ED2C6" }}
               >
                 <svg
-                  className="w-8 h-8"
+                  className="w-7 h-7"
                   style={{ color: "#54BAB9" }}
                   fill="none"
                   stroke="currentColor"
@@ -375,21 +364,21 @@ export default function Curriculum() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: "#54BAB9" }}>
+              <h3 className="text-lg font-bold mb-3" style={{ color: "#54BAB9" }}>
                 Global Recognition
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-sm">
                 Accepted by top universities worldwide, opening doors to international opportunities and career paths.
               </p>
             </div>
             {/* Benefit 2 */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
-                className="w-16 h-16 rounded-full mb-6 flex items-center justify-center"
+                className="w-14 h-14 rounded-full mb-4 flex items-center justify-center"
                 style={{ backgroundColor: "#9ED2C6" }}
               >
                 <svg
-                  className="w-8 h-8"
+                  className="w-7 h-7"
                   style={{ color: "#54BAB9" }}
                   fill="none"
                   stroke="currentColor"
@@ -403,22 +392,22 @@ export default function Curriculum() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: "#54BAB9" }}>
+              <h3 className="text-lg font-bold mb-3" style={{ color: "#54BAB9" }}>
                 Critical Thinking
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-sm">
                 Develops analytical skills and independent thinking, preparing students for complex real-world
                 challenges.
               </p>
             </div>
             {/* Benefit 3 */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
-                className="w-16 h-16 rounded-full mb-6 flex items-center justify-center"
+                className="w-14 h-14 rounded-full mb-4 flex items-center justify-center"
                 style={{ backgroundColor: "#9ED2C6" }}
               >
                 <svg
-                  className="w-8 h-8"
+                  className="w-7 h-7"
                   style={{ color: "#54BAB9" }}
                   fill="none"
                   stroke="currentColor"
@@ -427,21 +416,21 @@ export default function Curriculum() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: "#54BAB9" }}>
+              <h3 className="text-lg font-bold mb-3" style={{ color: "#54BAB9" }}>
                 Flexible Learning
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-sm">
                 Adaptable curriculum that accommodates different learning styles and individual student needs.
               </p>
             </div>
             {/* Benefit 4 */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
-                className="w-16 h-16 rounded-full mb-6 flex items-center justify-center"
+                className="w-14 h-14 rounded-full mb-4 flex items-center justify-center"
                 style={{ backgroundColor: "#9ED2C6" }}
               >
                 <svg
-                  className="w-8 h-8"
+                  className="w-7 h-7"
                   style={{ color: "#54BAB9" }}
                   fill="none"
                   stroke="currentColor"
@@ -455,21 +444,21 @@ export default function Curriculum() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: "#54BAB9" }}>
+              <h3 className="text-lg font-bold mb-3" style={{ color: "#54BAB9" }}>
                 Proven Excellence
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-sm">
                 Over 150 years of educational innovation and continuous improvement in teaching methodologies.
               </p>
             </div>
             {/* Benefit 5 */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
-                className="w-16 h-16 rounded-full mb-6 flex items-center justify-center"
+                className="w-14 h-14 rounded-full mb-4 flex items-center justify-center"
                 style={{ backgroundColor: "#9ED2C6" }}
               >
                 <svg
-                  className="w-8 h-8"
+                  className="w-7 h-7"
                   style={{ color: "#54BAB9" }}
                   fill="none"
                   stroke="currentColor"
@@ -483,21 +472,21 @@ export default function Curriculum() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: "#54BAB9" }}>
+              <h3 className="text-lg font-bold mb-3" style={{ color: "#54BAB9" }}>
                 Character Building
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-sm">
                 Emphasizes values, ethics, and personal development alongside academic achievement.
               </p>
             </div>
             {/* Benefit 6 */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
               <div
-                className="w-16 h-16 rounded-full mb-6 flex items-center justify-center"
+                className="w-14 h-14 rounded-full mb-4 flex items-center justify-center"
                 style={{ backgroundColor: "#9ED2C6" }}
               >
                 <svg
-                  className="w-8 h-8"
+                  className="w-7 h-7"
                   style={{ color: "#54BAB9" }}
                   fill="none"
                   stroke="currentColor"
@@ -511,10 +500,10 @@ export default function Curriculum() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: "#54BAB9" }}>
+              <h3 className="text-lg font-bold mb-3" style={{ color: "#54BAB9" }}>
                 Quality Assurance
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-sm">
                 Rigorous assessment standards and continuous monitoring ensure consistent educational quality.
               </p>
             </div>
@@ -523,7 +512,7 @@ export default function Curriculum() {
       </section>
 
       {/* Call to Action - Lighter Background */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
         {/* Light background pattern */}
         <div
           className="absolute inset-0 opacity-20"
@@ -565,33 +554,19 @@ export default function Curriculum() {
           ></div>
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: "#54BAB9" }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: "#54BAB9" }}>
             Ready to Begin the Journey?
           </h2>
-          <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
             Join thousands of students worldwide who are already experiencing the Cambridge advantage at Budding Minds
             International School.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              className="px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg"
-              style={{ backgroundColor: "#54BAB9", color: "white" }}
-            >
-              Schedule a Visit
-            </button>
-            <button
-              className="px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-lg border-2"
-              style={{ borderColor: "#54BAB9", color: "#54BAB9" }}
-            >
-              Apply Now
-            </button>
-          </div>
         </div>
-        <div className="flex justify-center mt-12 relative z-20">
+        <div className="flex justify-center mt-8 relative z-20">
           <Link href="/earlyyears" className="inline-block">
-            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-6 py-3 rounded-lg shadow-md transition-colors cursor-pointer">
               <div className="text-center">
-                <div className="font-semibold text-lg">Early Years</div>
+                <div className="font-semibold text-base">Early Years</div>
               </div>
               <ArrowRight className="w-5 h-5" />
             </div>
