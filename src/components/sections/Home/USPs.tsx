@@ -9,7 +9,6 @@ export default function USPs() {
     { number: "98%", label: "University Acceptance", icon: Award },
     { number: "50+", label: "Expert Faculty", icon: Star },
     { number: "20", label: "Years of Excellence", icon: BookOpen },
-    { number: "15:1", label: "Student-Teacher Ratio", icon: Users },
     { number: "100%", label: "Holistic Curriculum Coverage", icon: Award },
   ]
 
@@ -67,41 +66,78 @@ export default function USPs() {
           <h3 className="text-2xl font-bold text-[#54BAB9] mb-4">Latest Updates</h3>
           <ScrollTicker />
           <p className="text-[#54BAB9] leading-relaxed text-sm">
-           <b>Stay updated with our latest announcements and achievements</b> 
+            <b>Stay updated with our latest announcements and achievements</b>
           </p>
         </motion.div>
 
         {/* Right Stats Cards */}
-        <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-6">
-          {stats.map((s, i) => {
-            const Icon = s.icon
-            const bg = colorMap[i % colorMap.length]
-            const textColor = bg === "#E9DAC1" ? "#54BAB9" : "white"
-            return (
-              <motion.div
-                key={s.label}
-                className={`relative flex flex-col justify-between h-48 p-8 rounded-xl shadow-xl overflow-hidden ${tilt(i)}`}
-                style={{ backgroundColor: bg }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                whileHover={{
-                  scale: 1.05,
-                  rotate: 0, // on hover it flattens
-                  boxShadow: "0px 15px 30px rgba(0,0,0,0.2)",
-                }}
-                viewport={{ once: true }}
-              >
-                <Icon size={28} className="absolute top-3 right-3 opacity-20" color={textColor} />
-                <div className="text-3xl font-black" style={{ color: textColor }}>
-                  {s.number}
-                </div>
-                <div className="text-sm mt-2 font-semibold leading-tight" style={{ color: textColor }}>
-                  {s.label}
-                </div>
-              </motion.div>
-            )
-          })}
+        <div className="lg:col-span-7 flex flex-col gap-4">
+          {/* Top row - 3 cards */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {stats.slice(0, 3).map((s, i) => {
+              const Icon = s.icon
+              const bg = colorMap[i % colorMap.length]
+              const textColor = bg === "#E9DAC1" ? "#54BAB9" : "white"
+              return (
+                <motion.div
+                  key={s.label}
+                  className={`relative flex flex-col justify-between h-28 p-4 rounded-xl shadow-xl overflow-hidden ${tilt(i)}`}
+                  style={{ backgroundColor: bg }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  whileHover={{
+                    scale: 1.05,
+                    rotate: 0,
+                    boxShadow: "0px 15px 30px rgba(0,0,0,0.2)",
+                  }}
+                  viewport={{ once: true }}
+                >
+                  <Icon size={20} className="absolute top-2 right-2 opacity-20" color={textColor} />
+                  <div className="text-xl font-black" style={{ color: textColor }}>
+                    {s.number}
+                  </div>
+                  <div className="text-xs mt-1 font-semibold leading-tight" style={{ color: textColor }}>
+                    {s.label}
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
+
+          {/* Bottom row - 2 cards centered */}
+          <div className="grid grid-cols-2 gap-4 max-w-md mx-auto w-full">
+            {stats.slice(3, 5).map((s, i) => {
+              const actualIndex = i + 3
+              const Icon = s.icon
+              const bg = colorMap[actualIndex % colorMap.length]
+              const textColor = bg === "#E9DAC1" ? "#54BAB9" : "white"
+              return (
+                <motion.div
+                  key={s.label}
+                  className={`relative flex flex-col justify-between h-28 p-4 rounded-xl shadow-xl overflow-hidden ${tilt(actualIndex)}`}
+                  style={{ backgroundColor: bg }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: actualIndex * 0.1 }}
+                  whileHover={{
+                    scale: 1.05,
+                    rotate: 0,
+                    boxShadow: "0px 15px 30px rgba(0,0,0,0.2)",
+                  }}
+                  viewport={{ once: true }}
+                >
+                  <Icon size={20} className="absolute top-2 right-2 opacity-20" color={textColor} />
+                  <div className="text-xl font-black" style={{ color: textColor }}>
+                    {s.number}
+                  </div>
+                  <div className="text-xs mt-1 font-semibold leading-tight" style={{ color: textColor }}>
+                    {s.label}
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
         </div>
       </div>
 

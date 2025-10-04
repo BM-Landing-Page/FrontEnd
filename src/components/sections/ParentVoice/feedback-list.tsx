@@ -175,7 +175,6 @@ export default function FeedbackList({
       <ul className="mt-4 grid gap-3 md:gap-4 md:grid-cols-2">
         {items?.map((item) => {
           const key = item.id ?? `${item.parent_name}-${item.student_name}-${item.grade}-${item.created_at}`
-          const date = item.created_at ? new Date(item.created_at) : null
           return (
             <li key={key}>
               <button
@@ -204,11 +203,6 @@ export default function FeedbackList({
                         <div className="text-sm font-medium" style={{ color: colors.primary }}>
                           {item.parent_name}
                         </div>
-                        {date && (
-                          <div className="mt-0.5 text-xs opacity-75">
-                            <time dateTime={date.toISOString()}>{date.toLocaleDateString()}</time>
-                          </div>
-                        )}
                       </div>
                     </div>
                   </div>

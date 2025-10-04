@@ -38,13 +38,13 @@ export default function ParentVoiceSection() {
                   Parents’ Voice
                 </h1>
                 <p className="mt-2 text-pretty leading-relaxed">
-                  Contribute your perspective and explore the experiences shared by peer parents.
+                  Join a Community of Voices — Because Every Parenting Story Counts
                 </p>
                 <div
                   className="mt-4 inline-flex items-center rounded-full px-4 py-2 text-sm"
                   style={{ backgroundColor: COLORS.accent }}
                 >
-                  Your feedback matters
+                  Your voice matters
                 </div>
               </div>
             </div>

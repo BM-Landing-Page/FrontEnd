@@ -41,7 +41,6 @@ const About = () => {
   const philosophyPoints = [
     "Every individual feels seen, heard, and respected",
     "Courtesy and kindness are part of daily interactions",
-    "Learning is engaging, meaningful, and motivating",
     "Students are encouraged to take risks and celebrate both effort and achievement",
     "The social, emotional, physical, and intellectual needs of each child are nurtured",
     "Cultural diversity is embraced and celebrated",
@@ -76,8 +75,7 @@ const About = () => {
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">Building Healthy Minds</h1>
           <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-            Our motto "Building Healthy Minds" is more than a phrase—it is the foundation of everything we do. We
-            provide a vibrant, nurturing environment where students explore, grow, and reach their full potential.
+            Building Healthy Minds' is more than just a motto —it's the heart of who we are. We create a vibrant, nurturing environment where students are encouraged to explore, grow, and thrive, unlocking their full potential every step of the way.
           </p>
         </div>
       </section>
