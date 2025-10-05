@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react"
-
 import { useEffect, useRef, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -9,8 +7,7 @@ const timelineData = [
   {
     year: "2004",
     title: "Humble Beginnings",
-    description:
-      "Inception of Budding Minds International Play School with an initial cohort of just 8 children.",
+    description: "Inception of Budding Minds International Play School with an initial cohort of just 8 children.",
     color: "#F7ECDE",
     icon: "🏠",
   },
@@ -31,7 +28,8 @@ const timelineData = [
   {
     year: "2012",
     title: "Cambridge Affiliation",
-    description: "Accredited to Cambridge International Education, reinforcing our commitment to delivering a holistic and global education.",
+    description:
+      "Accredited to Cambridge International Education, reinforcing our commitment to delivering a holistic and global education.",
     color: "#54BAB9",
     icon: "🎓",
   },
@@ -94,24 +92,12 @@ const heroImages = [
 
 export default function Timeline() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isScrolling, setIsScrolling] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [isMobile, setIsMobile] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setMounted(true)
-    
-    // Check if device is mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
-    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   // Auto-rotate carousel images
@@ -123,84 +109,22 @@ export default function Timeline() {
     return () => clearInterval(imageInterval)
   }, [])
 
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault()
-
-      if (isScrolling) return
-
-      setIsScrolling(true)
-
-      if (e.deltaY > 0 && currentIndex < timelineData.length - 1) {
-        setCurrentIndex((prev) => prev + 1)
-      } else if (e.deltaY < 0 && currentIndex > 0) {
-        setCurrentIndex((prev) => prev - 1)
-      }
-
-      setTimeout(() => {
-        setIsScrolling(false)
-      }, 800)
-    }
-
-    const container = containerRef.current
-    if (container && !isMobile) {
-      container.addEventListener("wheel", handleWheel, { passive: false })
-      return () => container.removeEventListener("wheel", handleWheel)
-    }
-  }, [currentIndex, isScrolling, isMobile])
-
-  const [touchStart, setTouchStart] = useState<{ y: number; x: number } | null>(null)
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart({
-      y: e.targetTouches[0].clientY,
-      x: e.targetTouches[0].clientX
-    })
-  }
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (!touchStart) return
-
-    const touchEnd = {
-      y: e.changedTouches[0].clientY,
-      x: e.changedTouches[0].clientX
-    }
-    
-    const distanceY = touchStart.y - touchEnd.y
-    const distanceX = Math.abs(touchStart.x - touchEnd.x)
-
-    // Only trigger if it's more vertical than horizontal
-    if (Math.abs(distanceY) > 50 && Math.abs(distanceY) > distanceX) {
-      if (distanceY > 0 && currentIndex < timelineData.length - 1) {
-        setCurrentIndex((prev) => prev + 1)
-      } else if (distanceY < 0 && currentIndex > 0) {
-        setCurrentIndex((prev) => prev - 1)
-      }
-    }
-    setTouchStart(null)
-  }
-
   const colors = ["#F7ECDE", "#E9DAC1", "#9ED2C6", "#54BAB9"]
 
   const goToNext = () => {
     if (currentIndex < timelineData.length - 1) {
-      setCurrentIndex(prev => prev + 1)
+      setCurrentIndex((prev) => prev + 1)
     }
   }
 
   const goToPrev = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(prev => prev - 1)
+      setCurrentIndex((prev) => prev - 1)
     }
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="min-h-screen overflow-hidden relative"
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
+    <div ref={containerRef} className="min-h-screen overflow-hidden relative">
       {/* Hero Carousel Background - Full Screen */}
       <div className="absolute inset-0">
         {heroImages.map((image, index) => (
@@ -229,34 +153,31 @@ export default function Timeline() {
         ))}
       </div>
 
-      {/* Mobile Navigation Buttons */}
-      {isMobile && (
-        <>
-          <button
-            onClick={goToPrev}
-            disabled={currentIndex === 0}
-            className={`absolute top-1/2 left-4 z-30 transform -translate-y-1/2 w-12 h-12 rounded-full backdrop-blur-md border border-white/30 flex items-center justify-center transition-all duration-300 shadow-lg ${
-              currentIndex === 0 
-                ? 'bg-gray-400/50 text-gray-300 cursor-not-allowed' 
-                : 'bg-white/20 text-white hover:bg-white/30 active:scale-95'
-            }`}
-          >
-            <span className="text-xl font-bold">‹</span>
-          </button>
-          
-          <button
-            onClick={goToNext}
-            disabled={currentIndex === timelineData.length - 1}
-            className={`absolute top-1/2 right-4 z-30 transform -translate-y-1/2 w-12 h-12 rounded-full backdrop-blur-md border border-white/30 flex items-center justify-center transition-all duration-300 shadow-lg ${
-              currentIndex === timelineData.length - 1 
-                ? 'bg-gray-400/50 text-gray-300 cursor-not-allowed' 
-                : 'bg-white/20 text-white hover:bg-white/30 active:scale-95'
-            }`}
-          >
-            <span className="text-xl font-bold">›</span>
-          </button>
-        </>
-      )}
+      <button
+        onClick={goToPrev}
+        disabled={currentIndex === 0}
+        className={`absolute top-1/2 left-4 md:left-8 z-30 transform -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full backdrop-blur-md border-2 border-white/40 flex items-center justify-center transition-all duration-300 shadow-xl ${
+          currentIndex === 0
+            ? "bg-gray-400/50 text-gray-300 cursor-not-allowed"
+            : "bg-white/30 text-white hover:bg-white/40 hover:scale-110 active:scale-95"
+        }`}
+        aria-label="Previous milestone"
+      >
+        <span className="text-2xl md:text-3xl font-bold">‹</span>
+      </button>
+
+      <button
+        onClick={goToNext}
+        disabled={currentIndex === timelineData.length - 1}
+        className={`absolute top-1/2 right-4 md:right-8 z-30 transform -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full backdrop-blur-md border-2 border-white/40 flex items-center justify-center transition-all duration-300 shadow-xl ${
+          currentIndex === timelineData.length - 1
+            ? "bg-gray-400/50 text-gray-300 cursor-not-allowed"
+            : "bg-white/30 text-white hover:bg-white/40 hover:scale-110 active:scale-95"
+        }`}
+        aria-label="Next milestone"
+      >
+        <span className="text-2xl md:text-3xl font-bold">›</span>
+      </button>
 
       {/* Timeline Content Overlay */}
       <div className="absolute inset-0 z-20 flex items-center justify-center">
@@ -296,9 +217,7 @@ export default function Timeline() {
                     style={{ backgroundColor: "rgba(84, 186, 185, 0.9)" }}
                   >
                     <div className="w-2 h-2 rounded-full animate-pulse bg-white" />
-                    <span className="text-white font-medium">
-                      {isMobile ? "Swipe or tap to explore" : "Scroll to explore"}
-                    </span>
+                    <span className="text-white font-medium">Use arrows to navigate</span>
                   </div>
                 </div>
               </div>
@@ -325,23 +244,23 @@ export default function Timeline() {
                     zIndex = 10
                     rotateX = 0
                   } else if (isNext) {
-                    translateY = isMobile ? 80 : 100
+                    translateY = 100
                     opacity = 0
                     scale = 0.9
                     zIndex = 5
-                    rotateX = isMobile ? 5 : 10
+                    rotateX = 10
                   } else if (isPrev) {
-                    translateY = isMobile ? -80 : -100
+                    translateY = -100
                     opacity = 0
                     scale = 0.9
                     zIndex = 5
-                    rotateX = isMobile ? -5 : -10
+                    rotateX = -10
                   } else {
-                    translateY = index > currentIndex ? (isMobile ? 80 : 100) : (isMobile ? -80 : -100)
+                    translateY = index > currentIndex ? 100 : -100
                     opacity = 0
                     scale = 0.8
                     zIndex = 1
-                    rotateX = index > currentIndex ? (isMobile ? 5 : 10) : (isMobile ? -5 : -10)
+                    rotateX = index > currentIndex ? 10 : -10
                   }
 
                   return (
@@ -431,6 +350,7 @@ export default function Timeline() {
                   style={{
                     backgroundColor: index === currentIndex ? "#54BAB9" : index < currentIndex ? "#9ED2C6" : "#E9DAC1",
                   }}
+                  aria-label={`Go to ${timelineData[index].year}`}
                 />
               ))}
             </div>

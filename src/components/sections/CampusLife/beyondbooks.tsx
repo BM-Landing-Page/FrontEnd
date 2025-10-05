@@ -168,7 +168,7 @@ export default function BeyondBooks() {
                   style={{ background: "linear-gradient(135deg, #9ED2C6 0%, #54BAB9 100%)" }}
                 >
                   <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">IGNITE</h2>
-                  <p className="text-2xl text-white/90 font-light">Where Learning Goes Beyond the Classroom</p>
+                  <p className="text-2xl text-white/90 font-light">Where Learning Happens beyond the classroom</p>
                   <div className="w-24 h-1 bg-white/50 mx-auto mt-6"></div>
                 </div>
                 {/* What is IGNITE Section */}

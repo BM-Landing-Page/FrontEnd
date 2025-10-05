@@ -37,9 +37,18 @@ const NAV_ITEMS = [
       "Apply Now",
     ],
   },
+  {
+    label: "Futures",
+    subItems: [
+      "Career Counselling",
+      "Career Quest",
+      "CIALFO",
+    ],
+  },
   { label: "Newsroom", subItems: ["School Updates", "Student Achievements", "Thought Pieces", "BM Gazette"] },
   { label: "Career", subItems: [] },
   { label: "Contact Us", subItems: [] },
+
 ]
 
 const ROUTE_OVERRIDES: Record<string, string> = {

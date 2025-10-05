@@ -9,13 +9,11 @@ export default function ADayAtBM() {
   const dailyFlow = [
     {
       time: "8:50 AM",
-      title: "School Begins",
+      title: "A bright start of our day",
       description: "Students arrive and prepare for the day ahead",
       location: "Main Campus",
       participants: "All Students",
       icon: Clock,
-      bgColor: "bg-[#F7ECDE]",
-      textColor: "text-[#54BAB9]",
     },
     {
       time: "9:00 - 10:15 AM",
@@ -24,8 +22,6 @@ export default function ADayAtBM() {
       location: "Classrooms & Labs",
       participants: "Period 1 & 2",
       icon: BookOpen,
-      bgColor: "bg-[#E9DAC1]",
-      textColor: "text-[#54BAB9]",
     },
     {
       time: "10:15 - 10:25 AM",
@@ -34,8 +30,6 @@ export default function ADayAtBM() {
       location: "Cafeteria & Grounds",
       participants: "All Students",
       icon: Coffee,
-      bgColor: "bg-[#9ED2C6]",
-      textColor: "text-white",
     },
     {
       time: "10:25 AM - 12:40 PM",
@@ -44,8 +38,6 @@ export default function ADayAtBM() {
       location: "Various Classrooms",
       participants: "Periods 3, 4 & 5",
       icon: Users,
-      bgColor: "bg-[#54BAB9]",
-      textColor: "text-white",
     },
     {
       time: "12:40 - 1:10 PM",
@@ -54,8 +46,6 @@ export default function ADayAtBM() {
       location: "Dining Hall",
       participants: "All Students",
       icon: Utensils,
-      bgColor: "bg-[#F7ECDE]",
-      textColor: "text-[#54BAB9]",
     },
     {
       time: "1:10 - 3:15 PM",
@@ -64,8 +54,6 @@ export default function ADayAtBM() {
       location: "Classrooms & Labs",
       participants: "Periods 6, 7 & 8",
       icon: BookOpen,
-      bgColor: "bg-[#E9DAC1]",
-      textColor: "text-[#54BAB9]",
     },
     {
       time: "3:15 - 4:30 PM",
@@ -74,8 +62,6 @@ export default function ADayAtBM() {
       location: "Various Venues",
       participants: "Optional",
       icon: Trophy,
-      bgColor: "bg-[#9ED2C6]",
-      textColor: "text-white",
     },
   ]
 
@@ -91,7 +77,6 @@ export default function ADayAtBM() {
         "Age-appropriate resources",
         "Comfortable learning space",
       ],
-      bgColor: "bg-[#F7ECDE]",
     },
     {
       title: "Secondary System",
@@ -99,7 +84,6 @@ export default function ADayAtBM() {
       description:
         "Students move between specialized subject rooms and laboratories, experiencing diverse learning environments with expert teachers.",
       features: ["Subject-specific rooms", "Specialized equipment", "Expert instruction", "Bag storage systems"],
-      bgColor: "bg-[#E9DAC1]",
     },
   ]
 
@@ -108,91 +92,77 @@ export default function ADayAtBM() {
       category: "Certificate Courses",
       frequency: "2 hours per week",
       description: "Specialized skill development programs",
-      bgColor: "bg-[#F7ECDE]",
     },
     {
-      category: "Music & Dance",
+      category: "'Specials' - Extra curriculars",
       frequency: "1 hour per week",
       description: "Creative arts and cultural expression",
-      bgColor: "bg-[#E9DAC1]",
     },
     {
       category: "Sports Programs",
       frequency: "2+ times per week",
       description: "Physical fitness and team building",
-      bgColor: "bg-[#9ED2C6]",
     },
     {
       category: "Club Activities",
       frequency: "2 hours per week",
       description: "Interest-based learning communities",
-      bgColor: "bg-[#54BAB9]",
     },
     {
       category: "Library Sessions",
       frequency: "Weekly",
       description: "Reading development and research skills",
-      bgColor: "bg-[#F7ECDE]",
     },
     {
       category: "Harmony Hours",
       frequency: "2 times per week",
       description: "Mental wellness and mindfulness activities",
-      bgColor: "bg-[#9ED2C6]",
     },
   ]
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Banner */}
-      <div className="relative h-96 overflow-hidden">
-        <img
-          src="/images/adayatbm.jpg"
-          alt="A Day at BM"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-[#54BAB9]/70"></div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="relative h-80 overflow-hidden">
+        <img src="/images/adayatbm.jpg" alt="A Day at BM" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 /70"></div>
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
-            <h1 className="text-6xl font-bold mb-4">A Day at BM</h1>
-            <p className="text-xl max-w-2xl">Experience the structured rhythm of learning and growth</p>
+            <h1 className="text-4xl font-bold mb-2">A Day at BM</h1>
+            <p className="text-base max-w-2xl">Experience the structured rhythm of learning and growth</p>
           </div>
         </div>
       </div>
 
-      {/* Daily Schedule */}
-      <div className="py-20 bg-white">
+      <div className="py-8 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#54BAB9] mb-6">Daily Schedule</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-bold text-[#54BAB9] mb-3">Daily Schedule</h2>
+            <p className="text-sm text-gray-600 max-w-3xl mx-auto">
               Our carefully structured day balances academic learning with breaks and enrichment activities
             </p>
           </div>
-          <div className="grid gap-6">
+          <div className="grid md:grid-cols-2 gap-3">
             {dailyFlow.map((period, index) => (
               <div
                 key={index}
-                className={`${period.bgColor} rounded-2xl p-8 hover:shadow-lg transition-all duration-300 cursor-pointer`}
+                className="bg-white border-2 border-[#54BAB9] rounded-xl p-4 hover:shadow-lg hover:border-[#54BAB9]/70 transition-all duration-300 cursor-pointer"
                 onClick={() => setSelectedPeriod(index)}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-6">
-                    <div className={`p-4 bg-white/20 rounded-xl`}>
-                      <period.icon className={`w-8 h-8 ${period.textColor}`} />
-                    </div>
-                    <div>
-                      <div className={`text-sm font-medium ${period.textColor} opacity-80`}>{period.time}</div>
-                      <h3 className={`text-2xl font-bold ${period.textColor} mb-2`}>{period.title}</h3>
-                      <p className={`${period.textColor} opacity-90`}>{period.description}</p>
-                    </div>
+                <div className="flex items-start gap-3">
+                  <div className="p-2 bg-[#54BAB9]/10 rounded-lg flex-shrink-0">
+                    <period.icon className="w-5 h-5 text-[#54BAB9]" />
                   </div>
-                  <div className="text-right">
-                    <div className={`flex items-center gap-2 ${period.textColor} opacity-80 mb-2`}>
-                      <MapPin className="w-4 h-4" />
-                      <span className="text-sm">{period.location}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs font-medium text-[#54BAB9] opacity-80">{period.time}</div>
+                    <h3 className="text-base font-bold text-gray-900 mb-1">{period.title}</h3>
+                    <p className="text-sm text-gray-600 mb-2">{period.description}</p>
+                    <div className="flex items-center gap-3 text-xs">
+                      <div className="flex items-center gap-1 text-gray-500">
+                        <MapPin className="w-3 h-3" />
+                        <span>{period.location}</span>
+                      </div>
+                      <div className="text-gray-500">{period.participants}</div>
                     </div>
-                    <div className={`text-sm ${period.textColor} opacity-80`}>{period.participants}</div>
                   </div>
                 </div>
               </div>
@@ -201,28 +171,30 @@ export default function ADayAtBM() {
         </div>
       </div>
 
-      {/* Learning Methods */}
-      <div className="py-20 bg-gradient-to-br from-[#F7ECDE] to-[#E9DAC1]">
+      <div className="py-8 bg-white">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#54BAB9] mb-6">Learning Approaches</h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-bold text-[#54BAB9] mb-3">Learning Approaches</h2>
+            <p className="text-sm text-gray-600 max-w-3xl mx-auto">
               Different grade levels experience tailored learning environments designed for their developmental needs
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-4">
             {learningMethods.map((method, index) => (
-              <div key={index} className="bg-white rounded-3xl p-8 shadow-lg">
-                <div className={`inline-block px-4 py-2 ${method.bgColor} rounded-full mb-6`}>
-                  <span className="text-[#54BAB9] font-medium">{method.subtitle}</span>
+              <div
+                key={index}
+                className="bg-white border-2 border-[#9ED2C6] rounded-xl p-5 hover:shadow-lg hover:border-[#9ED2C6]/70 transition-all duration-300"
+              >
+                <div className="inline-block px-3 py-1 bg-[#54BAB9]/10 rounded-full mb-3">
+                  <span className="text-[#54BAB9] font-medium text-sm">{method.subtitle}</span>
                 </div>
-                <h3 className="text-2xl font-bold text-[#54BAB9] mb-4">{method.title}</h3>
-                <p className="text-gray-700 mb-6 leading-relaxed">{method.description}</p>
-                <div className="space-y-3">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{method.title}</h3>
+                <p className="text-sm text-gray-600 mb-4 leading-relaxed">{method.description}</p>
+                <div className="space-y-2">
                   {method.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-[#54BAB9] rounded-full"></div>
-                      <span className="text-gray-700">{feature}</span>
+                    <div key={idx} className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-[#54BAB9] rounded-full"></div>
+                      <span className="text-sm text-gray-600">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -232,81 +204,41 @@ export default function ADayAtBM() {
         </div>
       </div>
 
-      {/* Beyond Academics */}
-      <div className="py-20 bg-white">
+      <div className="py-8 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#54BAB9] mb-6">Beyond Academics</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-bold text-[#54BAB9] mb-3">Beyond Academics</h2>
+            <p className="text-sm text-gray-600 max-w-3xl mx-auto">
               Holistic development through diverse co-curricular activities and enrichment programs
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {activities.map((activity, index) => (
               <div
                 key={index}
-                className={`${activity.bgColor} rounded-2xl p-6 hover:shadow-lg transition-all duration-300`}
+                className="bg-white border-2 border-[#E9DAC1] rounded-xl p-4 hover:shadow-lg hover:border-[#E9DAC1]/70 transition-all duration-300"
               >
-                <h3
-                  className={`text-xl font-bold mb-3 ${activity.bgColor === "bg-[#54BAB9]" || activity.bgColor === "bg-[#9ED2C6]" ? "text-white" : "text-[#54BAB9]"}`}
-                >
-                  {activity.category}
-                </h3>
-                <div
-                  className={`text-sm font-medium mb-3 ${activity.bgColor === "bg-[#54BAB9]" || activity.bgColor === "bg-[#9ED2C6]" ? "text-white/80" : "text-[#54BAB9]/80"}`}
-                >
-                  {activity.frequency}
-                </div>
-                <p
-                  className={`${activity.bgColor === "bg-[#54BAB9]" || activity.bgColor === "bg-[#9ED2C6]" ? "text-white/90" : "text-gray-700"}`}
-                >
-                  {activity.description}
-                </p>
+                <h3 className="text-base font-bold text-gray-900 mb-2">{activity.category}</h3>
+                <div className="text-xs font-medium text-[#54BAB9] mb-2">{activity.frequency}</div>
+                <p className="text-sm text-gray-600">{activity.description}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Next Button - Centered */}
-      <div className="py-12 bg-white">
+      <div className="py-6 bg-white">
         <div className="flex justify-center">
           <Link href="/eventsandcelebration" className="inline-block">
-            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-6 py-3 rounded-lg shadow-md transition-colors cursor-pointer">
               <div className="text-center">
-                <div className="font-semibold text-lg">Events and Celebration</div>
+                <div className="font-semibold text-base">Events and Celebration</div>
               </div>
               <ArrowRight className="w-5 h-5" />
             </div>
           </Link>
         </div>
       </div>
-
-      {/* Key Information */}
-      <div className="py-20 bg-gradient-to-r from-[#9ED2C6] to-[#54BAB9]">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 text-center text-white">
-            <div>
-              <div className="text-3xl font-bold mb-2">8:50 AM</div>
-              <div className="text-white/80">School Start Time</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">40-45</div>
-              <div className="text-white/80">Minutes per Period</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">4:30 PM</div>
-              <div className="text-white/80">Extended Hours End</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">8</div>
-              <div className="text-white/80">Periods per Day</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
     </div>
   )
 }
