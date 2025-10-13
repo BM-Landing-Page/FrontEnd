@@ -1,358 +1,310 @@
-"use client"
-import Link from "next/link"
-
-
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import { BookOpen, Heart, Users, Palette, Globe, Star, Play, Target, Lightbulb, Award, ArrowRight } from "lucide-react"
-
 export default function EarlyYears() {
-  const [isVisible, setIsVisible] = useState(false)
+  const colors = {
+    sand: "#F7ECDE",
+    tan: "#E9DAC1",
+    accent: "#9ED2C6",
+    brand: "#54BAB9",
+    white: "#ffffff",
+  }
 
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
-
-  const learningAreas = [
-    {
-      title: "Communication & Language",
-      icon: <Users className="w-8 h-8" />,
-      description: "Building confident speakers and active listeners",
-    },
-    {
-      title: "Literacy",
-      icon: <BookOpen className="w-8 h-8" />,
-      description: "Early reading and writing foundations",
-    },
-    {
-      title: "Numeracy",
-      icon: <Target className="w-8 h-8" />,
-      description: "Mathematical thinking through play",
-    },
-    {
-      title: "Physical Development",
-      icon: <Play className="w-8 h-8" />,
-      description: "Gross and fine motor skill development",
-    },
-    {
-      title: "Personal, Social & Emotional",
-      icon: <Heart className="w-8 h-8" />,
-      description: "Building relationships and self-confidence",
-    },
-    {
-      title: "Understanding the World",
-      icon: <Globe className="w-8 h-8" />,
-      description: "Exploring communities, traditions, and nature",
-    },
-  ]
-
-  const themes = [
-    "Seasons & Weather",
-    "Community Helpers",
-    "Animals & Habitats",
-    "Transportation",
-    "Festivals & Traditions",
-    "Space & Science",
-  ]
+  const imageClass = "h-40 md:h-48 w-full rounded-md border object-cover" // consistent size across all sections
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative px-4 text-center overflow-hidden h-[75vh] flex items-center justify-center">
-        {/* Hero Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/earlyyears.jpg"
-            alt="Early Years Learning Environment"
-            fill
-            className="object-cover"
-            priority
-          />
-          {/* Semi-transparent overlay for text readability */}
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
-
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div
-            className={`transform transition-all duration-1000 ${
-              isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-            }`}
-          >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-              Early Years at <span style={{ color: "#9ED2C6" }}>Budding Minds</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/95 mb-8 font-light drop-shadow-md">
-              Where learning begins with wonder, joy, and love.
-            </p>
-            <div className="w-24 h-1 mx-auto rounded-full" style={{ backgroundColor: "#9ED2C6" }}></div>
+    <main className="min-h-dvh w-full" style={{ backgroundColor: colors.white }}>
+      {/* Hero */}
+      <section className="relative">
+        <div
+          className="w-full"
+          style={{
+            backgroundImage: "url('/playful-children-learning-in-bright-classroom-hero.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="mx-auto max-w-4xl px-4 py-12 md:py-16">
+            <div
+              className="max-w-2xl rounded-lg border p-4 md:p-6 shadow-sm"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.9)",
+                borderColor: colors.accent,
+              }}
+            >
+              <h1
+                className="text-balance text-3xl font-semibold leading-tight md:text-4xl"
+                style={{ color: colors.brand }}
+              >
+                {"Early Years Programme – The BM Way! "}
+              </h1>
+              <p className="mt-2 text-pretty text-lg md:text-xl" style={{ color: "#222" }}>
+                {"Rooted in Inquiry, Rising with Confidence "}
+              </p>
+            </div>
           </div>
         </div>
-
-        {/* Decorative elements */}
-        <div
-          className="absolute top-10 left-10 w-20 h-20 rounded-full opacity-30 animate-bounce z-10"
-          style={{ backgroundColor: "#E9DAC1" }}
-        ></div>
-        <div
-          className="absolute bottom-10 right-10 w-16 h-16 rounded-full opacity-30 animate-pulse z-10"
-          style={{ backgroundColor: "#9ED2C6" }}
-        ></div>
       </section>
 
-      {/* Founders' Vision */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">Our Founders' Vision</h2>
-              <div className="prose prose-lg text-gray-600">
-                <p className="mb-4">
-                  Founded by <strong>Mr. Ashok</strong> and <strong>Ms. Latha</strong>, Budding Minds was born from
-                  their personal journey as parents seeking the perfect early learning environment for their own
-                  children.
+      <section className="relative mx-auto max-w-4xl px-4 py-8 md:py-10">
+        {/* Center rail */}
+        <div
+          className="pointer-events-none absolute inset-y-0 hidden md:block"
+          style={{
+            left: "50%",
+            width: "1px",
+            transform: "translateX(-1px)",
+            backgroundColor: colors.tan,
+          }}
+        />
+
+        <div className="space-y-8 md:space-y-10">
+          {/* Item 1: Intro */}
+          <div className="relative grid items-center gap-4 md:grid-cols-2 md:gap-6">
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-4 hidden h-3 w-3 -translate-x-1/2 rounded-full md:block"
+              style={{ backgroundColor: colors.brand, boxShadow: `0 0 0 4px ${colors.sand}` }}
+            />
+            <div className="md:pr-8">
+              <img
+                src="/curious-kids-exploring-inquiry-based-learning.jpg"
+                alt="Children engaged in inquiry-based exploration"
+                className={imageClass}
+                style={{ borderColor: colors.tan }}
+              />
+            </div>
+            <div className="md:pl-8">
+              <p className="text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {
+                  "At Budding Minds International School (BMIS), every child’s journey begins with wonder, exploration, and joy. Recognized among the best preschools in Chennai, our Early Years Programme lays the foundation for a lifetime of learning — where curiosity leads to understanding, and every question sparks discovery. "
+                }
+              </p>
+              <p className="mt-4 text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {"Because the best beginnings build confident, creative learners. "}
+              </p>
+            </div>
+          </div>
+
+          {/* Item 2: Programme offers */}
+          <div className="relative grid items-start gap-4 md:grid-cols-2 md:gap-6">
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-4 hidden h-3 w-3 -translate-x-1/2 rounded-full md:block"
+              style={{ backgroundColor: colors.accent, boxShadow: `0 0 0 4px ${colors.sand}` }}
+            />
+            <div className="md:order-2 md:pl-8">
+              <img
+                src="/play-driven-learning-and-classroom-activities.jpg"
+                alt="Play-driven learning environment"
+                className={imageClass}
+                style={{ borderColor: colors.tan }}
+              />
+            </div>
+            <div className="md:order-1 md:pr-8">
+              <p className="font-semibold" style={{ color: colors.brand }}>
+                {"Our Early Years Programme offers:  "}
+              </p>
+              <div
+                className="mt-4 rounded-lg border p-3"
+                style={{ borderColor: colors.accent, backgroundColor: colors.sand }}
+              >
+                <p className="leading-relaxed" style={{ color: "#222" }}>
+                  {"Inquiry-based, play-driven learning "}
                 </p>
-                <p className="mb-4">
-                  With extensive certifications in early childhood education and a deep understanding of child
-                  development, they created a nurturing space where every child's unique potential can flourish.
+                <p className="leading-relaxed" style={{ color: "#222" }}>
+                  {"Holistic development across cognitive, emotional, and physical domains  "}
                 </p>
+                <p className="leading-relaxed" style={{ color: "#222" }}>
+                  {"Creative, theme-based curriculum integrating play and academics  "}
+                </p>
+                <p className="leading-relaxed" style={{ color: "#222" }}>
+                  {"Strong communication and literacy foundation through Jolly Phonics "}
+                </p>
+                <p className="leading-relaxed" style={{ color: "#222" }}>
+                  {"Life skills and empathy-based education  "}
+                </p>
+                <p className="leading-relaxed" style={{ color: "#222" }}>
+                  {"Learning through multisensory activities, celebrations, field trips "}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Item 3: Discovery Den */}
+          <div className="relative grid items-start gap-4 md:grid-cols-2 md:gap-6">
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-4 hidden h-3 w-3 -translate-x-1/2 rounded-full md:block"
+              style={{ backgroundColor: colors.brand, boxShadow: `0 0 0 4px ${colors.sand}` }}
+            />
+            <div className="md:pl-8 md:order-1">
+              <img
+                src="/life-skills-confidence-teamwork-children.jpg"
+                alt="Life skills sessions building confidence and empathy"
+                className={imageClass}
+                style={{ borderColor: colors.tan }}
+              />
+            </div>
+            <div className="md:order-2 md:pr-8">
+              <h2 className="text-xl font-semibold" style={{ color: colors.brand }}>
+                {"Discovery Den! - Life Skills for Everyday Confidence "}
+              </h2>
+              <p className="mt-3 text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {"Our exclusive Life Skills Sessions help children to - "}
+              </p>
+              <div className="mt-3 space-y-2 leading-relaxed" style={{ color: "#222" }}>
+                <p>{"Build confidence and self-awareness "}</p>
+                <p>{"Develop empathy and social skills "}</p>
+                <p>{"Communicate effectively "}</p>
+                <p>{"Solve problems independently "}</p>
                 <p>
-                  Their vision: to provide a foundation where children develop not just academically, but emotionally,
-                  socially, and creatively – preparing them for a lifetime of learning and discovery.
+                  {
+                    "These sessions prepare them for life beyond school — shaping emotionally intelligent, kind, and self-assured individuals. "
+                  }
                 </p>
               </div>
             </div>
-            <div className="relative">
-              {/* <CHANGE> Replace icon box with image placeholder */}
-              <div className="w-full h-80 rounded-2xl shadow-lg overflow-hidden">
-                <img
-                  src="/images/earlyyearsbanner.jpg"
-                  alt="Founders' Vision image placeholder"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Key Learning Areas */}
-      <section className="py-16 px-4" style={{ backgroundColor: "#F7ECDE" }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Foundation for Lifelong Learning</h2>
-            <p className="text-xl text-gray-600">EYFS-Aligned Learning Areas</p>
+          {/* Item 4: Skills Hub */}
+          <div className="relative grid items-start gap-4 md:grid-cols-2 md:gap-6">
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-4 hidden h-3 w-3 -translate-x-1/2 rounded-full md:block"
+              style={{ backgroundColor: colors.accent, boxShadow: `0 0 0 4px ${colors.sand}` }}
+            />
+            <div className="md:order-2 md:pl-8">
+              <img
+                src="/multiple-intelligences-kids-activities.jpg"
+                alt="Children exploring multiple intelligences"
+                className={imageClass}
+                style={{ borderColor: colors.tan }}
+              />
+            </div>
+            <div className="md:order-1 md:pr-8">
+              <h2 className="text-xl font-semibold" style={{ color: colors.brand }}>
+                {"Skills Hub - Discovering Every Child’s Brilliance "}
+              </h2>
+              <p className="mt-3 text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {"Every child is gifted in their own way — and we make sure they know it! "}
+                {
+                  " Through our Skills hub, children explore and strengthen their unique talents across linguistic, logical, spatial, musical, bodily-kinesthetic, interpersonal, intrapersonal, and naturalistic intelligences. "
+                }
+              </p>
+            </div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {learningAreas.map((area, index) => (
-              <div
-                key={index}
-                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 bg-white rounded-lg shadow-md"
-              >
-                <div className="p-6 text-center">
-                  <div
-                    className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-                    style={{ backgroundColor: "#9ED2C6" }}
-                  >
-                    <div style={{ color: "#54BAB9" }}>{area.icon}</div>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{area.title}</h3>
-                  <p className="text-gray-600 text-sm">{area.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Kindergarten Focus */}
-      <section className="py-16 px-4" style={{ backgroundColor: "#9ED2C6" }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-black mb-4">Early Readers & Writers</h2>
-            <p className="text-xl text-black/90">Kindergarten Programme Excellence</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h3 className="text-2xl font-bold text-black mb-4">Our Goal</h3>
-                <p className="text-black/90 text-lg">
-                  By the end of kindergarten, children confidently read Level 1 books and write complete paragraphs,
-                  setting a strong foundation for primary school success.
-                </p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h3 className="text-2xl font-bold text-black mb-4">Daily Structure</h3>
-                <ul className="text-black/90 space-y-2">
-                  <li>• PP1 & PP2 structured learning routines</li>
-                  <li>• Self-dependence activities (eating, dressing)</li>
-                  <li>• Guided nap time for emotional regulation</li>
-                  <li>• Confidence-building through independence</li>
-                </ul>
-              </div>
+          {/* Item 5: Early Literacy + Jolly Phonics */}
+          <div className="relative grid items-start gap-4 md:grid-cols-2 md:gap-6">
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-4 hidden h-3 w-3 -translate-x-1/2 rounded-full md:block"
+              style={{ backgroundColor: colors.brand, boxShadow: `0 0 0 4px ${colors.sand}` }}
+            />
+            <div className="md:order-1 md:pl-8">
+              <img
+                src="/early-literacy-reading-children-jolly-phonics.jpg"
+                alt="Early literacy and Jolly Phonics joyful reading"
+                className={imageClass}
+                style={{ borderColor: colors.tan }}
+              />
             </div>
-            <div className="relative">
-              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 text-center">
-                <div className="flex justify-center space-x-4 mb-6">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                    <BookOpen className="w-8 h-8 text-black" />
-                  </div>
-                  <ArrowRight className="w-8 h-8 text-black mt-4" />
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                    <Award className="w-8 h-8 text-black" />
-                  </div>
-                </div>
-                <p className="text-black text-lg font-medium">Learning Journey Progress</p>
+            <div className="md:order-2 md:pr-8">
+              <h2 className="text-xl font-semibold" style={{ color: colors.brand }}>
+                {"Early Literacy "}
+              </h2>
+              <p className="mt-3 text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {
+                  "Our Kindergarten Literacy Programme helps every child become an enthusiastic reader and expressive writer. Our Programme builds independence and confidence in every learner. At BMIS, early literacy begins with joyful read-alouds, exploring different genres of fiction and non-fiction texts that develops a love for book reading at a very early stage of child’s life.  "
+                }
+              </p>
+              <h3 className="mt-5 font-semibold" style={{ color: colors.brand }}>
+                {"Jolly Phonics program – Building Strong Readers and Writers "}
+              </h3>
+              <p className="mt-2 text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {"By the end of Kindergarten, With our joyful Jolly Phonics approach, children, "}
+              </p>
+              <div className="mt-3 space-y-2 leading-relaxed" style={{ color: "#222" }}>
+                <p>{"Learn 42 letter sounds through songs, actions & stories "}</p>
+                <p>{"Spell and blend letter sounds to read fluently "}</p>
+                <p>{"Read simple stories with understanding and enjoyment "}</p>
+                <p>{"Write simple short stories, poems and letters with creativity and confidence. "}</p>
               </div>
+              <p className="mt-3 text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {
+                  "Learning is interactive, engaging, and highly effective for young learners. Early literacy at BMIS is not just about reading — it’s about falling in love with language. "
+                }
+              </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Literacy & Numeracy Approach */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Literacy */}
-            <div className="space-y-6">
-              <h3 className="text-3xl font-bold text-gray-800">Literacy Programme</h3>
-              <div className="space-y-4">
-                {/* Points */}
-                <div className="flex items-start space-x-4">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: "#54BAB9" }}
-                  >
-                    <BookOpen className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Multi-Sensory Learning</h4>
-                    <p className="text-gray-600">Engaging all senses for deeper understanding</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: "#54BAB9" }}
-                  >
-                    <Heart className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Inclusive Teaching</h4>
-                    <p className="text-gray-600">Adapting to every child's learning style</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: "#54BAB9" }}
-                  >
-                    <Star className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Early Readers by Age 5</h4>
-                    <p className="text-gray-600">Proven track record of reading success</p>
-                  </div>
-                </div>
-              </div>
+          {/* Item 6: ELPS */}
+          <div className="relative grid items-start gap-4 md:grid-cols-2 md:gap-6">
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-4 hidden h-3 w-3 -translate-x-1/2 rounded-full md:block"
+              style={{ backgroundColor: colors.accent, boxShadow: `0 0 0 4px ${colors.sand}` }}
+            />
+            <div className="md:order-2 md:pl-8">
+              <img
+                src="/hands-on-math-learning-elps-kids.jpg"
+                alt="Hands-on numeracy with ELPS approach"
+                className={imageClass}
+                style={{ borderColor: colors.tan }}
+              />
             </div>
-            {/* Numeracy */}
-            <div className="space-y-6">
-              <h3 className="text-3xl font-bold text-gray-800">Numeracy Through Play</h3>
-              <div className="space-y-4">
-                {/* Points */}
-                <div className="flex items-start space-x-4">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: "#9ED2C6" }}
-                  >
-                    <Play className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Real-World Scenarios</h4>
-                    <p className="text-gray-600">Mathematics in everyday contexts</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: "#9ED2C6" }}
-                  >
-                    <Palette className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Theme-Based Integration</h4>
-                    <p className="text-gray-600">Math woven into thematic learning</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: "#9ED2C6" }}
-                  >
-                    <Target className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Hands-On Learning</h4>
-                    <p className="text-gray-600">Manipulatives and interactive activities</p>
-                  </div>
-                </div>
+            <div className="md:order-1 md:pr-8">
+              <h2 className="text-xl font-semibold" style={{ color: colors.brand }}>
+                {"Early Numeracy Through Experience (ELPS Approach) "}
+              </h2>
+              <p className="mt-3 text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {"Our numeracy curriculum helps children experience the joy of numbers through the E–L–P–S model: "}
+              </p>
+              <div className="mt-3 space-y-2 leading-relaxed" style={{ color: "#222" }}>
+                <p>{"E – Experience: Hands-on learning through real-life exploration "}</p>
+                <p>{"L – Language: Express ideas using mathematical vocabulary "}</p>
+                <p>{"P – Pictorial: Represent understanding through visuals "}</p>
+                <p>{"S – Symbol: Apply concepts with numbers "}</p>
               </div>
+              <p className="mt-3 text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {
+                  "With engaging tools like Jodo Gyan and Rangometry, children connect maths to the world around them — making numeracy natural, fun, and meaningful.  "
+                }
+              </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Thematic Curriculum */}
-      <section className="py-16 px-4" style={{ backgroundColor: "#E9DAC1" }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Holistic, Thematic Learning</h2>
-            <p className="text-xl text-gray-600">Theme-Based Curriculum Since 2004</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            {themes.map((theme, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow duration-300"
-              >
-                <div
-                  className="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: "#54BAB9" }}
-                >
-                  <Lightbulb className="w-6 h-6 text-white" />
-                </div>
-                <h4 className="font-semibold text-gray-800">{theme}</h4>
-              </div>
-            ))}
-          </div>
-          <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Integrated Learning Benefits</h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <ul className="space-y-2 text-gray-700">
-                <li>• Cross-curricular connections strengthen understanding</li>
-                <li>• Real-world relevance makes learning meaningful</li>
-                <li>• Creative expression through multiple mediums</li>
-              </ul>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Critical thinking through exploration</li>
-                <li>• Collaborative learning experiences</li>
-                <li>• Cultural awareness and global perspectives</li>
-              </ul>
+          {/* Item 7: Theme-based curriculum */}
+          <div className="relative grid items-start gap-4 md:grid-cols-2 md:gap-6">
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-4 hidden h-3 w-3 -translate-x-1/2 rounded-full md:block"
+              style={{ backgroundColor: colors.brand, boxShadow: `0 0 0 4px ${colors.sand}` }}
+            />
+            <div className="md:pl-8 md:order-1">
+              <img
+                src="/theme-based-learning-projects-children.jpg"
+                alt="Theme-based curriculum with integrated learning"
+                className={imageClass}
+                style={{ borderColor: colors.tan }}
+              />
             </div>
-          </div>
-          <div className="flex justify-center mt-12 relative z-20">
-            <Link href="/primaryandmiddleyears" className="inline-block">
-              <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
-                <div className="text-center">
-                 <div className="font-semibold text-lg">Primary and Middle Years</div>
-                </div>
-                <ArrowRight className="w-5 h-5" />
-              </div>
-            </Link>
+            <div className="md:order-2 md:pr-8">
+              <h2 className="text-xl font-semibold" style={{ color: colors.brand }}>
+                {"Early exploration of the world - Theme-Based Curriculum "}
+              </h2>
+              <p className="mt-3 text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {
+                  "Theme-based approach that connects literacy, numeracy, creativity, and social learning under one central idea. Children explore meaningful themes across weeks, building real-world connections and deep understanding. This helps them think critically, communicate confidently, and express ideas creatively. "
+                }
+              </p>
+              <p className="mt-3 text-pretty leading-relaxed" style={{ color: "#222" }}>
+                {
+                  "Each day at BMIS is a blend of play, exploration, and purpose — helping children grow into confident, empathetic, and resilient learners. “Children learn best when they’re joyfully engaged — that’s the BM Way!” "
+                }
+              </p>
+            </div>
           </div>
         </div>
       </section>
-    </div>
+    </main>
   )
 }
