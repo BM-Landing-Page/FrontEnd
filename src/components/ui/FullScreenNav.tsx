@@ -38,11 +38,11 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: "Futures",
+    label: "Career Guidance Cell",
     subItems: [
-      "Career Counselling",
-      "Career Quest",
+      "What we do?",
       "CIALFO",
+      "Career Quest",
     ],
   },
   { label: "Newsroom", subItems: ["School Updates", "Student Achievements", "Thought Pieces", "BM Gazette"] },
