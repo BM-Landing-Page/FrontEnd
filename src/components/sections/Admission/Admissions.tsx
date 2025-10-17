@@ -501,68 +501,8 @@ const Admissions = () => {
         </div>
       </section>
 
-      {/* Higher Grades Information */}
-      <section className="py-16" style={{ backgroundColor: "#F7ECDE" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            ref={gradesRef.ref}
-            className="bg-white p-8 rounded-xl shadow-sm border border-gray-200"
-            initial="initial"
-            animate={gradesRef.isInView ? "animate" : "initial"}
-            variants={fadeInUp}
-            whileHover={{
-              boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
-              transition: { duration: 0.3 },
-            }}
-          >
-            <motion.h2 className="text-3xl font-bold mb-6 text-center text-gray-800" variants={fadeInUp}>
-              Admission to Grade 9 and Above
-            </motion.h2>
-            <div className="prose prose-lg max-w-none">
-              <motion.p className="text-center mb-6 text-gray-600" variants={fadeInUp}>
-                BMIS will admit students to Grade 9 and above subject to the following conditions:
-              </motion.p>
-              <motion.div className="grid md:grid-cols-3 gap-6 text-center" variants={staggerContainer}>
-                {[
-                  {
-                    icon: Clock,
-                    title: "Preparedness",
-                    desc: "The required level of preparedness and competencies has been met",
-                  },
-                  {
-                    icon: Users,
-                    title: "Minimum Applications",
-                    desc: "A minimum of four applications have been submitted for the course",
-                  },
-                  {
-                    icon: GraduationCap,
-                    title: "Qualified Faculty",
-                    desc: "Qualified resource persons are available to deliver and facilitate the course effectively",
-                  },
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    className="p-6 rounded-lg"
-                    style={{ backgroundColor: "#E9DAC1" }}
-                    variants={fadeInUp}
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-                      transition: { duration: 0.3 },
-                    }}
-                  >
-                    <motion.div whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}>
-                      <item.icon className="w-12 h-12 mx-auto mb-4" style={{ color: "#54BAB9" }} />
-                    </motion.div>
-                    <h3 className="font-semibold mb-2 text-gray-800">{item.title}</h3>
-                    <p className="text-sm text-gray-600">{item.desc}</p>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+    
+      
 
       {/* CTA Section */}
       <motion.section
