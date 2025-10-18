@@ -76,7 +76,7 @@ export default function SLCOverview() {
             backgroundImage: `url('/images/slcoverview.jpg')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundBlendMode: "overlay", 
+            backgroundBlendMode: "overlay",
           }}
         />
         <div className="absolute inset-0 bg-black/20" />
@@ -96,34 +96,34 @@ export default function SLCOverview() {
       </section>
 
       {/* Evolution Timeline */}
-      <section className="py-16 md:py-24">
+      <section className="py-4 md:py-6">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Evolution Journey</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-1">Our Evolution Journey</h2>
+            <p className="text-base text-gray-600 max-w-3xl mx-auto">
               From inclusive beginnings to a structured cabinet model, discover how our Student Leadership Program has
               transformed over the years.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
             {timelineEvents.map((event, index) => (
               <Card key={index} className="relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                 <div className="h-2 w-full" style={{ backgroundColor: event.color }} />
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
+                <CardContent className="p-3">
+                  <div className="flex items-center mb-2">
                     <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold"
+                      className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs"
                       style={{ backgroundColor: event.color }}
                     >
                       {index + 1}
                     </div>
-                    <div className="ml-3 px-3 py-1 border border-gray-300 rounded-full text-sm bg-white text-gray-700 inline-block">
+                    <div className="ml-2 px-2 py-0.5 border border-gray-300 rounded-full text-xs bg-white text-gray-700 inline-block">
                       {event.year}
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-3">{event.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{event.description}</p>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">{event.title}</h3>
+                  <p className="text-sm text-gray-600 leading-tight">{event.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -132,33 +132,33 @@ export default function SLCOverview() {
       </section>
 
       {/* Current Cabinet Structure */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#F7ECDE]/30 to-[#9ED2C6]/30">
+      <section className="py-4 md:py-6 bg-gradient-to-br from-[#F7ECDE]/30 to-[#9ED2C6]/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Student Leadership Cabinet 2025-2026</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-1">Student Leadership Cabinet 2025-2026</h2>
+            <p className="text-base text-gray-600 max-w-3xl mx-auto">
               Our department-based leadership model with clear delegation and collaborative functioning.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {departments.map((dept, index) => (
               <Card key={index} className="overflow-hidden hover:shadow-2xl transition-all duration-300 group">
                 <div className="h-1 w-full" style={{ backgroundColor: dept.color }} />
-                <CardContent className="p-8">
-                  <div className="flex items-center mb-6">
+                <CardContent className="p-3">
+                  <div className="flex items-center mb-2">
                     <div
-                      className="w-14 h-14 rounded-full flex items-center justify-center text-white mr-4"
+                      className="w-10 h-10 rounded-full flex items-center justify-center text-white mr-2"
                       style={{ backgroundColor: dept.color }}
                     >
                       {dept.icon}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-800">{dept.name}</h3>
+                      <h3 className="text-lg font-bold text-gray-800">{dept.name}</h3>
                     </div>
                   </div>
 
-                  <p className="text-gray-600 leading-relaxed">{dept.description}</p>
+                  <p className="text-sm text-gray-600 leading-tight">{dept.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -167,46 +167,48 @@ export default function SLCOverview() {
       </section>
 
       {/* Mission Statement */}
-      <section className="py-16 md:py-24">
+      <section className="py-4 md:py-6">
         <div className="container mx-auto px-4">
           <Card className="max-w-4xl mx-auto overflow-hidden">
-            <div className="bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] p-8 md:p-12 text-center">
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                  <Target className="w-8 h-8 text-white" />
+            <div className="bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] p-4 md:p-5 text-center">
+              <div className="flex justify-center mb-2">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                  <Target className="w-5 h-5 text-white" />
                 </div>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Our Mission</h2>
-              <p className="text-xl text-white/90 leading-relaxed max-w-3xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Our Mission</h2>
+              <p className="text-base text-white/90 leading-tight max-w-3xl mx-auto">
                 At BMIS, we are dedicated to fostering the next generation of leaders. Our Student Leadership Cabinet is
                 designed to make a real impact on our school community through structured collaboration, meaningful
                 engagement, and inclusive representation.
               </p>
             </div>
-            <CardContent className="p-8 md:p-12">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <CardContent className="p-3 md:p-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
                 <div>
-                  <div className="w-12 h-12 bg-[#F7ECDE] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Users className="w-6 h-6 text-[#54BAB9]" />
+                  <div className="w-8 h-8 bg-[#F7ECDE] rounded-full flex items-center justify-center mx-auto mb-2">
+                    <Users className="w-4 h-4 text-[#54BAB9]" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">Inclusive Leadership</h3>
-                  <p className="text-gray-600">Fostering diverse voices and perspectives across all grade levels.</p>
+                  <h3 className="text-base font-semibold text-gray-800 mb-0.5">Inclusive Leadership</h3>
+                  <p className="text-sm text-gray-600 leading-tight">
+                    Fostering diverse voices and perspectives across all grade levels.
+                  </p>
                 </div>
                 <div>
-                  <div className="w-12 h-12 bg-[#E9DAC1] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Heart className="w-6 h-6 text-[#54BAB9]" />
+                  <div className="w-8 h-8 bg-[#E9DAC1] rounded-full flex items-center justify-center mx-auto mb-2">
+                    <Heart className="w-4 h-4 text-[#54BAB9]" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">Meaningful Impact</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-base font-semibold text-gray-800 mb-0.5">Meaningful Impact</h3>
+                  <p className="text-sm text-gray-600 leading-tight">
                     Creating tangible change through structured departments and clear responsibilities.
                   </p>
                 </div>
                 <div>
-                  <div className="w-12 h-12 bg-[#9ED2C6] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Award className="w-6 h-6 text-[#54BAB9]" />
+                  <div className="w-8 h-8 bg-[#9ED2C6] rounded-full flex items-center justify-center mx-auto mb-2">
+                    <Award className="w-4 h-4 text-[#54BAB9]" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">Excellence</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-base font-semibold text-gray-800 mb-0.5">Excellence</h3>
+                  <p className="text-sm text-gray-600 leading-tight">
                     Promoting accountability, recognition, and continuous growth in leadership.
                   </p>
                 </div>
@@ -216,14 +218,14 @@ export default function SLCOverview() {
         </div>
       </section>
       {/* Next Button - Centered */}
-      <div className="py-12 bg-white">
+      <div className="py-3 bg-white">
         <div className="flex justify-center">
           <Link href="/studentprofile" className="inline-block">
-            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+            <div className="flex items-center gap-2 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-5 py-2 rounded-lg shadow-md transition-colors cursor-pointer">
               <div className="text-center">
-                <div className="font-semibold text-lg">Student Profiles</div>
+                <div className="font-semibold text-sm">Student Profiles</div>
               </div>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4" />
             </div>
           </Link>
         </div>
