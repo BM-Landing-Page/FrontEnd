@@ -83,6 +83,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "BM Gazette": "/bmgazette",
   "PD Community": "/pdcommunity",
   "Contact Us": "contactus",
+  "What we do?": "/whatwedo",
 }
 
 const SOCIAL_LINKS = [
