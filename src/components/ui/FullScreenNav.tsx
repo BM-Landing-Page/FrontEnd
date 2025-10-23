@@ -84,6 +84,8 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "PD Community": "/pdcommunity",
   "Contact Us": "contactus",
   "What we do?": "/whatwedo",
+  "CIALFO": "/cialfo",
+  "Career Quest": "/careerquest",
 }
 
 const SOCIAL_LINKS = [
