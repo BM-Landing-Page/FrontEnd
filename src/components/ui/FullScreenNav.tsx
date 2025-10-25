@@ -165,13 +165,15 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
     <div className="fixed inset-0 z-[100] flex flex-col lg:flex-row font-light select-none w-full h-screen">
       {/* MOBILE AND TABLET VIEW */}
       <div className="lg:hidden bg-[#F7ECDE] w-full h-full p-4 sm:p-6 overflow-y-auto">
-        <button
-          onClick={onClose}
-          aria-label="Close Menu"
-          className="text-[#1E293B] hover:scale-105 transition-transform self-start mb-6"
-        >
-          <X size={24} className="sm:w-7 sm:h-7" />
-        </button>
+        <div className="flex justify-end mb-6">
+          <button
+            onClick={onClose}
+            aria-label="Close Menu"
+            className="text-[#1E293B] hover:scale-105 transition-transform"
+          >
+            <X size={24} className="sm:w-7 sm:h-7" />
+          </button>
+        </div>
         <div className="flex flex-col gap-3 sm:gap-4 text-left justify-center min-h-[75vh]">
           {NAV_ITEMS.map((item) => (
             <div key={item.label} className="w-full">
@@ -244,15 +246,17 @@ export default function FullScreenNav({ onClose }: FullScreenNavProps) {
 
       {/* DESKTOP VIEW */}
       <div className="hidden lg:flex w-full h-full relative">
+        {/* Close button for entire desktop view - positioned at rightmost corner */}
+        <button
+          onClick={onClose}
+          aria-label="Close Menu"
+          className="absolute top-5 right-5 text-[#1E293B] hover:scale-105 transition-transform z-[110]"
+        >
+          <X size={30} />
+        </button>
+        
         {/* LEFT PANEL */}
         <div ref={containerRef} className="w-1/2 bg-[#F7ECDE] px-6 xl:px-8 flex flex-col h-full relative">
-          <button
-            onClick={onClose}
-            aria-label="Close Menu"
-            className="absolute top-5 left-5 text-[#1E293B] hover:scale-105 transition-transform z-10"
-          >
-            <X size={30} />
-          </button>
           <div className="flex-1 flex flex-col justify-center items-end text-right gap-3 xl:gap-4">
             {NAV_ITEMS.map((item, index) => {
               const isLink = item.subItems.length === 0
