@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import Searchbar from "./Searchbar"
 
 interface HeaderProps {
@@ -19,19 +20,18 @@ export default function Header({ openNav }: HeaderProps) {
     >
       <div className="flex items-center justify-between px-4 sm:px-6 py-2">
         {/* Logo and School Name */}
-        <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+        <Link href="/" className="flex items-center gap-2 sm:gap-4 flex-shrink-0 hover:opacity-80 transition-opacity">
           <Image
             src="/images/logo.png"
             alt="Budding Minds Logo"
-            width={70} // Reduced from 70
-            height={70} // Reduced from 70
-            //className="rounded-full sm:w-[70px] sm:h-[60px]" // Reduced from 90px
+            width={70}
+            height={70}
           />
           <span className="text-base sm:text-xl font-bold tracking-wide text-[#1E293B] font-calibri leading-tight">
             <span className="block sm:inline">Budding Minds</span>
             <span className="block sm:inline sm:ml-2">International School</span>
           </span>
-        </div>
+        </Link>
 
         {/* Search Bar - Centered between logo and hamburger */}
         <div className="flex-1 flex justify-center mx-4 max-w-md">
