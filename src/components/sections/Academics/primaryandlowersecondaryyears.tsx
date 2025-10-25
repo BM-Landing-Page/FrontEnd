@@ -45,7 +45,7 @@ export default function BMISPrimaryYears() {
       </section>
 
       {/* Section 1: Introduction */}
-      <section className="py-4 md:py-6 px-6 md:px-8 bg-white">
+      <section className="py-3 md:py-5 px-6 md:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-3 text-center">
             A Global Framework with a Local Spirit
@@ -80,18 +80,18 @@ export default function BMISPrimaryYears() {
       </section>
 
       {/* Section 2: Active Learning */}
-      <section className="py-4 md:py-6 px-6 md:px-8 bg-white">
+      <section className="py-3 md:py-5 px-6 md:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-1 text-center">Active Learning Approach</h2>
-          <p className="text-base md:text-lg font-semibold text-[#9ED2C6] text-center mb-4">
+          <p className="text-base md:text-lg font-semibold text-[#9ED2C6] text-center mb-3">
             Learning Through Inquiry & Active Engagement
           </p>
           <div className="flex flex-col md:flex-row-reverse gap-4 md:gap-6 items-center">
-            <div>
-              <p className="text-gray-700 leading-relaxed mb-4 text-center md:text-left">
+            <div className="flex-1">
+              <p className="text-gray-700 leading-relaxed mb-3 text-center md:text-left">
                 At BMIS, learning is never passive. Our inquiry-based classrooms encourage children to:
               </p>
-              <ul className="space-y-2 max-w-2xl mb-4">
+              <ul className="space-y-2 max-w-2xl mb-3">
                 <li className="flex items-start gap-3">
                   <span className="text-[#54BAB9] font-bold mt-1">•</span>
                   <span className="text-gray-700">Investigate real-life challenges</span>
@@ -127,20 +127,20 @@ export default function BMISPrimaryYears() {
       </section>
 
       {/* Section 3: Life Skills */}
-      <section className="py-4 md:py-6 px-6 md:px-8 bg-white">
+      <section className="py-3 md:py-5 px-6 md:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-1 text-center">Life Skills Sessions</h2>
-          <p className="text-base md:text-lg font-semibold text-[#9ED2C6] text-center mb-4">Learning for Life</p>
+          <p className="text-base md:text-lg font-semibold text-[#9ED2C6] text-center mb-3">Learning for Life</p>
           <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
             <div className="flex-1">
-              <p className="text-gray-700 leading-relaxed mb-4 text-center md:text-left">
+              <p className="text-gray-700 leading-relaxed mb-3 text-center md:text-left">
                 Education at BMIS goes beyond academics. Our Life Skills Sessions help children build values,
                 confidence, and social-emotional intelligence through interactive discussions and real-world scenarios.
               </p>
-              <p className="text-gray-700 leading-relaxed mb-4 text-center md:text-left">
+              <p className="text-gray-700 leading-relaxed mb-3 text-center md:text-left">
                 Every term focuses on a unique theme that empowers learners to:
               </p>
-              <ul className="space-y-2 max-w-2xl mb-4">
+              <ul className="space-y-2 max-w-2xl mb-3">
                 <li className="flex items-start gap-3">
                   <span className="text-[#54BAB9] font-bold mt-1">•</span>
                   <span className="text-gray-700">Understand themselves and others</span>
@@ -175,13 +175,13 @@ export default function BMISPrimaryYears() {
       </section>
 
       {/* Section 4: Literacy */}
-      <section className="py-4 md:py-6 px-6 md:px-8 bg-white">
+      <section className="py-3 md:py-5 px-6 md:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-1 text-center">Literacy</h2>
-          <p className="text-base md:text-lg font-semibold text-[#9ED2C6] text-center mb-4">
+          <p className="text-base md:text-lg font-semibold text-[#9ED2C6] text-center mb-3">
             Learning Through Active Exploration
           </p>
-          <div className="flex flex-col md:flex-row-reverse gap-4 md:gap-6 items-start mb-6">
+          <div className="flex flex-col md:flex-row-reverse gap-4 md:gap-6 items-start mb-4">
             <div className="flex-1">
               <p className="text-gray-700 leading-relaxed mb-3 text-center md:text-left">
                 Our Literacy Programme develops confident readers, writers, and communicators. Children engage in:
@@ -216,11 +216,11 @@ export default function BMISPrimaryYears() {
 
           {/* Jolly Phonics & Grammar Subsection */}
           <div className="pt-3">
-            <h3 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-1 text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-1">
               Jolly Phonics & Jolly Grammar
             </h3>
-            <p className="text-base font-semibold text-[#9ED2C6] text-center mb-3">Fun with Reading and Writing</p>
-            <p className="text-gray-700 leading-relaxed text-center">
+            <p className="text-base font-semibold text-[#9ED2C6] mb-2">Fun with Reading and Writing</p>
+            <p className="text-gray-700 leading-relaxed">
               Our Jolly Phonics and Grammar programmes bring energy and joy into literacy learning. Children master
               letter sounds, blending, sentence construction, and punctuation through multisensory, hands-on
               activities—growing into confident readers and articulate writers.
@@ -229,16 +229,16 @@ export default function BMISPrimaryYears() {
 
           {/* Bookvie Subsection */}
           <div className="pt-3">
-            <h3 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-1 text-center">Bookvie</h3>
-            <p className="text-base font-semibold text-[#9ED2C6] text-center mb-3">Read it. Watch it. Live it!</p>
-            <p className="text-gray-700 leading-relaxed text-center mb-3">
+            <h3 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-1">Bookvie</h3>
+            <p className="text-base font-semibold text-[#9ED2C6] mb-2">Read it. Watch it. Live it!</p>
+            <p className="text-gray-700 leading-relaxed mb-2">
               BMIS's signature literacy initiative, Bookvie, turns reading into an adventure! Students read a book,
               watch its movie adaptation, and discuss connections between the two.
             </p>
-            <p className="text-base font-semibold text-[#54BAB9] text-center mb-2">
+            <p className="text-base font-semibold text-[#54BAB9] mb-2">
               This immersive experience enhances:
             </p>
-            <ul className="space-y-2 max-w-2xl mx-auto">
+            <ul className="space-y-2 max-w-2xl">
               <li className="flex items-start gap-3">
                 <span className="text-[#54BAB9] font-bold mt-1">•</span>
                 <span className="text-gray-700">Comprehension and critical analysis</span>
@@ -257,17 +257,17 @@ export default function BMISPrimaryYears() {
       </section>
 
       {/* Section 5: Numeracy */}
-      <section className="py-4 md:py-6 px-6 md:px-8 bg-white">
+      <section className="py-3 md:py-5 px-6 md:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-1 text-center">Numeracy</h2>
-          <p className="text-base md:text-lg font-semibold text-[#9ED2C6] text-center mb-4">The ELPS Approach</p>
+          <p className="text-base md:text-lg font-semibold text-[#9ED2C6] text-center mb-3">The ELPS Approach</p>
           <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
             <div className="flex-1">
-              <p className="text-gray-700 leading-relaxed mb-4 text-center md:text-left">
+              <p className="text-gray-700 leading-relaxed mb-3 text-center md:text-left">
                 Our Numeracy curriculum helps children develop problem-solving and reasoning skills through the ELPS
                 model which extends from Early years:
               </p>
-              <div className="space-y-2 max-w-2xl mb-4">
+              <div className="space-y-2 max-w-2xl mb-3">
                 <div className="flex items-start gap-4">
                   <span className="text-[#54BAB9] font-bold text-lg">E</span>
                   <div>
@@ -315,12 +315,12 @@ export default function BMISPrimaryYears() {
       </section>
 
       {/* Section 6: Science */}
-      <section className="py-4 md:py-6 px-6 md:px-8 bg-white">
+      <section className="py-3 md:py-5 px-6 md:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-1 text-center">
             Thematic Science Curriculum
           </h2>
-          <p className="text-base md:text-lg font-semibold text-[#9ED2C6] text-center mb-4">
+          <p className="text-base md:text-lg font-semibold text-[#9ED2C6] text-center mb-3">
             Exploring the World Around Us
           </p>
           <div className="flex flex-col md:flex-row-reverse gap-4 md:gap-6 items-center">
@@ -344,9 +344,9 @@ export default function BMISPrimaryYears() {
       </section>
 
       {/* Section 7: Subjects Table */}
-      <section className="py-4 md:py-6 px-6 md:px-8 bg-white">
+      <section className="py-3 md:py-5 px-6 md:px-8 bg-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-6 text-center">Subjects Offered at BMIS</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-5 text-center">Subjects Offered at BMIS</h2>
 
           <div className="hidden md:block overflow-x-auto rounded-lg shadow">
             <table className="w-full border-collapse">
@@ -417,11 +417,11 @@ export default function BMISPrimaryYears() {
       </section>
 
       {/* Section 8: Co-Curriculars */}
-      <section className="py-4 md:py-6 px-6 md:px-8 bg-white">
+      <section className="py-3 md:py-5 px-6 md:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-4 text-center">Co-Curriculars (Specials)</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-3 text-center">Co-Curriculars (Specials)</h2>
           <div className="flex flex-col items-center">
-            <p className="text-gray-700 text-center leading-relaxed mb-4">
+            <p className="text-gray-700 text-center leading-relaxed mb-3">
               We ensure balanced, holistic growth through a variety of creative and physical pursuits:
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
@@ -439,12 +439,12 @@ export default function BMISPrimaryYears() {
       </section>
 
       {/* Section 9: Assessments */}
-      <section className="py-4 md:py-6 px-6 md:px-8 bg-white">
+      <section className="py-3 md:py-5 px-6 md:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#54BAB9] mb-3 text-center">
             Assessments for Growth and Reflection
           </h2>
-          <div className="flex flex-col md:flex-row-reverse gap-4 md:gap-6 items-center">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
             <div className="flex-1">
               <p className="text-gray-700 leading-relaxed mb-3 text-center md:text-left">
                 At BMIS, assessments are tools for growth, feedback and learning ownership. Up to Grade 4, children
@@ -483,9 +483,9 @@ export default function BMISPrimaryYears() {
       </section>
 
       {/* Section 10: BMIS Advantage */}
-      <section className="py-4 md:py-6 px-6 md:px-8 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6]">
+      <section className="py-3 md:py-5 px-6 md:px-8 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6]">
         <div className="max-w-5xl mx-auto text-white">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">The BMIS Primary Years Advantage</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-center">The BMIS Primary Years Advantage</h2>
           <p className="text-base leading-relaxed mb-3 text-center">
             Our Primary Years Programme is designed to balance academic rigour with joyful exploration. It nurtures
             learners to become:
@@ -514,7 +514,7 @@ export default function BMISPrimaryYears() {
           </p>
         </div>
       </section>
-      <div className="py-4 bg-white">
+      <div className="py-3 bg-white">
         <div className="flex justify-center">
           <Link href="/igcseandsenioryears" className="inline-block">
             <div className="flex items-center gap-2 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-5 py-2 rounded-lg shadow-md transition-colors cursor-pointer text-sm">
