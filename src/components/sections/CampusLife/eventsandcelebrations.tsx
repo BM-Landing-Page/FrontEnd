@@ -7,39 +7,39 @@ export default function EventsAndCelebrations() {
       name: "Pongal",
       description:
         "Our school transforms into a festive village with bullock cart rides, pot-breaking games, and mud-pot cooking sessions.",
-      image: "/pongal-celebration-with-colorful-rangoli-and-tradi.jpg",
+      image: "/images/pongal.jpeg",
     },
     {
       name: "Onam",
       description: "A burst of color and culture with vibrant Rangolis, dance circles, and traditional Kerala attire.",
-      image: "/onam-celebration-with-pookolam-flower-rangoli-and-.jpg",
+      image: "/images/onam.jpeg",
     },
     {
       name: "Teachers' Day",
       description: "A meaningful opportunity to express heartfelt gratitude to educators who shape our lives.",
-      image: "/teachers-day-celebration-with-students-and-teacher.jpg",
+      image: "/images/teachersday.jpeg",
     },
     {
       name: "Grandparents' Day",
       description: "A heartwarming, student-led event dedicated to our youngest learners and their grandparents.",
-      image: "/grandparents-day-with-children-and-grandparents-do.jpg",
+      image: "/images/grandparentsday.jpeg",
     },
     {
       name: "Diwali",
       description:
         "Celebrated with eco-conscious joy, emphasizing environmental responsibility and traditional values.",
-      image: "/diwali-celebration-with-flower-rangoli-and-traditi.jpg",
+      image: "/images/diwali.jpeg",
     },
     {
       name: "Children's Day",
       description: "Celebrating the heart and soul of our school with fun activities and joyful moments.",
-      image: "/childrens-day-celebration-with-happy-kids-playing-.jpg",
+      image: "/images/childrensday.jpeg",
     },
     {
       name: "Christmas",
       description:
         "The air buzzes with anticipation during Christmas season, marked by our beloved Secret Santa tradition.",
-      image: "/christmas-celebration-with-decorated-tree-and-fest.jpg",
+      image: "/images/christmas.jpeg",
     },
   ]
 

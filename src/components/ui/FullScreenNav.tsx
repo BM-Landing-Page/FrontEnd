@@ -17,7 +17,7 @@ const NAV_ITEMS = [
     subItems: [
       "Curriculum Overview",
       "Early Years",
-      "Primary & Middle Years",
+      "Primary & Lower Secondary Years",
       "IGCSE & Senior Programmes",
       "Pedagogy & Tools",
     ],
@@ -57,7 +57,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Leadership Team": "ourteam",
   "BMIS Journey": "bmisjourney",
   "Early Years": "/earlyyears",
-  "Primary & Middle Years": "/primaryandmiddleyears",
+  "Primary & Lower Secondary Years": "/primaryandlowersecondaryyears",
   "IGCSE & Senior Programmes": "/igcseandsenioryears",
   "Pedagogy & Tools": "/pedagogytools",
   "Vision, Mission & Philosophy": "/missionforvision",

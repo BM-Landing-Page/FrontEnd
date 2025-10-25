@@ -1,4 +1,6 @@
 "use client"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 import type React from "react"
 
@@ -412,6 +414,18 @@ export default function EarlyYearsProgramme() {
           </div>
         </div>
       </section>
+      <div className="py-4 bg-white">
+        <div className="flex justify-center">
+          <Link href="/primaryandlowersecondaryyears" className="inline-block">
+            <div className="flex items-center gap-2 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-5 py-2 rounded-lg shadow-md transition-colors cursor-pointer text-sm">
+              <div className="text-center">
+                <div className="font-semibold">Primary and Lower Secondary Years</div>
+              </div>
+              <ArrowRight className="w-3 h-3" />
+            </div>
+          </Link>
+        </div>
+      </div>
     </main>
   )
 }
