@@ -105,6 +105,20 @@ export default function EarlyYearsProgramme() {
     }
   }
 
+  // Extract YouTube video ID from URL
+  const getYouTubeVideoId = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+    const match = url.match(regExp)
+    return (match && match[2].length === 11) ? match[2] : null
+  }
+
+  // YouTube thumbnail URL
+  const skillsHubVideoUrl = "https://youtu.be/zn-ex81WN1E?si=oQKFtodinerA5RIQ"
+  const skillsHubVideoId = getYouTubeVideoId(skillsHubVideoUrl)
+  const skillsHubThumbnail = skillsHubVideoId 
+    ? `https://img.youtube.com/vi/${skillsHubVideoId}/maxresdefault.jpg`
+    : "/placeholder.svg?height=200&width=300&text=Video+Thumbnail"
+
   return (
     <main className="w-full bg-white">
       {/* Hero Carousel */}
@@ -189,20 +203,18 @@ export default function EarlyYearsProgramme() {
               </p>
             </div>
 
-            {/* Video Card - Right Side */}
+            {/* Video Card - Right Side (Instagram) */}
             <div className="group">
               <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#9ED2C6] to-[#54BAB9] p-1.5 shadow-2xl hover:shadow-3xl transition-all duration-300">
                 <div className="bg-white rounded-3xl p-6 space-y-4">
                   <div
                     className="relative cursor-pointer rounded-2xl overflow-hidden group-hover:scale-105 transition-transform duration-300"
-                    onClick={() => window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank")}
+                    onClick={() => window.open("https://www.instagram.com/reel/DQMCZx-geJ0/?igsh=MXdzeG80cjJlMTY0aA==", "_blank")}
                   >
                     <img
-                      src="/images/discoveryden.jpg"
+                      src="/images/discoveryden.jpeg"
                       alt="Discovery Den - Life Skills"
                       className="w-full h-56 object-cover"
-                      onError={handleImageError}
-                      crossOrigin="anonymous"
                     />
                     {/* Play button overlay */}
                     <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/30 transition-colors">
@@ -232,20 +244,19 @@ export default function EarlyYearsProgramme() {
 
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Video Card - Left Side */}
+            {/* Video Card - Left Side (YouTube) */}
             <div className="group">
               <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#9ED2C6] to-[#54BAB9] p-1.5 shadow-2xl hover:shadow-3xl transition-all duration-300">
                 <div className="bg-white rounded-3xl p-6 space-y-4">
                   <div
                     className="relative cursor-pointer rounded-2xl overflow-hidden group-hover:scale-105 transition-transform duration-300"
-                    onClick={() => window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank")}
+                    onClick={() => window.open(skillsHubVideoUrl, "_blank")}
                   >
                     <img
-                      src="/images/skillshub.jpg"
+                      src={skillsHubThumbnail}
                       alt="Skills Hub - Discovering Brilliance"
                       className="w-full h-56 object-cover"
                       onError={handleImageError}
-                      crossOrigin="anonymous"
                     />
                     {/* Play button overlay */}
                     <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/30 transition-colors">
