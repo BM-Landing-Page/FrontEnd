@@ -14,7 +14,7 @@ export default function BMISPrimaryYears() {
     { name: "Language", grades: [1, 2, 3, "4,5"] },
     { name: "GS", grades: ["-", "-", 3, "4,5"] },
     { name: "ICT", grades: ["-", "-", 3, "4,5"] },
-    { name: "Robotics", grades: ["-", "-", 3, "4,5"] },
+    { name: "Robotics", grades: ["-", 2, 3, "4,5"] },
     { name: "PE", grades: [1, 2, 3, "4,5"] },
   ]
 
@@ -216,10 +216,10 @@ export default function BMISPrimaryYears() {
 
           {/* Jolly Phonics & Grammar Subsection */}
           <div className="pt-3">
-            <h3 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-1">
+            <h3 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-1 text-center">
               Jolly Phonics & Jolly Grammar
             </h3>
-            <p className="text-base font-semibold text-[#9ED2C6] mb-2">Fun with Reading and Writing</p>
+            <p className="text-base font-semibold text-[#9ED2C6] mb-2 text-center">Fun with Reading and Writing</p>
             <p className="text-gray-700 leading-relaxed">
               Our Jolly Phonics and Grammar programmes bring energy and joy into literacy learning. Children master
               letter sounds, blending, sentence construction, and punctuation through multisensory, hands-on
@@ -229,8 +229,8 @@ export default function BMISPrimaryYears() {
 
           {/* Bookvie Subsection */}
           <div className="pt-3">
-            <h3 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-1">Bookvie</h3>
-            <p className="text-base font-semibold text-[#9ED2C6] mb-2">Read it. Watch it. Live it!</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-1 text-center">Bookvie</h3>
+            <p className="text-base font-semibold text-[#9ED2C6] mb-2 text-center">Read it. Watch it. Live it!</p>
             <p className="text-gray-700 leading-relaxed mb-2">
               BMIS's signature literacy initiative, Bookvie, turns reading into an adventure! Students read a book,
               watch its movie adaptation, and discuss connections between the two.
