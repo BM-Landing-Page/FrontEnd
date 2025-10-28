@@ -109,13 +109,13 @@ export default function EarlyYearsProgramme() {
   const getYouTubeVideoId = (url: string) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
     const match = url.match(regExp)
-    return (match && match[2].length === 11) ? match[2] : null
+    return match && match[2].length === 11 ? match[2] : null
   }
 
   // YouTube thumbnail URL
   const skillsHubVideoUrl = "https://youtu.be/zn-ex81WN1E?si=oQKFtodinerA5RIQ"
   const skillsHubVideoId = getYouTubeVideoId(skillsHubVideoUrl)
-  const skillsHubThumbnail = skillsHubVideoId 
+  const skillsHubThumbnail = skillsHubVideoId
     ? `https://img.youtube.com/vi/${skillsHubVideoId}/maxresdefault.jpg`
     : "/placeholder.svg?height=200&width=300&text=Video+Thumbnail"
 
@@ -180,6 +180,61 @@ export default function EarlyYearsProgramme() {
         </div>
       </section>
 
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+          {/* Introduction Paragraph */}
+          <div className="space-y-4">
+            <p className="text-gray-700 leading-relaxed text-base md:text-lg">
+              At Budding Minds International School (BMIS), every child's journey begins with wonder, exploration, and
+              joy. Recognized among the best preschools in Chennai, our Early Years Programme lays the foundation for a
+              lifetime of learning — where curiosity leads to understanding, and every question sparks discovery.
+              Because the best beginnings build confident, creative learners.
+            </p>
+          </div>
+
+          {/* Programme Offerings */}
+          <div className="space-y-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#54BAB9] text-balance">
+              Our Early Years Programme Offers:
+            </h2>
+            <div className="grid md:grid-cols-2 gap-4 text-left">
+              <div className="flex items-start gap-3">
+                <span className="text-[#9ED2C6] font-bold text-lg mt-0.5 flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-base">Inquiry-based, play-driven learning</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-[#9ED2C6] font-bold text-lg mt-0.5 flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-base">
+                  Holistic development across cognitive, emotional, and physical domains
+                </span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-[#9ED2C6] font-bold text-lg mt-0.5 flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-base">
+                  Creative, theme-based curriculum integrating play and academics
+                </span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-[#9ED2C6] font-bold text-lg mt-0.5 flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-base">
+                  Strong communication and literacy foundation through Jolly Phonics
+                </span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-[#9ED2C6] font-bold text-lg mt-0.5 flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-base">Life skills and empathy-based education</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-[#9ED2C6] font-bold text-lg mt-0.5 flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-base">
+                  Learning through multisensory activities, celebrations, field trips
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Section 1: Discovery Den - Card Design */}
       <section className="py-2 md:py-3 px-4 md:px-8 bg-white overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -209,7 +264,9 @@ export default function EarlyYearsProgramme() {
                 <div className="bg-white rounded-3xl p-6 space-y-4">
                   <div
                     className="relative cursor-pointer rounded-2xl overflow-hidden group-hover:scale-105 transition-transform duration-300"
-                    onClick={() => window.open("https://www.instagram.com/reel/DQMCZx-geJ0/?igsh=MXdzeG80cjJlMTY0aA==", "_blank")}
+                    onClick={() =>
+                      window.open("https://www.instagram.com/reel/DQMCZx-geJ0/?igsh=MXdzeG80cjJlMTY0aA==", "_blank")
+                    }
                   >
                     <img
                       src="/images/discoveryden.jpeg"
@@ -253,7 +310,7 @@ export default function EarlyYearsProgramme() {
                     onClick={() => window.open(skillsHubVideoUrl, "_blank")}
                   >
                     <img
-                      src={skillsHubThumbnail}
+                      src={skillsHubThumbnail || "/placeholder.svg"}
                       alt="Skills Hub - Discovering Brilliance"
                       className="w-full h-56 object-cover"
                       onError={handleImageError}
