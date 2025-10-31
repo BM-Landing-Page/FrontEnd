@@ -21,7 +21,8 @@ export default function ParentVoiceSection() {
     <section className="w-full" style={{ backgroundColor: COLORS.bg }}>
       {/* Hero - full-bleed image with text overlay */}
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-        <div className="relative h-64 md:h-96 lg:h-[28rem]">
+        <div className="relative h-80 md:h-[30rem] lg:h-[36rem]">
+
           <img
             src="/images/parentvoice.jpg"
             alt="Parents and child at school"
