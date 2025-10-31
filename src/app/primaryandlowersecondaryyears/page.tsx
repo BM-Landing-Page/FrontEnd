@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import PrimaryYears from "@/components/sections/Academics/igcseandsenioryears"
+import PrimaryYears from "@/components/sections/Academics/primaryandlowersecondaryyears"
 import LowerSecondary from "@/components/sections/Academics/lowersecondary"
 
 export default function CurriculumPage() {
