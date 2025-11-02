@@ -8,19 +8,19 @@ export default function LowerSecondary() {
 
   const carouselImages = [
     {
-      src: "/images/lowersec1.jpg",
+      src: "/images/lowersec1.jpeg",
       alt: "Lower Secondary Classroom",
     },
     {
-      src: "/images/lowersec2.jpg",
+      src: "/images/lowersec2.jpeg",
       alt: "Student Learning Activities",
     },
     {
-      src: "/images/lowersec3.jpg",
+      src: "/images/lowersec3.jpeg",
       alt: "Student Collaboration",
     },
     {
-      src: "/images/lowersec3.jpg",
+      src: "/images/lowersec4.jpeg",
       alt: "School Campus",
     },
   ]

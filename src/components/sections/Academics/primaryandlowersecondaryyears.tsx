@@ -27,7 +27,7 @@ export default function PrimaryYears() {
         </div>
         <div className="flex-1 h-64 md:h-80 bg-[#F7ECDE] rounded-lg flex items-center justify-center">
           <img
-            src="/primary-years-programme-introduction.jpg"
+            src="/images/primaryyears1.jpeg"
             alt="Primary Years Programme"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -56,7 +56,7 @@ export default function PrimaryYears() {
         </div>
         <div className="flex-1 h-64 md:h-80 bg-[#F7ECDE] rounded-lg flex items-center justify-center">
           <img
-            src="/active-learning-inquiry-engagement.jpg"
+            src="/images/primaryyears2.jpeg"
             alt="Active Learning"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -84,7 +84,7 @@ export default function PrimaryYears() {
         </div>
         <div className="flex-1 h-64 md:h-80 bg-[#F7ECDE] rounded-lg flex items-center justify-center">
           <img
-            src="/life-skills-social-emotional-learning.jpg"
+            src="/images/primaryyears3.jpeg"
             alt="Life Skills"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -107,7 +107,7 @@ export default function PrimaryYears() {
         </div>
         <div className="flex-1 h-64 md:h-80 bg-[#F7ECDE] rounded-lg flex items-center justify-center">
           <img
-            src="/literacy-reading-writing-active-learning.jpg"
+            src="/images/primaryyears4.jpeg"
             alt="Literacy"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -176,7 +176,7 @@ export default function PrimaryYears() {
         </div>
         <div className="flex-1 h-64 md:h-80 bg-[#F7ECDE] rounded-lg flex items-center justify-center">
           <img
-            src="/numeracy-mathematics-elps-approach.jpg"
+            src="/images/primaryyears3.jpeg"
             alt="Numeracy"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -199,7 +199,7 @@ export default function PrimaryYears() {
         </div>
         <div className="flex-1 h-64 md:h-80 bg-[#F7ECDE] rounded-lg flex items-center justify-center">
           <img
-            src="/science-exploration-experiments-discovery.jpg"
+            src="/images/primaryyears4.jpeg"
             alt="Science"
             className="w-full h-full object-cover rounded-lg"
           />
