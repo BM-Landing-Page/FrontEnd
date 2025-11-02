@@ -1,5 +1,5 @@
 import { MapPin, Mail, Phone, Facebook, Instagram, Linkedin, ExternalLink, Youtube, Clock } from "lucide-react"
-import Link from "next/link"
+
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden" style={{ backgroundColor: "#54BAB9" }}>
@@ -16,6 +16,89 @@ export default function Footer() {
           <h2 className="text-4xl font-bold mb-4 text-white">BUDDING MINDS INTERNATIONAL SCHOOL</h2>
           <div className="w-24 h-1 mx-auto rounded-full" style={{ backgroundColor: "#F7ECDE" }}></div>
           <p className="mt-4 text-lg text-white/90">Nurturing Excellence • Inspiring Innovation</p>
+        </div>
+
+        {/* Partners Section - Scrolling Carousel */}
+        <div className="mb-12">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 overflow-hidden">
+            <h3 className="text-2xl font-semibold mb-6 text-center text-white" style={{ color: "#F7ECDE" }}>
+              Our Partners
+            </h3>
+            <div className="relative overflow-hidden">
+              <style>{`
+                @keyframes scroll {
+                  0% {
+                    transform: translateX(0);
+                  }
+                  100% {
+                    transform: translateX(-50%);
+                  }
+                }
+                .animate-scroll {
+                  animation: scroll 25s linear infinite;
+                }
+                .animate-scroll:hover {
+                  animation-play-state: paused;
+                }
+              `}</style>
+              
+              <div className="flex gap-8 animate-scroll items-center">
+                {/* First set of logos */}
+                <div className="flex gap-8 flex-shrink-0 items-center">
+                  <img
+                    src="/images/partner1.jpeg"
+                    alt="Partner 1"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                  
+                  <img
+                    src="/images/partner2.jpeg"
+                    alt="Partner 2"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                  
+                  <img
+                    src="/images/partner3.jpeg"
+                    alt="Partner 3"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                  
+                  <img
+                    src="/images/partner4.jpeg"
+                    alt="Partner 4"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                </div>
+                
+                {/* Duplicate set for seamless loop */}
+                <div className="flex gap-8 flex-shrink-0 items-center">
+                  <img
+                    src="/images/partner1.jpeg"
+                    alt="Partner 1"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                  
+                  <img
+                    src="/images/partner2.jpeg"
+                    alt="Partner 2"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                  
+                  <img
+                    src="/images/partner3.jpeg"
+                    alt="Partner 3"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                  
+                  <img
+                    src="/images/partner4.jpeg"
+                    alt="Partner 4"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Main Content Grid */}
@@ -92,7 +175,7 @@ export default function Footer() {
           {/* Quick Links & Social */}
           <div className="lg:col-span-2 space-y-6">
             {/* Parent Voice */}
-            <Link href="/parentvoice" passHref>
+            <a href="/parentvoice">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 cursor-pointer transition hover:shadow-lg">
                 <h3 className="text-xl font-semibold mb-4 text-white" style={{ color: "#F7ECDE" }}>
                   Parent Voice
@@ -102,7 +185,7 @@ export default function Footer() {
                   valuable feedback.
                 </p>
               </div>
-            </Link>
+            </a>
 
             {/* Social Media */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
@@ -147,8 +230,6 @@ export default function Footer() {
                   <Linkedin className="w-5 h-5 text-white" />
                 </a>
               </div>
-              
-              
             </div>
           </div>
         </div>
