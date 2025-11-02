@@ -115,7 +115,7 @@ const FoundersMessage = () => {
             </div>
             <h5 className="font-heading font-bold text-white">Budding Minds International School</h5>
           </div>
-          <p className="text-white/80">A place where the best kind of learning happens</p>
+          <p className="text-white/80">A place where meaningful learning comes to life.</p>
         </div>
       </footer>
     </div>
