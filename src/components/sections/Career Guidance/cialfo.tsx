@@ -1,3 +1,6 @@
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
+
 export default function CialfoPage() {
   return (
     <main className="w-full bg-white">
@@ -80,6 +83,18 @@ export default function CialfoPage() {
             Together with CIALFO, BMIS is transforming future readiness — helping every learner dream without boundaries
             and step into the global stage with clarity and confidence.
           </p>
+        </div>
+      </div>
+      <div className="py-6 bg-white">
+        <div className="flex justify-center">
+          <Link href="/careerquest" className="inline-block">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-6 py-3 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-base">Career Quest</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
         </div>
       </div>
     </main>

@@ -1,4 +1,8 @@
+
+
 "use client"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 export default function CareerGuidancePage() {
   return (
@@ -301,7 +305,7 @@ export default function CareerGuidancePage() {
               translate insights into action and build a roadmap for their future success.
             </p>
           </div>
-          <div className="section-visual">Self Discovery</div>
+          {/* <div className="section-visual">Self Discovery</div> */}
         </div>
 
         {/* Career Fairs */}
@@ -325,7 +329,7 @@ export default function CareerGuidancePage() {
               plan strategically.
             </p>
           </div>
-          <div className="section-visual">Global Connections</div>
+          {/* <div className="section-visual">Global Connections</div> */}
         </div>
 
         {/* Internship Opportunities */}
@@ -355,9 +359,21 @@ export default function CareerGuidancePage() {
               and potential into purpose.
             </p>
           </div>
-          <div className="section-visual">Real Experience</div>
+          {/* <div className="section-visual">Real Experience</div> */}
         </div>
       </section>
+      <div className="py-6 bg-white">
+        <div className="flex justify-center">
+          <Link href="/cialfo" className="inline-block">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-6 py-3 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-base">CIALFO</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

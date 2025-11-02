@@ -1,19 +1,21 @@
 "use client"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 export default function CambridgeIGCSE() {
   return (
     <div className="min-h-screen bg-white text-gray-800">
       {/* Hero Banner */}
-      <div className="relative w-full h-96 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] overflow-hidden flex items-center justify-center">
+      
         <img
-          src="/cambridge-igcse-education-hero-banner.jpg"
+          src="/images/igcsehero.jpeg"
           alt="Cambridge IGCSE"
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover opacity-100"
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-5xl md:text-6xl font-bold text-white text-center px-4">Cambridge IGCSE</h1>
         </div>
-      </div>
+      
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-16 md:py-24">
@@ -261,6 +263,18 @@ export default function CambridgeIGCSE() {
               </div>
             </section>
           </div>
+        </div>
+      </div>
+      <div className="py-6 bg-white">
+        <div className="flex justify-center">
+          <Link href="/pedagogyandtools" className="inline-block">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-6 py-3 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-base">Pedagogy and Tools</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,3 +1,7 @@
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
+
+
 export default function PrimaryYears() {
   return (
     <div className="w-full bg-white px-4 md:px-8 py-8 space-y-8">
@@ -346,6 +350,18 @@ export default function PrimaryYears() {
             alt="BMIS Advantage"
             className="w-full h-full object-cover rounded-lg"
           />
+        </div>
+      </div>
+      <div className="py-6 bg-white">
+        <div className="flex justify-center">
+          <Link href="/igcseandsenioryears" className="inline-block">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-6 py-3 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-base">IGCSE and Senior Years</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
         </div>
       </div>
     </div>

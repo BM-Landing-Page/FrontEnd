@@ -1,7 +1,9 @@
 "use client"
+import Link from "next/link"
+
 
 import { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 
 export default function LowerSecondary() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -194,6 +196,18 @@ export default function LowerSecondary() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="py-6 bg-white">
+        <div className="flex justify-center">
+          <Link href="/igcseandsenioryears" className="inline-block">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-6 py-3 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-base">IGCSE and Senior Years</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
         </div>
       </div>
     </div>
