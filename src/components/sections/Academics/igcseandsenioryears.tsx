@@ -6,7 +6,7 @@ export default function CambridgeIGCSE() {
   return (
     <div className="min-h-screen bg-white text-gray-800">
       {/* Hero Banner */}
-      
+      <div className="relative h-64 md:h-96 w-full">
         <img
           src="/images/igcsehero.jpeg"
           alt="Cambridge IGCSE"
@@ -15,7 +15,7 @@ export default function CambridgeIGCSE() {
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-5xl md:text-6xl font-bold text-white text-center px-4">Cambridge IGCSE</h1>
         </div>
-      
+      </div>
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-16 md:py-24">
