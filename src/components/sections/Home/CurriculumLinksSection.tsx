@@ -73,7 +73,7 @@ export default function CurriculumLinksSection() {
   const curriculumLinks = [
     {
       title: "Early Years",
-      description: "Explore our nurturing curriculum and holistic learning environment for young minds.",
+      description: "PHRASES - ZOOM INTO THE WORLD OF YOUNG MINDS",
       href: "/earlyyears",
       icon: BookOpen,
       gradient: "from-[#F7ECDE] to-[#E9DAC1]",
@@ -81,9 +81,9 @@ export default function CurriculumLinksSection() {
       thumbnail: "/images/earlyyearshome.jpg",
     },
     {
-      title: "Primary & Middle Years",
-      description: "Discover our comprehensive curriculum designed for growing learners.",
-      href: "/primaryandmiddleyears",
+      title: "Primary & Lower Secondary Years",
+      description: "QUESTIONING MINDS TO CONFIDENT THINKERS",
+      href: "/primaryandlowersecondaryyears",
       icon: Users,
       gradient: "from-[#E9DAC1] to-[#9ED2C6]",
       accentColor: "#54BAB9",

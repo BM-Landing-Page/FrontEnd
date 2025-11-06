@@ -120,7 +120,7 @@ export default function VideosShowcase() {
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-2">See Our School in Action</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Get an inside look at our educational community through these featured videos
+            Get an inside look at our community through these featured videos. 
           </p>
         </div>
 

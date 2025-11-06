@@ -44,35 +44,7 @@ export default function CambridgeIGCSE() {
               </div>
             </section>
 
-            {/* Career Guidance Section */}
-            <section className="py-8 border-b border-[#E9DAC1]">
-              <h2 className="text-3xl font-bold text-[#54BAB9] mb-6">Career Guidance Conference</h2>
-              <div className="space-y-4 text-gray-700 leading-relaxed">
-                <p>
-                  Our students go through an important stage – making subject recommendations! Our subject
-                  recommendation process involves the following steps. Our 4 step process will accommodate the interests
-                  of both the parents and the students.
-                </p>
-                <div className="space-y-3 ml-4">
-                  <p>
-                    <span className="font-semibold text-[#54BAB9]">Step 1:</span> Students take a survey, to capture
-                    their interests and aspirations.
-                  </p>
-                  <p>
-                    <span className="font-semibold text-[#54BAB9]">Step 2:</span> Parents choose subjects from the list
-                    offered
-                  </p>
-                  <p>
-                    <span className="font-semibold text-[#54BAB9]">Step 3:</span> Teachers make a recommendation of
-                    subjects for every student, considering all stake holders' recommendations.
-                  </p>
-                  <p>
-                    <span className="font-semibold text-[#54BAB9]">Step 4:</span> Parent & Student Conference to
-                    finalise their choices.
-                  </p>
-                </div>
-              </div>
-            </section>
+            
 
             {/* IGCSE Curriculum Section */}
             <section className="py-8 border-b border-[#E9DAC1]">
