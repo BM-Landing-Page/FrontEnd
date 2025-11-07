@@ -366,24 +366,24 @@ export default function EarlyYearsProgramme() {
                 <p className="text-base font-semibold text-[#54BAB9]">
                   Jolly Phonics program – Building Strong Readers and Writers
                 </p>
-                <ul className="text-gray-700 space-y-3 leading-relaxed text-sm">
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#9ED2C6] font-bold text-lg mt-0.5">✓</span>
-                    <span>Learn 42 letter sounds through songs, actions & stories</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#9ED2C6] font-bold text-lg mt-0.5">✓</span>
-                    <span>Spell and blend letter sounds to read fluently</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#9ED2C6] font-bold text-lg mt-0.5">✓</span>
-                    <span>Read simple stories with understanding and enjoyment</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#9ED2C6] font-bold text-lg mt-0.5">✓</span>
-                    <span>Write simple short stories, poems and letters with creativity</span>
-                  </li>
-                </ul>
+                <div className="text-gray-700 space-y-3 leading-relaxed text-sm">
+                  <p>
+                    Early literacy at BMIS is nurtured through the globally acclaimed Jolly Phonics Programme, a
+                    multisensory and systematic approach to teaching reading and writing. This programme introduces
+                    children to the foundational sounds of the English language through engaging songs, actions, and
+                    stories, ensuring that learning phonics is both joyful and meaningful.
+                  </p>
+                  <p>
+                    By engaging multiple senses, children not only learn the sounds of letters but also understand how
+                    to blend them to read words and segment them to spell. The programme empowers each learner to move
+                    from listening and recognizing sounds to confidently reading and writing with purpose and
+                    creativity.
+                  </p>
+                  <p>
+                    Our teachers integrate play, storytelling, and hands-on activities into the daily literacy routine,
+                    helping children see language as something to explore, express, and enjoy.
+                  </p>
+                </div>
               </div>
             </div>
             <div className="group">
@@ -494,7 +494,6 @@ export default function EarlyYearsProgramme() {
           </Link>
         </div>
       </div>
-      
     </main>
   )
 }
