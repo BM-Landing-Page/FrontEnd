@@ -57,7 +57,7 @@ export default function EarlyYearsProgramme() {
     }>
   >([])
 
-  const heroImages = ["/images/earlyhero1.jpg", "/images/earlyhero2.jpg", "/images/earlyhero3.jpg"]
+  const heroImages = ["/images/earlyhero1.jpg", "/images/earlyhero2.jpeg", "/images/earlyhero3.jpg"]
 
   useEffect(() => {
     const colors = ["#9ED2C6", "#54BAB9", "#F7ECDE", "#E9DAC1"]
