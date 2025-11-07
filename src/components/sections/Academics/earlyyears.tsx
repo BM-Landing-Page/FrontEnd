@@ -439,10 +439,7 @@ export default function EarlyYearsProgramme() {
                   <span className="font-bold text-[#54BAB9]">S – Symbol:</span> Apply concepts with numbers
                 </p>
               </div>
-              <p className="text-gray-700 leading-relaxed text-base">
-                With engaging tools like Jodo Gyan and Rangometry, children connect maths to the world around them —
-                making numeracy natural, fun, and meaningful.
-              </p>
+             
             </div>
           </div>
         </div>
