@@ -36,8 +36,8 @@ export default function Popup({ onClose }: PopupProps) {
   if (!show || loading || !popupData) return null
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/60 backdrop-blur-sm">
-      <div className="relative w-4/5 h-4/5 max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-300 scale-100">
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/60 backdrop-blur-sm p-4 sm:p-6 md:p-8">
+      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl max-h-full overflow-y-auto bg-white rounded-3xl shadow-2xl transform transition-all duration-300 scale-100">
         {/* Close Button */}
         <button
           className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 hover:bg-white text-gray-600 hover:text-gray-800 transition-colors duration-200 z-10 shadow-lg"
@@ -48,14 +48,14 @@ export default function Popup({ onClose }: PopupProps) {
           </svg>
         </button>
 
-        {/* Image covering 4/5 of popup */}
-        <div className="relative h-4/5 w-full">
+        {/* Square Image holder */}
+        <div className="relative w-full aspect-square">
           {popupData.image ? (
             <Image
               src={popupData.image || "/placeholder.svg"}
               alt="Registration Banner"
               fill
-              className="object-fill"
+              className="object-cover"
               priority
             />
           ) : (
@@ -65,8 +65,8 @@ export default function Popup({ onClose }: PopupProps) {
           )}
         </div>
 
-        {/* Register Now Button Section - 1/5 of popup */}
-        <div className="h-1/5 flex items-center justify-center bg-gray-50 px-6">
+        {/* Register Now Button Section */}
+        <div className="flex items-center justify-center bg-gray-50 px-6 py-6">
           <button
             onClick={() => {
               if (popupData.url) {
