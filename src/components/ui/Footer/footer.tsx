@@ -46,13 +46,13 @@ export default function Footer() {
                 {/* First set of logos */}
                 <div className="flex gap-8 flex-shrink-0 items-center">
                   <img
-                    src="/images/partner1.jpeg"
+                    src="/images/partner1.png"
                     alt="Partner 1"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
                   
                   <img
-                    src="/images/partner2.jpeg"
+                    src="/images/partner2.png"
                     alt="Partner 2"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
@@ -78,13 +78,13 @@ export default function Footer() {
                 {/* Duplicate set for seamless loop */}
                 <div className="flex gap-8 flex-shrink-0 items-center">
                   <img
-                    src="/images/partner1.jpeg"
+                    src="/images/partner1.png"
                     alt="Partner 1"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
                   
                   <img
-                    src="/images/partner2.jpeg"
+                    src="/images/partner2.png"
                     alt="Partner 2"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
