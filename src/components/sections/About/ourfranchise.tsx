@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
+import { Calendar, FileText, Users, CheckCircle, AlertCircle, FileCheck } from "lucide-react"
 
 function SectionBubble({
   delay,
@@ -50,6 +51,9 @@ export default function RoomPage() {
     }>
   >([])
 
+  const ctaRef = useRef(null)
+  const [isCtaInView, setIsCtaInView] = useState(false)
+
   useEffect(() => {
     const colors = ["#9ED2C6", "#54BAB9", "#F7ECDE", "#E9DAC1"]
     const newBubbles = Array.from({ length: 6 }, (_, i) => ({
@@ -64,6 +68,29 @@ export default function RoomPage() {
     }))
     setSectionBubbles(newBubbles)
   }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsCtaInView(entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+
+    if (ctaRef.current) {
+      observer.observe(ctaRef.current)
+    }
+
+    return () => {
+      if (ctaRef.current) {
+        observer.unobserve(ctaRef.current)
+      }
+    }
+  }, [])
+
+  const handleApplicationClick = () => {
+    window.open('https://buddingminds.net/contact', '_blank')
+  }
 
   return (
     <main className="w-full bg-white">
@@ -84,7 +111,7 @@ export default function RoomPage() {
       </section>
 
       {/* Section 1: About Our Franchise - Text Left, Image Right */}
-      <section className="py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
+      <section className="relative py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {sectionBubbles.map((bubble) => (
             <SectionBubble key={bubble.id} {...bubble} />
@@ -131,7 +158,7 @@ export default function RoomPage() {
       </section>
 
       {/* Section 2: Our Founder - Image Left, Text Right */}
-      <section className="py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
+      <section className="relative py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {sectionBubbles.map((bubble) => (
             <SectionBubble key={bubble.id} {...bubble} />
@@ -180,7 +207,7 @@ export default function RoomPage() {
       </section>
 
       {/* Section 3: Programmes Offered - Text Left, Image Right */}
-      <section className="py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
+      <section className="relative py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {sectionBubbles.map((bubble) => (
             <SectionBubble key={bubble.id} {...bubble} />
@@ -245,7 +272,7 @@ export default function RoomPage() {
       </section>
 
       {/* Section 4: Our Learning Environment - Image Left, Text Right */}
-      <section className="py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
+      <section className="relative py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {sectionBubbles.map((bubble) => (
             <SectionBubble key={bubble.id} {...bubble} />
@@ -348,6 +375,31 @@ export default function RoomPage() {
             Join a learning community where every child's first school experience is filled with joy, care, and
             confidence.
           </p>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section
+        ref={ctaRef}
+        className="py-12 px-4 sm:px-6 lg:px-8"
+        style={{ backgroundColor: "#54BAB9" }}
+      >
+        <div className={`max-w-4xl mx-auto text-center transition-all duration-700 ${
+          isCtaInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+            Ready to Start Your Application?
+          </h2>
+          <p className="text-base text-white font-normal mb-6">
+            Begin your child's journey with Budding Minds today
+          </p>
+          <button
+            className="inline-flex items-center px-8 py-3 font-semibold rounded-lg cursor-pointer text-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+            style={{ backgroundColor: "#9ED2C6" }}
+            onClick={handleApplicationClick}
+          >
+            Begin Application Process
+          </button>
         </div>
       </section>
     </main>
