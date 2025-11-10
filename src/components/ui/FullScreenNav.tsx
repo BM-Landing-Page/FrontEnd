@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { label: "My School One", subItems: [] },
   {
     label: "About BMIS",
-    subItems: ["Vision, Mission & Philosophy", "Founder's Message", "BMIS Journey", "Leadership Team","Calendar", "Alumni"],
+    subItems: ["Vision, Mission & Philosophy", "Founder's Message","Our Franchise", "BMIS Journey", "Leadership Team","Calendar", "Alumni"],
   },
   {
     label: "Academics",
@@ -86,6 +86,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "What we do?": "/whatwedo",
   "CIALFO": "/cialfo",
   "Career Quest": "/careerquest",
+  "Our Franchise": "/ourfranchise",
 }
 
 const SOCIAL_LINKS = [
