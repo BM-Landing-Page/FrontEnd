@@ -17,6 +17,95 @@ export interface PaginationInfo {
   hasMore: boolean
 }
 
+
+//
+// ========================
+// ✅ BUS ROUTES & STOPS SECTION
+// ========================
+//
+
+export interface BusRoute {
+  id: string
+  route_name: string
+  bus_number: string
+  active: boolean
+  created_at: string
+}
+
+export interface BusStop {
+  id: string
+  name: string
+  pickup: string | null
+  drop: string | null
+  order: number | null
+  route: string
+}
+
+// Fetch all bus routes
+export const fetchBusRoutes = async (): Promise<ApiResponse<BusRoute[]>> => {
+  try {
+    const url = `${API_BASE_URL}/bus-routes`
+    console.log("[v0] Fetching bus routes from:", url)
+    const response = await fetch(url)
+    console.log("[v0] Bus routes response status:", response.status)
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log("[v0] Bus routes data received:", data)
+    return { success: true, data }
+  } catch (error) {
+    console.error("[v0] Error fetching bus routes:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch bus routes",
+    }
+  }
+}
+
+// Fetch all stops for a specific route
+export const fetchBusStopsByRoute = async (routeId: string): Promise<ApiResponse<BusStop[]>> => {
+  try {
+    const url = `${API_BASE_URL}/bus-stops/route/${routeId}`
+    console.log("[v0] Fetching bus stops from:", url)
+    const response = await fetch(url)
+    console.log("[v0] Bus stops response status:", response.status)
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log("[v0] Bus stops data received:", data)
+    return { success: true, data }
+  } catch (error) {
+    console.error(`[v0] Error fetching bus stops for route ${routeId}:`, error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : `Failed to fetch stops for route ${routeId}`,
+    }
+  }
+}
+
+// Fetch a single bus route with its stops
+export const fetchBusRouteById = async (routeId: string): Promise<ApiResponse<BusRoute & { bus_stops: BusStop[] }>> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/busRoutes/${routeId}`)
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    console.error("Error fetching bus route:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch bus route",
+    }
+  }
+}
+
+
 //
 // ========================
 // ✅ CAREER SECTION

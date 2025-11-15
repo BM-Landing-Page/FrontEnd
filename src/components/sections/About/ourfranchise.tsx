@@ -89,7 +89,7 @@ export default function RoomPage() {
   }, [])
 
   const handleApplicationClick = () => {
-    window.open('https://buddingminds.net/contact', '_blank')
+    window.open('https://myschoolone.com/Web/Admission/ApplicationFormV2.php?iid=MTM=&ksjdkjsd=MQ==', '_blank')
   }
 
   return (
