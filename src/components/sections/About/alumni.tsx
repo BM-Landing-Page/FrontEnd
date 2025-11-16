@@ -92,11 +92,11 @@ export default function Alumni() {
           }
         })
 
-        setBatches(Array.from(batchSet).sort().reverse())
+        const sortedBatches = Array.from(batchSet).sort()
+        setBatches(sortedBatches)
         setAlumniVoices(groupedByBatch)
         setUniversities(univByBatch)
 
-        const sortedBatches = Array.from(batchSet).sort().reverse()
         if (sortedBatches.length > 0) {
           setActiveBatch(sortedBatches[0])
         }
