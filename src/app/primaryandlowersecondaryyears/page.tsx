@@ -9,12 +9,19 @@ export default function CurriculumPage() {
 
   return (
     <div className="w-full bg-white">
-      {/* Hero Banner */}
-      <div className="w-full h-64 md:h-80 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] flex items-center justify-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-white text-center px-4">Our Curriculum</h1>
+      {/* Hero Banner with Image */}
+      <div className="relative w-full h-64 md:h-80 overflow-hidden">
+        <img
+          src="/images/primaryhero.jpeg"
+          alt="Our Curriculum"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white text-center px-4">Our Curriculum</h1>
+        </div>
       </div>
 
-      {/* Tab Switching - white background instead of peach */}
+      {/* Tab Switching */}
       <div className="flex justify-center gap-4 py-8 px-4 bg-white">
         <button
           onClick={() => setActiveTab("primary")}

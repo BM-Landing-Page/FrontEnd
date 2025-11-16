@@ -180,7 +180,7 @@ export default function PrimaryYears() {
         </div>
         <div className="flex-1 h-64 md:h-80 bg-[#F7ECDE] rounded-lg flex items-center justify-center">
           <img
-            src="/images/primaryyears3.jpeg"
+            src="/images/primaryyears5.jpeg"
             alt="Numeracy"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -203,7 +203,7 @@ export default function PrimaryYears() {
         </div>
         <div className="flex-1 h-64 md:h-80 bg-[#F7ECDE] rounded-lg flex items-center justify-center">
           <img
-            src="/images/primaryyears4.jpeg"
+            src="/images/primaryyears6.jpeg"
             alt="Science"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -293,65 +293,48 @@ export default function PrimaryYears() {
         </div>
       </div>
 
-      {/* Section 11: Assessments - Image Left */}
-      <div className="flex flex-col md:flex-row-reverse gap-8 items-center">
-        <div className="flex-1">
-          <h2 className="text-3xl font-bold text-[#54BAB9] mb-4">Assessments for Growth and Reflection</h2>
-          <div className="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              At BMIS, assessments are tools for growth, feedback and learning ownership. Up to Grade 4, children
-              experience continuous assessment that values progress and reflection. Our continuous formative assessments
-              track skills and understanding through:
-            </p>
-            <ul className="list-disc list-inside space-y-2 ml-2">
-              <li>Checklists and rubrics</li>
-              <li>Performance tasks and reflections</li>
-              <li>Real-life projects</li>
-            </ul>
-            <p>
-              From Grade 5 onwards, they take unit tests and exams — gradually building confidence and readiness for
-              secondary education.
-            </p>
-          </div>
-        </div>
-        <div className="flex-1 h-64 md:h-80 bg-[#F7ECDE] rounded-lg flex items-center justify-center">
-          <img
-            src="/assessment-growth-reflection-learning.jpg"
-            alt="Assessments"
-            className="w-full h-full object-cover rounded-lg"
-          />
+      {/* Section 11: Assessments - NO IMAGE */}
+      <div className="py-4">
+        <h2 className="text-3xl font-bold text-[#54BAB9] mb-4">Assessments for Growth and Reflection</h2>
+        <div className="space-y-4 text-gray-700 leading-relaxed">
+          <p>
+            At BMIS, assessments are tools for growth, feedback and learning ownership. Up to Grade 4, children
+            experience continuous assessment that values progress and reflection. Our continuous formative assessments
+            track skills and understanding through:
+          </p>
+          <ul className="list-disc list-inside space-y-2 ml-2">
+            <li>Checklists and rubrics</li>
+            <li>Performance tasks and reflections</li>
+            <li>Real-life projects</li>
+          </ul>
+          <p>
+            From Grade 5 onwards, they take unit tests and exams — gradually building confidence and readiness for
+            secondary education.
+          </p>
         </div>
       </div>
 
-      {/* Section 12: Advantage - Image Right */}
-      <div className="flex flex-col md:flex-row gap-8 items-center">
-        <div className="flex-1">
-          <h2 className="text-3xl font-bold text-[#54BAB9] mb-4">The BMIS Primary Years Advantage</h2>
-          <div className="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Our Primary Years Programme is designed to balance academic rigour with joyful exploration. It nurtures
-              learners to become:
-            </p>
-            <ul className="list-disc list-inside space-y-2 ml-2">
-              <li>Curious and reflective thinkers</li>
-              <li>Confident communicators</li>
-              <li>Collaborative problem-solvers</li>
-              <li>Compassionate global citizens</li>
-            </ul>
-            <p>
-              At BMIS, learning in the primary years is lively, meaningful, and full of purpose — preparing children not
-              just for the next grade, but for the world beyond.
-            </p>
-          </div>
-        </div>
-        <div className="flex-1 h-64 md:h-80 bg-[#F7ECDE] rounded-lg flex items-center justify-center">
-          <img
-            src="/primary-years-advantage-learning.jpg"
-            alt="BMIS Advantage"
-            className="w-full h-full object-cover rounded-lg"
-          />
+      {/* Section 12: Advantage - NO IMAGE */}
+      <div className="py-4">
+        <h2 className="text-3xl font-bold text-[#54BAB9] mb-4">The BMIS Primary Years Advantage</h2>
+        <div className="space-y-4 text-gray-700 leading-relaxed">
+          <p>
+            Our Primary Years Programme is designed to balance academic rigour with joyful exploration. It nurtures
+            learners to become:
+          </p>
+          <ul className="list-disc list-inside space-y-2 ml-2">
+            <li>Curious and reflective thinkers</li>
+            <li>Confident communicators</li>
+            <li>Collaborative problem-solvers</li>
+            <li>Compassionate global citizens</li>
+          </ul>
+          <p>
+            At BMIS, learning in the primary years is lively, meaningful, and full of purpose — preparing children not
+            just for the next grade, but for the world beyond.
+          </p>
         </div>
       </div>
+
       <div className="py-6 bg-white">
         <div className="flex justify-center">
           <Link href="/igcseandsenioryears" className="inline-block">
