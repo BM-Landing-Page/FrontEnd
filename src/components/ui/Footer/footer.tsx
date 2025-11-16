@@ -58,18 +58,18 @@ export default function Footer() {
                   />
                   
                   <img
-                    src="/images/partner3.jpeg"
+                    src="/images/partner3.png"
                     alt="Partner 3"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
                   
                   <img
-                    src="/images/partner4.jpeg"
+                    src="/images/partner4.png"
                     alt="Partner 4"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
                   <img
-                    src="/images/partner5.jpeg"
+                    src="/images/partner5.png"
                     alt="Partner 4"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
@@ -90,18 +90,18 @@ export default function Footer() {
                   />
                   
                   <img
-                    src="/images/partner3.jpeg"
+                    src="/images/partner3.png"
                     alt="Partner 3"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
                   
                   <img
-                    src="/images/partner4.jpeg"
+                    src="/images/partner4.png"
                     alt="Partner 4"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
                   <img
-                    src="/images/partner5.jpeg"
+                    src="/images/partner5.png"
                     alt="Partner 4"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
