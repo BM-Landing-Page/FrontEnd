@@ -18,6 +18,110 @@ export interface PaginationInfo {
 }
 
 
+
+// ========================
+// ✅ ALUMNI & BATCHES SECTION
+// ========================
+
+
+export interface Batch {
+  batch_id: number
+  batch_year: number
+  description: string
+}
+
+export interface University {
+  university_id: number
+  university_name: string
+  country: string
+  logo_url?: string
+}
+
+export interface Alumni {
+  alumni_id: number
+  name: string
+  testimonial: string
+  batch_id: number
+  current_university_id: number
+  photo_url?: string
+  batches?: Batch
+  universities?: University
+  alumni_universities?: Array<{ universities: University }>
+}
+
+export interface ApiResponse<T> {
+  success: boolean
+  data?: T
+  error?: string
+}
+
+// Fetch all batches
+export const fetchAllBatches = async (): Promise<ApiResponse<Batch[]>> => {
+  try {
+    console.log("[v0] Fetching batches from:", `${API_BASE_URL}/batches`)
+    const response = await fetch(`${API_BASE_URL}/batches`)
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log("[v0] Batches received:", data)
+    return { success: true, data }
+  } catch (error) {
+    console.error("[v0] Error fetching batches:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch batches",
+    }
+  }
+}
+
+// Fetch all alumni with batch and university data
+export const fetchAllAlumni = async (): Promise<ApiResponse<Alumni[]>> => {
+  try {
+    console.log("[v0] Fetching alumni from:", `${API_BASE_URL}/alumni`)
+    const response = await fetch(`${API_BASE_URL}/alumni`)
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log("[v0] Alumni received:", data)
+    return { success: true, data }
+  } catch (error) {
+    console.error("[v0] Error fetching alumni:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch alumni",
+    }
+  }
+}
+
+// Fetch all alumni-university links
+export const fetchAlumniUniversities = async (): Promise<ApiResponse<any[]>> => {
+  try {
+    console.log("[v0] Fetching alumni-universities from:", `${API_BASE_URL}/alumni-universities`)
+    const response = await fetch(`${API_BASE_URL}/alumni-universities`)
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log("[v0] Alumni-universities received:", data)
+    return { success: true, data }
+  } catch (error) {
+    console.error("[v0] Error fetching alumni-universities:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch alumni-universities",
+    }
+  }
+}
+
+
 //
 // ========================
 // ✅ BUS ROUTES & STOPS SECTION
