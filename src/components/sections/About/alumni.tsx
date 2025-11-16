@@ -139,7 +139,7 @@ export default function Alumni() {
       <div className="relative h-96 overflow-hidden bg-gray-100">
         <div className="absolute inset-0">
           <Image
-            src="/alumni-hero-banner.jpg"
+            src="/images/alumni.jpg"
             alt="Alumni Hero Banner"
             fill
             className="object-cover object-top opacity-40"
