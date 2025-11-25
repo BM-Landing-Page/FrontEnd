@@ -73,7 +73,7 @@ export default function CurriculumLinksSection() {
   const curriculumLinks = [
     {
       title: "Early Years",
-      description: "PHRASES - ZOOM INTO THE WORLD OF YOUNG MINDS",
+      description: "Where curious exploration meets joyful discovery",
       href: "/earlyyears",
       icon: BookOpen,
       gradient: "from-[#F7ECDE] to-[#E9DAC1]",
@@ -82,7 +82,7 @@ export default function CurriculumLinksSection() {
     },
     {
       title: "Primary & Lower Secondary Years",
-      description: "QUESTIONING MINDS TO CONFIDENT THINKERS",
+      description: "The start of an exciting journey",
       href: "/primaryandlowersecondaryyears",
       icon: Users,
       gradient: "from-[#E9DAC1] to-[#9ED2C6]",

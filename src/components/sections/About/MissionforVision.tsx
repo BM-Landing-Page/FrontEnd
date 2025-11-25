@@ -69,10 +69,6 @@ const About = () => {
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative z-10 max-w-4xl mx-auto px-4">
-          <div className="inline-flex items-center gap-2 bg-[#54BAB9] text-white px-6 py-2 rounded-full mb-6">
-            <BookOpen className="w-5 h-5" />
-            <span className="font-semibold">BUDDING MINDS INTERNATIONAL SCHOOL</span>
-          </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">Building Healthy Minds</h1>
           <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md">
             Building Healthy Minds' is more than just a motto —it's the heart of who we are. We create a vibrant, nurturing environment where students are encouraged to explore, grow, and thrive, unlocking their full potential every step of the way.
