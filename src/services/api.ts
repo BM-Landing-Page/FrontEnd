@@ -95,7 +95,7 @@ export const fetchAllAlumni = async (): Promise<ApiResponse<Alumni[]>> => {
 // Fetch all alumni-university links
 export const fetchAlumniUniversities = async (): Promise<ApiResponse<any[]>> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/alumni-universities`)
+    const response = await fetch(`${API_BASE_URL}/universities`)
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
