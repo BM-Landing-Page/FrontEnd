@@ -322,10 +322,6 @@ export default function StudentVoices() {
                                       <BookOpen className="w-4 h-4" />
                                       <span>{storyItem.grade}</span>
                                     </div>
-                                    <div className="flex items-center gap-2">
-                                      <Calendar className="w-4 h-4" />
-                                      <span>{storyItem.date}</span>
-                                    </div>
                                   </div>
                                 </div>
                               </div>
