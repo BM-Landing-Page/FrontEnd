@@ -97,7 +97,7 @@ export default function RoomPage() {
       {/* Hero Banner */}
       <section className="relative w-full h-96 md:h-[500px] overflow-hidden bg-gradient-to-b from-[#E9DAC1] to-white">
         <img
-          src="/budding-minds-chromepet-playschool-children-learni.jpg"
+          src="/images/ourfranchiseherobanner.jpeg"
           alt="Budding Minds International Play School Chromepet"
           className="w-full h-full object-cover"
         />
@@ -147,7 +147,7 @@ export default function RoomPage() {
             <div className="group">
               <div className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300">
                 <img
-                  src="/classroom-children-playschool-chromepet.jpg"
+                  src="/images/aboutourfranchise.jpeg"
                   alt="Budding Minds Chromepet Classroom"
                   className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -171,7 +171,7 @@ export default function RoomPage() {
             <div className="group">
               <div className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300">
                 <img
-                  src="/ms-akhila-varadhan-founder-educator-with-children.jpg"
+                  src="/images/founder.jpeg"
                   alt="Ms. Akhila Varadhan"
                   className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -261,7 +261,7 @@ export default function RoomPage() {
             <div className="group">
               <div className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300">
                 <img
-                  src="/playschool-preschool-children-learning-activities.jpg"
+                  src="/images/programs.jpeg"
                   alt="Programmes at Budding Minds Chromepet"
                   className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -285,7 +285,7 @@ export default function RoomPage() {
             <div className="group">
               <div className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300">
                 <img
-                  src="/bright-engaging-classroom-learning-environment-pla.jpg"
+                  src="/images/learningenvironment.jpeg"
                   alt="Learning Environment"
                   className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                 />

@@ -67,6 +67,19 @@ export default function ADayAtBM() {
 
   const learningMethods = [
     {
+      title: "Early Years System",
+      subtitle: "Pre-Primary & Kindergarten",
+      description:
+        "A nurturing, play-based learning environment that prioritizes social-emotional development through exploration and hands-on experiences.",
+      features: [
+        "Play-based pedagogy",
+        "Experiential learning through themed learning stations",
+        "Integration of art, music, and movement",
+        "Focus on social-emotional development",
+        "Child-centred routines and flexible schedules",
+      ],
+    },
+    {
       title: "Primary Approach",
       subtitle: "Grades 1-3",
       description:
@@ -179,7 +192,7 @@ export default function ADayAtBM() {
               Different grade levels experience tailored learning environments designed for their developmental needs
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
             {learningMethods.map((method, index) => (
               <div
                 key={index}
