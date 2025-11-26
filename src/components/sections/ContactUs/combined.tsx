@@ -148,7 +148,7 @@ export default function CombinedPage() {
               {/* Main School Contact */}
               <div className="shadow-xl border-0 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-white rounded-lg overflow-hidden">
                 <div className="text-center rounded-t-lg py-6" style={{ backgroundColor: "#9ED2C6" }}>
-                  <h2 className="text-2xl text-white font-bold">Budding Minds International School</h2>
+                  <h2 className="text-2xl text-white font-bold">Budding Minds International School - Main Campus</h2>
                 </div>
                 <div className="p-8 space-y-6" style={{ backgroundColor: "#F7ECDE" }}>
                   <div className="flex items-start gap-3">
@@ -183,7 +183,7 @@ export default function CombinedPage() {
               {/* Play School Contact */}
               <div className="shadow-xl border-0 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-white rounded-lg overflow-hidden">
                 <div className="text-center rounded-t-lg py-6" style={{ backgroundColor: "#9ED2C6" }}>
-                  <h2 className="text-2xl text-white font-bold">International Play School</h2>
+                  <h2 className="text-2xl text-white font-bold">Budding Minds International Play School - Franchise</h2>
                   <p className="text-white text-sm">Bashyam Nagar – Franchise</p>
                 </div>
                 <div className="p-8 space-y-6" style={{ backgroundColor: "#F7ECDE" }}>
@@ -199,8 +199,8 @@ export default function CombinedPage() {
                     <Mail className="text-[#54BAB9]" size={20} />
                     <div>
                       <p className="font-semibold text-gray-800">Email:</p>
-                      <a href="mailto:bud_bashyamnagar@buddingminds.net" className="text-[#54BAB9] hover:underline">
-                        bud_bashyamnagar@buddingminds.net
+                      <a href="mailto:bmis@buddingminds.net" className="text-[#54BAB9] hover:underline">
+                        bmis@buddingminds.net
                       </a>
                     </div>
                   </div>
@@ -260,7 +260,7 @@ export default function CombinedPage() {
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-gray-800">Admissions</h3>
                   <p className="text-sm text-gray-600 mb-2">Admissions Manager</p>
-                  <p className="text-sm font-semibold text-gray-800 mb-2">Mrs. Savitha Srinivasan</p>
+                  <p className="text-sm font-semibold text-gray-800 mb-2">Ms. Savitha Srinivasan</p>
                   <a href="tel:+919840391815" className="text-[#54BAB9] hover:underline block text-sm mb-1">
                     +91-98403 91815
                   </a>
@@ -279,6 +279,8 @@ export default function CombinedPage() {
                     <Bus className="text-[#54BAB9]" size={32} />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-gray-800">Transport</h3>
+                  <p className="text-sm text-gray-600 mb-2">Transport Manager</p>
+                  <p className="text-sm font-semibold text-gray-800 mb-2">Ms. Hemasudha</p>
                   <a href="tel:+919840761722" className="text-[#54BAB9] hover:underline block text-sm mb-2">
                     +91-98407 61722
                   </a>

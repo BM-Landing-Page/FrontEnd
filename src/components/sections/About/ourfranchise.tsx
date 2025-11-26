@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Calendar, FileText, Users, CheckCircle, AlertCircle, FileCheck } from "lucide-react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -76,7 +75,7 @@ export default function RoomPage() {
       ([entry]) => {
         setIsCtaInView(entry.isIntersecting)
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     )
 
     if (ctaRef.current) {
@@ -91,7 +90,7 @@ export default function RoomPage() {
   }, [])
 
   const handleApplicationClick = () => {
-    window.open('https://myschoolone.com/Web/Admission/ApplicationFormV2.php?iid=MTM=&ksjdkjsd=MQ==', '_blank')
+    window.open("https://myschoolone.com/Web/Admission/ApplicationFormV2.php?iid=MTM=&ksjdkjsd=MQ==", "_blank")
   }
 
   return (
@@ -106,9 +105,7 @@ export default function RoomPage() {
         {/* Hero Text Overlay */}
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/20 text-white text-center px-4">
           <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">Budding minds Chrompet </h1>
-          <p className="text-xl md:text-2xl font-light text-balance">
-            Budding minds International Play school
-          </p>
+          <p className="text-xl md:text-2xl font-light text-balance">Budding minds International Play school</p>
         </div>
       </section>
 
@@ -341,39 +338,53 @@ export default function RoomPage() {
 
       {/* Section 5: Location & Admissions */}
       <section className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-b from-white to-[#F7ECDE]">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-4 text-balance">Location & Admissions</h2>
-            <p className="text-gray-700 leading-relaxed text-base">
-              Conveniently located in the heart of Chromepet, our campus serves families from Pallavaram, Chromepet, and
-              Tambaram. We invite parents to visit the campus, meet our faculty and experience the warmth of our early
-              years environment.
-            </p>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-4 text-balance">Contact</h2>
           </div>
 
-          <div className="bg-white rounded-2xl p-8 shadow-md border-2 border-[#9ED2C6]">
-            <div className="space-y-4">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-center gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-[#54BAB9] font-bold text-xl">📞</span>
-                  <div>
-                    <p className="text-sm text-gray-600">Call</p>
-                    <p className="text-lg font-semibold text-gray-900">+91- 99404 47800</p>
-                  </div>
+          <div className="bg-white rounded-2xl p-6 md:p-10 shadow-md border-2 border-[#9ED2C6]">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
+              {/* Phone */}
+              <div className="flex flex-col items-center">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-[#54BAB9] font-bold text-2xl">📞</span>
+                  <p className="text-sm text-gray-600 font-medium">Call</p>
                 </div>
-                <div className="hidden md:block w-1 h-12 bg-[#E9DAC1]"></div>
-                <div className="flex items-center gap-3">
-                  <span className="text-[#54BAB9] font-bold text-xl">📧</span>
-                  <div>
-                    <p className="text-sm text-gray-600">Email</p>
-                    <p className="text-lg font-semibold text-gray-900">bmis@buddingminds.net</p>
-                  </div>
+                <p className="text-base md:text-lg font-semibold text-gray-900">+91- 99404 47800</p>
+              </div>
+
+              {/* Divider */}
+              <div className="hidden md:block w-px h-24 bg-[#E9DAC1]"></div>
+
+              {/* Email */}
+              <div className="flex flex-col items-center">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-[#54BAB9] font-bold text-2xl">📧</span>
+                  <p className="text-sm text-gray-600 font-medium">Email</p>
+                </div>
+                <p className="text-base md:text-lg font-semibold text-gray-900">admissions@buddingminds.net</p>
+              </div>
+
+              {/* Divider */}
+              <div className="hidden md:block w-px h-24 bg-[#E9DAC1]"></div>
+
+              {/* Address */}
+              <div className="flex flex-col items-center">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-[#54BAB9] font-bold text-2xl">📍</span>
+                  <p className="text-sm text-gray-600 font-medium">Address</p>
+                </div>
+                <div className="text-base md:text-lg font-semibold text-gray-900 leading-relaxed text-center">
+                  <div>No: 5, 1st Street,</div>
+                  <div>Bashyam Nagar, Chromepet,</div>
+                  <div>Chennai - 44</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <p className="text-gray-700 leading-relaxed text-base italic">
+          <p className="text-gray-700 leading-relaxed text-base italic text-center mt-10">
             Join a learning community where every child's first school experience is filled with joy, care, and
             confidence.
           </p>
@@ -381,20 +392,14 @@ export default function RoomPage() {
       </section>
 
       {/* CTA Section */}
-      <section
-        ref={ctaRef}
-        className="py-12 px-4 sm:px-6 lg:px-8"
-        style={{ backgroundColor: "#54BAB9" }}
-      >
-        <div className={`max-w-4xl mx-auto text-center transition-all duration-700 ${
-          isCtaInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            Ready to Start Your Application?
-          </h2>
-          <p className="text-base text-white font-normal mb-6">
-            Begin your child's journey with Budding Minds today
-          </p>
+      <section ref={ctaRef} className="py-12 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#54BAB9" }}>
+        <div
+          className={`max-w-4xl mx-auto text-center transition-all duration-700 ${
+            isCtaInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Ready to Start Your Application?</h2>
+          <p className="text-base text-white font-normal mb-6">Begin your child's journey with Budding Minds today</p>
           <button
             className="inline-flex items-center px-8 py-3 font-semibold rounded-lg cursor-pointer text-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
             style={{ backgroundColor: "#9ED2C6" }}

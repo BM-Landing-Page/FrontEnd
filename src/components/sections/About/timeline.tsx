@@ -13,15 +13,15 @@ const timelineData = [
   },
   {
     year: "2006",
-    title: "First Franchise",
+    title: "Our Franchise",
     description: "Launched Franchise - Budding Minds International Playschool at Bashyam Nagar, Chromepet.",
     color: "#E9DAC1",
     icon: "🌟",
   },
   {
     year: "2007",
-    title: "Structured Growth",
-    description: "Introduced Pre-primary 1 - expanding our Pre-Primary program.",
+    title: "Stronger Beginnings",
+    description: "Introduced Pre-Primary 1, marking a key expansion in our Early Years program",
     color: "#9ED2C6",
     icon: "📈",
   },
@@ -35,7 +35,7 @@ const timelineData = [
   },
   {
     year: "2015",
-    title: "Secondary Expansion",
+    title: "Expanding Horizons",
     description: "BMIS expanded into an established secondary school.",
     color: "#F7ECDE",
     icon: "🏫",
@@ -43,7 +43,7 @@ const timelineData = [
   {
     year: "2016",
     title: "Our Own Campus",
-    description: "Marked a milestone by moving into our permanent campus at Manimangalam.",
+    description: "Marked a key milestone with the establishment of our  main campus at Manimangalam.",
     color: "#E9DAC1",
     icon: "🏛️",
   },
@@ -58,14 +58,14 @@ const timelineData = [
   {
     year: "2019",
     title: "Academic Excellence & Educator Empowerment",
-    description: "Established as a Cambridge PDQ Centre. First IGCSE batch graduated with stellar results.",
+    description: "• First IGCSE batch graduated with stellar results.\n• Established as a Cambridge PDQ Centre.",
     color: "#54BAB9",
     icon: "🏆",
   },
   {
     year: "2022",
     title: "A Level Success",
-    description: "Our first A Level students graduated with distinction.",
+    description: "Our first batch of A Level students graduated with distinction.",
     color: "#F7ECDE",
     icon: "🎯",
   },
@@ -100,11 +100,10 @@ export default function Timeline() {
     setMounted(true)
   }, [])
 
-  // Auto-rotate carousel images
   useEffect(() => {
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
-    }, 5000) // Change image every 5 seconds
+    }, 5000)
 
     return () => clearInterval(imageInterval)
   }, [])
@@ -125,7 +124,7 @@ export default function Timeline() {
 
   return (
     <div ref={containerRef} className="min-h-screen overflow-hidden relative">
-      {/* Hero Carousel Background - Full Screen */}
+      {/* Hero Carousel Background */}
       <div className="absolute inset-0">
         {heroImages.map((image, index) => (
           <div
@@ -183,7 +182,7 @@ export default function Timeline() {
       <div className="absolute inset-0 z-20 flex items-center justify-center">
         <div className="w-full h-full flex flex-col">
           <div className="flex-1 flex flex-col lg:flex-row">
-            {/* Header Section - Full width on mobile */}
+            {/* Header Section */}
             <div className="w-full lg:w-1/2 flex items-center justify-center p-4 md:p-6 lg:p-8 order-1 lg:order-1">
               <div
                 className={`max-w-md text-center lg:text-left transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
@@ -223,7 +222,7 @@ export default function Timeline() {
               </div>
             </div>
 
-            {/* Timeline Cards - Takes more space on mobile */}
+            {/* Timeline Cards */}
             <div className="flex-1 lg:w-1/2 flex items-center justify-center p-4 md:p-6 lg:p-8 order-2 lg:order-2">
               <div className="relative w-full max-w-sm lg:max-w-md h-80 md:h-96">
                 {timelineData.map((item, index) => {
@@ -275,7 +274,6 @@ export default function Timeline() {
                         zIndex,
                       }}
                     >
-                      {/* Card Glow Effect */}
                       {isActive && (
                         <div
                           className="absolute inset-0 opacity-20 animate-pulse"
@@ -286,7 +284,6 @@ export default function Timeline() {
                       )}
 
                       <CardContent className="p-3 md:p-4 lg:p-6 h-full flex flex-col justify-center relative overflow-hidden">
-                        {/* Icon */}
                         <div
                           className="absolute top-3 left-3 md:top-4 md:left-4 text-xl md:text-2xl lg:text-3xl animate-bounce"
                           style={{ animationDuration: "2s" }}
@@ -294,12 +291,10 @@ export default function Timeline() {
                           {item.icon}
                         </div>
 
-                        {/* Background Year */}
                         <div className="absolute top-1 right-1 md:top-2 md:right-2 text-2xl md:text-4xl lg:text-6xl font-bold text-gray-800 opacity-10 transform rotate-12">
                           {item.year}
                         </div>
 
-                        {/* Content */}
                         <div className="relative z-10 bg-white bg-opacity-90 p-3 md:p-4 rounded-lg border border-gray-200 shadow-lg">
                           <div className="text-sm md:text-lg lg:text-xl font-bold mb-2 text-gray-800 flex items-center space-x-2">
                             <span
@@ -314,11 +309,10 @@ export default function Timeline() {
                             {item.title}
                           </h3>
 
-                          <p className="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed line-clamp-3 md:line-clamp-4">
+                          <p className="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed line-clamp-3 md:line-clamp-4 whitespace-pre-wrap">
                             {item.description}
                           </p>
 
-                          {/* Decorative Line */}
                           <div
                             className="mt-2 md:mt-4 w-12 md:w-16 h-1 rounded-full shadow-sm"
                             style={{ backgroundColor: "#54BAB9" }}
@@ -332,7 +326,7 @@ export default function Timeline() {
             </div>
           </div>
 
-          {/* Progress Indicator - Always at bottom */}
+          {/* Progress Indicator */}
           <div className="flex justify-center pb-4 md:pb-6">
             <div
               className="flex space-x-1 md:space-x-2 px-3 md:px-4 py-2 rounded-full border border-gray-300 backdrop-blur-lg shadow-xl"
@@ -358,7 +352,7 @@ export default function Timeline() {
         </div>
       </div>
 
-      {/* Floating decorative elements - Responsive */}
+      {/* Floating decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
         {colors.map((color, i) => (
           <div
