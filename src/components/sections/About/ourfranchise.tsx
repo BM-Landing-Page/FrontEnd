@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Calendar, FileText, Users, CheckCircle, AlertCircle, FileCheck } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 function SectionBubble({
   delay,
@@ -103,9 +105,9 @@ export default function RoomPage() {
         />
         {/* Hero Text Overlay */}
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/20 text-white text-center px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">Budding Minds Chromepet</h1>
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">Budding minds Chrompet </h1>
           <p className="text-xl md:text-2xl font-light text-balance">
-            A nurturing start to a lifelong love for learning
+            Budding minds International Play school
           </p>
         </div>
       </section>
@@ -182,7 +184,7 @@ export default function RoomPage() {
             <div className="space-y-6">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-[#54BAB9] mb-3 text-balance">Our Founder</h2>
-                <p className="text-base md:text-lg font-semibold text-[#9ED2C6]">Ms. Akhila Varadhan</p>
+                <p className="text-base md:text-lg font-semibold text-[#9ED2C6]">Franchise Head</p>
               </div>
               <p className="text-gray-700 leading-relaxed text-base">
                 Leading the Franchise, Ms. Akhila Varadhan is the driving force — a passionate educator and visionary
@@ -400,6 +402,16 @@ export default function RoomPage() {
           >
             Begin Application Process
           </button>
+        </div>
+        <div className="flex justify-center mt-12">
+          <Link href="/bmisjourney">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-lg">BMIS Journey</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
         </div>
       </section>
     </main>

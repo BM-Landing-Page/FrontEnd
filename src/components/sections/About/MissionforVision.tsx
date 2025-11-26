@@ -40,7 +40,7 @@ const About = () => {
 
   const philosophyPoints = [
     "Every individual feels seen, heard, and respected",
-    "Courtesy and kindness are part of daily interactions",
+    "Courtesy and kindness are part of our everyday interactions",
     "Students are encouraged to take risks and celebrate both effort and achievement",
     "The social, emotional, physical, and intellectual needs of each child are nurtured",
     "Cultural diversity is embraced and celebrated",
@@ -77,14 +77,7 @@ const About = () => {
       </section>
 
       {/* Introduction */}
-      <section className="py-8 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-lg text-gray-700 leading-relaxed">
-            At BMIS, we are committed to cultivating not only academic excellence but also strong values that prepare
-            students for life beyond the classroom. We are not just shaping minds—we are shaping futures.
-          </p>
-        </div>
-      </section>
+      
 
       {/* Core Values Section */}
       <section className="py-8 px-4 bg-gray-50">

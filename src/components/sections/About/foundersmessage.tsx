@@ -75,15 +75,7 @@ const FoundersMessage = () => {
                   At Budding Minds, we don't promise perfection. But we do promise a space where children can grow with
                   courage, learn with joy, and step into the world equipped not just with knowledge, but with wisdom.
                 </p>
-                <div className="bg-gradient-to-br from-[#54BAB9] to-[#9ED2C6] p-8 rounded-xl text-center text-white shadow-md space-y-2">
-                  <p className="font-semibold text-lg">Come be a part of our story.</p>
-                  <p className="text-white/90">
-                    Because once you join the Budding Minds family, you'll know—it's not just a school.
-                  </p>
-                  <p className="font-bold text-xl">
-                    It's a place where the best kind of learning happens—the kind that stays with you for life.
-                  </p>
-                </div>
+                
                 <div className="text-right mt-12 pt-8 border-t border-[#f5e8d9]">
                   <p className="font-heading text-2xl font-bold text-[#0f766e] mb-2">A V Ashok Kumar</p>
                   <p className="text-[#777] text-lg">Founder, Budding Minds International School</p>
@@ -93,10 +85,10 @@ const FoundersMessage = () => {
 
             {/* Navigation Button */}
             <div className="flex justify-center mt-12">
-              <Link href="/bmisjourney">
+              <Link href="/ourfranchise">
                 <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
                   <div className="text-center">
-                    <div className="font-semibold text-lg">BMIS Journey</div>
+                    <div className="font-semibold text-lg">Our Franchise</div>
                   </div>
                   <ArrowRight className="w-5 h-5" />
                 </div>

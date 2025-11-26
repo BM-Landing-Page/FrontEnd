@@ -251,15 +251,15 @@ export default function Footer() {
               <p className="text-white/90 text-sm">© 2025 Budding Minds International School. All rights reserved.</p>
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-white/80 hover:text-white transition-colors">
+              <a href="https://policies.google.com/privacy?hl=en" className="text-white/80 hover:text-white transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-white/80 hover:text-white transition-colors">
+              <a href="https://policies.google.com/terms?hl=en" className="text-white/80 hover:text-white transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="text-white/80 hover:text-white transition-colors">
+              {/* <a href="#" className="text-white/80 hover:text-white transition-colors">
                 Sitemap
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
