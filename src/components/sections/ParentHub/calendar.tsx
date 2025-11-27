@@ -120,16 +120,15 @@ export default function CalendarPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
-      <div
-        className="relative h-[50vh] bg-cover bg-center flex items-center justify-center text-center p-4"
-        style={{
-          backgroundImage: `url('/images/calendar.jpg')`,
-        }}
-      >
-        <div className="absolute inset-0 bg-black/50" />
-        <h1 className="relative z-10 text-5xl md:text-7xl font-extrabold text-white drop-shadow-lg">
-          School Event Calendar
-        </h1>
+      <div className="relative h-96 overflow-hidden">
+        <img src="/images/calendar.jpg" alt="School Calendar" className="w-full h-full object-cover" />
+        {/* <div className="absolute inset-0 bg-gradient-to-r from-[#54BAB9]/80 to-[#9ED2C6]/60"></div> */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center text--black">
+            <h1 className="text-6xl font-bold mb-4">School Calender </h1>
+            <p className="text-xl max-w-2xl"> Subject to change as per government policies and cambridge guidelines.</p>
+          </div>
+        </div>
       </div>
 
       {/* Main Content Section */}
