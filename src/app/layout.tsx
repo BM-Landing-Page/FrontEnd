@@ -1,29 +1,32 @@
-// app/layout.tsx or your layout file
-"use client";
+import type React from "react"
+import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
+import "./globals.css"
 
-import { useState } from "react";
-import Header from "@/components/ui/Header/Header";
-import FullScreenNav from "@/components/ui/FullScreenNav";
-import Footer from "@/components/ui/Footer/footer"; // <-- Import Footer
-import "./globals.css"; // if you use global styles
+const _geist = Geist({ subsets: ["latin"] })
+const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const [isNavOpen, setIsNavOpen] = useState(false);
 
+
+export const metadata = {
+  icons: {
+    icon: "/icon.png",
+  },
+  title: "Budding Minds International School",
+};
+
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
     <html lang="en">
-      <body>
-        <Header openNav={() => setIsNavOpen(true)} />
+      <body className={`${_geist.className} antialiased`}>
+        {children}
 
-        {/* Full screen nav OVERLAY */}
-        {isNavOpen && <FullScreenNav onClose={() => setIsNavOpen(false)} />}
-
-        {/* Actual page content */}
-        <main className="pt-16">{children}</main>
-
-        {/* Footer below all content */}
-        <Footer />
       </body>
     </html>
-  );
+  )
 }
