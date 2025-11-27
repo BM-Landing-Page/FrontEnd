@@ -73,13 +73,13 @@ export default function VideosShowcase() {
     {
       id: "ax2Q6k5Rak0",
       title: "BM Life in Style",
-      description: "Take a virtual tour of our vibrant campus and witness learning in action.",
+      description: "Discover the essence of BMIS, a tribute to our community’s pride, harmony, and shared vision.",
       thumbnail: `https://img.youtube.com/vi/ax2Q6k5Rak0/hqdefault.jpg`,
     },
     {
       id: "hf3LXo76IzU",
       title: "Feel the Beat",
-      description: "Hear firsthand from our students and parents about their educational journey.",
+      description: "Celebrating togetherness, inspiration, and the journey of learning. ",
       thumbnail: `https://img.youtube.com/vi/hf3LXo76IzU/hqdefault.jpg`,
     },
   ]

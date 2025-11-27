@@ -175,9 +175,9 @@ const About = () => {
                 <h3 className="text-2xl font-bold text-gray-800">Our Vision</h3>
               </div>
               <p className="text-gray-700 leading-relaxed italic">
-                "Budding Minds develops student leaders by providing opportunities to build 21st-century skills,
-                supported by a nurturing infrastructure for holistic learning, and guided by a competent and empowered
-                community."
+                "Budding Minds develops student Leaders by providing opportunities to 
+                build 21st century skills creating a conducive infrastructure for holistic
+                 learning facilitated by a competent community that is empowered."
               </p>
             </div>
           </div>

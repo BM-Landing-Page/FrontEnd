@@ -406,7 +406,7 @@ export default function EarlyYearsProgramme() {
             <div className="group">
               <div className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300">
                 <img
-                  src="/images/earlynumeracy.jpg"
+                  src="/images/earlynumeracy.jpeg"
                   alt="Early Numeracy"
                   className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
