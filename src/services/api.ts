@@ -19,6 +19,117 @@ export interface PaginationInfo {
 
 
 
+
+export interface CalendarEvent {
+  id?: string | number
+  event_name: string
+  content?: string
+  event_date: string
+  created_at?: string
+}
+
+/**
+ * Fetch all calendar events via Next.js API route
+ * Events are automatically sorted by date on the backend
+ */
+export async function fetchAllEvents(): Promise<CalendarEvent[]> {
+  try {
+    console.log("[v0] Fetching from URL:", `${API_BASE_URL}/calendar`)
+
+    const response = await fetch(`${API_BASE_URL}/calendar`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+    console.log("[v0] Response status:", response.status)
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch events: ${response.status} ${response.statusText}`)
+    }
+
+    const data = await response.json()
+    console.log("[v0] Events fetched successfully:", data)
+    return data
+  } catch (error) {
+    console.error("[v0] Error fetching calendar events:", error)
+    throw error
+  }
+}
+
+/**
+ * Create a new calendar event (protected)
+ */
+export async function createEvent(event: CalendarEvent): Promise<CalendarEvent> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/calendar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(event),
+    })
+
+    if (!response.ok) {
+      throw new Error(`Failed to create event: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error("Error creating event:", error)
+    throw error
+  }
+}
+
+/**
+ * Update an existing calendar event (protected)
+ */
+export async function updateEvent(id: string | number, updates: Partial<CalendarEvent>): Promise<CalendarEvent> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/calendar/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updates),
+    })
+
+    if (!response.ok) {
+      throw new Error(`Failed to update event: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error("Error updating event:", error)
+    throw error
+  }
+}
+
+/**
+ * Delete a calendar event (protected)
+ */
+export async function deleteEvent(id: string | number): Promise<void> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/calendar/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete event: ${response.statusText}`)
+    }
+  } catch (error) {
+    console.error("Error deleting event:", error)
+    throw error
+  }
+}
+
+
 // ========================
 // ✅ ALUMNI & BATCHES SECTION
 // ========================
