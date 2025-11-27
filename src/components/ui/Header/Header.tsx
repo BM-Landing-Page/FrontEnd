@@ -6,12 +6,13 @@ import Searchbar from "./Searchbar"
 
 interface HeaderProps {
   openNav: () => void
+  className?: string
 }
 
-export default function Header({ openNav }: HeaderProps) {
+export default function Header({ openNav, className }: HeaderProps) {
   return (
     <header
-      className="fixed top-0 left-0 w-full z-40 transition-colors shadow-sm"
+      className={`fixed top-0 left-0 w-full z-40 transition-colors shadow-sm ${className || ""}`}
       style={{
         background: "rgba(255, 255, 255, 0.8)",
         backdropFilter: "blur(10px)",
@@ -20,26 +21,27 @@ export default function Header({ openNav }: HeaderProps) {
     >
       <div className="flex items-center justify-between px-4 sm:px-6 py-2">
         {/* Logo and School Name */}
-        <Link href="/" className="flex items-center gap-2 sm:gap-4 flex-shrink-0 hover:opacity-80 transition-opacity">
-          <Image
-            src="/images/logo.png"
-            alt="Budding Minds Logo"
-            width={70}
-            height={70}
-          />
+        <Link
+          href="/"
+          className="flex items-center gap-2 sm:gap-4 flex-shrink-0 hover:opacity-80 transition-opacity"
+        >
+          <Image src="/images/logo.png" alt="Budding Minds Logo" width={70} height={70} />
           <span className="text-base sm:text-xl font-bold tracking-wide text-[#1E293B] font-calibri leading-tight">
             <span className="block sm:inline">Budding Minds</span>
             <span className="block sm:inline sm:ml-2">International School</span>
           </span>
         </Link>
 
-        {/* Search Bar - Centered between logo and hamburger */}
+        {/* Search Bar */}
         <div className="flex-1 flex justify-center mx-4 max-w-md">
           <Searchbar />
         </div>
 
         {/* Hamburger Button */}
-        <div className="cursor-pointer p-2 hover:scale-105 transition-transform flex-shrink-0" onClick={openNav}>
+        <div
+          className="cursor-pointer p-2 hover:scale-105 transition-transform flex-shrink-0"
+          onClick={openNav}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

@@ -1,38 +1,23 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import Script from "next/script"
-import { FaWhatsapp } from "react-icons/fa"
-import Header from "@/components/ui/Header/Header"
-import FullScreenNav from "@/components/ui/FullScreenNav"
-import Footer from "@/components/ui/Footer/footer"
-import HeroBanner from "@/components/sections/Home/HeroBanner"
-import USPs from "@/components/sections/Home/USPs"
-import CurriculumLinksSection from "@/components/sections/Home/CurriculumLinksSection"
-import VideosShowcase from "@/components/sections/Home/VideosShowcaseSection"
-import Popup from "@/components/ui/popup"
+import { useEffect, useState } from "react";
+import Script from "next/script";
+import { FaWhatsapp } from "react-icons/fa";
+import HeroBanner from "@/components/sections/Home/HeroBanner";
+import USPs from "@/components/sections/Home/USPs";
+import CurriculumLinksSection from "@/components/sections/Home/CurriculumLinksSection";
+import VideosShowcase from "@/components/sections/Home/VideosShowcaseSection";
+import Popup from "@/components/ui/popup";
 
 // Floating Bubble component
-function FloatingBubble({
-  delay,
-  duration,
-  size,
-  left,
-  animationDelay,
-}: {
-  delay: number
-  duration: number
-  size: number
-  left: string
-  animationDelay: number
-}) {
+function FloatingBubble({ delay, duration, size, left, animationDelay }: any) {
   return (
     <div
       className="absolute rounded-full bg-gradient-to-br from-[#9ED2C6]/20 to-[#54BAB9]/20 animate-bounce"
       style={{
         width: `${size}px`,
         height: `${size}px`,
-        left: left,
+        left,
         bottom: "-50px",
         animationDelay: `${animationDelay}s`,
         animationDuration: `${duration}s`,
@@ -40,21 +25,11 @@ function FloatingBubble({
         animationDirection: "alternate",
       }}
     />
-  )
+  );
 }
 
 export default function HomePage() {
-  const [isNavOpen, setIsNavOpen] = useState(false)
-  const [bubbles, setBubbles] = useState<
-    Array<{
-      id: number
-      delay: number
-      duration: number
-      size: number
-      left: string
-      animationDelay: number
-    }>
-  >([])
+  const [bubbles, setBubbles] = useState<any[]>([]);
 
   useEffect(() => {
     const newBubbles = Array.from({ length: 8 }, (_, i) => ({
@@ -64,35 +39,27 @@ export default function HomePage() {
       size: 20 + Math.random() * 40,
       left: `${Math.random() * 100}%`,
       animationDelay: Math.random() * 5,
-    }))
-    setBubbles(newBubbles)
-  }, [])
+    }));
+    setBubbles(newBubbles);
+  }, []);
 
-  // Adjust Chatbase bubble position after script loads
   useEffect(() => {
     const interval = setInterval(() => {
-      const chatBubble = document.getElementById("chatbase-bubble")
+      const chatBubble = document.getElementById("chatbase-bubble");
       if (chatBubble) {
-        chatBubble.style.bottom = "90px"
-        chatBubble.style.right = "20px"
-        chatBubble.style.zIndex = "50"
-        clearInterval(interval)
+        chatBubble.style.bottom = "90px";
+        chatBubble.style.right = "20px";
+        chatBubble.style.zIndex = "50";
+        clearInterval(interval);
       }
-    }, 500)
+    }, 500);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
-      {/* Header with navigation */}
-      <Header openNav={() => setIsNavOpen(true)} />
-
-      {/* Full screen nav OVERLAY */}
-      {isNavOpen && <FullScreenNav onClose={() => setIsNavOpen(false)} />}
-
-      {/* Main page content */}
-      <main className="pt-16 min-h-screen bg-white relative overflow-hidden">
+      <main className="relative min-h-screen bg-white overflow-hidden">
         {/* Floating Bubbles */}
         <div className="fixed inset-0 pointer-events-none z-0">
           {bubbles.map((bubble) => (
@@ -100,22 +67,22 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* Main Content */}
+        {/* Page Sections */}
         <div className="relative z-10">
           <HeroBanner />
           <USPs />
-
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
             <CurriculumLinksSection />
             <VideosShowcase />
           </div>
         </div>
 
+        {/* WhatsApp Floating Button */}
         <a
           href="https://wa.me/919840391815"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-30 right-4 md:bottom-36 md:right-5 z-40 bg-[#54BAB9] hover:bg-[#54BAB9] p-3 rounded-full shadow-lg transition-colors duration-200 hover:scale-110 transform"
+          className="fixed bottom-10 right-4 md:bottom-16 md:right-5 z-40 bg-[#54BAB9] hover:bg-[#54BAB9] p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110 transform"
           aria-label="Contact us on WhatsApp"
         >
           <FaWhatsapp size={24} className="text-white" />
@@ -150,11 +117,9 @@ export default function HomePage() {
           `}
         </Script>
 
+        {/* Popup */}
         <Popup />
       </main>
-
-      {/* Footer */}
-      <Footer />
     </>
-  )
+  );
 }

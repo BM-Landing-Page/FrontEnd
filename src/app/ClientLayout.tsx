@@ -55,33 +55,33 @@ export default function ClientLayout({
     }>
   >([])
 
-  // Generate bubbles once
-  useEffect(() => {
-    const newBubbles = Array.from({ length: 8 }, (_, i) => ({
-      id: i,
-      delay: Math.random() * 2,
-      duration: 3 + Math.random() * 4,
-      size: 20 + Math.random() * 40,
-      left: `${Math.random() * 100}%`,
-      animationDelay: Math.random() * 5,
-    }))
-    setBubbles(newBubbles)
-  }, [])
+//   // Generate bubbles once
+//   useEffect(() => {
+//     const newBubbles = Array.from({ length: 8 }, (_, i) => ({
+//       id: i,
+//       delay: Math.random() * 2,
+//       duration: 3 + Math.random() * 4,
+//       size: 20 + Math.random() * 40,
+//       left: `${Math.random() * 100}%`,
+//       animationDelay: Math.random() * 5,
+//     }))
+//     setBubbles(newBubbles)
+//   }, [])
 
-  // Adjust Chatbase bubble position after script loads
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const chatBubble = document.getElementById("chatbase-bubble")
-      if (chatBubble) {
-        chatBubble.style.bottom = "90px"
-        chatBubble.style.right = "20px"
-        chatBubble.style.zIndex = "50"
-        clearInterval(interval)
-      }
-    }, 500)
+//   // Adjust Chatbase bubble position after script loads
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       const chatBubble = document.getElementById("chatbase-bubble")
+//       if (chatBubble) {
+//         chatBubble.style.bottom = "90px"
+//         chatBubble.style.right = "20px"
+//         chatBubble.style.zIndex = "50"
+//         clearInterval(interval)
+//       }
+//     }, 500)
 
-    return () => clearInterval(interval)
-  }, [])
+//     return () => clearInterval(interval)
+//   }, [])
 
   return (
     <>
@@ -94,16 +94,16 @@ export default function ClientLayout({
       {/* Main page content */}
       <main className="pt-16 min-h-screen bg-white relative overflow-hidden">
         {/* Floating Bubbles */}
-        <div className="fixed inset-0 pointer-events-none z-0">
+        {/* <div className="fixed inset-0 pointer-events-none z-0">
           {bubbles.map((bubble) => (
             <FloatingBubble key={bubble.id} {...bubble} />
           ))}
-        </div>
+        </div> */}
 
         {/* Main Content */}
         <div className="relative z-10">{children}</div>
 
-        {/* WhatsApp Floating Button */}
+        {/* WhatsApp Floating Button
         <a
           href="https://wa.me/919840391815"
           target="_blank"
@@ -112,9 +112,9 @@ export default function ClientLayout({
           aria-label="Contact us on WhatsApp"
         >
           <FaWhatsapp size={24} className="text-white" />
-        </a>
+        </a> */}
 
-        {/* Chatbase Script */}
+        {/* Chatbase Script
         <Script id="chatbase-embed" strategy="afterInteractive">
           {`
             (function(){
@@ -141,7 +141,7 @@ export default function ClientLayout({
               else{window.addEventListener("load",onLoad)}
             })();
           `}
-        </Script>
+        </Script> */}
       </main>
 
       {/* Footer */}
