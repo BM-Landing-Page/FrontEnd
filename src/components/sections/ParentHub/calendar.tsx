@@ -178,7 +178,9 @@ export default function CalendarPage() {
                               <span className="text-[#9ED2C6] text-base font-medium ml-2">{event.day}</span>
                             </div>
                           </div>
-                          <p className="text-gray-800 leading-relaxed text-base">{event.event_name || event.content}</p>
+                          <div className="text-lg font-semibold text-gray-800 mt-2 sm:mt-0">
+                            {event.event_name}
+                          </div>
                         </div>
                       </div>
                     ))}
