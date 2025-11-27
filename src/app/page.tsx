@@ -12,6 +12,9 @@ import Popup from "@/components/ui/popup"
 //import HelpDialog from "@/components/ui/HelpDialog" // Add this import
 
 // Floating Bubble component
+
+
+
 function FloatingBubble({
   delay,
   duration,
