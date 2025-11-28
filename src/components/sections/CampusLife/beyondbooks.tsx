@@ -50,7 +50,7 @@ export default function BeyondBooks() {
     { id: "ignite", label: "Ignite", icon: Sparkles },
     { id: "interschool", label: "InterSchool", icon: Users },
     { id: "intraschool", label: "IntraSchool", icon: School },
-    { id: "excellence", label: "20 Years Excellence", icon: Trophy },
+
   ]
 
   return (
@@ -374,8 +374,7 @@ export default function BeyondBooks() {
                 >
                   <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">InterSchool Events</h2>
                   <p className="text-sm text-gray-700 max-w-4xl mx-auto mb-3">
-                    Designed to spark collaboration, creativity, and critical thinking by bringing students from
-                    different schools together through shared passions and challenges.
+                    Designed to spark collaboration, creativity, and critical thinking by bringing students from different schools together through shared passions and challenges.
                   </p>
 
                   {/* Instagram Handle */}
@@ -737,181 +736,8 @@ export default function BeyondBooks() {
               </div>
             )}
 
-            {/* 20 Years Excellence Content */}
-            {activeTab === "excellence" && (
-              <div className="space-y-4 animate-in fade-in duration-500">
-                {/* Header Section */}
-                <div
-                  className="text-center py-6 rounded-2xl shadow-lg"
-                  style={{ background: "linear-gradient(135deg, #E9DAC1 0%, #54BAB9 100%)" }}
-                >
-                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">20 Years of Excellence</h2>
-                  <p className="text-sm text-white/90 max-w-4xl mx-auto">
-                    Celebrating two decades of nurturing minds, fostering creativity, and building a legacy of
-                    educational excellence.
-                  </p>
-                  <div className="w-20 h-0.5 bg-white/50 mx-auto mt-2"></div>
-                </div>
-                {/* BM Reverie */}
-                <Card className="shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
-                  <div
-                    className="h-1.5"
-                    style={{ background: "linear-gradient(90deg, #F7ECDE 0%, #54BAB9 100%)" }}
-                  ></div>
-                  <CardContent className="p-0">
-                    <div style={{ background: "linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 100%)" }} className="p-3">
-                      <div className="text-center mb-3">
-                        <h3 className="text-lg font-bold text-gray-900 mb-1">BM Reverie: Decade 2.0</h3>
-                        <p className="text-gray-700 leading-relaxed text-sm max-w-4xl mx-auto">
-                          A week-long celebration of creativity, compassion, talent, and student voice marking our grand
-                          20th year milestone.
-                        </p>
-                      </div>
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
-                        {[
-                          {
-                            title: "Masquerade",
-                            desc: "A lively cosplay event celebrating imagination and self-expression through diverse characters and roles.",
-                            color: "#54BAB9",
-                          },
-                          {
-                            title: "Palette Paradiso",
-                            desc: "A school-wide art takeover transforming the campus into a vibrant gallery with themed installations.",
-                            color: "#9ED2C6",
-                          },
-                          {
-                            title: "Razzle Dazzle",
-                            desc: "A vibrant day of music and movement featuring student-led performances and diverse musical styles.",
-                            color: "#E9DAC1",
-                          },
-                          {
-                            title: "Beyond Green",
-                            desc: '"The Green Horizon March" eco-awareness rally with powerful street plays promoting environmental restoration.',
-                            color: "#F7ECDE",
-                          },
-                          {
-                            title: "Acts of Compassion",
-                            desc: "Heartfelt outreach initiative with NGO volunteering and motivational CD painting for those in need.",
-                            color: "#54BAB9",
-                          },
-                          {
-                            title: "Radiant Retreats",
-                            desc: "Wellness-focused activities like Colors in the Dark, fostering mental health awareness and emotional well-being.",
-                            color: "#9ED2C6",
-                          },
-                        ].map((event, index) => (
-                          <div
-                            key={index}
-                            className="bg-white p-2 rounded-lg shadow-lg border hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                          >
-                            <div
-                              className="w-full h-0.5 rounded-full mb-1.5"
-                              style={{ backgroundColor: event.color }}
-                            ></div>
-                            <h4 className="font-bold text-gray-900 mb-1 text-sm">{event.title}</h4>
-                            <p className="text-gray-700 text-sm">{event.desc}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-                {/* Music Album & Memoir */}
-                <div className="grid lg:grid-cols-2 gap-3">
-                  {/* Music Album */}
-                  <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
-                    <div
-                      className="h-1.5"
-                      style={{ background: "linear-gradient(90deg, #9ED2C6 0%, #54BAB9 100%)" }}
-                    ></div>
-                    <CardContent className="p-3 h-full">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div
-                          className="w-8 h-8 rounded-full flex items-center justify-center shadow-lg"
-                          style={{ background: "linear-gradient(135deg, #9ED2C6 0%, #54BAB9 100%)" }}
-                        >
-                          <Music className="w-4 h-4 text-white" />
-                        </div>
-                        <h3 className="text-base font-bold text-gray-900">"20 Years of Memories" Album</h3>
-                      </div>
-                      <p className="text-gray-700 leading-relaxed mb-2 text-sm">
-                        A special music album performed by our talented student band, Team Vivace, under the mentorship
-                        of music teacher Reuban Ashok.
-                      </p>
-                      <div className="space-y-1.5">
-                        <div className="p-2 rounded-lg border shadow-sm" style={{ backgroundColor: "#F7ECDE" }}>
-                          <h4 className="font-bold text-gray-900 mb-0.5 text-sm">"BM Life in Style"</h4>
-                          <p className="text-sm text-gray-700">
-                            Our lively school anthem choreographed by Sunil Master, celebrating the essence of life at
-                            Budding Minds.
-                          </p>
-                        </div>
-                        <div className="p-2 rounded-lg border shadow-sm" style={{ backgroundColor: "#9ED2C6" }}>
-                          <h4 className="font-bold text-gray-900 mb-0.5 text-sm">"Feel the Beat"</h4>
-                          <p className="text-sm text-gray-700">
-                            A unique a cappella track created entirely using students' voices—no instruments, just
-                            rhythm and harmony.
-                          </p>
-                        </div>
-                        <div className="p-2 rounded-lg border shadow-sm" style={{ backgroundColor: "#E9DAC1" }}>
-                          <h4 className="font-bold text-gray-900 mb-0.5 text-sm">"Yaavarum Kelir"</h4>
-                          <p className="text-sm text-gray-700">
-                            A beautiful Tamil composition with lyrics by Dr. Annapoorani, reflecting cultural roots and
-                            unity.
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                  {/* The Memoir */}
-                  <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 overflow-hidden">
-                    <div
-                      className="h-1.5"
-                      style={{ background: "linear-gradient(90deg, #E9DAC1 0%, #F7ECDE 100%)" }}
-                    ></div>
-                    <CardContent className="p-3 h-full">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div
-                          className="w-8 h-8 rounded-full flex items-center justify-center shadow-lg"
-                          style={{ background: "linear-gradient(135deg, #E9DAC1 0%, #F7ECDE 100%)" }}
-                        >
-                          <Heart className="w-4 h-4" style={{ color: "#54BAB9" }} />
-                        </div>
-                        <h3 className="text-base font-bold text-gray-900">The Memoir</h3>
-                      </div>
-                      <div className="space-y-2">
-                        <p className="text-gray-700 leading-relaxed text-sm">
-                          A nostalgic souvenir capturing the school's journey from its humble beginnings to the vibrant
-                          community it is today. Filled with photographs, heartfelt stories, and cherished memories.
-                        </p>
-                        <p className="text-gray-700 leading-relaxed text-sm">
-                          Launched in a special ceremony alongside the very first students of Budding Minds and
-                          cherished well-wishers, making it a truly emotional and memorable moment.
-                        </p>
-                        <div className="p-2 rounded-lg border shadow-sm" style={{ backgroundColor: "#F7ECDE" }}>
-                          <h4 className="font-semibold text-gray-900 mb-0.5 text-sm">A Beautiful Tribute</h4>
-                          <p className="text-sm text-gray-700">
-                            The Memoir stands as a testament to everyone who has been part of the Budding Minds story
-                            over the past two decades.
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-                <Card className="shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0">
-                  <CardContent
-                    className="p-3 text-center"
-                    style={{ background: "linear-gradient(135deg, #54BAB9 0%, #9ED2C6 100%)" }}
-                  >
-                    <p className="text-white text-sm leading-relaxed max-w-4xl mx-auto">
-                      BM Reverie: Decade 2.0 was a true reflection of who we are—creative, compassionate, expressive,
-                      and united in celebrating every student's journey through two decades of educational excellence.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            )}
+
+            
           </div>
         </div>
       </section>
