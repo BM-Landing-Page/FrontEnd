@@ -9,7 +9,7 @@ export default function PrimaryYears() {
       <div className="flex flex-col md:flex-row gap-8 items-center">
         <div className="flex-1">
           <h2 className="text-3xl font-bold text-[#54BAB9] mb-4">Primary Years Programme – The BM Way!</h2>
-          <p className="text-lg font-semibold text-[#9ED2C6] mb-4">Rooted in Inquiry, Growing with Understanding</p>
+          <p className="text-lg font-semibold text-[#9ED2C6] mb-4">"The start of an exciting journey"</p>
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>
               <strong>A Global Framework with a Local Spirit</strong>
@@ -267,7 +267,7 @@ export default function PrimaryYears() {
                 <td className="border border-gray-300 px-4 py-3 text-center">✓</td>
                 <td className="border border-gray-300 px-4 py-3 text-center">✓</td>
                 <td className="border border-gray-300 px-4 py-3 text-center">✓</td>
-                <td className="border border-gray-300 px-4 py-3">Tam / Hindi + French</td>
+                <td className="border border-gray-300 px-4 py-3">Tam / Hindi + French/German</td>
                 <td className="border border-gray-300 px-4 py-3 text-center">✓</td>
                 <td className="border border-gray-300 px-4 py-3 text-center">✓</td>
                 <td className="border border-gray-300 px-4 py-3 text-center">✓</td>

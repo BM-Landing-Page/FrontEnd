@@ -103,32 +103,26 @@ export default function ADayAtBM() {
   const activities = [
     {
       category: "Certificate Courses",
-      frequency: "2 hours per week",
       description: "Specialized skill development programs",
     },
     {
       category: "'Specials' - Extra curriculars",
-      frequency: "1 hour per week",
       description: "Creative arts and cultural expression",
     },
     {
       category: "Sports Programs",
-      frequency: "2+ times per week",
       description: "Physical fitness and team building",
     },
     {
       category: "Club Activities",
-      frequency: "2 hours per week",
       description: "Interest-based learning communities",
     },
     {
       category: "Library Sessions",
-      frequency: "Weekly",
       description: "Reading development and research skills",
     },
     {
       category: "Harmony Hours",
-      frequency: "2 times per week",
       description: "Mental wellness and mindfulness activities",
     },
   ]
@@ -232,7 +226,6 @@ export default function ADayAtBM() {
                 className="bg-white border-2 border-[#E9DAC1] rounded-xl p-4 hover:shadow-lg hover:border-[#E9DAC1]/70 transition-all duration-300"
               >
                 <h3 className="text-base font-bold text-gray-900 mb-2">{activity.category}</h3>
-                <div className="text-xs font-medium text-[#54BAB9] mb-2">{activity.frequency}</div>
                 <p className="text-sm text-gray-600">{activity.description}</p>
               </div>
             ))}
@@ -245,7 +238,7 @@ export default function ADayAtBM() {
           <Link href="/eventsandcelebration" className="inline-block">
             <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-6 py-3 rounded-lg shadow-md transition-colors cursor-pointer">
               <div className="text-center">
-                <div className="font-semibold text-base">Events and Celebration</div>
+                <div className="font-semibold text-base">Celebration</div>
               </div>
               <ArrowRight className="w-5 h-5" />
             </div>

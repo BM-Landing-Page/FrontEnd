@@ -32,7 +32,7 @@ export default function PedagogyTools() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white px-4 max-w-4xl">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">BMIS Assessment Framework</h1>
+              <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">Assessment Framework</h1>
               <p className="text-xl md:text-2xl font-light opacity-90">
                 Guiding Student Growth Through International Benchmarks
               </p>

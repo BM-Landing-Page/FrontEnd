@@ -176,23 +176,22 @@ export default function EarlyYearsProgramme() {
         {/* Hero Text Overlay */}
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/20 text-white text-center px-4">
           <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">Early Years Programme</h1>
-          <p className="text-xl md:text-2xl font-light text-balance">Rooted in Inquiry, Rising with Confidence</p>
+          <p className="text-xl md:text-2xl font-light text-balance">Where curious exploration meets joyful discovery</p>
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-4 md:px-8 bg-white">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          {/* Introduction Paragraph */}
-          <div className="space-y-4">
-            <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-              At Budding Minds International School (BMIS), every child's journey begins with wonder, exploration, and
-              joy. Recognized among the best preschools in Chennai, our Early Years Programme lays the foundation for a
-              lifetime of learning — where curiosity leads to understanding, and every question sparks discovery.
-              Because the best beginnings build confident, creative learners.
-            </p>
-          </div>
+      <section className="w-full py-12 md:py-16 px-4 md:px-8 bg-white">
+        <p className="text-gray-700 text-left leading-relaxed text-base md:text-lg">
+          At Budding Minds International School (BMIS), every child's journey begins with wonder, exploration, and joy.
+          Recognized among the best preschools in Chennai, our Early Years Programme lays the foundation for a lifetime
+          of learning — where curiosity leads to understanding, and every question sparks discovery. Because the best
+          beginnings build confident, creative learners.
+        </p>
+      </section>
 
-          {/* Programme Offerings */}
+      {/* Programme Offerings */}
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white">
+        <div className="max-w-4xl mx-auto space-y-8">
           <div className="space-y-6">
             <h2 className="text-2xl md:text-3xl font-bold text-[#54BAB9] text-balance">
               Our Early Years Programme Offers:
@@ -236,7 +235,7 @@ export default function EarlyYearsProgramme() {
       </section>
 
       {/* Section 1: Discovery Den - Card Design */}
-      <section className="py-2 md:py-3 px-4 md:px-8 bg-white overflow-hidden">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {sectionBubbles.map((bubble) => (
             <SectionBubble key={bubble.id} {...bubble} />
@@ -292,7 +291,7 @@ export default function EarlyYearsProgramme() {
       </section>
 
       {/* Section 2: Skills Hub - Card Design */}
-      <section className="py-2 md:py-3 px-4 md:px-8 bg-white overflow-hidden">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {sectionBubbles.map((bubble) => (
             <SectionBubble key={bubble.id} {...bubble} />
@@ -349,7 +348,7 @@ export default function EarlyYearsProgramme() {
       </section>
 
       {/* Section 3: Early Literacy */}
-      <section className="py-2 md:py-3 px-4 md:px-8 bg-white">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
@@ -400,7 +399,7 @@ export default function EarlyYearsProgramme() {
       </section>
 
       {/* Section 4: Early Numeracy */}
-      <section className="py-2 md:py-3 px-4 md:px-8 bg-white">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="group">
@@ -439,14 +438,13 @@ export default function EarlyYearsProgramme() {
                   <span className="font-bold text-[#54BAB9]">S – Symbol:</span> Apply concepts with numbers
                 </p>
               </div>
-             
             </div>
           </div>
         </div>
       </section>
 
       {/* Section 5: Early Exploration */}
-      <section className="py-2 md:py-3 px-4 md:px-8 bg-white">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
@@ -470,7 +468,7 @@ export default function EarlyYearsProgramme() {
             <div className="group">
               <div className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300">
                 <img
-                  src="/images/earlyexploration.jpg"
+                  src="/images/earlyexploration.jpeg"
                   alt="Early Exploration"
                   className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -479,6 +477,7 @@ export default function EarlyYearsProgramme() {
           </div>
         </div>
       </section>
+
       <div className="py-4 bg-white">
         <div className="flex justify-center">
           <Link href="/primaryandlowersecondaryyears" className="inline-block">

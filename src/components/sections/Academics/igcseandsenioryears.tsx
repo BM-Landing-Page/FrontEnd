@@ -13,7 +13,8 @@ export default function CambridgeIGCSE() {
           className="w-full h-full object-cover opacity-100"
         />
         <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white text-center px-4">Cambridge IGCSE</h1>
+          <h1 className="text-5xl md:text-6xl font-bold text-white text-center px-4">Cambridge IGCSE & A levels</h1>
+          <p className="text-xl md:text-2xl font-light text-balance">Inspiring students to love learning</p>
         </div>
       </div>
 
@@ -48,14 +49,14 @@ export default function CambridgeIGCSE() {
 
             {/* IGCSE Curriculum Section */}
             <section className="py-8 border-b border-[#E9DAC1]">
-              <h2 className="text-3xl font-bold text-[#54BAB9] mb-6">IGCSE Curriculum @ BMIS</h2>
+              <h2 className="text-3xl font-bold text-[#54BAB9] mb-6">IGCSE @ BMIS</h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-[#E9DAC1]">
-                      <th className="px-4 py-3 text-left font-semibold text-gray-800 border border-[#F7ECDE]">Group</th>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-800 border border-[#F7ECDE]"> </th>
                       <th className="px-4 py-3 text-left font-semibold text-gray-800 border border-[#F7ECDE]">
-                        IGCSE Curriculum Groups
+                        Subject Groups
                       </th>
                       <th className="px-4 py-3 text-left font-semibold text-gray-800 border border-[#F7ECDE]">
                         Subjects Offered at BMIS
@@ -95,8 +96,7 @@ export default function CambridgeIGCSE() {
               </div>
               <div className="mt-6 space-y-3 text-gray-700 text-sm">
                 <p>
-                  • Global Perspectives as SLP (Student Leadership Program) – Budding Minds offers these as internal
-                  subjects for all students
+                  • Global Perspectives is offered as an internal subject integrated with student leadership program (SLP)
                 </p>
                 <p>• Student needs to choose 8 subjects.</p>
                 <p>
@@ -105,10 +105,7 @@ export default function CambridgeIGCSE() {
                   student has to pass examinations in at least seven subjects, including two languages, and one subject
                   from each of the other subject groups.
                 </p>
-                <p>
-                  • English, Second language (French/German/Tamil/Hindi) , Mathematics and Environmental Management are
-                  compulsory IGCSE Subjects for all students.
-                </p>
+                
               </div>
             </section>
 
@@ -142,14 +139,14 @@ export default function CambridgeIGCSE() {
                   worldwide value and recognise Cambridge International AS & A Level qualifications.
                 </p>
               </div>
-              <h3 className="text-2xl font-semibold text-[#9ED2C6] mb-4">AS & A LEVEL Curriculum @ BMIS</h3>
+              <h3 className="text-2xl font-semibold text-[#9ED2C6] mb-4">AS & A Levels @ BMIS</h3>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-[#E9DAC1]">
-                      <th className="px-4 py-3 text-left font-semibold text-gray-800 border border-[#F7ECDE]">Group</th>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-800 border border-[#F7ECDE]"> </th>
                       <th className="px-4 py-3 text-left font-semibold text-gray-800 border border-[#F7ECDE]">
-                        AS & A Levels Curriculum Groups
+                        Subject Groups
                       </th>
                       <th className="px-4 py-3 text-left font-semibold text-gray-800 border border-[#F7ECDE]">
                         Subjects Offered at BMIS
@@ -239,10 +236,10 @@ export default function CambridgeIGCSE() {
       </div>
       <div className="py-6 bg-white">
         <div className="flex justify-center">
-          <Link href="/pedagogyandtools" className="inline-block">
+          <Link href="/assessmentframeworks" className="inline-block">
             <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-6 py-3 rounded-lg shadow-md transition-colors cursor-pointer">
               <div className="text-center">
-                <div className="font-semibold text-base">Pedagogy and Tools</div>
+                <div className="font-semibold text-base">Assessment Frameworks</div>
               </div>
               <ArrowRight className="w-5 h-5" />
             </div>

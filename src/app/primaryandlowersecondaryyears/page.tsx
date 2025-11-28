@@ -17,7 +17,7 @@ export default function CurriculumPage() {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-center px-4">Our Curriculum</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white text-center px-4">Primary & Lower Secondary Years</h1>
         </div>
       </div>
 

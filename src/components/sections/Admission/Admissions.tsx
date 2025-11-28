@@ -97,7 +97,7 @@ const Admissions = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Admissions
+              Admissions Process
             </motion.h1>
             <motion.p
               className="text-base md:text-lg max-w-3xl mx-auto text-white/95 mb-6 font-light"
@@ -145,10 +145,10 @@ const Admissions = () => {
             animate={eligibilityRef.isInView ? "animate" : "initial"}
           >
             {[
-              { age: "1.9+", title: "Play Group", years: "1.9 years", bg: "#FAFAF8" },
-              { age: "2.6+", title: "Preschool", years: "2.6 years", bg: "#F5F3F0" },
-              { age: "3.6+", title: "Pre-Primary 1", years: "3.6 years", bg: "#FAFAF8" },
-              { age: "4.6+", title: "Pre-Primary 2", years: "4.6 years", bg: "#F5F3F0" },
+              { age: "2+", title: "Play Group", years: "2 years", bg: "#FAFAF8" },
+              { age: "3+", title: "Preschool", years: "3 years", bg: "#F5F3F0" },
+              { age: "4+", title: "Pre-Primary 1", years: "4 years", bg: "#FAFAF8" },
+              { age: "5+", title: "Pre-Primary 2", years: "5 years", bg: "#F5F3F0" },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -281,14 +281,14 @@ const Admissions = () => {
                     <motion.div whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                       <Calendar className="w-5 h-5 mr-2" style={{ color: "#54BAB9" }} />
                     </motion.div>
-                    {"Know Your School"} Session & Student Assessment
+                    {"Know Your School Session,"} Student Assessment & Campus Tour
                   </h3>
                   <ul className="space-y-2">
                     {[
                       "Parents will be invited to a 'Know Your School' session, which introduces the school's vision, curriculum, and learning environment",
                       "The date will be shared via email one week in advance",
                       "Student assessments will be conducted for applicants seeking admission to PP2 and above",
-                      "A non-refundable registration fee of ₹1,500/- is to be paid at this stage",
+                      "A non-refundable registration fee of ₹2,000/- is to be paid during the visit.",
                     ].map((text, index) => (
                       <motion.li
                         key={index}
@@ -463,6 +463,7 @@ const Admissions = () => {
                   "Child's Birth Certificate",
                   "Aadhar Card or valid proof of address",
                   "Latest academic report card / evaluation report from the previous school",
+                  "Copy of passport & Visa (for NRI students)",
                 ].map((text, index) => (
                   <motion.li
                     key={index}
