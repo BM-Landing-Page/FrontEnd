@@ -9,26 +9,26 @@ import Footer from "@/components/ui/Footer/footer"
 
 // Floating Bubble component
 function FloatingBubble({
-  delay,
   duration,
   size,
   left,
+  top,
   animationDelay,
 }: {
-  delay: number
   duration: number
   size: number
   left: string
+  top: string
   animationDelay: number
 }) {
   return (
     <div
       className="absolute rounded-full bg-gradient-to-br from-[#9ED2C6]/20 to-[#54BAB9]/20 animate-bounce"
       style={{
-        width: `${size}px`,
-        height: `${size}px`,
-        left: left,
-        bottom: "-50px",
+        width: `${size}vw`, // relative to viewport width
+        height: `${size}vw`,
+        left,
+        top,
         animationDelay: `${animationDelay}s`,
         animationDuration: `${duration}s`,
         animationIterationCount: "infinite",
@@ -47,41 +47,26 @@ export default function ClientLayout({
   const [bubbles, setBubbles] = useState<
     Array<{
       id: number
-      delay: number
       duration: number
       size: number
       left: string
+      top: string
       animationDelay: number
     }>
   >([])
 
-//   // Generate bubbles once
-//   useEffect(() => {
-//     const newBubbles = Array.from({ length: 8 }, (_, i) => ({
-//       id: i,
-//       delay: Math.random() * 2,
-//       duration: 3 + Math.random() * 4,
-//       size: 20 + Math.random() * 40,
-//       left: `${Math.random() * 100}%`,
-//       animationDelay: Math.random() * 5,
-//     }))
-//     setBubbles(newBubbles)
-//   }, [])
-
-//   // Adjust Chatbase bubble position after script loads
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       const chatBubble = document.getElementById("chatbase-bubble")
-//       if (chatBubble) {
-//         chatBubble.style.bottom = "90px"
-//         chatBubble.style.right = "20px"
-//         chatBubble.style.zIndex = "50"
-//         clearInterval(interval)
-//       }
-//     }, 500)
-
-//     return () => clearInterval(interval)
-//   }, [])
+  // Generate bubbles once
+  useEffect(() => {
+    const newBubbles = Array.from({ length: 8 }, (_, i) => ({
+      id: i,
+      duration: 3 + Math.random() * 4,
+      size: 2 + Math.random() * 5, // 2vw–7vw
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`, // relative to main area (below header)
+      animationDelay: Math.random() * 5,
+    }))
+    setBubbles(newBubbles)
+  }, [])
 
   return (
     <>
@@ -92,6 +77,7 @@ export default function ClientLayout({
       {isNavOpen && <FullScreenNav onClose={() => setIsNavOpen(false)} />}
 
       {/* Main page content */}
+      {/* Header is fixed, so we offset content with pt-16 */}
       <main className="pt-16 min-h-screen bg-white relative overflow-hidden">
         {/* Floating Bubbles */}
         {/* <div className="fixed inset-0 pointer-events-none z-0">
@@ -100,11 +86,18 @@ export default function ClientLayout({
           ))}
         </div> */}
 
+        {/* Instead, bubbles are relative to main (below header) */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          {bubbles.map((bubble) => (
+            <FloatingBubble key={bubble.id} {...bubble} />
+          ))}
+        </div>
+
         {/* Main Content */}
         <div className="relative z-10">{children}</div>
 
-        {/* WhatsApp Floating Button
-        <a
+        {/* WhatsApp Floating Button */}
+        {/* <a
           href="https://wa.me/919840391815"
           target="_blank"
           rel="noopener noreferrer"
@@ -114,8 +107,8 @@ export default function ClientLayout({
           <FaWhatsapp size={24} className="text-white" />
         </a> */}
 
-        {/* Chatbase Script
-        <Script id="chatbase-embed" strategy="afterInteractive">
+        {/* Chatbase Script */}
+        {/* <Script id="chatbase-embed" strategy="afterInteractive">
           {`
             (function(){
               if(!window.chatbase||window.chatbase("getState")!=="initialized"){
