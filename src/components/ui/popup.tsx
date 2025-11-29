@@ -27,11 +27,8 @@ export default function Popup({ onClose }: PopupProps) {
     };
     fetchPopupData();
 
-    // Measure header height dynamically
     const header = document.querySelector("header");
-    if (header) {
-      setHeaderHeight(header.clientHeight);
-    }
+    if (header) setHeaderHeight(header.clientHeight);
   }, []);
 
   const handleClose = () => {
@@ -55,9 +52,9 @@ export default function Popup({ onClose }: PopupProps) {
   return (
     <div
       className="fixed inset-0 flex items-start justify-center z-[60] bg-black/60 backdrop-blur-sm p-4 sm:p-6 md:p-8"
-      style={{ paddingTop: `${headerHeight + 40}px` }} // more space below header
+      style={{ paddingTop: `${headerHeight + 30}px` }}
     >
-      <div className="relative w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl max-h-[85vh] overflow-y-auto bg-white rounded-3xl shadow-2xl transform transition-all duration-300 scale-100">
+      <div className="relative w-full sm:w-[85%] md:w-[65%] lg:w-[50%] max-h-[80vh] overflow-y-auto bg-white rounded-3xl shadow-2xl transform transition-all duration-300 scale-100">
         {/* Close Button */}
         <button
           className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-600 hover:text-gray-800 transition-colors duration-200 z-10 shadow-lg"
@@ -70,33 +67,31 @@ export default function Popup({ onClose }: PopupProps) {
         </button>
 
         {/* Image */}
-        <div className="relative w-full aspect-[4/3]">
+        <div className="relative w-full" style={{ paddingTop: "100%" }}>
           {popupData.image ? (
             <Image
               src={popupData.image}
-              alt="Registration Banner"
+              alt="Popup Banner"
               fill
-              className="object-cover rounded-t-3xl"
+              className="object-contain w-full h-full rounded-t-3xl"
               priority
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 768px, 1024px"
+              sizes="100vw"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center rounded-t-3xl">
+            <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center rounded-t-3xl absolute inset-0">
               <span className="text-white text-lg font-semibold">No Image Available</span>
             </div>
           )}
         </div>
 
-        {/* Register / Discover More Button */}
+        {/* Discover More Button */}
         <div className="flex items-center justify-center bg-gray-50 px-6 py-5 rounded-b-3xl">
           <button
             onClick={() => {
-              if (popupData.url) {
-                window.open(popupData.url, "_blank", "noopener,noreferrer");
-              }
+              if (popupData.url) window.open(popupData.url, "_blank", "noopener,noreferrer");
             }}
             disabled={!popupData.url}
-            className="inline-flex items-center justify-center px-7 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold rounded-full transform hover:scale-105 disabled:hover:scale-100 transition-all duration-200 shadow-lg hover:shadow-xl text-lg sm:text-xl"
+            className="inline-flex items-center justify-center px-6 py-2 sm:px-7 sm:py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold rounded-full transform hover:scale-105 disabled:hover:scale-100 transition-all duration-200 shadow-lg hover:shadow-xl text-base sm:text-lg"
           >
             Discover More
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
