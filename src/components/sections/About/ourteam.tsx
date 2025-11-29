@@ -14,14 +14,13 @@ const departments = [
 ]
 
 export default function OurTeam() {
-  const [activeTab, setActiveTab] = useState("chief executive") // Default to first category
+  const [activeTab, setActiveTab] = useState("chief executive")
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Fetch team members on component mount
   useEffect(() => {
     const loadTeamMembers = async () => {
       setLoading(true)
@@ -37,7 +36,6 @@ export default function OurTeam() {
     loadTeamMembers()
   }, [])
 
-  // Filter team members by selected department
   const filteredTeam = teamMembers.filter((member) => member.department === activeTab)
 
   const handleCardClick = (member: TeamMember) => {
@@ -50,7 +48,6 @@ export default function OurTeam() {
     setSelectedMember(null)
   }
 
-  // Loading skeleton component
   const LoadingSkeleton = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {[...Array(8)].map((_, index) => (
@@ -65,7 +62,6 @@ export default function OurTeam() {
     </div>
   )
 
-  // Error component
   const ErrorMessage = ({ message }: { message: string }) => (
     <div className="text-center py-12">
       <div className="text-red-500 text-lg mb-4">⚠️ Error Loading Team</div>
@@ -149,7 +145,6 @@ export default function OurTeam() {
                   className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 rounded-2xl bg-white shadow-lg overflow-hidden"
                   onClick={() => handleCardClick(member)}
                 >
-                  {/* Large Image Section */}
                   <div className="relative w-full h-64 overflow-hidden">
                     <Image
                       src={member.image_url || "/placeholder.svg?height=400&width=300&query=professional headshot"}
@@ -162,7 +157,6 @@ export default function OurTeam() {
                       }}
                     />
                   </div>
-                  {/* Text Content Below */}
                   <div className="p-4 text-center">
                     <h3 className="text-lg font-bold mb-1" style={{ color: "#54BAB9" }}>
                       {member.name}
@@ -177,7 +171,6 @@ export default function OurTeam() {
             </div>
           )}
 
-          {/* Navigation Button */}
           <div className="flex justify-center mt-16">
             <Link href="/alumni">
               <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
@@ -193,11 +186,10 @@ export default function OurTeam() {
 
       {/* Team Member Detail Modal */}
       {isModalOpen && selectedMember && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-5xl w-full max-h-[90vh] overflow-hidden">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 pt-20">
+          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[75vh] overflow-hidden">
             {/* Teal Header Section */}
-            <div className="relative p-8" style={{ backgroundColor: "#54BAB9" }}>
-              {/* Close button */}
+            <div className="relative p-6" style={{ backgroundColor: "#54BAB9" }}>
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors"
@@ -206,9 +198,8 @@ export default function OurTeam() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <div className="flex items-center gap-6">
-                {/* Profile Photo - Square */}
-                <div className="relative w-40 h-40 rounded-2xl overflow-hidden bg-white/20 flex-shrink-0 shadow-lg">
+              <div className="flex flex-col md:flex-row md:items-center gap-4">
+                <div className="relative w-32 h-32 rounded-2xl overflow-hidden bg-white/20 flex-shrink-0 shadow-lg">
                   <Image
                     src={
                       selectedMember.image_url || "/placeholder.svg?height=300&width=300&query=professional headshot"
@@ -222,39 +213,40 @@ export default function OurTeam() {
                     }}
                   />
                 </div>
-                {/* Name and Role */}
                 <div>
-                  <h2 className="text-4xl font-bold text-white mb-2">{selectedMember.name}</h2>
-                  <p className="text-xl text-white/90">{selectedMember.role}</p>
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-1">{selectedMember.name}</h2>
+                  <p className="text-lg md:text-xl text-white/90">{selectedMember.role}</p>
                 </div>
               </div>
             </div>
+
             {/* White Content Area */}
-            <div className="p-8 bg-white overflow-y-auto max-h-[60vh]">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="p-6 bg-white overflow-y-auto max-h-[calc(75vh-180px)]">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Left Column - About and Achievements */}
-                <div className="lg:col-span-2 space-y-8">
+                <div className="lg:col-span-2 space-y-6">
                   {/* About Section */}
                   <div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-1 h-8 rounded-full" style={{ backgroundColor: "#54BAB9" }}></div>
-                      <h3 className="text-2xl font-bold text-gray-800">About {selectedMember.name.split(" ")[0]}.</h3>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-1 h-6 rounded-full" style={{ backgroundColor: "#54BAB9" }}></div>
+                      <h3 className="text-xl font-bold text-gray-800">About</h3>
                     </div>
-                    <p className="text-gray-600 leading-relaxed text-lg">{selectedMember.description}</p>
+                    <p className="text-gray-600 leading-relaxed text-sm md:text-base">{selectedMember.description}</p>
                   </div>
+
                   {/* Key Achievements Section */}
                   {selectedMember.achievements && selectedMember.achievements.length > 0 && (
                     <div>
-                      <div className="flex items-center gap-3 mb-6">
-                        <Award className="w-6 h-6" style={{ color: "#54BAB9" }} />
-                        <h3 className="text-2xl font-bold text-gray-800">Key Achievements</h3>
+                      <div className="flex items-center gap-3 mb-4">
+                        <Award className="w-5 h-5" style={{ color: "#54BAB9" }} />
+                        <h3 className="text-lg font-bold text-gray-800">Key Achievements</h3>
                       </div>
-                      <div className="space-y-4">
+                      <div className="space-y-2">
                         {selectedMember.achievements.map((achievement, index) => (
                           <div
                             key={achievement.id || index}
-                            className="p-4 rounded-2xl text-gray-700 font-medium"
-                            style={{ backgroundColor: "#54BAB9", color: "white" }}
+                            className="p-3 rounded-xl text-white font-medium text-sm"
+                            style={{ backgroundColor: "#54BAB9" }}
                           >
                             {achievement.description}
                           </div>
@@ -263,55 +255,58 @@ export default function OurTeam() {
                     </div>
                   )}
                 </div>
+
                 {/* Right Column - Info and Contact */}
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {/* Education */}
                   {selectedMember.education_background && (
                     <div
-                      className="p-4 rounded-xl border-2"
+                      className="p-3 rounded-lg border-2 text-sm"
                       style={{ borderColor: "#9ED2C6", backgroundColor: "#F7ECDE" }}
                     >
-                      <div className="flex items-start gap-3">
-                        <GraduationCap className="w-5 h-5 mt-1" style={{ color: "#54BAB9" }} />
+                      <div className="flex items-start gap-2">
+                        <GraduationCap className="w-4 h-4 mt-1 flex-shrink-0" style={{ color: "#54BAB9" }} />
                         <div>
-                          <h4 className="font-semibold mb-2" style={{ color: "#54BAB9" }}>
+                          <h4 className="font-semibold mb-1" style={{ color: "#54BAB9" }}>
                             Education
                           </h4>
-                          <p className="text-sm text-gray-700 leading-relaxed">{selectedMember.education_background}</p>
+                          <p className="text-xs text-gray-700 leading-relaxed">{selectedMember.education_background}</p>
                         </div>
                       </div>
                     </div>
                   )}
+
                   {/* Experience */}
                   {selectedMember.years_experience && (
                     <div
-                      className="p-4 rounded-xl border-2"
+                      className="p-3 rounded-lg border-2 text-sm"
                       style={{ borderColor: "#9ED2C6", backgroundColor: "#E9DAC1" }}
                     >
-                      <div className="flex items-center gap-3">
-                        <Calendar className="w-5 h-5" style={{ color: "#54BAB9" }} />
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" style={{ color: "#54BAB9" }} />
                         <div>
                           <h4 className="font-semibold mb-1" style={{ color: "#54BAB9" }}>
                             Experience
                           </h4>
-                          <p className="text-lg font-bold text-gray-800">{selectedMember.years_experience}+ years</p>
+                          <p className="text-sm font-bold text-gray-800">{selectedMember.years_experience}+ years</p>
                         </div>
                       </div>
                     </div>
                   )}
+
                   {/* Joined Date */}
                   {selectedMember.joined_month && selectedMember.joined_year && (
                     <div
-                      className="p-4 rounded-xl border-2"
+                      className="p-3 rounded-lg border-2 text-sm"
                       style={{ borderColor: "#9ED2C6", backgroundColor: "rgba(158, 210, 198, 0.2)" }}
                     >
-                      <div className="flex items-center gap-3">
-                        <Calendar className="w-5 h-5" style={{ color: "#54BAB9" }} />
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" style={{ color: "#54BAB9" }} />
                         <div>
                           <h4 className="font-semibold mb-1" style={{ color: "#54BAB9" }}>
                             Joined
                           </h4>
-                          <p className="text-sm text-gray-700">
+                          <p className="text-xs text-gray-700">
                             {new Date(selectedMember.joined_year, selectedMember.joined_month - 1).toLocaleDateString(
                               "en-US",
                               {
@@ -324,19 +319,18 @@ export default function OurTeam() {
                       </div>
                     </div>
                   )}
+
                   {/* Get in Touch Section */}
                   {selectedMember.linkedin_url && (
-                    <div className="p-6 rounded-2xl" style={{ backgroundColor: "#54BAB9" }}>
-                      <h3 className="text-xl font-bold text-white mb-4">Get in Touch</h3>
-                      <div className="space-y-3">
-                        <button
-                          className="w-full flex items-center gap-3 p-3 rounded-xl bg-white/20 hover:bg-white/30 transition-colors text-white"
-                          onClick={() => window.open(selectedMember.linkedin_url, "_blank")}
-                        >
-                          <Linkedin className="w-5 h-5" />
-                          LinkedIn Profile
-                        </button>
-                      </div>
+                    <div className="p-4 rounded-lg" style={{ backgroundColor: "#54BAB9" }}>
+                      <h3 className="text-sm font-bold text-white mb-2">Get in Touch</h3>
+                      <button
+                        className="w-full flex items-center justify-center gap-2 p-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors text-white text-sm"
+                        onClick={() => window.open(selectedMember.linkedin_url, "_blank")}
+                      >
+                        <Linkedin className="w-4 h-4" />
+                        LinkedIn
+                      </button>
                     </div>
                   )}
                 </div>
