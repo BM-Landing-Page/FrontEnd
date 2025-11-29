@@ -1,20 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Josefin_Sans, JetBrains_Mono } from "next/font/google"
-
+import { Josefin_Sans } from "next/font/google"
 import "./globals.css"
+import Header from "@/components/ui/Header/Header"
 import ClientLayout from "@/app/ClientLayout"
 
-// Main UI font
 const josefin = Josefin_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-})
-
-// Monospace font (optional)
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
 })
 
 export const metadata: Metadata = {
@@ -25,14 +18,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={`${josefin.className} antialiased`}>
+        {/* <CHANGE> Header is fixed and positioned at top; does not affect layout flow */}
+        <Header />
+        {/* <CHANGE> ClientLayout handles all page content with proper padding below fixed header */}
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
