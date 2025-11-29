@@ -65,7 +65,7 @@ const timelineData = [
   {
     year: "2022",
     title: "A Level Success",
-    description: "Our first batch of A Level students graduated with distinction.",
+    description: "• Our first batch of A Level students graduated with distinction.\n• Global Recognition & Leadership ",
     color: "#F7ECDE",
     icon: "🎯",
   },

@@ -104,8 +104,8 @@ export default function RoomPage() {
         />
         {/* Hero Text Overlay */}
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/20 text-white text-center px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">Budding minds Chrompet </h1>
-          <p className="text-xl md:text-2xl font-light text-balance">Budding minds International Play school</p>
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">Budding Minds Chrompet </h1>
+          <p className="text-xl md:text-2xl font-light text-balance">Budding Minds International Play school</p>
         </div>
       </section>
 
@@ -363,7 +363,7 @@ export default function RoomPage() {
                   <span className="text-[#54BAB9] font-bold text-2xl">📧</span>
                   <p className="text-sm text-gray-600 font-medium">Email</p>
                 </div>
-                <p className="text-base md:text-lg font-semibold text-gray-900">admissions@buddingminds.net</p>
+                <p className="text-base md:text-lg font-semibold text-gray-900">bmis@buddingminds.net</p>
               </div>
 
               {/* Divider */}
