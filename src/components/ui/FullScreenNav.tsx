@@ -64,7 +64,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "SLC Overview": "/slcoverview",
   "A Day at BMIS": "/adayatbm",
   "Celebrations": "/eventsandcelebration",
-  "Awards and Recogonition": "/studentachievement",
+  "Awards and Recogonitions": "/awardsandrecogonitions",
   "Student Voices": "/studentvoice",
   "Beyond Books": "/beyondbooks",
   "Student Profiles": "/studentprofile",
