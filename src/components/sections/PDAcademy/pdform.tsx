@@ -177,8 +177,8 @@ export default function PDForm() {
               margin: "0 auto",
             }}
           >
-            Complete this form to apply for CICTL/CIDTL professional development programs. Please provide accurate
-            information to help us process your application effectively.
+            Complete this form to apply for professional development programs. 
+            Please provide accurate information to help us process your application effectively.
           </p>
         </div>
 
@@ -593,7 +593,7 @@ export default function PDForm() {
                     color: "#374151",
                   }}
                 >
-                  Reason to pursue CICTL/CIDTL? <span style={{ color: "#ef4444" }}>*</span>
+                  Reason to pursue this program <span style={{ color: "#ef4444" }}>*</span>
                 </label>
                 <textarea
                   rows={6}
@@ -621,7 +621,7 @@ export default function PDForm() {
                     color: "#6b7280",
                   }}
                 >
-                  Please provide a detailed explanation (minimum 50 characters required)
+                  Please provide a detailed explanation (minimum 100 words required)
                   {formData.reason && (
                     <span style={{ marginLeft: "8px", color: formData.reason.length >= 50 ? "#16a34a" : "#dc2626" }}>
                       ({formData.reason.length} characters)

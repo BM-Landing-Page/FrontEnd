@@ -12,10 +12,15 @@ export default function CambridgeIGCSE() {
           alt="Cambridge IGCSE"
           className="w-full h-full object-cover opacity-100"
         />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white text-center px-4">Cambridge IGCSE & A levels</h1>
-          <p className="text-xl md:text-2xl font-light text-balance">Inspiring students to love learning</p>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-white text-center px-4">
+            Cambridge IGCSE & A levels
+          </h1>
+          <p className="text-xl md:text-2xl font-bold text-white text-center">
+            Inspiring students to love learning
+          </p>
         </div>
+
       </div>
 
       {/* Main Content */}
@@ -218,13 +223,13 @@ export default function CambridgeIGCSE() {
               <h2 className="text-3xl font-bold text-[#54BAB9] mb-6">Recognition and acceptance</h2>
               <div className="flex flex-col md:flex-row gap-6 mt-8 justify-center">
                 <a
-                  href="#"
+                  href="https://www.cambridgeinternational.org/programmes-and-qualifications/recognition-and-acceptance/#:~:text=We%20provide%20extra%20guidance%20on%20university%20recognition%20of,us%20with%20formal%20written%20acceptance%20of%20Cambridge%20qualifications"
                   className="px-8 py-4 bg-[#54BAB9] text-white font-semibold text-center rounded-full hover:bg-[#9ED2C6] hover:text-gray-800 transition-colors border-2 border-[#54BAB9] w-56"
                 >
                   Cambridge Recognitions
                 </a>
                 <a
-                  href="#"
+                  href="https://www.cambridgeinternational.org/programmes-and-qualifications/recognition-and-acceptance/guidance-for-universities/"
                   className="px-8 py-4 bg-[#54BAB9] text-white font-semibold text-center rounded-full hover:bg-[#9ED2C6] hover:text-gray-800 transition-colors border-2 border-[#54BAB9] w-56"
                 >
                   Indian Universities Guide

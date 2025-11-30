@@ -22,53 +22,63 @@ export default function AboutTheAcademyPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Introduction Section */}
         <div className="text-center mb-4">
           <div className="bg-white rounded-xl shadow-md p-5 max-w-4xl mx-auto">
-            <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-2">About the Academy</h2>
-            <p className="text-sm text-gray-600 leading-relaxed mb-3">
-              At Budding Minds International School, we believe that excellence in education begins with empowered
-              educators and insightful research.
-            </p>
-            <div className="bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] text-white rounded-lg p-2">
-              <p className="text-sm font-medium">🏆 Proud to be recognised as one of the Hodder Research Schools</p>
+            <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-4">About the Academy</h2>
+            <div className="text-gray-700 text-sm leading-relaxed space-y-4">
+              <p>
+                The BM PD Academy is being established to drive research in education, with a focus on early childhood
+                learning, reimagined language acquisition, and innovative teacher development. Its research aims to
+                strengthen educational practices, especially in the foundational years.
+              </p>
+              <p>
+                As part of this vision, the Academy will offer high-quality training programs—including Cambridge
+                Professional Development Qualifications (PDQs)—for both aspiring and practicing educators, building key
+                competencies in classroom management, communication, learner engagement, and pedagogy.
+              </p>
+              <p>
+                The organisation will also develop educational products such as teaching aids, learning resources,
+                activity kits, and digital content to support teachers, parents, and students.
+              </p>
+              <p>
+                Through this blend of research, training, and resource development, the BM PD Academy seeks to enhance
+                learning outcomes and empower educators across the wider educational ecosystem.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Vision Mission Values - Simplified */}
-        <div className="grid lg:grid-cols-3 gap-3 mb-6">
-          <div className="bg-white rounded-lg shadow-sm p-4 text-center hover:shadow-md transition-shadow duration-300">
-            <div className="w-10 h-10 bg-[#54BAB9] rounded-full flex items-center justify-center mx-auto mb-2">
-              <span className="text-lg">🎯</span>
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="bg-white rounded-lg shadow-sm p-3 text-center hover:shadow-md transition-shadow duration-300">
+            <div className="w-8 h-8 bg-[#54BAB9] rounded-full flex items-center justify-center mx-auto mb-1">
+              <span className="text-base">🎯</span>
             </div>
-            <h3 className="text-base font-bold mb-2 text-gray-800">Our Vision</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <h3 className="text-sm font-bold mb-1 text-gray-800">Our Vision</h3>
+            <p className="text-xs text-gray-600 leading-relaxed">
               To be a catalyst for innovation in education through transformative teacher training and cutting-edge
               research.
             </p>
           </div>
-          <div className="bg-white rounded-lg shadow-sm p-4 text-center hover:shadow-md transition-shadow duration-300">
-            <div className="w-10 h-10 bg-[#9ED2C6] rounded-full flex items-center justify-center mx-auto mb-2">
-              <span className="text-lg">🚀</span>
+          <div className="bg-white rounded-lg shadow-sm p-3 text-center hover:shadow-md transition-shadow duration-300">
+            <div className="w-8 h-8 bg-[#9ED2C6] rounded-full flex items-center justify-center mx-auto mb-1">
+              <span className="text-base">🚀</span>
             </div>
-            <h3 className="text-base font-bold mb-2 text-gray-800">Our Mission</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <h3 className="text-sm font-bold mb-1 text-gray-800">Our Mission</h3>
+            <p className="text-xs text-gray-600 leading-relaxed">
               To build a thriving learning community dedicated to improving education through evidence-based strategies.
             </p>
           </div>
-          <div className="bg-white rounded-lg shadow-sm p-4 text-center hover:shadow-md transition-shadow duration-300">
-            <div className="w-10 h-10 bg-[#E9DAC1] rounded-full flex items-center justify-center mx-auto mb-2">
-              <span className="text-lg">⭐</span>
+          <div className="bg-white rounded-lg shadow-sm p-3 text-center hover:shadow-md transition-shadow duration-300">
+            <div className="w-8 h-8 bg-[#E9DAC1] rounded-full flex items-center justify-center mx-auto mb-1">
+              <span className="text-base">⭐</span>
             </div>
-            <h3 className="text-base font-bold mb-2 text-gray-800">Our Values</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <h3 className="text-sm font-bold mb-1 text-gray-800">Our Values</h3>
+            <p className="text-xs text-gray-600 leading-relaxed">
               Excellence, Innovation, Collaboration, Integrity, Lifelong Learning, and Inclusivity.
             </p>
           </div>
         </div>
 
-        {/* What We Offer - Simplified */}
         <div className="mb-6">
           <h2 className="text-lg md:text-xl font-bold text-center text-gray-800 mb-4">What We Offer</h2>
           <div className="grid lg:grid-cols-2 gap-4">
@@ -80,7 +90,7 @@ export default function AboutTheAcademyPage() {
                 <h3 className="text-base font-bold text-gray-800">Cambridge PDQs</h3>
               </div>
               <p className="text-gray-600 text-sm mb-3">
-                Accredited centre for Cambridge International Certificate and Diploma in Teaching & Learning
+                Accredited centre for Cambridge International Certificate and Diploma in Teaching & Learning Cambridge Early Years Good Practice
               </p>
               <div className="space-y-1">
                 <div className="flex items-center text-gray-600 text-sm">
@@ -125,14 +135,12 @@ export default function AboutTheAcademyPage() {
           </div>
         </div>
 
-        {/* Contact Section - Reorganized */}
         <div className="bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] rounded-lg shadow-md p-4 text-white mb-6">
           <div className="text-center mb-3">
             <h3 className="text-lg font-bold mb-1">Ready to Join Our Community?</h3>
             <p className="text-sm opacity-90">Get in touch with us to start your professional development journey</p>
           </div>
 
-          {/* Contact Information */}
           <div className="mb-3">
             <h4 className="text-sm font-semibold text-center mb-2">Contact Information</h4>
             <div className="grid md:grid-cols-3 gap-2 max-w-4xl mx-auto">
@@ -154,7 +162,6 @@ export default function AboutTheAcademyPage() {
             </div>
           </div>
 
-          {/* Social Media */}
           <div className="text-center">
             <h4 className="text-sm font-semibold mb-1">Follow Us</h4>
             <div className="flex justify-center">
@@ -180,7 +187,6 @@ export default function AboutTheAcademyPage() {
           </div>
         </div>
 
-        {/* Next Button - Centered */}
         <div className="py-2 bg-white">
           <div className="flex justify-center">
             <Link href="/pedagogyandmodule" className="inline-block">

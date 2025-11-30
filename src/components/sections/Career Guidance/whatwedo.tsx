@@ -1,5 +1,3 @@
-
-
 "use client"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
@@ -13,11 +11,9 @@ export default function CareerGuidancePage() {
           padding: 0;
           box-sizing: border-box;
         }
-
         body {
           background-color: #ffffff;
         }
-
         .hero-section {
           position: relative;
           height: 350px;
@@ -27,7 +23,6 @@ export default function CareerGuidancePage() {
           align-items: center;
           justify-content: center;
         }
-
         .hero-image {
           position: absolute;
           width: 100%;
@@ -35,13 +30,11 @@ export default function CareerGuidancePage() {
           object-fit: cover;
           opacity: 0.85;
         }
-
         .hero-overlay {
           position: absolute;
           inset: 0;
           background: linear-gradient(135deg, rgba(84, 186, 185, 0.7) 0%, rgba(158, 210, 198, 0.7) 100%);
         }
-
         .hero-content {
           position: relative;
           z-index: 10;
@@ -50,7 +43,6 @@ export default function CareerGuidancePage() {
           padding: 2rem;
           max-width: 800px;
         }
-
         .hero-title {
           font-size: 3.5rem;
           font-weight: 700;
@@ -58,21 +50,17 @@ export default function CareerGuidancePage() {
           letter-spacing: -1px;
           line-height: 1.2;
         }
-
         .hero-subtitle {
           font-size: 1.3rem;
           font-weight: 300;
           opacity: 0.95;
           letter-spacing: 0.5px;
         }
-
-        /* Remove max-width constraints to allow full-width layout */
         .intro-section {
           padding: 1.5rem 4rem;
           background-color: #ffffff;
-          border-bottom: 1px solid #E9DAC1;
+          /* removed border-bottom line */
         }
-
         .intro-text {
           font-size: 1rem;
           line-height: 1.6;
@@ -82,24 +70,20 @@ export default function CareerGuidancePage() {
           margin-left: auto;
           margin-right: auto;
         }
-
         .intro-text:last-child {
           margin-bottom: 0;
         }
-
         .intro-highlight {
           color: #54BAB9;
           font-weight: 700;
         }
-
-        /* Full-width grid layout with horizontal padding */
+        /* Updated grid to single column layout */
         .sections-container {
           padding: 1.5rem 4rem;
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr;
           gap: 2rem;
         }
-
         .section-item {
           display: flex;
           flex-direction: column;
@@ -109,28 +93,22 @@ export default function CareerGuidancePage() {
           border: 1px solid #E9DAC1;
           transition: all 0.3s ease;
         }
-
         .section-item:hover {
           box-shadow: 0 8px 24px rgba(84, 186, 185, 0.12);
           transform: translateY(-2px);
         }
-
-        /* First section spans full width */
+        /* Removed grid-column span and kept consistent flex-direction */
         .section-item:first-child {
-          grid-column: 1 / -1;
-          flex-direction: row;
+          flex-direction: column;
         }
-
         .section-item:first-child .section-visual {
-          width: 40%;
+          width: 100%;
           height: auto;
-          min-height: 200px;
+          min-height: 180px;
         }
-
         .section-item:first-child .section-content {
-          width: 60%;
+          width: 100%;
         }
-
         .section-visual {
           background: linear-gradient(135deg, #54BAB9 0%, #9ED2C6 100%);
           display: flex;
@@ -144,14 +122,12 @@ export default function CareerGuidancePage() {
           min-height: 180px;
           order: 2;
         }
-
         .section-content {
           padding: 1.5rem;
           order: 1;
           display: flex;
           flex-direction: column;
         }
-
         .section-title {
           font-size: 1.4rem;
           font-weight: 700;
@@ -159,7 +135,6 @@ export default function CareerGuidancePage() {
           margin-bottom: 0.4rem;
           line-height: 1.3;
         }
-
         .section-title strong {
           display: block;
           color: #333;
@@ -167,30 +142,25 @@ export default function CareerGuidancePage() {
           margin-top: 0.3rem;
           font-weight: 600;
         }
-
         .section-text {
           font-size: 0.95rem;
           line-height: 1.6;
           color: #555;
           margin-bottom: 0.6rem;
         }
-
         .section-text:last-of-type {
           margin-bottom: 0;
         }
-
         .section-accent {
           display: inline;
           color: #54BAB9;
           font-weight: 600;
         }
-
         .partners-list {
           margin-top: 0.8rem;
           padding-top: 0.8rem;
           border-top: 2px solid #9ED2C6;
         }
-
         .partner-item {
           padding: 0.3rem 0;
           color: #666;
@@ -199,63 +169,50 @@ export default function CareerGuidancePage() {
           align-items: center;
           gap: 0.5rem;
         }
-
         .partner-item::before {
           content: '→';
           color: #9ED2C6;
           font-weight: 700;
           flex-shrink: 0;
         }
-
         @media (max-width: 768px) {
           .hero-title {
             font-size: 2.5rem;
           }
-
           .hero-subtitle {
             font-size: 1.1rem;
           }
-
           .hero-section {
             height: 300px;
           }
-
           .sections-container {
             grid-template-columns: 1fr;
             padding: 1rem;
             gap: 1rem;
           }
-
           .section-item:first-child {
             flex-direction: column;
           }
-
           .section-item:first-child .section-visual {
             width: 100%;
           }
-
           .section-item:first-child .section-content {
             width: 100%;
           }
-
           .intro-section {
             padding: 1rem;
           }
-
           .section-content {
             padding: 1rem;
           }
-
           .section-title {
             font-size: 1.2rem;
           }
-
           .section-title strong {
             font-size: 0.95rem;
           }
         }
       `}</style>
-
       {/* Hero Section */}
       <section className="hero-section">
         <img src="/students-in-classroom-learning-career-guidance.jpg" alt="Career Guidance" className="hero-image" />
@@ -265,7 +222,6 @@ export default function CareerGuidancePage() {
           <p className="hero-subtitle">Career Guidance Program @ BMIS</p>
         </div>
       </section>
-
       {/* Introduction Section */}
       <section className="intro-section">
         <p className="intro-text">
@@ -284,7 +240,6 @@ export default function CareerGuidancePage() {
           direction and confidence.
         </p>
       </section>
-
       {/* Content Sections */}
       <section className="sections-container">
         {/* Psychometric Assessments */}
@@ -305,9 +260,7 @@ export default function CareerGuidancePage() {
               translate insights into action and build a roadmap for their future success.
             </p>
           </div>
-          {/* <div className="section-visual">Self Discovery</div> */}
         </div>
-
         {/* Career Fairs */}
         <div className="section-item">
           <div className="section-content">
@@ -329,9 +282,7 @@ export default function CareerGuidancePage() {
               plan strategically.
             </p>
           </div>
-          {/* <div className="section-visual">Global Connections</div> */}
         </div>
-
         {/* Internship Opportunities */}
         <div className="section-item">
           <div className="section-content">
@@ -359,7 +310,6 @@ export default function CareerGuidancePage() {
               and potential into purpose.
             </p>
           </div>
-          {/* <div className="section-visual">Real Experience</div> */}
         </div>
       </section>
       <div className="py-6 bg-white">
