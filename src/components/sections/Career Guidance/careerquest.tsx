@@ -2,15 +2,16 @@ export default function CareerQuestPage() {
   return (
     <main className="w-full bg-white">
       {/* Hero Banner */}
-      <div
-        className="w-full h-64 bg-gradient-to-r from-[#9ED2C6] to-[#54BAB9] flex items-center justify-center"
-        style={{
-          backgroundImage: "url(/placeholder.svg?height=256&width=1200&query=career-guidance-students-banner)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="text-center text-white">
+      <div className="relative w-full h-[60vh] overflow-hidden flex items-center justify-center">
+        {/* Background Image */}
+        <img 
+          src="/images/careerquest.jpeg" 
+          alt="Career guidance banner"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+  
+        {/* Content */}
+        <div className="relative text-center text-white z-10">
           <h1 className="text-4xl font-bold">Career Quest Sessions</h1>
           <p className="text-lg mt-2">Career Learning Series</p>
         </div>

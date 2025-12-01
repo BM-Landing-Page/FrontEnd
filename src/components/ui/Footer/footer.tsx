@@ -70,7 +70,12 @@ export default function Footer() {
                   />
                   <img
                     src="/images/partner5.png"
-                    alt="Partner 4"
+                    alt="Partner 5"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                  <img
+                    src="/images/partner6.png"
+                    alt="Partner 6"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
                 </div>
@@ -102,7 +107,12 @@ export default function Footer() {
                   />
                   <img
                     src="/images/partner5.png"
-                    alt="Partner 4"
+                    alt="Partner 5"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                  <img
+                    src="/images/partner6.png"
+                    alt="Partner 6"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
                 </div>

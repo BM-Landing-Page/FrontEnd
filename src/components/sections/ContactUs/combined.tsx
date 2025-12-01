@@ -105,37 +105,50 @@ export default function CombinedPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
-      <div className="relative h-96 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] flex items-center justify-center">
-        <div className="text-center text-white">
-          <h1 className="text-5xl font-bold mb-4">Budding Minds International School</h1>
-          <p className="text-xl mb-8">Nurturing Young Minds for a Bright Future</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => setActiveSection("contact")}
-              className={`px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
-                activeSection === "contact"
-                  ? "bg-white text-[#54BAB9] shadow-lg"
-                  : "border-2 border-white text-white hover:bg-white hover:text-[#54BAB9] bg-transparent"
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <Phone size={20} />
-                Contact Us
-              </div>
-            </button>
-            <button
-              onClick={() => setActiveSection("bus")}
-              className={`px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
-                activeSection === "bus"
-                  ? "bg-white text-[#54BAB9] shadow-lg"
-                  : "border-2 border-white text-white hover:bg-white hover:text-[#54BAB9] bg-transparent"
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <Bus size={20} />
-                Bus Routes
-              </div>
-            </button>
+<div className="relative h-96 overflow-hidden">
+  {/* Background Image with Overlay */}
+  <div className="absolute inset-0">
+    <img 
+      src="images/contactus.jpeg" 
+      alt="School background"
+      className="w-full h-full object-cover"
+    />
+    
+  </div>
+  
+      {/* Content */}
+        <div className="relative h-full flex items-center justify-center">
+          <div className="text-center text-white px-4">
+            <h1 className="text-5xl font-bold mb-4">Budding Minds International School</h1>
+            <p className="text-xl mb-8">Nurturing Young Minds for a Bright Future</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => setActiveSection("contact")}
+                className={`px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  activeSection === "contact"
+                    ? "bg-white text-[#54BAB9] shadow-lg"
+                    : "border-2 border-white text-white hover:bg-white hover:text-[#54BAB9] bg-transparent"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Phone size={20} />
+                  Contact Us
+                </div>
+              </button>
+              <button
+                onClick={() => setActiveSection("bus")}
+                className={`px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  activeSection === "bus"
+                    ? "bg-white text-[#54BAB9] shadow-lg"
+                    : "border-2 border-white text-white hover:bg-white hover:text-[#54BAB9] bg-transparent"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Bus size={20} />
+                  Bus Routes
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
