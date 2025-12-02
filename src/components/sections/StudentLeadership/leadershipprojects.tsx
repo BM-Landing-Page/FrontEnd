@@ -1,242 +1,228 @@
 import Image from "next/image"
-import { BookOpen, Heart, Users, Globe } from "lucide-react"
+import { Heart, Globe, Zap, Target } from "lucide-react"
 
 export default function LeadershipProjects() {
+  const initiatives = [
+    {
+      icon: Target,
+      title: "3D Model",
+      description: "Student-Led Community Transformation",
+    },
+    {
+      icon: Heart,
+      title: "Empathy-Driven",
+      description: "Fostering Deep understanding of community",
+    },
+    {
+      icon: Zap,
+      title: "Student-Driven",
+      description: "Empowering students to lead, ideate and share",
+    },
+    {
+      icon: Globe,
+      title: "Community-Driven",
+      description: "Direct engagement with communities establishing long-term partnerships",
+    },
+  ]
+
+  const partnerships = [
+    {
+      name: "KANAVU Project",
+      partner: "Partnership with ASSEFA",
+      description:
+        "The KANAVU Project, through a partnership with ASSEFA, enabled student leaders to conduct fortnightly literacy sessions while immersing in community needs to build empathy and sustainable educational growth.",
+    },
+    {
+      name: "Eco Champs",
+      partner: "Partnership with BHUMI",
+      description:
+        "A student-led, volunteer-guided sustainability program where Grades 7–11 learned, practiced and led eco-actions—from eco-bricks to composting—culminating in student changemakers winning awards for impactful ideas.",
+    },
+    {
+      name: "BHUMI Young Changemakers Program",
+      partner: "Partnership with BHUMI",
+      description:
+        "Student leaders identified their cause, learned from NGOs and community groups, trained to create impact, and independently executed and reported on their own service projects.",
+    },
+    {
+      name: "Kids Education Revolution",
+      partner: "A Teach-for-India Initiative",
+      description:
+        "Our Grade 11 student was selected nationally as a young changemaker and learned partnership-driven approaches. She returned with new practices and insights that enriched the whole school community.",
+    },
+    {
+      name: "Inclusion & Insight - Scribe Program",
+      partner: "Ongoing Partnership",
+      description:
+        "Through our ongoing partnership, students serve as scribing volunteers, gaining patience, strong listening skills, and deep empathy for diverse learning needs.",
+    },
+    {
+      name: "Educational Empowerment",
+      partner: "Local Government Schools",
+      description:
+        "Student leaders visited Paalvadi government schools, learned about local livelihoods and women-led leadership and conducted storytelling and sports for kindergarteners. It ended with reflective mentoring discussions on giving back.",
+    },
+  ]
+
+  const studentLedInitiatives = [
+    {
+      title: "Action for Community Transformation",
+      description:
+        "ACT was a student-led sustainability symposium which empowered students to analyse issues and pursue actionable environmental change. We brought together educators and experts for panel discussions and judging presentations for collaborative action.",
+    },
+    {
+      title: "I CAN School Challenge",
+      description:
+        'Through the "I CAN" School Challenge with Design for Change, our student leaders got featured for identifying issues like excessive screen time and low reading interest in their community, implementing their solution. They learned that small actions spark meaningful change.',
+    },
+    {
+      title: "Kindness Week",
+      description:
+        "The Outreach & Inclusion team led Kindness Week with a gratitude corner, conflict-resolution sessions, seedball volunteering, and schoolwide grocery, stationery, and hygiene drives, donating all contributions to a local men's mental-health institution and a girls' shelter.",
+    },
+    {
+      title: "Internal Community Upliftment Initiative",
+      description:
+        "Student leaders built deep connections with support staff through home interviews, creating personalised skill-development internships where drivers explored media, admin, and football roles—revealing shared talent and the value of every community member.",
+    },
+    {
+      title: "Budding Minds United Nations",
+      description:
+        "BMUN was a student-led diplomatic conference where learners handled end-to-end management including budget and logistics, united multiple schools to debate crises, practiced advanced negotiation and alliances and built global awareness.",
+    },
+  ]
+
+  const keyProjects = [
+    { name: "KANAVU Project with ASSEFA" },
+    { name: "Eco Champs with BHUMI" },
+    { name: "BHUMI Young Changemakers Program" },
+    { name: "Kids Education Revolution" },
+    { name: "Scribe Program with Pratiksha Learning Centre" },
+    { name: "Visit to Government Paalvadi Schools" },
+    { name: "International Award for Young People" },
+    { name: "Beyond Green - Environmental Awareness Rally" },
+    { name: "Chitlapakkam Rising - Save Lakes Walkathon" },
+    { name: "Student Exchange Program" },
+    { name: "Action for Community Transformation" },
+    { name: "I CAN School Challenge" },
+    { name: "Student Leadership Council - Outreach & Inclusion Department" },
+    { name: "Internal Community Upliftment Initiative" },
+    { name: "Budding Minds United Nations (BMUN)" },
+    { name: "Presented Projects before the Industrial Waste Management Association" },
+  ]
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Banner */}
-      <div className="relative py-20 px-4 text-center overflow-hidden" style={{ minHeight: "60vh" }}>
+      {/* Hero Section */}
+      <section className="relative w-full h-96 overflow-hidden">
         <Image
           src="/images/leadership-hero.jpg"
-          alt="Students collaborating on leadership projects"
+          alt="Students leading community initiatives and transformation"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-35"></div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-white px-4">
+            <h1 className="text-5xl sm:text-6xl font-bold mb-4 drop-shadow-lg">
+              Leadership projects
+            </h1>
+            {/* <p className="text-lg sm:text-xl max-w-2xl mx-auto drop-shadow-md">
+              Empowering students to lead meaningful change through community engagement and transformative initiatives
+            </p> */}
+          </div>
+        </div>
+      </section>
 
-        <div className="max-w-4xl mx-auto relative z-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">Leadership Projects</h1>
-          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-            Showcasing student-led initiatives that foster creativity, community engagement, and meaningful impact
+      {/* Core Values Grid */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Approach</h2>
+          <div className="grid md:grid-cols-4 gap-4">
+            {initiatives.map((initiative, idx) => {
+              const Icon = initiative.icon
+              return (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center text-center p-4 rounded-lg"
+                  style={{ backgroundColor: "#F7ECDE" }}
+                >
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center mb-3"
+                    style={{ backgroundColor: "#54BAB9" }}
+                  >
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-base font-semibold text-gray-900 mb-2">{initiative.title}</h3>
+                  <p className="text-sm text-gray-700">{initiative.description}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Key Projects Overview */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Key Community Projects</h2>
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-3">
+            {keyProjects.map((project, idx) => (
+              <div
+                key={idx}
+                className="p-3 rounded-lg text-center text-sm font-medium text-gray-800"
+                style={{ backgroundColor: "#E9DAC1" }}
+              >
+                {project.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partnerships Section */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Partnerships & Collaborations</h2>
+          <div className="space-y-4">
+            {partnerships.map((partnership, idx) => (
+              <div key={idx} className="pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">{partnership.name}</h3>
+                <p className="text-sm font-medium text-gray-700 mb-2">{partnership.partner}</p>
+                <p className="text-sm text-gray-700 leading-relaxed">{partnership.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Student-Led Initiatives */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Student-Led Initiatives</h2>
+          <div className="space-y-4">
+            {studentLedInitiatives.map((initiative, idx) => (
+              <div key={idx} className="p-5 rounded-lg" style={{ backgroundColor: "#9ED2C6" }}>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{initiative.title}</h3>
+                <p className="text-sm text-gray-800 leading-relaxed">{initiative.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Statement */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#54BAB9" }}>
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Creating Lasting Change</h2>
+          <p className="text-base text-white leading-relaxed">
+            Our student-led community initiatives reflect a deep commitment to empathy-driven action and sustainable
+            impact. Through meaningful partnerships and collaborative projects, students discover their capacity to
+            lead, inspire, and transform their communities.
           </p>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10"></div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-16 space-y-20">
-        {/* BM Gazette Section */}
-        <section className="space-y-8">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-3 mb-4">
-              <BookOpen className="w-8 h-8" style={{ color: "#54BAB9" }} />
-              <h2 className="text-4xl font-bold text-gray-800">The BM Gazette</h2>
-            </div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              A vibrant student-led publication showcasing voices, creativity, and perspectives of our school community
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* First Edition */}
-            <div className="p-8 rounded-2xl shadow-lg" style={{ backgroundColor: "#F7ECDE" }}>
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">First Edition</h3>
-                <p className="text-gray-600 font-medium">Academic Year 2023–2024</p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <Users className="w-5 h-5 mt-1" style={{ color: "#54BAB9" }} />
-                  <div>
-                    <p className="font-semibold text-gray-800">Chief Editors</p>
-                    <p className="text-gray-700">Shalini and Akshara</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <p className="text-gray-700 leading-relaxed">
-                    The debut edition focused solely on school life, capturing memorable events, student activities, and
-                    the spirit of the campus.
-                  </p>
-                  <p className="text-gray-700 leading-relaxed">
-                    Though it was a first attempt, the edition was met with enthusiasm and appreciation, laying a strong
-                    foundation for what was to come.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Second Edition */}
-            <div className="p-8 rounded-2xl shadow-lg" style={{ backgroundColor: "#E9DAC1" }}>
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">Second Edition</h3>
-                <p className="text-gray-600 font-medium">Academic Year 2024–2025</p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <Users className="w-5 h-5 mt-1" style={{ color: "#54BAB9" }} />
-                  <div>
-                    <p className="font-semibold text-gray-800">Chief Editor</p>
-                    <p className="text-gray-700">Hamritha</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <p className="text-gray-700 leading-relaxed">
-                    This edition took a bold step forward by expanding its scope beyond the school walls, featuring
-                    articles on global and social topics.
-                  </p>
-
-                  <div className="space-y-2">
-                    <p className="font-semibold text-gray-800">Topics Covered:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {["Money Management", "Sustainability", "Fashion", "Movies", "Music"].map((topic) => (
-                        <span
-                          key={topic}
-                          className="px-3 py-1 rounded-full text-sm font-medium text-white"
-                          style={{ backgroundColor: "#54BAB9" }}
-                        >
-                          {topic}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="font-semibold text-gray-800">New Features:</p>
-                    <ul className="text-gray-700 space-y-1">
-                      <li>• First Tamil article included</li>
-                      <li>• Dedicated sections for teachers, annas, and akkas</li>
-                      <li>• Platform for diverse voices and experiences</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="p-8 rounded-2xl text-center" style={{ backgroundColor: "#9ED2C6" }}>
-            <p className="text-lg text-gray-800 leading-relaxed max-w-4xl mx-auto">
-              The BM Gazette has evolved into more than just a school newsletter; it has become a space for diverse
-              voices, meaningful conversations, and creative expression, reflecting the dynamic and inclusive spirit of
-              the school.
-            </p>
-          </div>
-        </section>
-
-        {/* Donation Drive Section */}
-        <section className="space-y-8">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-3 mb-4">
-              <Heart className="w-8 h-8" style={{ color: "#54BAB9" }} />
-              <h2 className="text-4xl font-bold text-gray-800">Donation Drive for Avvai Illam</h2>
-            </div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Part of Random Acts of Kindness Week - Supporting underprivileged children through community action
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Initiative Overview */}
-            <div className="lg:col-span-2 p-8 rounded-2xl shadow-lg" style={{ backgroundColor: "#F7ECDE" }}>
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">The Initiative</h3>
-              <div className="space-y-4">
-                <p className="text-gray-700 leading-relaxed">
-                  Organized by the Outreach and Inclusion Department of the Student Leadership Cabinet 2024-2025, this
-                  donation drive aimed to support children at Avvai Illam, a local home for underprivileged girls.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  The drive focused on extending compassion beyond the school walls and fostering a spirit of giving
-                  within the student community. Students from across grades came together to donate generously.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  The initiative was not just about collecting items—it was about building a connection. Students took
-                  time to understand the needs of the children and responded with empathy and thoughtfulness.
-                </p>
-              </div>
-            </div>
-
-            {/* Impact Stats */}
-            <div className="p-8 rounded-2xl shadow-lg" style={{ backgroundColor: "#9ED2C6" }}>
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">Community Impact</h3>
-              <div className="space-y-6">
-                <div className="text-center">
-                  <Globe className="w-12 h-12 mx-auto mb-2" style={{ color: "#54BAB9" }} />
-                  <p className="font-semibold text-gray-800">School-wide</p>
-                  <p className="text-gray-700">Participation</p>
-                </div>
-                <div className="text-center">
-                  <Heart className="w-12 h-12 mx-auto mb-2" style={{ color: "#54BAB9" }} />
-                  <p className="font-semibold text-gray-800">Meaningful</p>
-                  <p className="text-gray-700">Connections</p>
-                </div>
-                <div className="text-center">
-                  <Users className="w-12 h-12 mx-auto mb-2" style={{ color: "#54BAB9" }} />
-                  <p className="font-semibold text-gray-800">Community</p>
-                  <p className="text-gray-700">Building</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Items Collected */}
-          <div className="p-8 rounded-2xl shadow-lg" style={{ backgroundColor: "#E9DAC1" }}>
-            <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Items Collected</h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                  style={{ backgroundColor: "#54BAB9" }}
-                >
-                  <BookOpen className="w-8 h-8 text-white" />
-                </div>
-                <h4 className="font-bold text-gray-800 mb-2">Educational Supplies</h4>
-                <p className="text-gray-700 text-sm">
-                  Notebooks, pens, pencils, and art materials to support their education
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                  style={{ backgroundColor: "#54BAB9" }}
-                >
-                  <Heart className="w-8 h-8 text-white" />
-                </div>
-                <h4 className="font-bold text-gray-800 mb-2">Hygiene Items</h4>
-                <p className="text-gray-700 text-sm">
-                  Soaps, sanitary napkins, toothpaste, and towels to ensure personal hygiene
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                  style={{ backgroundColor: "#54BAB9" }}
-                >
-                  <Globe className="w-8 h-8 text-white" />
-                </div>
-                <h4 className="font-bold text-gray-800 mb-2">Food Items</h4>
-                <p className="text-gray-700 text-sm">
-                  Non-perishable items like rice, pulses, and snacks for daily nourishment
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Success Message */}
-          <div className="p-8 rounded-2xl text-center" style={{ backgroundColor: "#54BAB9" }}>
-            <p className="text-lg text-white leading-relaxed max-w-4xl mx-auto">
-              The success of the donation drive reflected the school community's commitment to outreach and inclusion.
-              It was a meaningful step toward making kindness actionable, ensuring that students experienced firsthand
-              the joy of giving and the importance of supporting those in need.
-            </p>
-          </div>
-        </section>
-      </div>
+      </section>
     </div>
   )
 }

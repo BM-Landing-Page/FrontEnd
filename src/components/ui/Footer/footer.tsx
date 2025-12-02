@@ -78,6 +78,11 @@ export default function Footer() {
                     alt="Partner 6"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
+                  <img
+                    src="/images/partner7.png"
+                    alt="Partner 7"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
                 </div>
                 
                 {/* Duplicate set for seamless loop */}
@@ -113,6 +118,11 @@ export default function Footer() {
                   <img
                     src="/images/partner6.png"
                     alt="Partner 6"
+                    className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
+                  />
+                  <img
+                    src="/images/partner7.png"
+                    alt="Partner 7"
                     className="h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                   />
                 </div>

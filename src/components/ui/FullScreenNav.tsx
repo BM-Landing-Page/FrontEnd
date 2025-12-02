@@ -27,7 +27,7 @@ const NAV_ITEMS = [
     label: "Campus Life",
     subItems: ["A Day at BMIS", "Celebrations","Beyond Books", "Gallery" ],
   },
-  { label: "Student Leadership", subItems: ["SLC Overview", "Student Profiles", "Leadership Projects"] },
+  { label: "Student Leadership", subItems: ["Leadership Projects", "SLC"] },
   {
     label: "BM PD Academy",
     subItems: [
@@ -67,7 +67,7 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Awards and Recogonitions": "/awardsandrecogonitions",
   "Student Voices": "/studentvoice",
   "Beyond Books": "/beyondbooks",
-  "Student Profiles": "/studentprofile",
+  "SLC": "/studentprofile",
   "Leadership Projects": "/leadershipprojects",
   "Alumni": "/alumni",
   "Founder's Message": "/foundersmessage",
