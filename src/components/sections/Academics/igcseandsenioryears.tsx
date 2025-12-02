@@ -229,7 +229,7 @@ export default function CambridgeIGCSE() {
                   Cambridge Recognitions
                 </a>
                 <a
-                  href="https://www.cambridgeinternational.org/programmes-and-qualifications/recognition-and-acceptance/guidance-for-universities/"
+                  href="https://www.cambridgeinternational.org/programmes-and-qualifications/recognition-and-acceptance/country/india/"
                   className="px-8 py-4 bg-[#54BAB9] text-white font-semibold text-center rounded-full hover:bg-[#9ED2C6] hover:text-gray-800 transition-colors border-2 border-[#54BAB9] w-56"
                 >
                   Indian Universities Guide
