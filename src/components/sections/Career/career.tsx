@@ -34,7 +34,7 @@ export default function CareerForm() {
 
   const languageOptions = ["English", "Tamil", "Hindi", "French", "Telugu", "Malayalam", "Others"]
   const genderOptions = ["Male", "Female", "Other", "Prefer not to say"]
-  const maritalOptions = ["Single", "Married", "Divorced", "Widowed"]
+  const maritalOptions = ["Single", "Married"]
   const sourceOptions = ["LinkedIn", "Other Social Media", "Friend", "Known Source"]
 
   const handleInputChange = (field: keyof CareerFormData, value: string) => {
