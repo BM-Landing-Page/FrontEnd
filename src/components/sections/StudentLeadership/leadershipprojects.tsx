@@ -41,7 +41,7 @@ export default function LeadershipProjects() {
     {
       id: "eco-champs",
       name: "Eco Champs with BHUMI",
-      image: "/students-recycling-eco-bricks-composting.jpg",
+      image: "/images/ecochamps.jpeg",
       description:
         "A student-led, volunteer-guided sustainability program where Grades 7–11 learned, practiced and led eco-actions—from eco-bricks to composting—culminating in student changemakers winning awards for impactful ideas.",
     },
