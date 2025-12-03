@@ -33,7 +33,7 @@ export default function CareerGuidancePage() {
         .hero-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, rgba(84, 186, 185, 0.7) 0%, rgba(158, 210, 198, 0.7) 100%);
+          // background: linear-gradient(135deg, rgba(84, 186, 185, 0.7) 0%, rgba(158, 210, 198, 0.7) 100%);
         }
         .hero-content {
           position: relative;
@@ -59,7 +59,6 @@ export default function CareerGuidancePage() {
         .intro-section {
           padding: 1.5rem 4rem;
           background-color: #ffffff;
-          /* removed border-bottom line */
         }
         .intro-text {
           font-size: 1rem;
@@ -77,12 +76,13 @@ export default function CareerGuidancePage() {
           color: #54BAB9;
           font-weight: 700;
         }
-        /* Updated grid to single column layout */
         .sections-container {
           padding: 1.5rem 4rem;
           display: grid;
           grid-template-columns: 1fr;
           gap: 2rem;
+          max-width: 900px;
+          margin: 0 auto;
         }
         .section-item {
           display: flex;
@@ -97,7 +97,6 @@ export default function CareerGuidancePage() {
           box-shadow: 0 8px 24px rgba(84, 186, 185, 0.12);
           transform: translateY(-2px);
         }
-        /* Removed grid-column span and kept consistent flex-direction */
         .section-item:first-child {
           flex-direction: column;
         }
@@ -175,6 +174,37 @@ export default function CareerGuidancePage() {
           font-weight: 700;
           flex-shrink: 0;
         }
+        .cta-section {
+          padding: 1.5rem;
+          background-color: white;
+          display: flex;
+          justify-content: center;
+        }
+        .cta-link {
+          display: inline-block;
+          text-decoration: none;
+        }
+        .cta-button {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          background-color: #54BAB9;
+          color: white;
+          padding: 0.75rem 1.5rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+        .cta-button:hover {
+          background-color: #479f9e;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .cta-text {
+          font-size: 1rem;
+          font-weight: 600;
+        }
         @media (max-width: 768px) {
           .hero-title {
             font-size: 2.5rem;
@@ -213,15 +243,21 @@ export default function CareerGuidancePage() {
           }
         }
       `}</style>
+      
       {/* Hero Section */}
       <section className="hero-section">
-        <img src="/students-in-classroom-learning-career-guidance.jpg" alt="Career Guidance" className="hero-image" />
+        <img 
+          src="/images/careerguidance.jpeg" 
+          alt="Students collaborating and learning" 
+          className="hero-image" 
+        />
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="hero-title">Futures</h1>
           <p className="hero-subtitle">Career Guidance Program @ BMIS</p>
         </div>
       </section>
+
       {/* Introduction Section */}
       <section className="intro-section">
         <p className="intro-text">
@@ -240,6 +276,7 @@ export default function CareerGuidancePage() {
           direction and confidence.
         </p>
       </section>
+
       {/* Content Sections */}
       <section className="sections-container">
         {/* Psychometric Assessments */}
@@ -261,6 +298,7 @@ export default function CareerGuidancePage() {
             </p>
           </div>
         </div>
+
         {/* Career Fairs */}
         <div className="section-item">
           <div className="section-content">
@@ -283,6 +321,7 @@ export default function CareerGuidancePage() {
             </p>
           </div>
         </div>
+
         {/* Internship Opportunities */}
         <div className="section-item">
           <div className="section-content">
@@ -312,17 +351,15 @@ export default function CareerGuidancePage() {
           </div>
         </div>
       </section>
-      <div className="py-6 bg-white">
-        <div className="flex justify-center">
-          <Link href="/cialfo" className="inline-block">
-            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-6 py-3 rounded-lg shadow-md transition-colors cursor-pointer">
-              <div className="text-center">
-                <div className="font-semibold text-base">CIALFO</div>
-              </div>
-              <ArrowRight className="w-5 h-5" />
-            </div>
-          </Link>
-        </div>
+
+      {/* Call to Action */}
+      <div className="cta-section">
+        <Link href="/cialfo" className="cta-link">
+          <div className="cta-button">
+            <div className="cta-text">CIALFO</div>
+            <ArrowRight className="w-5 h-5" />
+          </div>
+        </Link>
       </div>
     </div>
   )

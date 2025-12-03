@@ -1,22 +1,19 @@
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
 export default function CialfoPage() {
   return (
     <main className="w-full bg-white">
       {/* Hero Banner */}
-      <div
-        className="w-full h-64 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] flex items-center justify-center"
-        style={{
-          backgroundImage: "url(/placeholder.svg?height=256&width=1200&query=global-partnership-education-banner)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="text-center text-white">
-          <h1 className="text-4xl font-bold">Cialfo</h1>
-          <p className="text-lg mt-2">Global Partnership with CIALFO</p>
-        </div>
+      <div className="relative w-full h-[60vh] overflow-hidden">
+        <Image
+          src="/images/cialfo.jpeg"
+          alt="Global Partnership with CIALFO - Students collaborating"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
 
       {/* Content Section */}
@@ -85,6 +82,8 @@ export default function CialfoPage() {
           </p>
         </div>
       </div>
+
+      {/* Navigation Button */}
       <div className="py-6 bg-white">
         <div className="flex justify-center">
           <Link href="/careerquest" className="inline-block">

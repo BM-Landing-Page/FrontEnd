@@ -92,7 +92,7 @@ function mergeEventsWithDateRanges(processedEvents: ProcessedEvent[]): GroupedCa
 
         const rangeEvent: GroupedCalendarEvent = {
           ...event,
-          dateRange: `${event.date} - ${endDate}`,
+          dateRange: `${event.date} ${event.day} - ${endDate} ${endDay}`,
           isRangeStart: true,
         }
 
@@ -238,10 +238,7 @@ export default function CalendarPage() {
                         <div className="flex-1 ml-4 md:ml-8 p-4 bg-[#F7ECDE] border-2 border-[#E9DAC1] rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 ease-in-out">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                             <div className="text-xl font-bold text-[#54BAB9] flex-shrink-0">
-                              {event.dateRange || event.date}
-                              <span className="text-[#9ED2C6] text-base font-medium ml-2">
-                                {event.dateRange ? "Event" : event.day}
-                              </span>
+                              {event.dateRange || `${event.date} ${event.day}`}
                             </div>
                           </div>
                           <div className="text-lg font-semibold text-gray-800 mt-2 sm:mt-0">{event.event_name}</div>
