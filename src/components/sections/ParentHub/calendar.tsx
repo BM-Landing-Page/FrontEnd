@@ -1,5 +1,4 @@
 "use client"
-
 import { useEffect, useState } from "react"
 import { fetchAllEvents, type CalendarEvent } from "@/services/api"
 
@@ -9,6 +8,12 @@ interface ProcessedEvent extends CalendarEvent {
   day: string
   month: string
   year: number
+}
+
+interface GroupedCalendarEvent extends ProcessedEvent {
+  dateRange?: string // added for displaying date ranges
+  isRangeStart?: boolean
+  isRangeEnd?: boolean
 }
 
 const monthOrder = [
@@ -38,10 +43,9 @@ function parseEventDate(event_date: string): {
   const year = dateObj.getFullYear()
   const month = dateObj.toLocaleString("en-US", { month: "long" })
   const day = dateObj.toLocaleString("en-US", { weekday: "long" })
-  const date = dateObj.toLocaleString("en-US", { month: "2-digit", day: "2-digit" })
-
+  const date = dateObj.toLocaleString("en-US", { day: "2-digit" })
   return {
-    date: `${date.replace("/", "-")}`,
+    date,
     day,
     month,
     year,
@@ -49,11 +53,76 @@ function parseEventDate(event_date: string): {
   }
 }
 
+function mergeEventsWithDateRanges(processedEvents: ProcessedEvent[]): GroupedCalendarEvent[] {
+  const eventMap = new Map<string, ProcessedEvent[]>()
+
+  // Group events by name
+  processedEvents.forEach((event) => {
+    const key = event.event_name
+    if (!eventMap.has(key)) {
+      eventMap.set(key, [])
+    }
+    eventMap.get(key)!.push(event)
+  })
+
+  const mergedEvents: GroupedCalendarEvent[] = []
+  const processedIds = new Set<string>()
+
+  // Sort all events by date for processing
+  const sortedEvents = [...processedEvents].sort((a, b) => a.fullDate.getTime() - b.fullDate.getTime())
+
+  sortedEvents.forEach((event) => {
+    const eventId = `${event.event_name}-${event.date}`
+    if (processedIds.has(eventId)) return
+
+    const sameNameEvents = eventMap.get(event.event_name) || []
+
+    if (sameNameEvents.length > 1) {
+      // Find consecutive events with the same name
+      const sortedSameName = [...sameNameEvents].sort((a, b) => a.fullDate.getTime() - b.fullDate.getTime())
+
+      // Check if this event is part of a series
+      const currentIndex = sortedSameName.findIndex((e) => e.date === event.date)
+      const nextEvent = currentIndex < sortedSameName.length - 1 ? sortedSameName[currentIndex + 1] : null
+
+      if (nextEvent) {
+        // Create a date range entry
+        const endDate = nextEvent.date
+        const { day: endDay } = nextEvent
+
+        const rangeEvent: GroupedCalendarEvent = {
+          ...event,
+          dateRange: `${event.date} - ${endDate}`,
+          isRangeStart: true,
+        }
+
+        mergedEvents.push(rangeEvent)
+
+        // Mark all events in this range as processed
+        for (let i = currentIndex; i <= currentIndex + 1; i++) {
+          const processedEventId = `${sortedSameName[i].event_name}-${sortedSameName[i].date}`
+          processedIds.add(processedEventId)
+        }
+      } else {
+        // Single event, add as is
+        mergedEvents.push(event)
+        processedIds.add(eventId)
+      }
+    } else {
+      // Single event with this name
+      mergedEvents.push(event)
+      processedIds.add(eventId)
+    }
+  })
+
+  return mergedEvents
+}
+
 export default function CalendarPage() {
   const [events, setEvents] = useState<ProcessedEvent[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [groupedEvents, setGroupedEvents] = useState<Record<string, ProcessedEvent[]>>({})
+  const [groupedEvents, setGroupedEvents] = useState<Record<string, GroupedCalendarEvent[]>>({})
   const [sortedMonthKeys, setSortedMonthKeys] = useState<string[]>([])
 
   useEffect(() => {
@@ -61,7 +130,6 @@ export default function CalendarPage() {
       try {
         setLoading(true)
         const data = await fetchAllEvents()
-
         // Process events with date information for display
         const processedEvents: ProcessedEvent[] = data.map((event) => {
           const { date, day, month, year, fullDate } = parseEventDate(event.event_date)
@@ -75,11 +143,13 @@ export default function CalendarPage() {
           }
         })
 
+        const mergedEvents = mergeEventsWithDateRanges(processedEvents)
+
         setEvents(processedEvents)
 
         // Group events by month and year
-        const grouped: Record<string, ProcessedEvent[]> = {}
-        processedEvents.forEach((event) => {
+        const grouped: Record<string, GroupedCalendarEvent[]> = {}
+        mergedEvents.forEach((event) => {
           const key = `${event.year}-${event.month}`
           if (!grouped[key]) {
             grouped[key] = []
@@ -96,7 +166,6 @@ export default function CalendarPage() {
         const sorted = Object.keys(grouped).sort((a, b) => {
           const [yearA, monthNameA] = a.split("-")
           const [yearB, monthNameB] = b.split("-")
-
           if (Number.parseInt(yearA) !== Number.parseInt(yearB)) {
             return Number.parseInt(yearA) - Number.parseInt(yearB)
           }
@@ -113,7 +182,6 @@ export default function CalendarPage() {
         setLoading(false)
       }
     }
-
     loadEvents()
   }, [])
 
@@ -138,7 +206,6 @@ export default function CalendarPage() {
             <p className="text-lg text-gray-600">Loading events...</p>
           </div>
         )}
-
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
             <p className="text-red-800">
@@ -146,13 +213,11 @@ export default function CalendarPage() {
             </p>
           </div>
         )}
-
         {!loading && events.length === 0 && !error && (
           <div className="text-center py-12">
             <p className="text-lg text-gray-600">No events found.</p>
           </div>
         )}
-
         {!loading && sortedMonthKeys.length > 0 && (
           <div className="relative pl-4 md:pl-8 border-l-4 border-[#E9DAC1]">
             {sortedMonthKeys.map((key) => {
@@ -170,17 +235,16 @@ export default function CalendarPage() {
                       <div key={`${key}-${index}`} className="relative flex items-start group">
                         {/* Timeline dot */}
                         <div className="absolute -left-4 md:-left-8 top-0 mt-2 w-4 h-4 bg-[#54BAB9] rounded-full border-2 border-white z-10" />
-
                         <div className="flex-1 ml-4 md:ml-8 p-4 bg-[#F7ECDE] border-2 border-[#E9DAC1] rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 ease-in-out">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                             <div className="text-xl font-bold text-[#54BAB9] flex-shrink-0">
-                              {event.date}
-                              <span className="text-[#9ED2C6] text-base font-medium ml-2">{event.day}</span>
+                              {event.dateRange || event.date}
+                              <span className="text-[#9ED2C6] text-base font-medium ml-2">
+                                {event.dateRange ? "Event" : event.day}
+                              </span>
                             </div>
                           </div>
-                          <div className="text-lg font-semibold text-gray-800 mt-2 sm:mt-0">
-                            {event.event_name}
-                          </div>
+                          <div className="text-lg font-semibold text-gray-800 mt-2 sm:mt-0">{event.event_name}</div>
                         </div>
                       </div>
                     ))}
