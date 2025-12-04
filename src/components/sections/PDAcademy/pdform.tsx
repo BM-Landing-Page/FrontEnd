@@ -1,588 +1,347 @@
 "use client"
+
 import type React from "react"
-import { useState } from "react"
-import { createPDApplication, type PDFormData } from "@/services/api"
 
-export default function PDForm() {
-  const [formData, setFormData] = useState<PDFormData>({
-    firstName: "",
-    lastName: "",
-    dateOfBirth: "",
-    educationalQualification: "",
-    institutionName: "",
-    designation: "",
+import { useState, type ChangeEvent, type FormEvent } from "react"
+import { Upload } from "lucide-react"
+
+const COURSES = ["CICTT", "CIDTL", "CEYGP"]
+
+export default function ApplicationForm() {
+  const [formData, setFormData] = useState({
+    full_name: "",
+    date_of_birth: "",
+    gender: "",
+    contact_number: "",
+    email_id: "",
     address: "",
-    email: "",
-    mobile: "",
-    reason: "",
+    school_name: "",
+    designation: "",
+    preferred_course: "",
+    reason_to_pursue: "",
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: "success" | "error" | null
-    message: string
-  }>({ type: null, message: "" })
 
-  const handleInputChange = (field: keyof PDFormData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-    // Clear any previous error messages when user starts typing
-    if (submitStatus.type === "error") {
-      setSubmitStatus({ type: null, message: "" })
+  const [resumeFile, setResumeFile] = useState<File | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState("")
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setResumeFile(e.target.files[0])
     }
   }
 
-  const validateForm = (): string | null => {
-    if (!formData.firstName.trim()) return "First name is required"
-    if (!formData.lastName.trim()) return "Last name is required"
-    if (!formData.dateOfBirth) return "Date of birth is required"
-    if (!formData.email.trim()) return "Email is required"
-    if (!formData.reason.trim()) return "Please provide your reason for pursuing CICTL/CIDTL"
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(formData.email)) return "Please enter a valid email address"
-    // Reason length validation (minimum 50 characters for meaningful response)
-    if (formData.reason.trim().length < 50) {
-      return "Please provide a more detailed explanation (minimum 50 characters)"
-    }
-    return null
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
-    // Validate form
-    const validationError = validateForm()
-    if (validationError) {
-      setSubmitStatus({
-        type: "error",
-        message: validationError,
-      })
-      return
-    }
+    e.currentTarget.classList.add("border-primary")
+  }
 
-    setIsSubmitting(true)
-    setSubmitStatus({ type: null, message: "" })
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.currentTarget.classList.remove("border-primary")
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.currentTarget.classList.remove("border-primary")
+    if (e.dataTransfer.files) {
+      setResumeFile(e.dataTransfer.files[0])
+    }
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    setMessage("")
 
     try {
-      const response = await createPDApplication(formData)
-      if (response.success) {
-        setSubmitStatus({
-          type: "success",
-          message:
-            "Your PD application has been submitted successfully! We will review your application and get back to you soon.",
-        })
-        // Reset form after successful submission
-        setFormData({
-          firstName: "",
-          lastName: "",
-          dateOfBirth: "",
-          educationalQualification: "",
-          institutionName: "",
-          designation: "",
-          address: "",
-          email: "",
-          mobile: "",
-          reason: "",
-        })
-        // Scroll to top to show success message
-        window.scrollTo({ top: 0, behavior: "smooth" })
-      } else {
-        setSubmitStatus({
-          type: "error",
-          message: response.error || "Failed to submit application. Please try again.",
-        })
-      }
-    } catch (error) {
-      setSubmitStatus({
-        type: "error",
-        message: "An unexpected error occurred. Please try again.",
+      const form = new FormData()
+      Object.entries(formData).forEach(([key, value]) => {
+        form.append(key, value)
       })
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+      if (resumeFile) {
+        form.append("resume_file", resumeFile)
+      }
 
-  const formatDateForDisplay = (dateString: string) => {
-    if (!dateString) return ""
-    const date = new Date(dateString)
-    const day = date.getDate().toString().padStart(2, "0")
-    const month = (date.getMonth() + 1).toString().padStart(2, "0")
-    const year = date.getFullYear()
-    return `${day}-${month}-${year}`
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/applications`, {
+        method: "POST",
+        body: form,
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to submit application")
+      }
+
+      setMessage("Application submitted successfully!")
+      setFormData({
+        full_name: "",
+        date_of_birth: "",
+        gender: "",
+        contact_number: "",
+        email_id: "",
+        address: "",
+        school_name: "",
+        designation: "",
+        preferred_course: "",
+        reason_to_pursue: "",
+      })
+      setResumeFile(null)
+    } catch (error) {
+      setMessage(`Error: ${error instanceof Error ? error.message : "Something went wrong"}`)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "white" }}>
-      <div style={{ maxWidth: "1024px", margin: "0 auto", padding: "24px" }}>
-        {/* Status Messages */}
-        {submitStatus.type && (
+    <main className="min-h-screen bg-white">
+      <div
+        className="relative w-full h-64 bg-cover bg-center"
+        style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=400&fit=crop")',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-[#54BAB9]/40 to-[#9ED2C6]/40 flex items-center justify-center">
+          <h1 className="text-4xl font-bold text-white text-center text-balance">Career Application Portal</h1>
+        </div>
+      </div>
+
+      <div className="max-w-2xl mx-auto px-4 py-12">
+        {message && (
           <div
-            style={{
-              padding: "16px",
-              borderRadius: "8px",
-              marginBottom: "24px",
-              backgroundColor: submitStatus.type === "success" ? "#dcfce7" : "#fef2f2",
-              border: `2px solid ${submitStatus.type === "success" ? "#16a34a" : "#dc2626"}`,
-              color: submitStatus.type === "success" ? "#15803d" : "#dc2626",
-            }}
+            className={`mb-6 p-4 rounded-lg ${
+              message.includes("successfully") ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+            }`}
           >
-            <p style={{ margin: 0, fontWeight: "500" }}>{submitStatus.message}</p>
+            {message}
           </div>
         )}
-        {/* Header Section */}
-        <div
-          style={{
-            textAlign: "center",
-            padding: "32px 24px",
-            borderRadius: "8px",
-            backgroundColor: "#F7ECDE",
-            marginBottom: "32px",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: "bold",
-              color: "#1f2937",
-              marginBottom: "16px",
-            }}
-          >
-            Professional Development Form
-          </h1>
-          <p
-            style={{
-              color: "#374151",
-              fontSize: "1.125rem",
-              lineHeight: "1.6",
-              maxWidth: "768px",
-              margin: "0 auto",
-            }}
-          >
-            Complete this form to apply for professional development programs. Please provide accurate information to
-            help us process your application effectively.
-          </p>
-        </div>
-        <form onSubmit={handleSubmit}>
-          {/* Main Form Section */}
-          <div
-            style={{
-              border: "2px solid #54BAB9",
-              borderRadius: "8px",
-              marginBottom: "32px",
-              backgroundColor: "white",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: "#E9DAC1",
-                padding: "24px",
-                borderTopLeftRadius: "6px",
-                borderTopRightRadius: "6px",
-              }}
-            >
-              <h2
-                style={{
-                  fontSize: "1.5rem",
-                  fontWeight: "bold",
-                  color: "#1f2937",
-                  margin: "0",
-                }}
-              >
-                Application Details
-              </h2>
-            </div>
-            <div style={{ padding: "24px" }}>
-              {/* First Name and Last Name */}
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                  gap: "24px",
-                  marginBottom: "24px",
-                }}
-              >
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.875rem",
-                      fontWeight: "500",
-                      marginBottom: "8px",
-                      color: "#374151",
-                    }}
-                  >
-                    First Name <span style={{ color: "#ef4444" }}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.firstName}
-                    onChange={(e) => handleInputChange("firstName", e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "12px",
-                      border: "2px solid #9ED2C6",
-                      borderRadius: "6px",
-                      fontSize: "1rem",
-                      outline: "none",
-                      transition: "border-color 0.2s",
-                    }}
-                    onFocus={(e) => (e.target.style.borderColor = "#54BAB9")}
-                    onBlur={(e) => (e.target.style.borderColor = "#9ED2C6")}
-                  />
-                </div>
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.875rem",
-                      fontWeight: "500",
-                      marginBottom: "8px",
-                      color: "#374151",
-                    }}
-                  >
-                    Last Name <span style={{ color: "#ef4444" }}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.lastName}
-                    onChange={(e) => handleInputChange("lastName", e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "12px",
-                      border: "2px solid #9ED2C6",
-                      borderRadius: "6px",
-                      fontSize: "1rem",
-                      outline: "none",
-                      transition: "border-color 0.2s",
-                    }}
-                    onFocus={(e) => (e.target.style.borderColor = "#54BAB9")}
-                    onBlur={(e) => (e.target.style.borderColor = "#9ED2C6")}
-                  />
-                </div>
-              </div>
-              {/* Date of Birth */}
-              <div style={{ marginBottom: "24px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontSize: "0.875rem",
-                    fontWeight: "500",
-                    marginBottom: "8px",
-                    color: "#374151",
-                  }}
-                >
-                  Date of Birth <span style={{ color: "#ef4444" }}>*</span>
-                </label>
-                <input
-                  type="date"
-                  required
-                  value={formData.dateOfBirth}
-                  onChange={(e) => handleInputChange("dateOfBirth", e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "12px",
-                    border: "2px solid #9ED2C6",
-                    borderRadius: "6px",
-                    fontSize: "1rem",
-                    outline: "none",
-                    transition: "border-color 0.2s",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = "#54BAB9")}
-                  onBlur={(e) => (e.target.style.borderColor = "#9ED2C6")}
-                />
-                {formData.dateOfBirth && (
-                  <div
-                    style={{
-                      marginTop: "4px",
-                      fontSize: "0.875rem",
-                      color: "#6b7280",
-                    }}
-                  >
-                    Formatted: {formatDateForDisplay(formData.dateOfBirth)}
-                  </div>
-                )}
-              </div>
-              <div style={{ marginBottom: "24px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontSize: "0.875rem",
-                    fontWeight: "500",
-                    marginBottom: "8px",
-                    color: "#374151",
-                  }}
-                >
-                  Educational Qualification (Mention your highest qualification)
-                </label>
-                <input
-                  type="text"
-                  value={formData.educationalQualification}
-                  onChange={(e) => handleInputChange("educationalQualification", e.target.value)}
-                  placeholder="E.g., Bachelor's Degree, Master's Degree, PhD..."
-                  style={{
-                    width: "100%",
-                    padding: "12px",
-                    border: "2px solid #9ED2C6",
-                    borderRadius: "6px",
-                    fontSize: "1rem",
-                    outline: "none",
-                    transition: "border-color 0.2s",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = "#54BAB9")}
-                  onBlur={(e) => (e.target.style.borderColor = "#9ED2C6")}
-                />
-              </div>
-              {/* Institution Name and Designation */}
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                  gap: "24px",
-                  marginBottom: "24px",
-                }}
-              >
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.875rem",
-                      fontWeight: "500",
-                      marginBottom: "8px",
-                      color: "#374151",
-                    }}
-                  >
-                    Name of the Institution where you are presently employed
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.institutionName}
-                    onChange={(e) => handleInputChange("institutionName", e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "12px",
-                      border: "2px solid #9ED2C6",
-                      borderRadius: "6px",
-                      fontSize: "1rem",
-                      outline: "none",
-                      transition: "border-color 0.2s",
-                    }}
-                    onFocus={(e) => (e.target.style.borderColor = "#54BAB9")}
-                    onBlur={(e) => (e.target.style.borderColor = "#9ED2C6")}
-                  />
-                </div>
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.875rem",
-                      fontWeight: "500",
-                      marginBottom: "8px",
-                      color: "#374151",
-                    }}
-                  >
-                    Your Designation
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.designation}
-                    onChange={(e) => handleInputChange("designation", e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "12px",
-                      border: "2px solid #9ED2C6",
-                      borderRadius: "6px",
-                      fontSize: "1rem",
-                      outline: "none",
-                      transition: "border-color 0.2s",
-                    }}
-                    onFocus={(e) => (e.target.style.borderColor = "#54BAB9")}
-                    onBlur={(e) => (e.target.style.borderColor = "#9ED2C6")}
-                  />
-                </div>
-              </div>
-              {/* Address */}
-              <div style={{ marginBottom: "24px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontSize: "0.875rem",
-                    fontWeight: "500",
-                    marginBottom: "8px",
-                    color: "#374151",
-                  }}
-                >
-                  Address
-                </label>
-                <textarea
-                  rows={4}
-                  value={formData.address}
-                  onChange={(e) => handleInputChange("address", e.target.value)}
-                  placeholder="Enter your complete address..."
-                  style={{
-                    width: "100%",
-                    padding: "12px",
-                    border: "2px solid #9ED2C6",
-                    borderRadius: "6px",
-                    fontSize: "1rem",
-                    outline: "none",
-                    resize: "none",
-                    transition: "border-color 0.2s",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = "#54BAB9")}
-                  onBlur={(e) => (e.target.style.borderColor = "#9ED2C6")}
-                />
-              </div>
-              {/* Email and Mobile */}
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                  gap: "24px",
-                  marginBottom: "24px",
-                }}
-              >
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.875rem",
-                      fontWeight: "500",
-                      marginBottom: "8px",
-                      color: "#374151",
-                    }}
-                  >
-                    Email <span style={{ color: "#ef4444" }}>*</span>
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "12px",
-                      border: "2px solid #9ED2C6",
-                      borderRadius: "6px",
-                      fontSize: "1rem",
-                      outline: "none",
-                      transition: "border-color 0.2s",
-                    }}
-                    onFocus={(e) => (e.target.style.borderColor = "#54BAB9")}
-                    onBlur={(e) => (e.target.style.borderColor = "#9ED2C6")}
-                  />
-                </div>
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.875rem",
-                      fontWeight: "500",
-                      marginBottom: "8px",
-                      color: "#374151",
-                    }}
-                  >
-                    Mobile
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.mobile}
-                    onChange={(e) => handleInputChange("mobile", e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "12px",
-                      border: "2px solid #9ED2C6",
-                      borderRadius: "6px",
-                      fontSize: "1rem",
-                      outline: "none",
-                      transition: "border-color 0.2s",
-                    }}
-                    onFocus={(e) => (e.target.style.borderColor = "#54BAB9")}
-                    onBlur={(e) => (e.target.style.borderColor = "#9ED2C6")}
-                  />
-                </div>
-              </div>
-              {/* Reason to pursue CICTL/CIDTL */}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="border-2 border-[#54BAB9] p-6 rounded-lg">
+            <h2 className="text-xl font-semibold text-[#54BAB9] mb-4">Personal Information</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label
-                  style={{
-                    display: "block",
-                    fontSize: "0.875rem",
-                    fontWeight: "500",
-                    marginBottom: "8px",
-                    color: "#374151",
-                  }}
+                <label htmlFor="full_name" className="block text-sm font-medium mb-2">
+                  Full Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="full_name"
+                  type="text"
+                  name="full_name"
+                  value={formData.full_name}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border border-[#9ED2C6] rounded-lg focus:ring-2 focus:ring-[#54BAB9] outline-none"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="date_of_birth" className="block text-sm font-medium mb-2">
+                  Date of Birth <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="date_of_birth"
+                  type="date"
+                  name="date_of_birth"
+                  value={formData.date_of_birth}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border border-[#9ED2C6] rounded-lg focus:ring-2 focus:ring-[#54BAB9] outline-none"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="gender" className="block text-sm font-medium mb-2">
+                  Gender <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="gender"
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border border-[#9ED2C6] rounded-lg focus:ring-2 focus:ring-[#54BAB9] outline-none"
                 >
-                  Reason to pursue this program <span style={{ color: "#ef4444" }}>*</span>
+                  <option value="">Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="contact_number" className="block text-sm font-medium mb-2">
+                  Contact Number <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="contact_number"
+                  type="tel"
+                  name="contact_number"
+                  value={formData.contact_number}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border border-[#9ED2C6] rounded-lg focus:ring-2 focus:ring-[#54BAB9] outline-none"
+                  placeholder="10-digit phone number"
+                />
+              </div>
+
+              <div className="md:col-span-2">
+                <label htmlFor="email_id" className="block text-sm font-medium mb-2">
+                  Email Address <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="email_id"
+                  type="email"
+                  name="email_id"
+                  value={formData.email_id}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border border-[#9ED2C6] rounded-lg focus:ring-2 focus:ring-[#54BAB9] outline-none"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+
+              <div className="md:col-span-2">
+                <label htmlFor="address" className="block text-sm font-medium mb-2">
+                  Address <span className="text-red-500">*</span>
                 </label>
                 <textarea
-                  rows={6}
+                  id="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
                   required
-                  value={formData.reason}
-                  onChange={(e) => handleInputChange("reason", e.target.value)}
-                  placeholder="Please explain your motivation and reasons for pursuing CICTL/CIDTL certification. Include your career goals, how this certification aligns with your professional development, and what you hope to achieve..."
-                  style={{
-                    width: "100%",
-                    padding: "12px",
-                    border: "2px solid #9ED2C6",
-                    borderRadius: "6px",
-                    fontSize: "1rem",
-                    outline: "none",
-                    resize: "none",
-                    transition: "border-color 0.2s",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = "#54BAB9")}
-                  onBlur={(e) => (e.target.style.borderColor = "#9ED2C6")}
+                  className="w-full px-4 py-2 border border-[#9ED2C6] rounded-lg focus:ring-2 focus:ring-[#54BAB9] outline-none"
+                  placeholder="Enter your complete address"
+                  rows={2}
                 />
-                <div
-                  style={{
-                    marginTop: "4px",
-                    fontSize: "0.75rem",
-                    color: "#6b7280",
-                  }}
-                >
-                  Please provide a detailed explanation (minimum 100 words required)
-                  {formData.reason && (
-                    <span style={{ marginLeft: "8px", color: formData.reason.length >= 50 ? "#16a34a" : "#dc2626" }}>
-                      ({formData.reason.length} characters)
-                    </span>
-                  )}
-                </div>
               </div>
             </div>
           </div>
-          {/* Submit Button */}
-          <div style={{ display: "flex", justifyContent: "center", paddingTop: "24px" }}>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              style={{
-                padding: "16px 48px",
-                backgroundColor: isSubmitting ? "#9ca3af" : "#54BAB9",
-                color: "white",
-                fontSize: "1.125rem",
-                fontWeight: "600",
-                border: "none",
-                borderRadius: "8px",
-                cursor: isSubmitting ? "not-allowed" : "pointer",
-                transition: "background-color 0.2s",
-                opacity: isSubmitting ? 0.7 : 1,
-              }}
-              onMouseEnter={(e) => {
-                if (!isSubmitting) {
-                  e.currentTarget.style.backgroundColor = "#4a9d9c"
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isSubmitting) {
-                  e.currentTarget.style.backgroundColor = "#54BAB9"
-                }
-              }}
-            >
-              {isSubmitting ? "Submitting..." : "Submit Application"}
-            </button>
+
+          <div className="border-2 border-[#54BAB9] p-6 rounded-lg">
+            <h2 className="text-xl font-semibold text-[#54BAB9] mb-4">Professional Information</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="school_name" className="block text-sm font-medium mb-2">
+                  School Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="school_name"
+                  type="text"
+                  name="school_name"
+                  value={formData.school_name}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border border-[#9ED2C6] rounded-lg focus:ring-2 focus:ring-[#54BAB9] outline-none"
+                  placeholder="Your school name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="designation" className="block text-sm font-medium mb-2">
+                  Designation <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="designation"
+                  type="text"
+                  name="designation"
+                  value={formData.designation}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border border-[#9ED2C6] rounded-lg focus:ring-2 focus:ring-[#54BAB9] outline-none"
+                  placeholder="Your designation"
+                />
+              </div>
+
+              <div className="md:col-span-2">
+                <label htmlFor="preferred_course" className="block text-sm font-medium mb-2">
+                  Preferred Course <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="preferred_course"
+                  name="preferred_course"
+                  value={formData.preferred_course}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border border-[#9ED2C6] rounded-lg focus:ring-2 focus:ring-[#54BAB9] outline-none"
+                >
+                  <option value="">Select a course</option>
+                  {COURSES.map((course) => (
+                    <option key={course} value={course}>
+                      {course}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="md:col-span-2">
+                <label htmlFor="reason_to_pursue" className="block text-sm font-medium mb-2">
+                  Reason to Pursue <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  id="reason_to_pursue"
+                  name="reason_to_pursue"
+                  value={formData.reason_to_pursue}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border border-[#9ED2C6] rounded-lg focus:ring-2 focus:ring-[#54BAB9] outline-none"
+                  placeholder="Why do you want to pursue this course?"
+                  rows={3}
+                />
+              </div>
+            </div>
           </div>
+
+          <div className="border-2 border-[#54BAB9] p-6 rounded-lg">
+            <h2 className="text-xl font-semibold text-[#54BAB9] mb-4">Resume Upload</h2>
+
+            <div
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              className="border-2 border-dashed border-[#9ED2C6] rounded-lg p-8 text-center cursor-pointer transition-colors hover:border-[#54BAB9]"
+            >
+              <label htmlFor="resume_file" className="cursor-pointer block">
+                <Upload className="w-8 h-8 text-[#54BAB9] mx-auto mb-2" />
+                <p className="text-sm font-medium text-gray-900">Drag and drop your resume here, or click to select</p>
+                <p className="text-xs text-gray-600 mt-1">PDF, DOC, DOCX (Max 5MB)</p>
+              </label>
+              <input
+                id="resume_file"
+                type="file"
+                name="resume_file"
+                onChange={handleFileChange}
+                accept=".pdf,.doc,.docx"
+                className="hidden"
+              />
+            </div>
+
+            {resumeFile && (
+              <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
+                <span className="text-green-700 text-sm">✓ {resumeFile.name}</span>
+              </div>
+            )}
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-[#54BAB9] text-white py-3 rounded-lg font-semibold hover:bg-[#54BAB9]/90 disabled:opacity-50 transition-colors"
+          >
+            {loading ? "Submitting..." : "Submit Application"}
+          </button>
         </form>
       </div>
-    </div>
+    </main>
   )
 }

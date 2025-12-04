@@ -460,139 +460,149 @@ export const deleteCareerApplication = async (id: number): Promise<ApiResponse<a
       error: error instanceof Error ? error.message : "Failed to delete career application",
     }
   }
-}//
+}
+
+//
 // ========================
 // ✅ PD APPLICATION SECTION
 // ========================
 //
-
 export interface PDApplication {
-  id?: number
-  first_name: string
-  last_name: string
-  date_of_birth: string
-  educational_qualification?: string
-  institution_name?: string
-  designation?: string
-  address?: string
-  email: string
-  mobile?: string
-  reason: string
-  submitted_at?: string
+  id?: number;
+  full_name: string;
+  date_of_birth: string;
+  gender: string;
+  contact_number: string;
+  email_id: string;
+  address: string;
+  school_name: string;
+  designation: string;
+  preferred_course: string;
+  reason_to_pursue: string;
+  resume_file: string;
+  submitted_at?: string;
 }
 
 export interface PDFormData {
-  firstName: string
-  lastName: string
-  dateOfBirth: string
-  educationalQualification: string
-  institutionName: string
-  designation: string
-  address: string
-  email: string
-  mobile: string
-  reason: string
+  fullName: string;
+  dateOfBirth: string;
+  gender: string;
+  contactNumber: string;
+  emailId: string;
+  address: string;
+  schoolName: string;
+  designation: string;
+  preferredCourse: string;
+  reasonToPursue: string;
+  resumeFile: File; // Now a File object
 }
 
-// Create PD application
+
+// ---------------- CREATE PD APPLICATION ----------------
 export const createPDApplication = async (formData: PDFormData): Promise<ApiResponse<any>> => {
   try {
-    // Map frontend field names to backend expected field names
-    const applicationData: Omit<PDApplication, "id" | "submitted_at"> = {
-      first_name: formData.firstName,
-      last_name: formData.lastName,
-      date_of_birth: formData.dateOfBirth,
-      educational_qualification: formData.educationalQualification,
-      institution_name: formData.institutionName,
-      designation: formData.designation,
-      address: formData.address,
-      email: formData.email,
-      mobile: formData.mobile,
-      reason: formData.reason,
-    }
+    const body = new FormData();
+    body.append("full_name", formData.fullName);
+    body.append("date_of_birth", formData.dateOfBirth);
+    body.append("gender", formData.gender);
+    body.append("contact_number", formData.contactNumber);
+    body.append("email_id", formData.emailId);
+    body.append("address", formData.address);
+    body.append("school_name", formData.schoolName);
+    body.append("designation", formData.designation);
+    body.append("preferred_course", formData.preferredCourse);
+    body.append("reason_to_pursue", formData.reasonToPursue);
+    body.append("resume", formData.resumeFile); // Must match Multer field name
 
     const response = await fetch(`${API_BASE_URL}/applications`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(applicationData),
-    })
+      body, // FormData automatically sets multipart/form-data
+    });
 
     if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(errorData.error || `HTTP error! status: ${response.status}`)
+      const errorData = await response.json();
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json()
-    return { success: true, data }
+    const data = await response.json();
+    return { success: true, data };
   } catch (error) {
-    console.error("Error creating PD application:", error)
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : "Failed to submit PD application",
-    }
+    console.error("Error creating PD application:", error);
+    return { success: false, error: error instanceof Error ? error.message : "Failed to submit application" };
   }
-}
+};
 
-// Fetch all PD applications (protected)
+// ---------------- FETCH ALL PD APPLICATIONS ----------------
 export const fetchPDApplications = async (): Promise<ApiResponse<PDApplication[]>> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/applications`)
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
-    const data = await response.json()
-    return { success: true, data }
+    const response = await fetch(`${API_BASE_URL}/applications`);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await response.json();
+    return { success: true, data };
   } catch (error) {
-    console.error("Error fetching PD applications:", error)
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : "Failed to fetch PD applications",
-    }
+    console.error("Error fetching PD applications:", error);
+    return { success: false, error: error instanceof Error ? error.message : "Failed to fetch applications" };
   }
-}
+};
 
-// Update PD application (protected)
-export const updatePDApplication = async (id: number, updates: Partial<PDApplication>): Promise<ApiResponse<any>> => {
+// ---------------- UPDATE PD APPLICATION ----------------
+export const updatePDApplication = async (id: number, updates: Partial<PDFormData>): Promise<ApiResponse<any>> => {
   try {
+    const body = new FormData();
+    for (const [key, value] of Object.entries(updates)) {
+      if (value !== undefined) {
+        // Map frontend keys to backend
+        if (key === "fullName") body.append("full_name", value as string);
+        else if (key === "dateOfBirth") body.append("date_of_birth", value as string);
+        else if (key === "contactNumber") body.append("contact_number", value as string);
+        else if (key === "emailId") body.append("email_id", value as string);
+        else if (key === "schoolName") body.append("school_name", value as string);
+        else if (key === "preferredCourse") body.append("preferred_course", value as string);
+        else if (key === "reasonToPursue") body.append("reason_to_pursue", value as string);
+        else if (key === "resumeFile" && value instanceof File) body.append("resume", value);
+        else body.append(key, value as string);
+      }
+    }
+
     const response = await fetch(`${API_BASE_URL}/applications/${id}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updates),
-    })
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
-    const data = await response.json()
-    return { success: true, data }
-  } catch (error) {
-    console.error("Error updating PD application:", error)
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : "Failed to update PD application",
-    }
-  }
-}
+      body,
+    });
 
-// Delete PD application (protected)
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error updating PD application:", error);
+    return { success: false, error: error instanceof Error ? error.message : "Failed to update application" };
+  }
+};
+
+// ---------------- DELETE PD APPLICATION ----------------
 export const deletePDApplication = async (id: number): Promise<ApiResponse<any>> => {
   try {
     const response = await fetch(`${API_BASE_URL}/applications/${id}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
-    const data = await response.json()
-    return { success: true, data }
-  } catch (error) {
-    console.error("Error deleting PD application:", error)
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : "Failed to delete PD application",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
     }
+
+    const data = await response.json();
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error deleting PD application:", error);
+    return { success: false, error: error instanceof Error ? error.message : "Failed to delete application" };
   }
-}
+};
+
 
 //
 // ========================
