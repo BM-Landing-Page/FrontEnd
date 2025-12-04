@@ -310,80 +310,83 @@ export const fetchBusRouteById = async (routeId: string): Promise<ApiResponse<Bu
 }
 
 
-//
+
 // ========================
 // ✅ CAREER SECTION
 // ========================
-//
 
 export interface CareerApplication {
   id?: number
-  first_name: string
-  last_name?: string
+  name: string
   gender: string
   email: string
-  phone?: string
+  contact_number: string
   date_of_birth: string
-  marital_status?: string
-  languages_known?: string[]
-  address?: string
-  how_did_you_know_us?: string
-  educational_qualification?: string
-  work_experience?: string
-  area_of_expertise?: string
-  reason_to_associate: string
+  marital_status: string
+  address: string
+  resume?: string
+  position_id?: string
   submitted_at?: string
 }
 
 export interface CareerFormData {
-  firstName: string
-  lastName: string
+  name: string
   gender: string
   email: string
-  phone: string
-  dateOfBirth: string
-  maritalStatus: string
-  languages: string[]
+  contact_number: string
+  date_of_birth: string
+  marital_status: string
   address: string
-  howKnowUs: string
-  education: string
-  experience: string
-  expertise: string
-  motivation: string
+  resume?: File | null
 }
 
-// Create career application
-export const createCareerApplication = async (formData: CareerFormData): Promise<ApiResponse<any>> => {
+// Create career application with improved error handling
+export const createCareerApplication = async (
+  formData: CareerFormData & { position_id: string },
+): Promise<ApiResponse<any>> => {
   try {
-    // Map frontend field names to backend expected field names
-    const applicationData: Omit<CareerApplication, "id" | "submitted_at"> = {
-      first_name: formData.firstName,
-      last_name: formData.lastName,
-      gender: formData.gender,
-      email: formData.email,
-      phone: formData.phone,
-      date_of_birth: formData.dateOfBirth,
-      marital_status: formData.maritalStatus,
-      languages_known: formData.languages,
-      address: formData.address,
-      how_did_you_know_us: formData.howKnowUs,
-      educational_qualification: formData.education,
-      work_experience: formData.experience,
-      area_of_expertise: formData.expertise,
-      reason_to_associate: formData.motivation,
+    const formDataToSend = new FormData()
+    formDataToSend.append("name", formData.name)
+    formDataToSend.append("gender", formData.gender)
+    formDataToSend.append("email", formData.email)
+    formDataToSend.append("contact_number", formData.contact_number)
+    formDataToSend.append("date_of_birth", formData.date_of_birth)
+    formDataToSend.append("marital_status", formData.marital_status)
+    formDataToSend.append("address", formData.address)
+    formDataToSend.append("position_id", formData.position_id)
+
+    if (formData.resume) {
+      formDataToSend.append("resume", formData.resume)
     }
 
     const response = await fetch(`${API_BASE_URL}/career`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(applicationData),
+      body: formDataToSend,
     })
 
     if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(errorData.error || `HTTP error! status: ${response.status}`)
+      let errorMessage = `HTTP error! status: ${response.status}`
+      
+      // Clone the response so we can try multiple parsing methods
+      const responseClone = response.clone()
+      
+      try {
+        const errorData = await response.json()
+        errorMessage = errorData.error || errorData.message || errorMessage
+      } catch {
+        // If JSON parsing fails, try to get text
+        try {
+          const errorText = await responseClone.text()
+          if (errorText) errorMessage = errorText
+        } catch {
+          // Keep the default error message
+        }
+      }
+      
+      return {
+        success: false,
+        error: errorMessage,
+      }
     }
 
     const data = await response.json()
@@ -457,9 +460,7 @@ export const deleteCareerApplication = async (id: number): Promise<ApiResponse<a
       error: error instanceof Error ? error.message : "Failed to delete career application",
     }
   }
-}
-
-//
+}//
 // ========================
 // ✅ PD APPLICATION SECTION
 // ========================

@@ -1,259 +1,207 @@
-"use client"
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
 
-import Link from "next/link"
-import { useState, useEffect } from "react"
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Trophy, Medal, Award, Star, Globe, Crown, Target, ArrowRight, Loader2 } from "lucide-react"
-import { fetchAchievements, type Achievement } from "@/services/api"
-
-interface DisplayAchievement extends Achievement {
-  icon: any
-  borderColor: string
-  headerBg: string
-  emoji: string
-  awards: string[]
+type SchoolAwardContent = {
+  subtitle: string
+  description: string
 }
 
-export default function StudentAchievement() {
-  const [achievements, setAchievements] = useState<DisplayAchievement[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+type CambridgeAwardContent = {
+  name: string
+  award: string
+}
 
-  const getIconForAchievement = (title: string, tagline: string) => {
-    const text = (title + " " + tagline).toLowerCase()
-    if (text.includes("skating") || text.includes("sport")) return Medal
-    if (text.includes("journalist") || text.includes("writing")) return Award
-    if (text.includes("world record") || text.includes("record")) return Globe
-    if (text.includes("chess")) return Crown
-    if (text.includes("strength") || text.includes("physical")) return Trophy
-    if (text.includes("cambridge") || text.includes("academic")) return Star
-    return Target
-  }
+type IAYPContent = {
+  highlight: string
+  detail: string
+}
 
-  const getColorScheme = (index: number) => {
-    const schemes = [
-      { borderColor: "#54BAB9", headerBg: "#F7ECDE", emoji: "🏆" },
-      { borderColor: "#9ED2C6", headerBg: "#E9DAC1", emoji: "🌟" },
-      { borderColor: "#54BAB9", headerBg: "#F7ECDE", emoji: "🎯" },
-      { borderColor: "#E9DAC1", headerBg: "#9ED2C6", emoji: "⭐" },
-    ]
-    return schemes[index % schemes.length]
-  }
+type TabData = {
+  id: string
+  label: string
+  title: string
+  fullText: string
+  coordinators?: string[]
+} & (
+  | { id: "school-awards"; content: SchoolAwardContent[] }
+  | { id: "cambridge-awards"; content: CambridgeAwardContent[] }
+  | { id: "iayp"; content: IAYPContent[] }
+)
 
-  useEffect(() => {
-    const loadAchievements = async () => {
-      try {
-        setLoading(true)
-        const response = await fetchAchievements()
+const tabs: TabData[] = [
+  {
+    id: "school-awards",
+    label: "School Awards & Recognitions",
+    title: "Celebrating Excellence and Impact",
+    content: [
+      {
+        subtitle: "Hodder Research School",
+        description:
+          "Recognized for our continued pursuit of evidence-based teaching practices and commitment to professional development.",
+      },
+      {
+        subtitle: "Excellent Contribution to Holistic Approach",
+        description:
+          "The Economic Times – Education Leadership Awards (2025), honoring our efforts in nurturing socially responsible learners.",
+      },
+      {
+        subtitle: "Community Engagement Initiative of the Year",
+        description:
+          "ScooNews at the New India Champions in Education Awards (2025), acknowledging our impactful outreach and civic learning initiatives.",
+      },
+    ],
+    fullText:
+      "At Budding Minds International School, excellence is not just an aspiration — it's a way of life. Over the years, our commitment to innovative pedagogy, holistic learning, and community engagement has been recognized by leading national and international institutions. Each recognition reflects our unwavering dedication to fostering purposeful learning, compassionate citizenship, and a culture of excellence — values that define the Budding Minds way.",
+  },
+  {
+    id: "cambridge-awards",
+    label: "Cambridge Learner Awards",
+    title: "Celebrating Global Excellence",
+    content: [
+      {
+        name: "Vinoth Maximus",
+        award: "Cambridge IGCSE: Top in the World – Physical Science",
+      },
+      {
+        name: "K. S. Saadhana Anugraha",
+        award: "Cambridge IGCSE: Top in the World – Tamil & Mathematics",
+      },
+    ],
+    fullText:
+      "Our learners shine bright with Top in the World titles at the Cambridge IGCSE Awards — a proud moment for the entire Budding Minds community. These prestigious international recognitions stand as a testament to the academic rigour, perseverance, and passion for learning that define our students — and to the culture of excellence that lies at the heart of Budding Minds. Each award is not just a milestone but an inspiration — a reminder of what young minds can achieve when nurtured with purpose, passion, and perseverance.",
+  },
+  {
+    id: "iayp",
+    label: "IAYP Programme",
+    title: "International Award for Young People",
+    content: [
+      {
+        highlight: "Flexible, student-led activities",
+        detail:
+          "Across four core areas: Voluntary Service, Skill Development, Physical Recreation, and Adventurous Journey.",
+      },
+      {
+        highlight: "Three Progressive Levels",
+        detail: "Bronze → Silver → Gold with time-frames from 6 to 18 months.",
+      },
+      {
+        highlight: "Non-competitive Structure",
+        detail: "Participants set personal goals, work at their pace, and are supported by trained Award Leaders.",
+      },
+    ],
+    fullText:
+      "At Budding Minds International School, we are proud to be a certified YES Centre for the International Award for Young People (IAYP) — a globally recognised self-development programme for students aged 14 years and above. By offering the IAYP programme, BMIS empowers our adolescents to build resilience, leadership, empathy and global citizenship. For students ready to challenge themselves and make a positive impact – the IAYP at BMIS is a pathway to growth, discovery and distinction.",
+    coordinators: ["Ms. HemaSudha (IAYP Coordinator)", "Anita Jai", "Aaliya Sultana", "Vaishali Rajan"],
+  },
+]
 
-        if (response.success && response.data) {
-          // Transform backend data to display format
-          const transformedAchievements: DisplayAchievement[] = response.data.map((achievement, index) => {
-            const colorScheme = getColorScheme(index)
-            return {
-              ...achievement,
-              icon: getIconForAchievement(achievement.title, achievement.tagline),
-              borderColor: colorScheme.borderColor,
-              headerBg: colorScheme.headerBg,
-              emoji: colorScheme.emoji,
-              awards: achievement.desc ? achievement.desc.split("\n").filter((line) => line.trim()) : [],
-            }
-          })
-          setAchievements(transformedAchievements)
-        } else {
-          setError(response.error || "Failed to load achievements")
-        }
-      } catch (err) {
-        setError("An unexpected error occurred")
-        console.error("Error loading achievements:", err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadAchievements()
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-white via-[#F7ECDE]/30 to-[#9ED2C6]/20 flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="h-12 w-12 animate-spin text-[#54BAB9] mx-auto mb-4" />
-          <p className="text-xl text-gray-600">Loading achievements...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-white via-[#F7ECDE]/30 to-[#9ED2C6]/20 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-red-500 text-xl mb-4">⚠️ Error Loading Achievements</div>
-          <p className="text-gray-600 mb-4">{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-[#54BAB9] text-white px-6 py-2 rounded-lg hover:bg-[#54BAB9]/90 transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    )
-  }
+export default function AwardsPage() {
+  const [activeTab, setActiveTab] = useState<string>("school-awards")
+  const activeTabData = tabs.find((tab) => tab.id === activeTab)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-[#F7ECDE]/30 to-[#9ED2C6]/20">
-      {/* Floating Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-20 w-20 h-20 bg-[#54BAB9]/10 rounded-full animate-pulse"></div>
-        <div className="absolute top-32 right-10 w-16 h-16 bg-[#9ED2C6]/15 rounded-full animate-bounce"></div>
-        <div className="absolute bottom-40 left-10 w-24 h-24 bg-[#E9DAC1]/20 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-20 right-32 w-32 h-32 bg-[#F7ECDE]/30 rounded-full animate-bounce"></div>
-      </div>
-
-      {/* Hero Banner */}
-      <div className="relative h-96 overflow-hidden">
-        <div className="absolute inset-0">
-          <img src="/images/studentachievement.jpg" alt="Student Achievements" className="w-full h-full object-cover" />
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center text-center">
-          <div className="text-white">
-            <h1 className="text-6xl md:text-8xl font-black mb-6 drop-shadow-2xl">Student Achievements</h1>
-            <p className="text-2xl md:text-3xl font-semibold drop-shadow-lg max-w-5xl mx-auto">
-              Celebrating remarkable accomplishments on national and international platforms
-            </p>
+    <main className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="relative h-96 md:h-[500px] overflow-hidden" style={{ background: 'linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 50%, #9ED2C6 100%)' }}>
+        <div className="relative h-full flex items-center justify-center">
+          <div className="text-center px-4 max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#54BAB9' }}>Awards & Recognitions</h1>
+            <p className="text-lg md:text-xl" style={{ color: '#54BAB9' }}>Celebrating Excellence and Global Achievement</p>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Achievement Categories Section */}
-      <div className="container mx-auto px-4 py-12 max-w-7xl relative">
-        {/* Uniform Achievement Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {achievements.length > 0 ? (
-            achievements.map((student, index) => {
-              const IconComponent = student.icon
-              const firstName = student.name.split(" ")[0]
+      {/* Tabs Section */}
+      <section className="py-12 md:py-20 px-4 md:px-8 max-w-6xl mx-auto">
+        <div className="flex flex-wrap gap-3 mb-12 pb-6 justify-center" style={{ borderBottom: '1px solid #E9DAC1' }}>
+          {tabs.map((tab) => (
+            <Button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 font-medium transition-all rounded-md ${
+                activeTab === tab.id
+                  ? "text-white"
+                  : "bg-transparent"
+              }`}
+              style={{
+                backgroundColor: activeTab === tab.id ? '#54BAB9' : 'transparent',
+                color: activeTab === tab.id ? 'white' : '#54BAB9',
+              }}
+              variant="ghost"
+            >
+              {tab.label}
+            </Button>
+          ))}
+        </div>
 
-              return (
-                <Card
-                  key={student.id || index}
-                  className="border rounded-xl bg-white hover:shadow-md transition-shadow duration-200 h-full flex flex-col"
-                >
-                  <CardHeader className="pb-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        <div className="h-9 w-9 rounded-md border border-[#54BAB9]/30 grid place-items-center text-[#54BAB9] bg-white">
-                          <IconComponent className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <CardTitle className="text-xl font-semibold text-gray-900">{student.name}</CardTitle>
-                          <CardDescription className="text-sm text-gray-600">{student.tagline}</CardDescription>
-                        </div>
+        {/* Tab Content */}
+        {activeTabData && (
+          <div className="animate-in fade-in duration-500">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#54BAB9' }}>{activeTabData.title}</h2>
+            <p className="text-lg text-gray-700 mb-8 leading-relaxed">{activeTabData.fullText}</p>
+
+            {/* Content Grid */}
+            <div className="grid gap-6 md:gap-8">
+              {activeTabData.id === "school-awards" &&
+                activeTabData.content.map((item, idx) => (
+                  <div key={idx} className="pl-6 py-4 rounded-r-lg" style={{ borderLeft: '4px solid #54BAB9', backgroundColor: '#F7ECDE' }}>
+                    <h3 className="text-xl font-semibold mb-2" style={{ color: '#54BAB9' }}>{item.subtitle}</h3>
+                    <p className="text-gray-700 leading-relaxed">{item.description}</p>
+                  </div>
+                ))}
+
+              {activeTabData.id === "cambridge-awards" && (
+                <div className="grid md:grid-cols-2 gap-6">
+                  {activeTabData.content.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-6 rounded-lg hover:shadow-lg transition-shadow"
+                      style={{ background: 'linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 100%)', border: '1px solid #9ED2C6' }}
+                    >
+                      <div className="mb-3 h-12 w-12 rounded-full flex items-center justify-center" style={{ backgroundColor: '#54BAB9' }}>
+                        <span className="text-white font-bold text-lg">{idx + 1}</span>
                       </div>
-
-                      {student.grade && (
-                        <span className="px-2 py-1 rounded-full border border-[#54BAB9]/30 text-xs text-gray-700 bg-white">
-                          {student.grade}
-                        </span>
-                      )}
+                      <h3 className="text-xl font-bold mb-2" style={{ color: '#54BAB9' }}>{item.name}</h3>
+                      <p className="text-gray-700">{item.award}</p>
                     </div>
-                  </CardHeader>
+                  ))}
+                </div>
+              )}
 
-                  <CardContent className="pt-4 flex-grow">
-                    <div className="space-y-4">
+              {activeTabData.id === "iayp" && (
+                <>
+                  <div className="grid md:grid-cols-3 gap-6 mb-8">
+                    {activeTabData.content.map((item, idx) => (
                       <div
-                        className="p-3 rounded-md bg-gray-50 border-l-2"
-                        style={{ borderLeftColor: student.borderColor }}
+                        key={idx}
+                        className="p-6 bg-white rounded-lg hover:shadow-md transition-all"
+                        style={{ border: '2px solid #54BAB9' }}
                       >
-                        <p className="text-sm text-gray-800 leading-relaxed">{student.title}</p>
+                        <h3 className="text-lg font-bold mb-3" style={{ color: '#54BAB9' }}>{item.highlight}</h3>
+                        <p className="text-gray-700 text-sm leading-relaxed">{item.detail}</p>
                       </div>
+                    ))}
+                  </div>
 
+                  {activeTabData.coordinators && (
+                    <div className="mt-10 p-6 rounded-lg" style={{ backgroundColor: '#F7ECDE', border: '1px solid #E9DAC1' }}>
+                      <h3 className="text-xl font-bold mb-4" style={{ color: '#54BAB9' }}>Certified Award Leaders</h3>
                       <ul className="space-y-2">
-                        {student.awards.map((award, awardIndex) => (
-                          <li key={awardIndex} className="flex items-start gap-2">
-                            <span
-                              className="mt-1 h-2 w-2 rounded-full"
-                              style={{ backgroundColor: student.borderColor }}
-                              aria-hidden="true"
-                            />
-                            <span className="text-sm text-gray-700 leading-relaxed">{award}</span>
+                        {activeTabData.coordinators.map((coordinator, idx) => (
+                          <li key={idx} className="text-gray-700 flex items-center gap-3">
+                            <span className="h-2 w-2 rounded-full" style={{ backgroundColor: '#54BAB9' }}></span>
+                            {coordinator}
                           </li>
                         ))}
                       </ul>
-
-                      <div className="pt-2">
-                        <p className="text-xs text-gray-500">Congratulations, {firstName}.</p>
-                      </div>
                     </div>
-                  </CardContent>
-                </Card>
-              )
-            })
-          ) : (
-            <div className="col-span-full text-center py-12">
-              <p className="text-gray-500 text-lg">No achievements found.</p>
+                  )}
+                </>
+              )}
             </div>
-          )}
-        </div>
-
-        {/* Bottom Celebration Section */}
-        <div className="mt-20">
-          <Card className="border-0 shadow-2xl bg-gradient-to-r from-[#54BAB9] via-[#9ED2C6] to-[#54BAB9] text-white overflow-hidden">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/15"></div>
-
-              <CardContent className="p-16 text-center relative z-10">
-                <h3 className="text-6xl font-black mb-8 drop-shadow-lg">Pride of Budding Minds</h3>
-
-                <p className="text-2xl leading-relaxed max-w-5xl mx-auto mb-10 opacity-95 drop-shadow-md">
-                  These exceptional achievements showcase the{" "}
-                  <span className="font-black text-3xl">talent, dedication, and excellence</span> that define our
-                  student community. From world records to international competitions, our students continue to set new
-                  benchmarks and inspire others with their remarkable accomplishments.
-                </p>
-
-                <div className="grid md:grid-cols-3 gap-8 mt-12">
-                  <div className="bg-white/25 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-white/30">
-                    <div className="text-5xl mb-4 drop-shadow-lg">🌍</div>
-                    <div className="text-3xl font-black mb-3 drop-shadow-md">World Records</div>
-                    <div className="opacity-95 text-lg font-semibold">Setting global standards</div>
-                  </div>
-
-                  <div className="bg-white/25 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-white/30">
-                    <div className="text-5xl mb-4 drop-shadow-lg">🏆</div>
-                    <div className="text-3xl font-black mb-3 drop-shadow-md">Championships</div>
-                    <div className="opacity-95 text-lg font-semibold">National & international wins</div>
-                  </div>
-
-                  <div className="bg-white/25 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-white/30">
-                    <div className="text-5xl mb-4 drop-shadow-lg">📚</div>
-                    <div className="text-3xl font-black mb-3 drop-shadow-md">Academic Excellence</div>
-                    <div className="opacity-95 text-lg font-semibold">Outstanding scholarly achievements</div>
-                  </div>
-                </div>
-              </CardContent>
-            </div>
-          </Card>
-        </div>
-
-        {/* Next Button - Centered */}
-        <div className="py-12 bg-white">
-          <div className="flex justify-center">
-            <Link href="/studentvoice" className="inline-block">
-              <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
-                <div className="text-center">
-                  <div className="font-semibold text-lg">Thought Pieces</div>
-                </div>
-                <ArrowRight className="w-5 h-5" />
-              </div>
-            </Link>
           </div>
-        </div>
-      </div>
-    </div>
+        )}
+      </section>
+    </main>
   )
 }

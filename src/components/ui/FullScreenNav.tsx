@@ -46,7 +46,7 @@ const NAV_ITEMS = [
     ],
   },
   { label: "Newsroom", subItems: ["Awards and Recogonitions", "Student Voices", "BM Gazette"] },
-  { label: "Career", subItems: [] },
+  { label: "Career", subItems: ["Job Listing"] },
   { label: "Contact Us", subItems: [] },
 
 ]
@@ -75,7 +75,8 @@ const ROUTE_OVERRIDES: Record<string, string> = {
   "Admission Process": "/admissionsprocess",
   "Calendar": "/calendar",
   Gallery: "/gallery",
-  Career: "/career",
+
+  "Job Listing": "/job-listing",
   "Apply Now": "pdform",
   "About the Academy": "/abouttheacademy",
   "Pedagogy & Modules": "/pedagogyandmodule",
