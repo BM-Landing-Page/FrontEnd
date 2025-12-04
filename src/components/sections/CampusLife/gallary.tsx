@@ -21,12 +21,12 @@ export default function Home() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const categories = [
-    { label: "Early Years", value: "Kidsfest" },
-    { label: "Sports", value: "Sports Synod" },
-    { label: "Campus Life", value: "Field Trips / Edu Trips" },
-    { label: "Events and Celebrations", value: "Festive Celebrations (Diwali, Christmas, Pongal, etc.)" },
-    { label: "Beyond Books", value: "Club Activities / House Events" },
-    { label: "Recogonitions and Awards", value: "Inter-school Competitions" },
+    { label: "Early Years", value: "KEarly Years" },
+    { label: "Sports", value: "Sports" },
+    { label: "Campus Life", value: "Campus Life" },
+    { label: "Events and Celebrations", value: "Events and Celebration" },
+    { label: "Beyond Books", value: "Beyond Books" },
+    { label: "Recogonitions and Awards", value: "Recogonitions and Awards" },
   ]
 
   useEffect(() => {
