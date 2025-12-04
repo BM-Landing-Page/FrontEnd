@@ -40,7 +40,7 @@ export default function JobListingPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#E9DAC1] to-white flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-[#54BAB9] border-r-transparent"></div>
           <p className="mt-4 text-[#54BAB9] font-medium">Loading positions...</p>
@@ -50,7 +50,7 @@ export default function JobListingPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#E9DAC1] to-white">
+    <main className="min-h-screen bg-white">
       {/* Hero Banner */}
       <div className="relative w-full h-64 md:h-80 mb-8 overflow-hidden">
         <Image src="/job-listings.jpg" alt="Join Our Team" fill className="object-cover" priority />

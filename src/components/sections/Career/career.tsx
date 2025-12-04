@@ -148,7 +148,7 @@ function CareerFormContent() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#E9DAC1] to-white">
+    <main className="min-h-screen bg-white">
       {/* Hero Banner */}
       <div className="relative w-full h-64 md:h-80 mb-8 overflow-hidden">
         <Image src="/career.jpg" alt="Career Application" fill className="object-cover" priority />
@@ -357,13 +357,7 @@ function CareerFormContent() {
 
 export default function CareerApplyPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen bg-gradient-to-br from-[#E9DAC1] to-white flex items-center justify-center">
-          Loading...
-        </div>
-      }
-    >
+    <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>}>
       <CareerFormContent />
     </Suspense>
   )
