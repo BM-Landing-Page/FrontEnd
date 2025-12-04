@@ -180,10 +180,10 @@ export default function OurTeam() {
             </div>
           )}
           <div className="flex justify-center mt-16">
-            <Link href="/alumni">
+            <Link href="/calendar">
               <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
                 <div className="text-center">
-                  <div className="font-semibold text-lg">Alumni</div>
+                  <div className="font-semibold text-lg">Calendar</div>
                 </div>
                 <ArrowRight className="w-5 h-5" />
               </div>
@@ -312,6 +312,7 @@ export default function OurTeam() {
           </div>
         </div>
       )}
+      
     </div>
   )
 }

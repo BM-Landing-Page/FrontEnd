@@ -1,4 +1,6 @@
 "use client"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 import { useState } from "react"
 
@@ -251,6 +253,17 @@ export default function AwardsPage() {
           </div>
         )}
       </section>
+      <div className="flex justify-center mt-12">
+          <Link href="/alumni">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-lg">Alumni</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
+        </div>
     </main>
+    
   )
 }

@@ -171,7 +171,7 @@ export default function LeadershipProjects() {
       {/* Hero Section */}
       <section className="relative w-full h-96 overflow-hidden">
         <Image
-          src="/students-leading-community-initiatives-transformat.jpg"
+          src="/images/leadershipprojects.jpeg"
           alt="Students leading community initiatives and transformation"
           fill
           className="object-cover"

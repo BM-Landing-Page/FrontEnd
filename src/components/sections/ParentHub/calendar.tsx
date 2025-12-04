@@ -1,6 +1,8 @@
 "use client"
 import { useEffect, useState } from "react"
 import { fetchAllEvents, type CalendarEvent } from "@/services/api"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 interface ProcessedEvent extends CalendarEvent {
   fullDate: Date
@@ -252,6 +254,16 @@ export default function CalendarPage() {
           </div>
         )}
       </main>
+      <div className="flex justify-center mt-12">
+          <Link href="/awardsandrecogonitions">
+            <div className="flex items-center gap-3 bg-[#54BAB9] hover:bg-[#54BAB9]/90 text-white px-8 py-4 rounded-lg shadow-md transition-colors cursor-pointer">
+              <div className="text-center">
+                <div className="font-semibold text-lg">Awards and Recogonitions</div>
+              </div>
+              <ArrowRight className="w-5 h-5" />
+            </div>
+          </Link>
+        </div>
     </div>
   )
 }
