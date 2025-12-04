@@ -55,7 +55,7 @@ export default function LeadershipProjects() {
     {
       id: "kids-education",
       name: "Kids Education Revolution",
-      image: "/student-mentoring-teaching.jpg",
+      image: "/images/ker.jpeg",
       description:
         "Our Grade 11 student was selected nationally as a young changemaker and learned partnership-driven approaches. She returned with new practices and insights that enriched the whole school community.",
     },
@@ -69,7 +69,7 @@ export default function LeadershipProjects() {
     {
       id: "paalvadi",
       name: "Visit to Government Paalvadi Schools",
-      image: "/students-government-school-community-visit.jpg",
+      image: "/images/pallvadi.jpeg",
       description:
         "Student leaders visited Paalvadi government schools, learned about local livelihoods and women-led leadership and conducted storytelling and sports for kindergarteners. It ended with reflective mentoring discussions on giving back.",
     },
@@ -79,14 +79,14 @@ export default function LeadershipProjects() {
     {
       id: "beyond-green",
       name: "Beyond Green - Environmental Awareness Rally",
-      image: "/environmental-awareness-rally-students.jpg",
+      image: "/images/beyondgreen.jpeg",
       description:
         "Students organized an impactful environmental awareness campaign, rallying the community to take action on ecological conservation and sustainable practices.",
     },
     {
       id: "chitlapakkam",
       name: "Chitlapakkam Rising - Save Lakes Walkathon",
-      image: "/students-walkathon-lake-environmental.jpg",
+      image: "/images/savelakes.jpeg",
       description:
         "A student-led walkathon initiative to raise awareness about lake conservation and environmental protection in the Chitlapakkam area.",
     },
