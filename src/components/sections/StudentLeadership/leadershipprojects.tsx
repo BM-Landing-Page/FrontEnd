@@ -48,7 +48,7 @@ export default function LeadershipProjects() {
     {
       id: "bhumi-young",
       name: "BHUMI Young Changemakers Program",
-      image: "/students-environmental-project-planning.jpg",
+      image: "/images/bhumiyoungchangemakers.jpeg",
       description:
         "Student leaders identified their cause, learned from NGOs and community groups, trained to create impact, and independently executed and reported on their own service projects.",
     },
@@ -62,7 +62,7 @@ export default function LeadershipProjects() {
     {
       id: "scribe",
       name: "Scribe Program with Pratiksha Learning Centre",
-      image: "/students-volunteering-helping-learning.jpg",
+      image: "/images/pratiksha.jpeg",
       description:
         "Through our ongoing partnership, students serve as scribing volunteers, gaining patience, strong listening skills, and deep empathy for diverse learning needs.",
     },
@@ -93,7 +93,7 @@ export default function LeadershipProjects() {
     {
       id: "student-exchange",
       name: "Student Exchange Program",
-      image: "/students-cultural-exchange-international.jpg",
+      image: "/images/studentexchange.jpeg",
       description:
         "Students participated in cultural exchanges that broadened perspectives, fostered global understanding, and built meaningful international connections.",
     },
@@ -103,35 +103,35 @@ export default function LeadershipProjects() {
     {
       id: "act",
       name: "Action for Community Transformation",
-      image: "/act-symposium-sustainability-conference.jpg",
+      image: "/images/actforcommunity.jpeg",
       description:
         "ACT was a student-led sustainability symposium which empowered students to analyse issues and pursue actionable environmental change. We brought together educators and experts for panel discussions and judging presentations for collaborative action.",
     },
     {
       id: "i-can",
       name: "I CAN School Challenge",
-      image: "/students-design-thinking-challenge-innovation.jpg",
+      image: "/images/changeschool.jpeg",
       description:
         'Through the "I CAN" School Challenge with Design for Change, our student leaders got featured for identifying issues like excessive screen time and low reading interest in their community, implementing their solution. They learned that small actions spark meaningful change.',
     },
     {
       id: "leadership-council",
       name: "Student Leadership Council - Outreach & Inclusion Department",
-      image: "/student-leadership-council-meeting.jpg",
+      image: "/images/leadershipcouncil.jpeg",
       description:
         "Student leaders drove outreach initiatives and fostered inclusion across the school community, creating safe spaces and meaningful engagement for all members.",
     },
     {
       id: "community-uplift",
       name: "Internal Community Upliftment Initiative",
-      image: "/students-support-staff-interview-internship.jpg",
+      image: "/images/communityupliftment.jpeg",
       description:
         "Student leaders built deep connections with support staff through home interviews, creating personalised skill-development internships where drivers explored media, admin, and football roles—revealing shared talent and the value of every community member.",
     },
     {
       id: "bmun",
       name: "Budding Minds United Nations (BMUN)",
-      image: "/student-conference-debate-united-nations.jpg",
+      image: "/images/bmun.jpeg",
       description:
         "BMUN was a student-led diplomatic conference where learners handled end-to-end management including budget and logistics, united multiple schools to debate crises, practiced advanced negotiation and alliances and built global awareness.",
     },
