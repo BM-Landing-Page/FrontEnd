@@ -151,11 +151,11 @@ function CareerFormContent() {
     <main className="min-h-screen bg-gradient-to-br from-[#E9DAC1] to-white">
       {/* Hero Banner */}
       <div className="relative w-full h-64 md:h-80 mb-8 overflow-hidden">
-        <Image src="/career-application-hero-banner.jpg" alt="Career Application" fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#54BAB9]/70 to-transparent flex items-center">
+        <Image src="/career.jpg" alt="Career Application" fill className="object-cover" priority />
+        <div className="absolute inset-0  flex items-center">
           <div className="max-w-6xl mx-auto px-4 w-full">
-            <h1 className="text-4xl md:text-5xl font-bold text-white">Join Our Team</h1>
-            <p className="text-white/90 mt-2">Take the next step in your career with us</p>
+            <h1 className="text-4xl md:text-5xl font-bold text-black text-center">Join Our Team</h1>
+            <p className="text-black/90 mt-2 text-center">Take the next step in your career with us</p>
           </div>
         </div>
       </div>

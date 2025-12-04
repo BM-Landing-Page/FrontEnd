@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { label: "My School One", subItems: [] },
   {
     label: "About BMIS",
-    subItems: ["Vision, Mission & Philosophy", "Founder's Message","Our Franchise", "BMIS Journey", "Leadership Team","Calendar", "Alumni"],
+    subItems: ["Vision, Mission & Philosophy", "Founder's Message","Our Franchise", "BMIS Journey", "Leadership Team","Calendar","Awards and Recogonitions", "Alumni"],
   },
   {
     label: "Academics",
@@ -45,7 +45,7 @@ const NAV_ITEMS = [
       "Career Quest",
     ],
   },
-  { label: "Newsroom", subItems: ["Awards and Recogonitions", "Student Voices", "BM Gazette"] },
+  { label: "Newsroom", subItems: [ "Student Voices", "BM Gazette"] },
   { label: "Career", subItems: ["Job Listing"] },
   { label: "Contact Us", subItems: [] },
 

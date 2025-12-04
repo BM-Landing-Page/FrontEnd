@@ -88,9 +88,9 @@ export default function OurTeam() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
-      <section className="relative h-48 md:h-56 lg:h-64 overflow-hidden">
+      <section className="relative h-[50vh] md:h-[50vh] lg:h-[50vh] overflow-hidden">
         <Image
-          src="/images/ourteam.jpg"
+          src="/images/ourteam.jpeg"
           alt="Our Team Hero"
           fill
           className="object-cover object-top md:object-center"

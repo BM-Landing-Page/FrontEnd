@@ -10,6 +10,9 @@ type SchoolAwardContent = {
 type CambridgeAwardContent = {
   name: string
   award: string
+  image: string
+  year: number
+  description: string
 }
 
 type IAYPContent = {
@@ -62,10 +65,18 @@ const tabs: TabData[] = [
       {
         name: "Vinoth Maximus",
         award: "Cambridge IGCSE: Top in the World – Physical Science",
+        image: "/images/vinoth.jpg",
+        year: 2024,
+        description:
+          "Vinoth Maximus achieved the remarkable distinction of Top in the World in Physical Science at Cambridge IGCSE, demonstrating exceptional understanding of scientific concepts and consistent academic excellence.",
       },
       {
         name: "K. S. Saadhana Anugraha",
         award: "Cambridge IGCSE: Top in the World – Tamil & Mathematics",
+        image: "/images/sadhana.jpeg",
+        year: 2024,
+        description:
+          "K. S. Saadhana Anugraha achieved extraordinary success by earning Top in the World titles in both Tamil and Mathematics, showcasing exceptional linguistic and mathematical prowess on the global stage.",
       },
     ],
     fullText:
@@ -104,29 +115,27 @@ export default function AwardsPage() {
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
       <section
-        className="relative h-96 md:h-[500px] overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 50%, #9ED2C6 100%)",
-        }}
-      >
-        <div className="relative h-full flex items-center justify-center">
-          <div className="text-center px-4 max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: "#54BAB9" }}>
-              Awards & Recognitions
-            </h1>
-            <p className="text-lg md:text-xl" style={{ color: "#54BAB9" }}>
-              Celebrating Excellence and Global Achievement
-            </p>
-          </div>
-        </div>
-      </section>
+  className="relative h-96 md:h-[500px] overflow-hidden bg-cover bg-center"
+  style={{
+    backgroundImage: "url('/images/awards.jpg')", // replace with your image path
+  }}
+>
+  <div className="relative h-full flex items-center justify-center bg-black/40">
+    <div className="text-center px-4 max-w-3xl mx-auto">
+      <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+        Awards & Recognitions
+      </h1>
+      <p className="text-lg md:text-xl text-white">
+        Celebrating Excellence and Global Achievement
+      </p>
+    </div>
+  </div>
+</section>
+
 
       {/* Tabs Section */}
       <section className="py-12 md:py-20 px-4 md:px-8 max-w-6xl mx-auto">
-        <div
-          className="flex flex-wrap gap-3 mb-12 pb-6 justify-center"
-          style={{ borderBottom: "1px solid #E9DAC1" }}
-        >
+        <div className="flex flex-wrap gap-3 mb-12 pb-6 justify-center" style={{ borderBottom: "1px solid #E9DAC1" }}>
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -169,26 +178,33 @@ export default function AwardsPage() {
                 ))}
 
               {activeTabData.id === "cambridge-awards" && (
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-8 justify-center">
                   {activeTabData.content.map((item, idx) => (
                     <div
                       key={idx}
-                      className="p-6 rounded-lg hover:shadow-lg transition-shadow"
+                      className="rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow w-full max-w-xs mx-auto"
                       style={{
-                        background: "linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 100%)",
-                        border: "1px solid #9ED2C6",
+                        background: "white",
+                        border: "1px solid #E9DAC1",
                       }}
                     >
-                      <div
-                        className="mb-3 h-12 w-12 rounded-full flex items-center justify-center"
-                        style={{ backgroundColor: "#54BAB9" }}
-                      >
-                        <span className="text-white font-bold text-lg">{idx + 1}</span>
+                      <div className="w-full h-56 overflow-hidden">
+                        <img
+                          src={item.image || "/placeholder.svg"}
+                          alt={item.name}
+                          className="w-full h-full object-cover rounded-t-2xl"
+                        />
                       </div>
-                      <h3 className="text-xl font-bold mb-2" style={{ color: "#54BAB9" }}>
-                        {item.name}
-                      </h3>
-                      <p className="text-gray-700">{item.award}</p>
+
+                      <div className="p-6 text-center">
+                        <h3 className="text-xl font-bold mb-2" style={{ color: "#54BAB9" }}>
+                          {item.name}
+                        </h3>
+
+                        <p className="text-sm text-gray-700 leading-relaxed">{item.award}</p>
+
+                        <p className="text-xs text-gray-600 mt-3">{item.description}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
