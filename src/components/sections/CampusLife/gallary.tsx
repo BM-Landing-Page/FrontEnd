@@ -58,13 +58,25 @@ export default function Home() {
     return () => document.removeEventListener("keydown", handleEscape)
   }, [])
 
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (selectedItem) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [selectedItem])
+
   const filteredItems = galleryItems.filter((item) => item.category === activeTab)
 
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Banner */}
-      <div className="w-full h-64 sm:h-80 md:h-96 bg-gradient-to-r from-[#54BAB9] to-[#9ED2C6] overflow-hidden">
-        <img src="/school-gallery-hero-banner.jpg" alt="Gallery Banner" className="w-full h-full object-cover" />
+      <div className="w-full h-[60vh] sm:h-[60vh] md:h-[60vh] overflow-hidden">
+        <img src="/images/gallery.jpeg" alt="Gallery Banner" className="w-full h-full object-cover" />
       </div>
 
       {/* Tab Switcher */}
