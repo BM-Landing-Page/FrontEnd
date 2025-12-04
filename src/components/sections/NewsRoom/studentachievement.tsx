@@ -1,7 +1,6 @@
-"use client" 
+"use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
 
 type SchoolAwardContent = {
   subtitle: string
@@ -104,50 +103,67 @@ export default function AwardsPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-96 md:h-[500px] overflow-hidden" style={{ background: 'linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 50%, #9ED2C6 100%)' }}>
+      <section
+        className="relative h-96 md:h-[500px] overflow-hidden"
+        style={{
+          background: "linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 50%, #9ED2C6 100%)",
+        }}
+      >
         <div className="relative h-full flex items-center justify-center">
           <div className="text-center px-4 max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#54BAB9' }}>Awards & Recognitions</h1>
-            <p className="text-lg md:text-xl" style={{ color: '#54BAB9' }}>Celebrating Excellence and Global Achievement</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: "#54BAB9" }}>
+              Awards & Recognitions
+            </h1>
+            <p className="text-lg md:text-xl" style={{ color: "#54BAB9" }}>
+              Celebrating Excellence and Global Achievement
+            </p>
           </div>
         </div>
       </section>
 
       {/* Tabs Section */}
       <section className="py-12 md:py-20 px-4 md:px-8 max-w-6xl mx-auto">
-        <div className="flex flex-wrap gap-3 mb-12 pb-6 justify-center" style={{ borderBottom: '1px solid #E9DAC1' }}>
+        <div
+          className="flex flex-wrap gap-3 mb-12 pb-6 justify-center"
+          style={{ borderBottom: "1px solid #E9DAC1" }}
+        >
           {tabs.map((tab) => (
-            <Button
+            <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`px-4 py-2 font-medium transition-all rounded-md ${
-                activeTab === tab.id
-                  ? "text-white"
-                  : "bg-transparent"
+                activeTab === tab.id ? "text-white" : "bg-transparent"
               }`}
               style={{
-                backgroundColor: activeTab === tab.id ? '#54BAB9' : 'transparent',
-                color: activeTab === tab.id ? 'white' : '#54BAB9',
+                backgroundColor: activeTab === tab.id ? "#54BAB9" : "transparent",
+                color: activeTab === tab.id ? "white" : "#54BAB9",
               }}
-              variant="ghost"
             >
               {tab.label}
-            </Button>
+            </button>
           ))}
         </div>
 
         {/* Tab Content */}
         {activeTabData && (
           <div className="animate-in fade-in duration-500">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#54BAB9' }}>{activeTabData.title}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: "#54BAB9" }}>
+              {activeTabData.title}
+            </h2>
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">{activeTabData.fullText}</p>
 
             {/* Content Grid */}
             <div className="grid gap-6 md:gap-8">
               {activeTabData.id === "school-awards" &&
                 activeTabData.content.map((item, idx) => (
-                  <div key={idx} className="pl-6 py-4 rounded-r-lg" style={{ borderLeft: '4px solid #54BAB9', backgroundColor: '#F7ECDE' }}>
-                    <h3 className="text-xl font-semibold mb-2" style={{ color: '#54BAB9' }}>{item.subtitle}</h3>
+                  <div
+                    key={idx}
+                    className="pl-6 py-4 rounded-r-lg"
+                    style={{ borderLeft: "4px solid #54BAB9", backgroundColor: "#F7ECDE" }}
+                  >
+                    <h3 className="text-xl font-semibold mb-2" style={{ color: "#54BAB9" }}>
+                      {item.subtitle}
+                    </h3>
                     <p className="text-gray-700 leading-relaxed">{item.description}</p>
                   </div>
                 ))}
@@ -158,12 +174,20 @@ export default function AwardsPage() {
                     <div
                       key={idx}
                       className="p-6 rounded-lg hover:shadow-lg transition-shadow"
-                      style={{ background: 'linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 100%)', border: '1px solid #9ED2C6' }}
+                      style={{
+                        background: "linear-gradient(135deg, #F7ECDE 0%, #E9DAC1 100%)",
+                        border: "1px solid #9ED2C6",
+                      }}
                     >
-                      <div className="mb-3 h-12 w-12 rounded-full flex items-center justify-center" style={{ backgroundColor: '#54BAB9' }}>
+                      <div
+                        className="mb-3 h-12 w-12 rounded-full flex items-center justify-center"
+                        style={{ backgroundColor: "#54BAB9" }}
+                      >
                         <span className="text-white font-bold text-lg">{idx + 1}</span>
                       </div>
-                      <h3 className="text-xl font-bold mb-2" style={{ color: '#54BAB9' }}>{item.name}</h3>
+                      <h3 className="text-xl font-bold mb-2" style={{ color: "#54BAB9" }}>
+                        {item.name}
+                      </h3>
                       <p className="text-gray-700">{item.award}</p>
                     </div>
                   ))}
@@ -177,21 +201,28 @@ export default function AwardsPage() {
                       <div
                         key={idx}
                         className="p-6 bg-white rounded-lg hover:shadow-md transition-all"
-                        style={{ border: '2px solid #54BAB9' }}
+                        style={{ border: "2px solid #54BAB9" }}
                       >
-                        <h3 className="text-lg font-bold mb-3" style={{ color: '#54BAB9' }}>{item.highlight}</h3>
+                        <h3 className="text-lg font-bold mb-3" style={{ color: "#54BAB9" }}>
+                          {item.highlight}
+                        </h3>
                         <p className="text-gray-700 text-sm leading-relaxed">{item.detail}</p>
                       </div>
                     ))}
                   </div>
 
                   {activeTabData.coordinators && (
-                    <div className="mt-10 p-6 rounded-lg" style={{ backgroundColor: '#F7ECDE', border: '1px solid #E9DAC1' }}>
-                      <h3 className="text-xl font-bold mb-4" style={{ color: '#54BAB9' }}>Certified Award Leaders</h3>
+                    <div
+                      className="mt-10 p-6 rounded-lg"
+                      style={{ backgroundColor: "#F7ECDE", border: "1px solid #E9DAC1" }}
+                    >
+                      <h3 className="text-xl font-bold mb-4" style={{ color: "#54BAB9" }}>
+                        Certified Award Leaders
+                      </h3>
                       <ul className="space-y-2">
                         {activeTabData.coordinators.map((coordinator, idx) => (
                           <li key={idx} className="text-gray-700 flex items-center gap-3">
-                            <span className="h-2 w-2 rounded-full" style={{ backgroundColor: '#54BAB9' }}></span>
+                            <span className="h-2 w-2 rounded-full" style={{ backgroundColor: "#54BAB9" }}></span>
                             {coordinator}
                           </li>
                         ))}
