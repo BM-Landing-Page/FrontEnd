@@ -26,7 +26,7 @@ export default function Home() {
     { label: "Campus Life", value: "Field Trips / Edu Trips" },
     { label: "Events and Celebrations", value: "Festive Celebrations (Diwali, Christmas, Pongal, etc.)" },
     { label: "Beyond Books", value: "Club Activities / House Events" },
-    { label: "Recogonitions and Awards", value: "Inter-school Competitions" },
+    { label: "Awards and Recogonitions", value: "Inter-school Competitions" },
   ]
 
   useEffect(() => {
