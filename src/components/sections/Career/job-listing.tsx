@@ -52,12 +52,12 @@ export default function JobListingPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Banner */}
-      <div className="relative w-full h-64 md:h-80 mb-8 overflow-hidden">
-        <Image src="/job-listings.jpg" alt="Join Our Team" fill className="object-cover" priority />
+      <div className="relative w-full h-[50vh] md:h-[50vh] mb-8 overflow-hidden">
+        <Image src="/images/ourteam.jpeg" alt="Join Our Team" fill className="object-cover" priority />
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-6xl mx-auto px-4 w-full">
-            <h1 className="text-4xl md:text-5xl font-bold text-black text-center">Join Our Team</h1>
-            <p className="text-black/90 mt-2 text-center">Explore exciting career opportunities</p>
+            {/* <h1 className="text-4xl md:text-5xl font-bold text-black text-center">Join Our Team</h1>
+            <p className="text-black/90 mt-2 text-center">Explore exciting career opportunities</p> */}
           </div>
         </div>
       </div>

@@ -119,7 +119,7 @@ export default function AwardsPage() {
       <section
   className="relative h-96 md:h-[500px] overflow-hidden bg-cover bg-center"
   style={{
-    backgroundImage: "url('/images/awards.jpg')", // replace with your image path
+    backgroundImage: "url('/images/awards.jpeg')", // replace with your image path
   }}
 >
   <div className="relative h-full flex items-center justify-center bg-black/40">

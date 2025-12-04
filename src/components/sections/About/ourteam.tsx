@@ -90,7 +90,7 @@ export default function OurTeam() {
       {/* Hero Banner */}
       <section className="relative h-[50vh] md:h-[50vh] lg:h-[50vh] overflow-hidden">
         <Image
-          src="/images/ourteam.jpeg"
+          src="/images/ourteam.jpg"
           alt="Our Team Hero"
           fill
           className="object-cover object-top md:object-center"

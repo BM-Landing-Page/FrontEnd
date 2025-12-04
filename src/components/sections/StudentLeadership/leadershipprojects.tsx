@@ -48,7 +48,7 @@ export default function LeadershipProjects() {
     {
       id: "bhumi-young",
       name: "BHUMI Young Changemakers Program",
-      image: "/images/bhumiyoungchangemakers.jpeg",
+      image: "/images/bhumiyoungchangemakers.png",
       description:
         "Student leaders identified their cause, learned from NGOs and community groups, trained to create impact, and independently executed and reported on their own service projects.",
     },
@@ -62,14 +62,14 @@ export default function LeadershipProjects() {
     {
       id: "scribe",
       name: "Scribe Program with Pratiksha Learning Centre",
-      image: "/images/pratiksha.jpeg",
+      image: "/images/pratiksha.jpg",
       description:
         "Through our ongoing partnership, students serve as scribing volunteers, gaining patience, strong listening skills, and deep empathy for diverse learning needs.",
     },
     {
       id: "paalvadi",
       name: "Visit to Government Paalvadi Schools",
-      image: "/images/pallvadi.jpeg",
+      image: "/images/pallvadi.png",
       description:
         "Student leaders visited Paalvadi government schools, learned about local livelihoods and women-led leadership and conducted storytelling and sports for kindergarteners. It ended with reflective mentoring discussions on giving back.",
     },
@@ -110,7 +110,7 @@ export default function LeadershipProjects() {
     {
       id: "i-can",
       name: "I CAN School Challenge",
-      image: "/images/changeschool.jpeg",
+      image: "/images/changeschool.png",
       description:
         'Through the "I CAN" School Challenge with Design for Change, our student leaders got featured for identifying issues like excessive screen time and low reading interest in their community, implementing their solution. They learned that small actions spark meaningful change.',
     },
@@ -131,7 +131,7 @@ export default function LeadershipProjects() {
     {
       id: "bmun",
       name: "Budding Minds United Nations (BMUN)",
-      image: "/images/bmun.jpeg",
+      image: "/images/bmun.png",
       description:
         "BMUN was a student-led diplomatic conference where learners handled end-to-end management including budget and logistics, united multiple schools to debate crises, practiced advanced negotiation and alliances and built global awareness.",
     },
