@@ -1,6 +1,6 @@
 // API Base URL — Updated to use Render-hosted backend
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://backend-edhc.onrender.com"
-
+const API_BASE_URL =process.env.NEXT_PUBLIC_API_BASE_URL || "https://backend-edhc.onrender.com";
+//const getApiBaseUrl = () => process.env.NEXT_PUBLIC_API_BASE_URL || "https://backend-edhc.onrender.com"
 // Common API Response Interface
 export interface ApiResponse<T> {
   success: boolean
@@ -315,22 +315,50 @@ export const fetchBusRouteById = async (routeId: string): Promise<ApiResponse<Bu
 
 
 // ========================
-// ✅ CAREER SECTION
+// POSITIONS
 // ========================
 
-export interface CareerApplication {
-  id?: number
-  name: string
-  gender: string
-  email: string
-  contact_number: string
-  date_of_birth: string
-  marital_status: string
-  address: string
-  resume?: string
-  position_id?: string
-  submitted_at?: string
+export async function fetchPositions(): Promise<ApiResponse<Position[]>> {
+  try {
+    console.log("[v0] Fetching positions from:", `${API_BASE_URL}/positions`)
+
+    const response = await fetch(`${API_BASE_URL}/positions`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+    console.log("[v0] Positions response status:", response.status)
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      console.error("[v0] Positions error response:", errorText)
+      return {
+        success: false,
+        error: `Failed to fetch positions: ${response.status}`,
+      }
+    }
+
+    const data = await response.json()
+    console.log("[v0] Positions fetched successfully:", data)
+    return {
+      success: true,
+      data,
+    }
+  } catch (error) {
+    console.error("[v0] Error fetching positions:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to fetch positions",
+    }
+  }
 }
+
+// ========================
+// CAREER APPLICATIONS
+// ========================
+
 
 export interface CareerFormData {
   name: string
@@ -340,78 +368,132 @@ export interface CareerFormData {
   date_of_birth: string
   marital_status: string
   address: string
-  resume?: File | null
+  resume: File | null
+  position_id: string
+}
+export interface Position {
+  id: string
+  name: string
+  description: string
 }
 
-// Create career application with improved error handling
-export const createCareerApplication = async (
-  formData: CareerFormData & { position_id: string },
-): Promise<ApiResponse<any>> => {
-  try {
-    const formDataToSend = new FormData()
-    formDataToSend.append("name", formData.name)
-    formDataToSend.append("gender", formData.gender)
-    formDataToSend.append("email", formData.email)
-    formDataToSend.append("contact_number", formData.contact_number)
-    formDataToSend.append("date_of_birth", formData.date_of_birth)
-    formDataToSend.append("marital_status", formData.marital_status)
-    formDataToSend.append("address", formData.address)
-    formDataToSend.append("position_id", formData.position_id)
+export interface CareerApplication {
+  id: number
+  name: string
+  email: string
+  gender: string
+  contact_number: string
+  date_of_birth: string
+  marital_status: string
+  address: string
+  position_id: string
+  resume: string | null
+  submitted_at: string
+}
 
-    if (formData.resume) {
-      formDataToSend.append("resume", formData.resume)
+
+export async function createCareerApplication(
+  data: CareerFormData & { position_id: string },
+): Promise<ApiResponse<CareerApplication>> {
+  try {
+    console.log("[v0] Creating career application...")
+    console.log("[v0] API URL:", `${API_BASE_URL}/career`)
+    console.log("[v0] Form data:", {
+      name: data.name,
+      email: data.email,
+      position_id: data.position_id,
+      hasResume: !!data.resume,
+    })
+
+    const formData = new FormData()
+    formData.append("name", data.name)
+    formData.append("gender", data.gender)
+    formData.append("email", data.email)
+    formData.append("contact_number", data.contact_number)
+    formData.append("date_of_birth", data.date_of_birth)
+    formData.append("marital_status", data.marital_status || "")
+    formData.append("address", data.address)
+    formData.append("position_id", data.position_id)
+
+    if (data.resume) {
+      formData.append("resume", data.resume)
     }
+
+    console.log("[v0] Sending FormData to backend...")
 
     const response = await fetch(`${API_BASE_URL}/career`, {
       method: "POST",
-      body: formDataToSend,
+      body: formData,
+      // DO NOT set Content-Type header - browser will set it with correct boundary
     })
+
+    console.log("[v0] Career API response status:", response.status)
 
     if (!response.ok) {
       let errorMessage = `HTTP error! status: ${response.status}`
-      
-      // Clone the response so we can try multiple parsing methods
-      const responseClone = response.clone()
-      
+
       try {
         const errorData = await response.json()
         errorMessage = errorData.error || errorData.message || errorMessage
-      } catch {
-        // If JSON parsing fails, try to get text
+        console.error("[v0] Error response from backend:", errorData)
+      } catch (e) {
+        // If not JSON, try to get text
         try {
-          const errorText = await responseClone.text()
-          if (errorText) errorMessage = errorText
-        } catch {
-          // Keep the default error message
+          const errorText = await response.text()
+          if (errorText) {
+            errorMessage = errorText
+            console.error("[v0] Error text from backend:", errorText)
+          }
+        } catch (e) {
+          console.error("[v0] Could not parse error response")
         }
       }
-      
+
       return {
         success: false,
         error: errorMessage,
       }
     }
 
-    const data = await response.json()
-    return { success: true, data }
+    const result = await response.json()
+    console.log("[v0] Career application submitted successfully:", result)
+
+    return {
+      success: true,
+      data: result.data || result,
+    }
   } catch (error) {
-    console.error("Error creating career application:", error)
+    console.error("[v0] Career application error:", error)
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to submit career application",
+      error: error instanceof Error ? error.message : "An unexpected error occurred",
     }
   }
 }
 
-// Fetch all career applications (protected)
-export const fetchCareerApplications = async (): Promise<ApiResponse<CareerApplication[]>> => {
+export async function fetchCareerApplications(): Promise<ApiResponse<CareerApplication[]>> {
   try {
-    const response = await fetch(`${API_BASE_URL}/career`)
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+    const response = await fetch(`${API_BASE_URL}/career`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+    if (!response.ok) {
+      return {
+        success: false,
+        error: `Failed to fetch applications: ${response.status}`,
+      }
+    }
+
     const data = await response.json()
-    return { success: true, data }
+    return {
+      success: true,
+      data,
+    }
   } catch (error) {
-    console.error("Error fetching career applications:", error)
+    console.error("[v0] Error fetching applications:", error)
     return {
       success: false,
       error: error instanceof Error ? error.message : "Failed to fetch career applications",
@@ -419,11 +501,10 @@ export const fetchCareerApplications = async (): Promise<ApiResponse<CareerAppli
   }
 }
 
-// Update career application (protected)
-export const updateCareerApplication = async (
+export async function updateCareerApplication(
   id: number,
   updates: Partial<CareerApplication>,
-): Promise<ApiResponse<any>> => {
+): Promise<ApiResponse<CareerApplication>> {
   try {
     const response = await fetch(`${API_BASE_URL}/career/${id}`, {
       method: "PUT",
@@ -432,11 +513,21 @@ export const updateCareerApplication = async (
       },
       body: JSON.stringify(updates),
     })
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+
+    if (!response.ok) {
+      return {
+        success: false,
+        error: `Failed to update application: ${response.status}`,
+      }
+    }
+
     const data = await response.json()
-    return { success: true, data }
+    return {
+      success: true,
+      data,
+    }
   } catch (error) {
-    console.error("Error updating career application:", error)
+    console.error("[v0] Error updating application:", error)
     return {
       success: false,
       error: error instanceof Error ? error.message : "Failed to update career application",
@@ -444,8 +535,7 @@ export const updateCareerApplication = async (
   }
 }
 
-// Delete career application (protected)
-export const deleteCareerApplication = async (id: number): Promise<ApiResponse<any>> => {
+export async function deleteCareerApplication(id: number): Promise<ApiResponse<void>> {
   try {
     const response = await fetch(`${API_BASE_URL}/career/${id}`, {
       method: "DELETE",
@@ -453,11 +543,19 @@ export const deleteCareerApplication = async (id: number): Promise<ApiResponse<a
         "Content-Type": "application/json",
       },
     })
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
-    const data = await response.json()
-    return { success: true, data }
+
+    if (!response.ok) {
+      return {
+        success: false,
+        error: `Failed to delete application: ${response.status}`,
+      }
+    }
+
+    return {
+      success: true,
+    }
   } catch (error) {
-    console.error("Error deleting career application:", error)
+    console.error("[v0] Error deleting application:", error)
     return {
       success: false,
       error: error instanceof Error ? error.message : "Failed to delete career application",
